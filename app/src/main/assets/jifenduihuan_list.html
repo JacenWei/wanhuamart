@@ -1,0 +1,43 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css">
+		<link rel="stylesheet" href="../css/line.css">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+		<script src="../js/util.js"></script>
+		<script src="../js/jifenduihuan_list.js"></script>
+		<script src="../js/layer2.0/layer.js"></script>
+	    <script type="text/javascript" src="../js/common.js" ></script>
+        <script type="text/javascript">
+            if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+                clicked('login.html');
+            }
+        </script>
+	</head>
+
+	<body>
+		<header class="header"   style="margin-bottom: 0px;" >
+			<a id="frame4.html" class="back" onclick="clicked(this.id)"></a>
+			<h1 class="tit">积分兑换记录</h1>
+		</header>
+		<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted"
+            	 style=" border-bottom:  dashed #0168B7 1px; position: fixed; z-index: 19; "  >
+	                <button style="z-index: 15;color: #007FFF;margin-top:10px;width: 32%;height: 50px; background-color: #ffffff;border: 1px #007FFF solid;" class="" id="user_order.html" onclick="clicked(this.id)">线下订单</button> 
+	                <button style="z-index: 15;color: #ffffff;margin-top:10px;width: 32%;height: 50px; background-color: #007FFF;border: 1px #ffffff solid;" class="mui-active"  id="jifenduihuan_list.html" onclick="clicked(this.id)">积分订单</button>
+	                <button style="z-index: 15;color: #007FFF;margin-top:10px;width: 32%;height: 50px; background-color: #ffffff;border: 1px #007FFF solid;" class=""  id="online_list.html" onclick="clicked(this.id)">线上订单</button>
+            </div>
+		<div class="content">
+			
+			
+            
+			<div class="refine-details" style="margin-top: 56px;">
+                <ul class="list"></ul>
+            </div>
+        </div>
+	</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css" /> <!--公用css-->
+		<link rel="stylesheet" href="../css/business.css" />
+		<script src="../js/jquery.min.js"></script>
+		<!--<script src="../js/mui.min.js"></script>-->
+		<script src="../js/config.js"></script>
+		<script src="../js/util.js"></script>
+		<script src="../js/layer2.0/layer.js"></script>
+		<script src="../js/login.js?2=212s"></script>
+		<!--<script src="../js/layer2.0/layer.js"></script>-->
+	    <script type="text/javascript" src="../js/common.js" ></script>
+	    <script>
+	    	
+				localStorage.clear();
+	    </script>
+	</head>
+	<body>
+		<header class="header">
+			<a class="back"  id="frame0.html" onclick="clicked(this.id)"></a>
+			<h1 class="tit">万华商城 - 会员登录</h1>
+		</header>
+		<div class="content mtop44">
+			<div class="business-main">
+				<form>
+					<ul>
+						<li>
+							<label>账号</label>
+							<em></em>
+							<input placeholder="请输入手机号" id="phone" type="tel" style="width:80%">
+						</li>
+
+						<li>
+							<label>密码</label>
+							<em></em>
+							<input placeholder="请输入密码" id="psm" type="password" style="width:80%">
+						</li>
+					</ul>
+					<p class="determine"><a href="javascript:void(0);" id="determine">登录</a></p>
+				</form>
+				<div class="quick" style="margin-top: 35px;">
+					<a class="left_a" href="javascript:clicked('register.html');" style="background-color: #0168B7 ;  border-radius: 3px; color: #fff; padding: 8px; margin-left: 30px;">快速注册</a>
+					<a class="right_a" href="javascript:clicked('password_phone.html');" style="background-color: #0168B7 ;  border-radius: 3px; color: #fff; padding:8px; margin-right: 30px;">找回密码</a>
+				</div>
+
+			</div>
+
+		</div>
+	</body>
+</html>

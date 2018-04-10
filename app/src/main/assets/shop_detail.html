@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="../css/public.css" /> <!--公用css-->
+    <link rel="stylesheet" href="../css/business-index.css" />
+	    <script src="../js/common.js"></script>
+    <style> 
+    	.product-list li {
+    		display: block;
+		    margin: 10px 1%;
+		    padding: 0;
+		    background: #fff;
+		    overflow: hidden;		    
+		    float: left;
+		    width: 42%;
+    		padding: 2% 3%;    		
+    	}
+    	.product-list li .p_img {
+		    margin-bottom: 5px;
+		    width: 100%;
+		    float: left;
+		}
+		.product-list li .p_title {
+		    margin-bottom: 5px;
+		    width: 100%;
+		    float: left;
+		    margin: 3px 5px;
+    		border-bottom: 0;
+		}
+		.product-list li .p_title span{
+			display: -webkit-box;
+		    overflow: hidden;
+		    font-size: 12px;
+		    text-align: left;
+		    height: 28px;
+		    line-height: 14px;
+		    color: #333;
+			font-size: 14px;
+		    text-align: left;
+		    height: 32px;
+		    line-height: 16px;
+		    color: #000;
+		    
+		}
+		.product-list li .p_bottom  {
+		    margin: 4px;
+		    display: table;
+		    vertical-align: middle;
+		    width: 100%;
+		}
+		.product-list li .p_bottom .price {
+		    font-size: 14px;
+		    color: #f15353;
+		    width: 100%;
+		    display: block;
+		}
+    </style>
+</head>
+<body>
+<header class="header search-header">
+    <a class="back"  onclick="back();"></a>
+    <div class="search shop_name" style="text-align:center;font-size:1.5em;color:#fff;" ></div>
+    <!--<a href="#" class="menu-iocn"></a>-->
+</header>
+<div class="content">
+    <!--
+    <div class="business-nav">
+        <ul>
+            <li>
+                <a href="#" id="index-nav">首页</a>
+            </li>
+
+            <li>
+                <a href="#" id="share-nav">分享商城</a>
+            </li>
+        </ul>
+    </div>
+    -->
+    <!--
+
+    <div class="business-share" id="share">
+        <img src="images/business_index/qrcode.png">
+        <p>感觉这家商店不错哦！<br />扫描二维码分享给你的好友吧！</p>
+    </div>
+    -->
+    <div class="business-index" id="index">
+        <!--轮播图-->
+        <div class="Carousel" style="margin-top: 0px;">
+            <div class="addWrap">
+                <div class="swipe" id="mySwipe">
+                    <div class="swipe-wrap" id="banner">
+                        <div>
+                            <a href="javascript:;"><img class="img-responsive" style="width: inherit;" src="../images/p12.png"/> </a>
+                        	 
+                        </div>
+                        <div>
+                            <a href="javascript:;"><img class="img-responsive" style="    width: inherit;" src="../images/p12.png"/></a>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+                <ul id="position">
+                    <li class="cur"></li>
+                    <li></li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="information">
+            <p class="inf-tit">商家信息</p>
+            <div class="inf-details">
+                <div class="des-lf" data-lng="" data-lat="" data-name="" data-local="" style="width: 59%;">
+                    <p class="des-name shop_name" style="font-weight: 600;"></p>
+                    <p class="des-id"><span>地址：</span><span id="address"></span></p>
+                    
+                     
+                </div>
+                <div class="des-right" style="text-align: center; padding-left: 25px;">
+                	<img  id="daohang" src="../images/icon/zdsj.png"  style="margin-bottom: 10px;">
+					<img src="../images/icon/lxsj.png"    id="tel" >
+                </div>
+                
+               
+                 
+            </div>
+            <div class="inf-details">
+                <p class="inf-text"><span>简介：</span><span id="desc">{$store.description}</span></p>
+                <div id="href"></div>
+            </div>
+            <div class="inf-Telephone">
+                <a href="tel:{$store.tel}">联系电话：<span id="b_tel">{$store.tel}</span></a>                
+            </div>
+        </div>
+    </div>
+    <div class="information list" style="margin-bottom:0; ">
+    	<p class="inf-tit">商家产品</p>
+    	<div class="product-list">  
+    		
+    		<div style="margin: 30px auto 30px auto; text-align: center;"  id="product_null"> 商家暂未上传产品</div>
+	    	<ul id="product_list">
+	    		
+	    		
+	    	</ul>
+	    </div>
+    </div>
+    
+    
+</div>
+</body>
+<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+<script src="../js/mui.min.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/util.js"></script>
+<script src="../js/layer2.0/layer.js"></script>
+<script src="../js/shop_detail.js?s2" ></script>
+
+<!--轮播图-->
+<script src="../js/swipe.js"></script>
+<script type="text/javascript">
+	function openhuhu() {
+						token = localStorage.getItem('token');
+						if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined') {
+							location.href = 'login.html';
+						} else {
+							location.href = "paraches://?token=" + token+"&to="+$("#b_tel").html();
+						}
+					}
+	
+	$("#tel").on('click',function(){
+				
+//				layer.open({
+//					type: 2,
+//					content: '加载中',
+//					shadeClose:false
+//				});		
+				openhuhu();
+				 
+				 //location.href="tel:"+$("#b_tel").html(); 
+				 //layer.closeAll();
+			});
+	
+    var bullets = document.getElementById('position').getElementsByTagName('li');
+    var banner = Swipe(document.getElementById('mySwipe'), {
+        auto: 3000,
+        continuous: true,
+        disableScroll:false,
+        callback: function(pos) {
+            var i = bullets.length;
+            while (i--) {
+                bullets[i].className = ' ';
+            }
+            bullets[pos].className = 'cur';
+        }
+    });
+</script>
+
+<script type="text/javascript">
+	var n_lng='';
+	var n_lat = '';
+    // function t_value(){
+    // 	var a =$('#search').val();
+    // 	alert(a);
+    // 	if(a==undefined || a =='' || a==null){
+    // 		return false;
+    // 	}
+    // }
+document.addEventListener('plusready', function(){
+	plus.geolocation.getCurrentPosition(function(position) {
+        var codns = position.coords; //获取地理坐标信息； 
+        localStorage.setItem('longitude',codns.longitude);
+        localStorage.setItem('latitude',codns.latitude);
+        n_lng = codns.longitude;
+        n_lat = codns.latitude;  
+        $("#chooseCity").html(position.address.district);
+	}, function(e) {
+        //if (error) error(e);
+    }, {
+        provider: 'baidu'
+    });  	  
+	  
+}, false );
+</script>
+</html>

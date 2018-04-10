@@ -1,0 +1,558 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css">
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+	    <script src="../js/common.js"></script>
+        <script src="../js/register.js"></script>
+        <style>
+        	/*input输入框*/
+.register{ margin-top: 15px;}
+.register-input{
+	overflow: hidden;
+	background-color: #FFFFFF;
+	border-top: 1px solid #DDDDDD;
+	border-bottom: 1px solid #DDDDDD;
+	margin-top: -1px;
+	line-height: 50px;
+	overflow: hidden;
+}
+.register-input label{
+	float: left;
+	margin-left: 10px;
+	width: 20%;
+	font-size: 14px;
+	line-height: 50px;
+	color: #333333;
+}
+.register-input input{ 
+	float: left;
+	line-height: 50px;
+	font-size: 14px;
+	width: 50%;
+}
+
+.register-input select{
+	float: left;
+	line-height: 50px;
+	font-size: 14px;
+	height: 50px;
+	width:70%;
+	color:#666666;
+}
+.register-input select option{
+	
+	line-height: 32px;
+	font-size: 14px;
+}
+.register-input span{
+	float: right;
+	width: 20px;
+	height: 20px;
+	margin-top: 15px;
+	margin-right: 10px;
+}
+.register-input span.register-clear{
+	font-family: Muiicons;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 20px;
+    display: inline-block;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+    color: #999999;
+    cursor: pointer;
+}
+.register-input span.register-clear:before{
+	content: '\e460';
+}
+/*获取验证码*/
+.register-input button{
+	float: right;
+	height: 50px;
+	background-color: #ECECEC;
+	width: 22%;
+	color: #666666;
+	font-size: 12px;
+}
+.register-input button:hover{
+	color:red;
+}
+.register-input button.active{
+	 color: #CCCCCC;
+}
+/*会员类别*/
+.register-input a{
+	overflow: hidden;\
+	display: block;
+}
+.register-class{
+	float: left;
+	text-align: right;
+	width: 65%;
+	font-size: 14px;
+	color: #999999;
+}
+/*右箭头*/
+.register-input span.register-fold{
+	font-family: Muiicons;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 20px;
+    display: inline-block;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+    color: #666666;
+    cursor: pointer;
+}
+.register-input span.register-fold:before{
+	content: '\e583';
+}
+/*选择地区*/
+.region{
+	overflow: hidden;
+	width: 80%;
+	margin:auto;
+	margin-top: 15px;
+}
+.region div{ 
+	float: left;
+	background-color: #FFFFFF;
+	border: 1px solid #DDDDDD;
+	height: 32px;
+	width: 30%;
+	margin-left: 3%;
+	overflow: hidden;
+	position: relative;
+}
+.region div:first-child{
+	margin-left: 0;
+}
+.region div select{
+	width: 120px;
+	line-height: 32px;
+	height: 32px;
+	font-size: 14px;
+	color: #666666;
+    text-indent: 0.2em;
+}
+.region div span{
+	position: absolute;
+	font-family: Muiicons;
+    font-size: 18px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1;
+    display: inline-block;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+    right: 5px;
+    top: 7px;
+    color: #666666;
+}
+.region div span:before{
+	content: '\e581';
+}
+/*同意条款*/
+.clause{
+	width: 80%;
+	margin: auto;
+	margin-top: 20px;
+	overflow: hidden;
+}
+.clause-box{
+	float: left;
+	font-size: 12px;
+	width: 16px;
+	height: 16px;
+	overflow: hidden;
+	position: relative;
+	margin-right: 5px;
+}
+.clause-box input{
+	width: 16px;
+	height: 16px;
+	z-index:99;
+	opacity: 0;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.clause-box span{
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	background-color: #CCCCCC;
+	border-radius: 10px;
+	z-index: 1;
+	font-family: Muiicons;
+    font-size: 20px;
+    font-weight: 400;
+    font-style: normal;
+    line-height:16px;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+    color: #FFFFFF;
+}
+.clause-box span:before{
+	content: '\e472';
+    margin-left: -2px;
+}
+.clause-box span.activ{
+	background-color: #00a4a6;
+}
+.clause label{
+	font-size: 12px;
+	line-height: 16px;
+	float: left;
+	color: #666666;
+	margin-right: 5px;
+}
+.clause a{
+	color: #00A4A6;
+	font-size: 12px;
+	float: left;
+}
+/*添加银行卡*/
+.add-bank{
+	width: 80%;
+	margin: auto;
+	margin-top: 15px;
+}
+.add-bank button{
+	width: 100%;
+	height: 44px;
+	background-color: #00A4A6;
+	border-radius: 5px;
+	color: #FFFFFF;
+	font-size: 16px;
+}
+
+        </style>
+	</head>
+
+	<body>
+        <header class="header">
+            <a class="back" href="javascript:back();"></a>
+            <h1 class="tit">注册新账号</h1>
+        </header>
+        <div class="content">
+            <form class="register" id="register_form">
+                <!--
+                <div class="register-input">
+                    <label>推荐编号</label>
+                    <input type="text" id="tuijian" name="tuijian" placeholder="注册后不可更改">
+                    <span class="register-clear"></span>
+                </div>
+                -->
+                <div class="register-input">
+                    <label>手机号</label>
+                    <input type="tel" id="phone_mob" name="phone_mob" placeholder="请输入11位有效手机号">
+                    <button type="button" id="sendsms"  style="display:none">获取验证码</button>
+                </div>
+                <div class="register-input"  style="display:none">
+                    <label>验证码</label>
+                    <input type="tel" id="code" placeholder="短信效验码">
+                    <span class="register-clear"></span>
+                </div>
+                <div class="register-input">
+                    <label>登录密码</label>
+                    <input type="password" id="password" placeholder="请输入登录密码">
+                    <span class="register-clear"></span>
+                </div>
+                <div class="register-input">
+                    <label>支付密码</label>
+                    <input type="password" id="repwd" placeholder="请输入支付密码">
+                    <span class="register-clear"></span>
+                </div>
+                <!--
+                <div class="register-input">
+                    <label>会员类别</label>
+                    <select>
+                        <option>普通会员</option>
+                        <option>销售经理</option>
+                    </select>
+                </div>
+                -->
+                <div class="register-input">
+                    <label>真实姓名</label>
+                    <input type="text" id="lzhengName" name="lzhengName" placeholder="请输入真实姓名">
+                    <span class="register-clear"></span>
+                </div>
+                 <div class="register-input">
+                    <label>昵称</label>
+                    <input type="text" id="nickName" name="nickName" placeholder="请输入昵称">
+                    <span class="register-clear"></span>
+                </div>
+                
+                
+                <div class="register-input">
+                    <label>分享人</label>
+                    <input type="text" id="fxr" name="fxr" placeholder="请输入分享人的手机号[选填]">
+                    <span class="register-clear"></span>
+                </div>
+                
+                <div class="register-input">
+                    <label>所在区域</label>                    
+                    <div class="province">
+                        <select name="province" id="province" data-next="city" onchange="areaChange(this,this.value)" style="width:25%;">
+                            <option value="">请选择省份</option>
+                        </select>
+                    </div>
+                    <div class="city">
+                        <select name="city" id="city" data-next="area" onchange="areaChange(this,this.value)" style="width:25%;">
+                            <option value="">请选择城市</option>
+                        </select>
+                    </div>
+                    <div class="area">
+                        <select name="area" id="area" data-next="" onchange="areaChange(this,this.value)" style="width:25%;">
+                            <option value="">选择县区</option>
+                        </select>
+                    </div>
+                </div>                
+                <div class="clause">
+                    <div class="clause-box">
+                        <span></span>
+                        <input type="radio">
+                    </div>
+                    <label>同意条款</label>
+                    <a href="#">（阅读条款）</a>
+                </div>
+                <p class="add-bank">
+                    <button type="button" id="register">注册</button>
+                </p>
+            </form>
+        </div>
+    </body>
+    <script>
+    	function GetQueryString(name)
+		{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+		}
+
+    $(function(){
+    	
+        var canSend = true;
+        var time = 60;
+        var dtime = 60;
+        getAreaChild('province',1);
+        $("#sendsms").bind('click', function () {
+            var btn = $(this);
+            if (!canSend)
+                return;
+            var sendaddress = $('#phone_mob').val();
+            var fhm = $("[for='phone_mob']").text();
+            if (fhm != '' && fhm != "OK!") {
+                alert("请输入正确的手机号码！");
+                return;
+            }
+            if (fhm == '' && $('#phone_mob').val() == "") {
+                alert("请输入正确的手机号码！");
+                return;
+            }
+            canSend = false;
+            $.ajax({
+                type: "get",
+                url: "http://www.tanglikeji.com/index.php/Register/sendcode_api/",
+                data: {
+                    mobile: function () {
+                        return sendaddress;
+                    }
+                },
+                success: function (msg) {
+                    var hander = setInterval(function () {
+                        if (time <= 0) {
+                            canSend = true;
+                            clearInterval(hander);
+                            btn.val("重新发送验证码");
+                            btn.removeAttr("disabled");
+                            time = dtime;
+                        } else {
+                            canSend = false;
+                            btn.attr({
+                                "disabled": "disabled"
+                            });
+                            btn.val(time + "秒后可重新发送");
+                            time--;
+                        }
+                    }, 1000);
+                    if (msg) {
+                        alert("短信已发送至:" + sendaddress + " 请注意查收！");
+                    } else {
+                        canSend = true;
+                        alert("短信发送失败，请检查手机号码是否正确！");
+                    }
+                }
+            });
+        });
+
+        $("#register").on('click',function(){
+            mobile = $("#phone_mob").val();
+            code = $("#code").val();
+            pwd = $("#password").val();
+            repwd = $("#repwd").val();
+            lzhengName = $("#lzhengName").val();
+            province = $("#province").val();
+            nickName = $("#nickName").val();
+            city = $("#city").val();
+            area = $("#area").val();
+            fxr= $("#fxr").val();
+            if(mobile == ''){
+                alert('手机号不能为空');
+                return;
+            }
+            $.ajax({
+                url : 'http://www.tanglikeji.com/api.php/Register/check_name_email',
+                type : 'POST',
+                dataType : '',
+                data : {'param':mobile,'name':'uname'},
+                success : function(res){    
+                    if(res=='用户已经存在'){      
+                    	 alert(res);
+                       return;
+                    }else{
+                     
+                    }
+                },
+                error:function(err){
+                	console.log(err);
+                }
+            });  
+            if(!(/^1[3456789]\d{9}$/.test(mobile))){
+                alert('手机号非法');
+                return;
+            }
+            if(lzhengName == ''){
+            	alert('请输入姓名');
+            	return;
+            }
+            if(pwd == ''){
+                alert('请输入登录密码');
+                return;
+            }
+            if(repwd == ''){
+                alert('请输入支付密码');
+                return;
+            }
+            if(pwd != repwd){
+                //alert('密码不一致');
+               // return;
+            }
+            if(province == ''){
+            	alert('请选择省份');
+                return;
+            }
+            if(city == ''){
+            	alert('请选择城市');
+                return;
+            }
+            if(area == ''){
+            	alert('请选择县/区');
+                return;
+            }
+            $.ajax({
+                url : 'http://www.tanglikeji.com/api.php/Register/user_reg',
+                type : 'POST',
+                dataType : 'JSON',
+                data : {'phone':mobile,'code':code,'lzhengName':lzhengName,'nickName':nickName,'pass':pwd,'paypassword':repwd,'province':province,'city':city,'area':area,'fxr':fxr},
+                success : function(res){                	
+                    if(res.status==0){                    
+                        alert('注册成功');
+                        clicked('login.html');
+                    }else{
+                        alert(res.message);
+                        return;
+                    }
+                },
+                error:function(err){
+                	console.log(err);
+                }
+            });          
+
+        });
+		$("#phone_mob").blur(function(){	
+			 mobile = $("#phone_mob").val();
+			  if(!(/^1[3456789]\d{9}$/.test(mobile))){
+                alert('手机号非法');
+                return;
+            }
+			 
+			$.ajax({
+                url : 'http://www.tanglikeji.com/api.php/Register/check_name_email',
+                type : 'POST',
+                dataType : '',
+                data : {'param':mobile,'name':'uname'},
+                success : function(res){    
+                    if(res=='用户已经存在'){      
+                    	 alert(res);
+                       return;
+                    }else{
+                     
+                    }
+                },
+                error:function(err){
+                	 alert(err);
+                	console.log(err);
+                }
+            });  
+		});
+        $(".clause-box").children("input").toggle(
+            function(){
+                $(this).prev("span").addClass("activ");
+            },
+            function(){
+                $(this).prev("span").removeClass("activ");
+            }
+        );
+        $(".register-input").children(".register-clear").hide();
+            $(".register-input input").focus(function(){
+                $(this).next(".register-clear").show();
+            });
+            $(".register-input").blur(function(){
+                $(this).children(".register-clear").hide();
+            });
+            $(".register-clear").click(function(){
+                $(this).prev("input").attr("value","");
+                $(this).hide();
+        });
+    });
+    function areaChange(obj,value){
+        var type = $(obj).attr('data-next');
+        if(type != ''){
+            getAreaChild(type,value);
+        }
+    }
+    function getAreaChild(objid,pid){        
+        $.ajax({
+            url : 'http://www.tanglikeji.com/api/index.php?n=area&f=list4',
+            type : 'POST',
+            dataType : 'JSON',
+            data : {'areasid':pid},
+            success : function(res){                
+                if(res.state=='ok'){                    
+                    var str = '请选择城市';
+                    if(objid == 'area'){
+                        str = '请选择县区';                        
+                    }else if(objid == 'province'){
+                        str = '请选择省份';
+                    }
+                    $("#"+objid).html('');
+                    html = '<option value="0">'+str+'</option>'
+                    for(var i in res.data){
+                        html += '<option value="'+res.data[i].areaid+'">'+res.data[i].diqu+'</option>';
+                    }                    
+                    $("#"+objid).html(html);
+                }
+            }
+        });
+    }
+    </script>
+</html>

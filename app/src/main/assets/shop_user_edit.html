@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css" /> <!--公用css-->
+		<link rel="stylesheet" href="../css/password.css" />
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<link href="../css/mui.picker.css" rel="stylesheet" />
+		<script src="../js/config.js"></script>
+	    <script src="../js/util.js"></script>	    
+	    <script src="../js/common.js"></script>
+	    <script src="../js/layer2.0/layer.js"></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				clicked('login.html');
+			}
+		</script>
+		<style>
+			.mui-btn {
+				font-size: 16px;
+				padding: 8px;
+				margin: 3px;
+			}
+			input[type=radio] {
+
+    display: inline-block;
+
+    vertical-align: middle;
+
+    width: 20px;
+
+    height: 20px;
+
+    -webkit-appearance: none;
+
+    background-color: transparent;
+
+    border: 0;
+
+    outline: 0 !important;
+
+    line-height: 20px;
+
+    color: #d8d8d8;
+
+}
+
+input[type=radio]:after {
+
+    content: "";
+
+    display:block;
+
+    width: 20px;
+
+    height: 20px;
+
+    border-radius: 50%;
+
+    text-align: center;
+
+    line-height: 14px;
+
+    font-size: 16px;
+
+    color: #fff;
+
+    border: 3px solid #ddd;
+
+    background-color: #fff;
+
+    box-sizing:border-box;
+
+}
+
+input[type=radio]:checked:after {
+
+    content: "L";
+
+    transform:matrix(-0.766044,-0.642788,-0.642788,0.766044,0,0);
+
+    -webkit-transform:matrix(-0.766044,-0.642788,-0.642788,0.766044,0,0);
+
+    border-color: #099414;
+
+    background-color: #099414;
+
+}
+		</style>
+	</head>
+	<body>
+		<header class="header"  >
+			<a id="master_list.html" onclick="clicked(this.id)" class="back"></a>
+			<h1 class="tit">业务员编辑</h1>
+		</header>
+		<div class="content">
+			<div class="password-Back">
+				<form>
+					<ul>
+						<li class="password-input">
+							<label style="color:#000000;width: 32%;">选择角色</label>
+							<select class="mui-btn mui-btn-block" name="role_id" id="role_id">
+									<option value = '1'>广告管理</option>
+									<option value = '2'>订单管理</option>
+									<option value = '3'>业务员</option>
+ 
+                                </select>
+						</li>
+						<li class="password-input">
+							<label style="color:#000000;width: 32%;">业务员账号</label>
+							<input style="width: 65%" placeholder="请输入业务员账号"  id='user_name' name="username" type="text">
+						</li>
+						<li class="password-input">
+							<label style="color:#000000;width: 32%;">真实姓名</label>
+							<input style="width: 65%"  placeholder="请输入真实姓名" name="realname" id="realname" type="text">
+						</li>
+						<li class="password-input">
+							<label style="color:#000000;width: 32%;">身份证号</label>
+							<input style="width: 65%"  placeholder="请输入身份证号" name="idcard" id="idcard" type="text">
+						</li>
+						<li class="password-input">
+							<label style="color:#000000;width: 32%;">状态</label>
+							<div style="float: left;height: 52px;line-height: 52px;"><input style="width: 25%;margin-top: 15px;vertical-align:middle" type="radio" id="rdo1" name="status" value="0" /><span style="margin-left: 15px;">启用</span></div>
+							<div style="float: left;height: 52px;line-height: 52px;"><input style="width: 25%;margin-top: 15px;vertical-align:middle"  type="radio" id="rdo2"  name="status" value="1" /><span style="margin-left: 15px;">停用</span></div>
+						</li>
+					</ul>
+					<input type="hidden" id="masterid" value=""/>
+					<p class="password-next"><button type="button" id="submit">提交</button></p>
+				</form>
+			</div>
+		</div>
+	</body>
+	
+	<script>
+		function GetQueryString(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return '';
+}
+		
+				function getMasterInfo(id)
+{
+    $.fn.Util().ajax({
+					url : 'http://www.tanglikeji.com/api.php/Ucenter/get_master',
+					data :{'id':id},
+					beforeFn:function(){
+						layer.open({
+							type: 2,
+							content: '加载中',
+							shadeClose:false
+						});
+					},
+				}).done(function(data){
+					layer.closeAll();
+					if(data.state == 'ok'){	
+						$("#role_id").val(data.data.role_id);
+						$("#user_name").val(data.data.user_id);
+						$("#realname").val(data.data.lzhengName);
+						$("#idcard").val(data.data.idcard);
+						if(data.data.status==0){
+							$("#rdo1").attr("checked","checked");
+							
+						}else{
+							$("#rdo2").attr("checked","checked");
+						}
+						
+					}else{
+						layer.open({
+							'content':data.msg,
+							time : 2,
+						})
+					}
+				}).fail(function(err){
+					alert(err.msg);
+					layer.open({'content':err.msg});
+				})
+}
+	
+		
+		$(function(){
+			var mastid = GetQueryString('id');
+			$("#masterid").val(mastid);
+			getMasterInfo(mastid);
+			var tokens = localStorage.getItem('token');
+			$("#submit").on('click',function(){
+			var status =$("input[name='status']:checked").val();
+				$.fn.Util().ajax({
+					url : 'http://www.tanglikeji.com/api.php/Ucenter/edit_master',
+					data :{'cookie':tokens,'id':mastid,'role_id':$("#role_id").val(),'username':$("#user_name").val(),'idcard':$("#idcard").val(),'realname':$("#realname").val(),'status':status},
+					beforeFn:function(){
+						layer.open({
+							type: 2,
+							content: '加载中',
+							shadeClose:false
+						});
+					},
+				}).done(function(data){
+					layer.closeAll();
+					if(data.state == 'ok'){	
+						layer.open({
+							'content':'修改成功',
+							time : 2,
+							end : function(){
+								clicked("shop_user_edit.html?id="+mastid);
+							}
+						})
+					}else{
+						layer.open({
+							'content':data.msg,
+							time : 2,
+						})
+					}
+				}).fail(function(err){
+					alert(err.msg);
+					layer.open({'content':err.msg});
+				})
+			});
+		});
+	</script>
+</html>

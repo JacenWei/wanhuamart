@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>聊天详情</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="css/sm.css">
+	<link rel="stylesheet" href="css/sm-extend.css">
+	<link rel="stylesheet" href="css/login.css">
+	<script type='text/javascript' src='js/zepto.js' charset='utf-8'></script>
+    <script type="text/javascript" src="js/update.js" ></script>
+    <script type="text/javascript" src="js/common.js" ></script>
+    <script type="text/javascript" src="js/cache.js" ></script>
+	<style>
+		
+	</style>
+	
+</head>
+<body>
+	
+    <div class="page-group" style="background-color:#f5f5f5;" id="chat-index">
+        <div class="page page-current page-from-right-to-center" style="background-color:#f5f5f5;">
+        	<header class="bar bar-nav">
+        		<button class="button pull-left btn-back" onclick="back()"><img src="images/icon/icon-arrow-left.png" class="icon-close" /></button>				
+        		<h1 class="title">聊天详情</h1>
+			</header>
+        	<div class="content chat-content">
+        		
+        		<div class="content-block add-content-content " id="chat-detail.html" style="padding:0;">
+		        	<div class="list-block" style="margin-bottom:1.33333333rem;">
+		        		<div class="piclist" id="memberList">
+		        			<span id="userface">
+		        				<img id="logo_src" style="height:3.33333333rem;" src="images/chat1.png" />
+		        				<p class="substr" id="nickname">发到空间</p>
+		        			</span>
+		        			<span id="add-add">
+		        				<img src="images/chat-group-add.png" />
+		        				<p class="substr">&nbsp;</p>
+		        			</span>
+							<!--		        			
+		        			<span id="sub-user">
+		        				<img src="images/chat-group-.png" />
+		        				<p class="substr">&nbsp;</p>
+		        			</span>
+		        			-->
+		        		</div>
+		        		
+		        	</div>
+		        	
+		        	
+		        	<div class="list-block" style="margin-bottom:1.33333333rem;">
+		        		<ul>
+					        <li class="item-content" style="padding:0 1.333333rem;">						          	
+					          	<div class="item-inner uc-list-inner my-inner-list" style="height:inherit;margin-left:0;">
+					            	<div class="item-title"><p style="line-height:2rem;margin-bottom:0;">查看聊天记录</p></div>						            	
+					          	</div>
+					        </li>
+					        <li class="item-content" style="padding:0 1.333333rem;" id="clear-log">						          	
+					          	<div class="item-inner uc-list-inner my-inner-list"  style="height:inherit;margin-left:0;">
+					            	<div class="item-title"><p style="line-height:2rem;margin-bottom:0;">清除聊天记录</p></div>
+					            	<div class="item-after"></div>
+					          	</div>
+					        </li>						    
+					    </ul>
+		        	</div>
+		        	
+		        	<div class="list-block" style="margin-bottom:1.33333333rem;">
+		        		<ul>
+					        <li class="item-content" style="padding:0 1.333333rem;">						          	
+					          	<div class="item-inner uc-list-inner my-inner-list" style="height:inherit;margin-left:0;">
+					            	<div class="item-title"><p style="line-height:2rem;margin-bottom:0;">置顶聊天</p></div>
+					            	<div class="item-after">
+					            		<div class="item-input">
+											<label class="label-switch">
+												<input type="checkbox">
+												<div class="checkbox"></div>
+											</label>
+										</div>
+					            	</div>
+					          	</div>
+					        </li>
+					        <li class="item-content" style="padding:0 1.333333rem;" id="notice">						          	
+					          	<div class="item-inner uc-list-inner my-inner-list"  style="height:inherit;margin-left:0;">
+					            	<div class="item-title"><p style="line-height:2rem;margin-bottom:0;">消息免打扰</p></div>
+					            	<div class="item-after">
+					            		<div class="item-input">
+											<label class="label-switch">
+												<input type="checkbox" id="notice">
+												<div class="checkbox" id="setnotice"></div>
+											</label>
+										</div>
+					            	</div>
+					          	</div>
+					        </li>						    
+					    </ul>
+		        	</div>
+		        	
+		        	
+		        	<div class="list-block" id="tousu">
+		        		<ul>
+					        <li class="item-content" style="padding:0 1.333333rem;">						          	
+					          	<div class="item-inner uc-list-inner my-inner-list" style="margin-left:0;">
+					            	<div class="item-title"><p style="line-height:2rem;margin-bottom:0;">投诉</p></div>						            	
+					          	</div>
+					        </li>						    
+					    </ul>
+		        	</div>		        	
+		       	</div>
+        		
+        		
+        		
+			  	<!--
+			  	<div class="content-block add-content-content " id="chat-detail.html" style="padding:0;">
+		        	<div class="list-block" style="margin-bottom:1.33333333rem;">
+		        		<ul>
+						        <li class="item-content" style="padding:0 1.333333rem;" id="fromer">
+						          	<div class="item-media"><i class="icon face"><img id="logo_src" src="images/chat1.png" /></i></div>
+						          	<div class="item-inner uc-list-inner my-inner-list" style="margin-left:1.333333rem;">
+						            	<div class="item-title">
+						            		<p id="nickname">这里是昵称</p>
+						            		<p id="remarks">这里是签名</p>
+						            	</div>
+						            	<div class="item-after">
+						            		<img src="images/icon/icon-arrow-right.png"  />
+						            	</div>
+						          	</div>
+						        </li>
+						        <li class="item-content" style="padding:0 1.333333rem;">
+						          	<div class="item-media"><i class="icon face"><img src="images/icon/icon-chat-more.png" /></i></div>
+						          	<div class="item-inner uc-list-inner my-inner-list" style="margin-left:1.333333rem;">
+						            	<div class="item-title"><p style="line-height:2rem;">添加好友群聊</p></div>
+						            	<div class="item-after"></div>
+						          	</div>
+						        </li>
+						    
+					    </ul>
+		        	</div>
+		        	<div class="list-block" style="margin-bottom:1.33333333rem;">
+		        		<ul>
+					        <li class="item-content" style="padding:0 1.333333rem;">						          	
+					          	<div class="item-inner uc-list-inner my-inner-list" style="height:inherit;margin-left:0;">
+					            	<div class="item-title"><p style="line-height:2rem;">查看聊天记录</p></div>						            	
+					          	</div>
+					        </li>
+					        <li class="item-content" style="padding:0 1.333333rem;" id="clear-log">						          	
+					          	<div class="item-inner uc-list-inner my-inner-list"  style="height:inherit;margin-left:0;">
+					            	<div class="item-title"><p style="line-height:2rem;">清除聊天记录</p></div>
+					            	<div class="item-after"></div>
+					          	</div>
+					        </li>						    
+					    </ul>
+		        	</div>
+		        	<div class="list-block">
+		        		<ul>
+					        <li class="item-content" style="padding:0 1.333333rem;">						          	
+					          	<div class="item-inner uc-list-inner my-inner-list" style="margin-left:0;">
+					            	<div class="item-title"><p style="line-height:2rem;">投诉</p></div>						            	
+					          	</div>
+					        </li>						    
+					    </ul>
+		        	</div>		        	
+		       	</div>
+		       -->
+		       	
+			</div>
+        </div>        
+    </div>
+   
+    
+	<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/template.js' charset='utf-8'></script>
+	<script type="text/javascript" src="js/layer/layer.js" ></script>
+	<script>		
+		var roomid = '';
+		console.log(localStorage.getItem('single-fromer'));
+		var token = localStorage.getItem('token');						
+		
+		if(token == null || token == undefined){
+			$.myUtil().alert_msg('用户未登录',function(){clicked('login.html');});
+		}
+		var userinfo = JSON.parse(localStorage.getItem('userinfo'));
+		$(function(){
+			
+			
+			fromer = JSON.parse(localStorage.getItem('single-fromer'));
+			roomid = localStorage.getItem('single-roomid');
+			var param = $.myUtil().toQueryParams();
+			roomid = param.id;
+			
+			var isNotice = localStorage.getItem(roomid);
+			console.log(isNotice);
+			if(isNotice != undefined){
+				if(isNotice == 1){
+					$("#notice").attr('checked','checked');					
+				}else if(isNotice == 0){
+					$("#notice").removeAttr('checked');
+				}
+			}
+			
+			inity();
+			
+			function inity(){
+				$("#logo_src").attr('src',fromer.head_pic);
+				$("#nickname").html(fromer.nickname);
+				$("#remarks").html(fromer.remarks);
+			}
+			
+			$("#fromer").click(function(){
+				localStorage.setItem('chat-userinfo',JSON.stringify(fromer));
+				clicked('userinfo.html?id='+fromer.user_id);
+			});
+			
+			$("#userface").click(function(){
+				clicked('userinfo.html?id='+fromer.user_id);
+			})
+			
+			$("#tousu").click(function(){
+				clicked('index-tousu.html?id='+roomid+"&type=4");
+			});
+			
+			$("#setnotice").click(function(){
+				$.myUtil().ajax({
+					data:{
+						'api_name':'tixing_qunpbgr',
+						'token':token,
+						'room_id':roomid
+					},beforeFn:function(){}
+				}).done(function(res){
+					if(res.state == 'ok'){
+						if(res.data.status == 1){
+							localStorage.setItem(roomid,1);
+							console.log(localStorage.getItem(roomid));
+							$("#notice").attr('checked');
+						}else{
+							localStorage.setItem(roomid,0);
+							$("#notice").removeAttr('checked');
+						}
+					}
+				})
+			})
+			
+			$("#add-add").click(function(){
+				clicked('chat-group-friend.html?action=creategroup');
+			})
+			
+		})
+		
+		document.addEventListener('plusready',function(){			
+			$("#clear-log").click(function(){
+				$.myUtil().dialog('清除聊天记录','确定清除聊天记录吗?',function(){					
+					$.myUtil().dialog_close();					
+					MobileFrame.clearCache(userinfo.intval_id,roomid,function(rs,msg){
+						plus.nativeUI.closeWaiting();
+						if(rs){
+							$.myUtil().toast('清除完毕');
+						}else{
+							$.myUtil().toast(msg);
+						}
+						
+					});
+				},function(){
+					$.myUtil().dialog_close();
+				});
+				
+			});
+		},false)
+	</script>
+</body>
+</html>

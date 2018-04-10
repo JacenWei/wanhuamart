@@ -1,0 +1,325 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css">
+        <link rel="stylesheet" href="../css/line.css">
+        <link rel="stylesheet" href="../css/mui.min.css">
+	    <script type="text/javascript" src="../js/common.js" ></script>
+        <style>
+            .mui-slider .mui-slider-group .mui-slider-item img {
+                width: 20px;
+            }
+            .onr-let{width:100%};
+            .onr-let img {padding:0;}
+            .list-muen {width: 65px;}
+        </style>
+        <script type="text/javascript">
+            if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+                clicked('login.html');
+            }
+            var dianji=false;
+        </script>
+        <script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+	    <script src="../js/config.js"></script>
+	    <script src="../js/util.js"></script>	    
+	    <script src="../js/layer2.0/layer.js"></script>
+	    <script src="../js/agent_order.js?22ds1addddsdcss"></script>
+	</head>
+
+	<body>
+		<header class="header" >
+			<a id="frame4.html" onclick="clicked(this.id)" class="back"></a>
+			<h1 class="tit" style="margin:0;">区域订单</h1>
+		</header>
+
+        <div id="slider"   style="background-color:#fff; margin-top: 55px;   ;">
+            <div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted"
+            	 style=" border-bottom:  dashed #0168B7 1px; position: fixed; z-index: 9; background: #fff;"   >
+                <a class="mui-control-item mui-active" href="#item1mobile">未审核</a>
+                <a class="mui-control-item" href="#item2mobile">已审核</a>
+                <a class="mui-control-item" href="#item3mobile">已驳回</a>
+            </div>
+            <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+            <div style="clear: both;"></div><br/><br/><br/>
+            <div class="mui-slider-group1" style="margin-bottom:64px; margin-top: 54px;">
+                <div id="item1mobile" class="mui-slider-item mui-control-content mui-active" style="height: initial;border-bottom:0;">
+                    <div class="refine-details">
+                    	<div style=" position: fixed; width: 100%; top: 100px; background: #fff; padding-top: 5px; padding-bottom: 5px; z-index: 9;">  
+	                    	<div style=" width: 30% ; margin-left: 3%; height: 30px; border: solid #41a768 1px;color:#41a768; background-color: #fff;  float: left; line-height: 30px; text-align: center;"  onclick="quanxuan();" >全选/全不选</div>
+	                    	<div style=" width: 30% ; margin-left: 3%; height: 30px; border: solid #0168B7 1px;color:#0168B7; background-color: #fff;  float: left; line-height: 30px; text-align: center;"  onclick="ttt1();" >批量通过</div>
+	                    	<div style=" width: 30% ; margin-left: 3%; height: 30px; border: solid #f00 1px;  color:#f00;background-color: #fff;  float: left; line-height: 30px; text-align: center;"  onclick="ttt0();" > 批量驳回</div>
+	                    </div>
+                        <ul id="list1" style="clear: both; margin-top: 85px;">
+                        	
+                        </ul>
+                    </div>
+                    <div class="refine-details">
+                <ul id="list"></ul>
+                <div style="text-align: center;">
+                	<button class="page_btn1" id="page_pre1">上一页</button>
+                	<button class="page_btn1" id="page_next1">下一页</button>	
+                </div>
+            </div>
+                </div>
+                <div id="item2mobile" class="mui-slider-item mui-control-content" style="height: initial;border-bottom:0;">
+                    <div class="refine-details">
+                        <ul id="list2">
+                            </ul>
+                    </div>
+                    <div class="refine-details">
+                <ul id="list"></ul>
+                <div style="text-align: center;">
+                	<button class="page_btn2" id="page_pre2">上一页</button>
+                	<button class="page_btn2" id="page_next2">下一页</button>	
+                </div>
+            </div>
+                </div>
+                <div id="item3mobile" class="mui-slider-item mui-control-content" style="height: initial;border-bottom:0;">
+                    <div class="refine-details">
+                        <ul id="list3">
+                        </ul>
+                    </div>
+                    <div class="refine-details">
+                <ul id="list"></ul>
+                <div style="text-align: center;">
+                	<button class="page_btn3" id="page_pre3">上一页</button>
+                	<button class="page_btn3" id="page_next3">下一页</button>	
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="../js/mui.min.js"></script>
+        <script>
+        	
+        	var ischeck = false;
+        	function quanxuan(){
+        		 if(!ischeck){
+        		 $(".checkb").each(function(){  				
+    				$(this).prop("checked",'checked');
+  					});
+  					ischeck = true;
+        		 }else{
+        		 	 $(".checkb").each(function(){  				
+    			$(this).prop("checked",'');	
+  					});
+        		 	ischeck = false;	    				
+  					}
+  					
+  					}
+        		     	
+        	
+        	function ttt1(){var xzz="0";
+        		 $(".checkb").each(
+        		 	function (index,domEle){
+        		 		
+        		 		if( $(domEle).is(':checked') ){
+        		 			console.log( $(domEle).val() );
+        		 			xzz=xzz + "," + $(domEle).val();
+        		 		}
+        		 		
+        		 	}
+        		 );
+        		 
+        		 
+        		 if(xzz==0){
+        		 	layer.open({'content':"请选择你要批量操作的订单"});
+        		 	return false;
+        		 }
+        		
+        		$.fn.Util().confirm('确定批量审核通过吗？','确定','取消',function(){tongguo();},function(){layer.closeAll();});        		
+        	}
+        	
+        	function ttt0(){
+        		var xzz="0";
+        		 $(".checkb").each(
+        		 	function (index,domEle){
+        		 		
+        		 		if( $(domEle).is(':checked') ){
+        		 			console.log( $(domEle).val() );
+        		 			xzz=xzz + "," + $(domEle).val();
+        		 		}
+        		 		
+        		 	}
+        		 );
+        		  
+        		 if(xzz==0){
+        		 	layer.open({'content':"请选择你要批量操作的订单"});
+        		 	return false;
+        		 }
+        		
+        		$.fn.Util().confirm('确定批量驳回订单吗？','确定','取消',function(){bohui();},function(){layer.closeAll();});        		
+        	}
+        	
+        	
+        	function bohui(){
+        		
+        		var xzz="0";
+        		 $(".checkb").each(
+        		 	function (index,domEle){
+        		 		
+        		 		if( $(domEle).is(':checked') ){
+        		 			console.log( $(domEle).val() );
+        		 			xzz=xzz + "," + $(domEle).val();
+        		 		}
+        		 		
+        		 	}
+        		 );
+        		 
+        		 
+        		 if(xzz==0){
+        		 	layer.open({'content':"请选择你要批量操作的订单"});
+        		 	return false;
+        		 }
+        		
+        		var tokens=localStorage.getItem ("token");
+        		$.fn.Util().ajax({
+					url : 'http://www.tanglikeji.com/api.php/Ucenter/doshopcheck_piliang',
+					data : {'cookie':tokens,'check':0,'xzz':xzz},
+					beforeFn:function(){
+						layer.open({
+							type: 2,
+							content: '加载中',
+							shadeClose:false
+						});
+					}
+				}).done(function(data){
+					layer.closeAll();
+					if(data.state == 'ok'){	
+						layer.open({
+							'content':data.msg,
+							time : 2,
+							end : function(){
+								location.reload();
+							}
+						})
+					}else{
+						layer.open({
+							'content':data.msg,
+							time : 2,
+						})
+					}
+				}).fail(function(err){
+					layer.open({'content':err.msg});
+				})
+        		
+        	}
+        	
+        	function tongguo(){
+        		
+        		var xzz="0";
+        		 $(".checkb").each(
+        		 	function (index,domEle){
+        		 		
+        		 		if( $(domEle).is(':checked') ){
+        		 			console.log( $(domEle).val() );
+        		 			xzz=xzz + "," + $(domEle).val();
+        		 		}
+        		 		
+        		 	}
+        		 );
+        		 
+        		 
+        		 if(xzz==0){
+        		 	layer.open({'content':"请选择你要批量操作的订单"});
+        		 	return false;
+        		 }
+        		
+        		var tokens=localStorage.getItem ("token");
+        		$.fn.Util().ajax({
+					url : 'http://www.tanglikeji.com/api.php/Ucenter/doshopcheck_piliang',
+					data : {'cookie':tokens,'check':1,'xzz':xzz},
+					beforeFn:function(){
+						layer.open({
+							type: 2,
+							content: '加载中',
+							shadeClose:false
+						});
+					}
+				}).done(function(data){
+					layer.closeAll();
+					if(data.state == 'ok'){	
+						layer.open({
+							'content':data.msg,
+							time : 2,
+							end : function(){
+								location.reload();
+							}
+						})
+					}else{
+						layer.open({
+							'content':data.msg,
+							time : 2,
+						})
+					}
+				}).fail(function(err){
+					layer.open({'content':err.msg});
+				})
+        		
+        	}
+        	function xianshi(id){ 
+        		if(dianji==true){
+        			dianji=false;
+        			return false;
+        		}
+        		if($("#" + id).attr("xs")=="0"){
+        			$("#" + id).attr("xs","1");
+					$("#" + id).find("div").show();
+				}else{
+					$("#" + id).attr("xs","0");
+					$("#" + id).find("div").hide();
+					
+					$("#" + id).find(".xxs").show();
+				}
+			}
+        	
+            var pinjia;
+            mui.init({
+                swipeBack: false
+            });
+            (function($) {
+                mui('.mui-scroll-wrapper').scroll();
+                $('.mui-scroll-wrapper').scroll({
+                    indicators: true //是否显示滚动条
+                });
+                var html2 = '<ul class="mui-table-view"><li class="mui-table-view-cell">第二个选项卡子项-1</li><li class="mui-table-view-cell">第二个选项卡子项-2</li><li class="mui-table-view-cell">第二个选项卡子项-3</li><li class="mui-table-view-cell">第二个选项卡子项-4</li><li class="mui-table-view-cell">第二个选项卡子项-5</li></ul>';
+                var html3 = '<ul class="mui-table-view"><li class="mui-table-view-cell">第三个选项卡子项-1</li><li class="mui-table-view-cell">第三个选项卡子项-2</li><li class="mui-table-view-cell">第三个选项卡子项-3</li><li class="mui-table-view-cell">第三个选项卡子项-4</li><li class="mui-table-view-cell">第三个选项卡子项-5</li></ul>';
+                var item2 = document.getElementById('item2mobile');
+                var item3 = document.getElementById('item3mobile');
+                document.getElementById('slider').addEventListener('slide', function(e) {
+                    if (e.detail.slideNumber === 1) {
+                        /*
+                         if (item2.querySelector('.mui-loading')) {
+
+                         setTimeout(function() {
+                         item2.querySelector('.mui-scroll').innerHTML = html2;
+                         }, 500);
+
+                         }
+                         */
+                    } else if (e.detail.slideNumber === 2) {
+                        /*
+                         if (item3.querySelector('.mui-loading')) {
+
+                         setTimeout(function() {
+                         item3.querySelector('.mui-scroll').innerHTML = html3;
+                         }, 500);
+
+                         }
+                         */
+                    }
+                });
+                var sliderSegmentedControl = document.getElementById('sliderSegmentedControl');
+                $('.mui-input-group').on('change', 'input', function() {
+                    if (this.checked) {
+                        sliderSegmentedControl.className = 'mui-slider-indicator mui-segmented-control mui-segmented-control-inverted mui-segmented-control-' + this.value;
+                        //force repaint
+                        sliderProgressBar.setAttribute('style', sliderProgressBar.getAttribute('style'));
+                    }
+                });
+            })(mui);
+        </script>
+    </body></html>

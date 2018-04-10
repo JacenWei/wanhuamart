@@ -1,0 +1,259 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1.0" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title></title>
+<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+<link rel="stylesheet" type="text/css" href="../css/new_css.css">
+<script type="text/javascript" src="../js/Adaptive.js"></script> 
+<link href="../css/global.css" type="text/css" rel="stylesheet">
+    <link href="../css/main.css" type="text/css" rel="stylesheet">
+    <link href="../css/public.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/business.css">
+    <link rel="stylesheet" href="../css/myindex.css">
+    <link rel="stylesheet" href="../css/swiper-3.4.1.min.css">
+    <link href="../css/mui.poppicker.css" type="text/css" rel="stylesheet">
+    <link href="../css/mui.picker.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>    
+    <script src="../js/mui.min.js"></script>    
+    <script src="../js/config.js"></script>
+    <script src="../js/util.js"></script> 
+    <script src="../js/layer2.0/layer.js"></script>
+    <script src="../js/common.js"></script> 
+    <script src="../js/mui.picker.js"></script> 
+    <script src="../js/mui.poppicker.js"></script>
+    <script src="../js/city.data-3.js"></script>
+    <script type="text/javascript" src="../js/swiper-3.4.1.jquery.min.js" charset="utf-8"></script>
+		<style>
+			.header .back:before {
+			    content: '\e471';
+			    line-height: 44px;
+			    color: #0168B7;
+			}
+			.product header h1 { 
+				font-size: 0.75rem;
+			}
+			.shopList li h2, p {
+			  padding: 0 ; 
+			}
+		</style>
+		<style>
+.mui-bar {
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    left: 0;
+    height: 44px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-bottom: 0;
+    background-color: #f7f7f7;
+    -webkit-box-shadow: 0 0 1px rgba(0,0,0,.85);
+    box-shadow: 0 0 1px rgba(0,0,0,.85);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.mui-bar-tab {
+    bottom: 0;
+    display: table;
+    width: 100%;
+    height: 50px;
+    padding: 0;
+    table-layout: fixed;
+    border-top: 0;
+    border-bottom: 0;
+    -webkit-touch-callout: none;
+}
+.mui-bar-tab .mui-tab-item {
+    display: table-cell;
+    overflow: hidden;
+    width: 1%;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #929292;
+}
+.mui-bar-tab .mui-tab-item.mui-active {
+    color: #007aff;
+}
+.mui-bar-tab .mui-tab-item .mui-icon {
+    top: 3px;
+    width: 24px;
+    height: 24px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.mui-bar .mui-icon {
+    font-size: 24px;
+    position: relative;
+    z-index: 20;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.mui-icon {
+    font-family: Muiicons;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1;
+    display: inline-block;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+}
+.mui-icon-home:before {
+    content: '\e500';
+}
+.mui-icon-email:before {
+    content: '\e201';
+}
+.mui-icon-contact:before {
+    content: '\e100';
+}
+.mui-icon-person:before {
+    content: '\e101';
+}
+.mui-icon-map:before {
+    content: '\e364';
+}
+.mui-icon-upload:before {
+    content: '\e402';
+}
+.mui-icon-list:before {
+    content: '\e301'; 
+}
+.mui-bar-tab .mui-tab-item .mui-icon~.mui-tab-label {
+    font-size: 11px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.mui-icon .mui-badge {
+    font-size: 10px;
+    line-height: 1.4;
+    position: absolute;
+    top: -2px;
+    left: 100%;
+    margin-left: -10px;
+    padding: 1px 5px;
+    color: #fff;
+    background: red;
+}
+.mui-badge {
+    font-size: 12px;
+    line-height: 1;
+    display: inline-block;
+    padding: 3px 6px;
+    color: #333;
+    border-radius: 100px;
+    background-color: rgba(0,0,0,.15);
+}
+ 
+</style>
+</head>
+
+<body>
+   <header class="header" style="background-color:#fff;">
+			<a class="back" id="new_whzy.html" onclick="clicked(this.id)" style=""></a>
+			<h1 class="tit" id="titt" style="color:#000"></h1>
+	</header>
+	
+	<nav class="mui-bar mui-bar-tab">
+	<a class="mui-tab-item mui-active page_index" id="frame0.html"  onclick="clicked(this.id)" href="javascript:;">
+		<span class="mui-icon mui-icon-home"></span>
+		<span class="mui-tab-label">首页</span>
+	</a>
+	<a class="mui-tab-item page_index" href="javascript:void(0);" onclick="clicked(this.id)" id="frame1.html">
+		<span class="mui-icon mui-icon-list"></span>
+		<span class="mui-tab-label">扫码</span>
+	</a>
+	<a class="mui-tab-item page_index" id="frame2.html?dengji=1" onclick="clicked(this.id)" href="javascript:;">
+		<span class="mui-icon mui-icon-map"></span>
+		<span class="mui-tab-label">附近</span>
+	</a>
+	<a class="mui-tab-item page_index" id="frame3.html" onclick="clicked(this.id)" href="javascript:;">
+		<span class="mui-icon mui-icon-upload"><!--<span class="mui-badge"></span>--></span>
+		<span class="mui-tab-label">购物车</span>
+	</a>
+	<a class="mui-tab-item page_index" id="frame4.html" onclick="clicked(this.id)" href="javascript:;">
+		<span class="mui-icon mui-icon-person"></span>
+		<span class="mui-tab-label">我的</span>
+	</a>
+</nav> 
+   <div class="product" style="margin-top: 20px; margin-bottom: 60px;" >
+  <header><h1 ></h1><hr></header>
+  <ul id="cp1">
+  </ul>
+   </div>
+   
+  <script>
+  	flpage=1;
+  	
+  	function viewnext(){
+  		$("#fanye").remove();
+  		flpage=flpage+1;
+  		getfldata();  		
+  	}
+  	
+  	getfldata();
+  	function getfldata(){
+  	$.fn.Util().ajax({
+			url : 'http://www.tanglikeji.com/api.php/index/new_whzy_new',
+			data : {'tjzq':localStorage.getItem("tjzq"),"flpage":flpage},
+			beforeFn:function(){
+				layer.open({
+					type: 2,
+					content: '加载中',
+					shadeClose:false
+				});
+			},
+			afterFn : function(){
+				layer.closeAll();
+			}
+		}).done(function(data){			
+				console.log( JSON.stringify( data ) );
+			if(data.state == 'out'){
+				layer.open({'content':data.msg});
+			}else{
+				layer.closeAll();
+		 		$("#titt").html( localStorage.getItem("tjzqname")   );
+		 		
+		 		if(localStorage.getItem("tjzq")==1){
+		   			list=data.data.offerlist;
+		   		}
+		   		if(localStorage.getItem("tjzq")==2){
+		   			list=data.data.hotlist;
+		   		}
+		   		if(localStorage.getItem("tjzq")==3){
+		   			list=data.data.newlist;
+		   		}
+		   		if(localStorage.getItem("tjzq")==4){
+		   			list=data.data.jflist;
+		   		}
+		 		
+		 		
+		 		for(var i in list){
+		 			$("#cp1").append('<li  onclick="clicked(\'product_detail.html?id=' + list[i].prodId + '\');" ><img src="http://www.tanglikeji.com/Public/Uploads/'+list[i].img+'"><h2>' + list[i].prodName + '</h2><p><b>¥' + list[i].price2 + '</b><del>¥' + list[i].price1 + '</del></p></li>');
+				}
+		 		if(data.data.hasnext==1){
+		 			$("#cp1").append('<div style="width:100%; clear: both;font-size:0.75rem; color:#FFFFFF; text-align:center; background-color:#0066FF; height:1.25rem; line-height:1.25rem; " onclick="viewnext();" id="fanye">点击查看下一页</div>');
+				
+				}
+				
+			}
+			
+		}).fail(function(err){
+			layer.open({'content':err.msg});
+		})
+  	}
+  </script>
+   
+   
+    
+</body>
+</html>

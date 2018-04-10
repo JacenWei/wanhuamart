@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>发布</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="css/sm.css">
+	<link rel="stylesheet" href="css/sm-extend.css">
+	<link rel="stylesheet" href="css/login.css">
+	<script type='text/javascript' src='js/zepto.js' charset='utf-8'></script>
+    <script type="text/javascript" src="js/update.js" ></script>
+    <script type="text/javascript" src="js/common.js" ></script>
+    <script type="text/javascript" src="js/mui.min.js" ></script>
+	<script>
+		document.addEventListener('plusready',function(){
+			plus.webview.currentWebview().setStyle({scrollIndicator:'none'});
+			plus.navigator.setStatusBarStyle('light');
+			plus.navigator.setStatusBarBackground("#262626");
+		},false)
+	</script>
+	<style>
+.mui-table-view {
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
+    background-color: #fff;
+}
+.mui-table-view:before {
+    position: absolute;
+    right: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+    top: -1px;
+}
+.mui-table-view-cell {
+    position: relative;
+    overflow: hidden;
+    padding: 11px 15px;
+    -webkit-touch-callout: none;
+}
+.mui-ios .mui-table-view-cell {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+.mui-table-view-cell:after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 15px;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+}
+.mui-table-view-cell>.mui-slider-left, .mui-table-view-cell>.mui-slider-right {
+    position: absolute;
+    top: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    height: 100%;
+}
+.mui-table-view-cell>.mui-slider-right {
+    right: 0;
+    -webkit-transition: -webkit-transform 0ms ease;
+    transition: transform 0ms ease;
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+.mui-btn, button, input[type=button], input[type=reset], input[type=submit] {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 0;
+    padding: 6px 12px;
+    cursor: pointer;
+    -webkit-transition: all;
+    transition: all;
+    -webkit-transition-timing-function: linear;
+    transition-timing-function: linear;
+    -webkit-transition-duration: .2s;
+    transition-duration: .2s;
+    text-align: center;
+    vertical-align: top;
+    white-space: nowrap;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    background-color: #fff;
+    background-clip: padding-box;
+}
+.mui-btn-danger, .mui-btn-negative, .mui-btn-red {
+    color: #fff;
+    border: 1px solid #dd524d;
+    background-color: #dd524d;
+}
+.mui-table-view-cell>.mui-slider-handle, .mui-table-view-cell>.mui-slider-left .mui-btn, .mui-table-view-cell>.mui-slider-right .mui-btn {
+    -webkit-transition: -webkit-transform 0ms ease;
+    transition: transform 0ms ease;
+}
+.mui-table-view-cell>.mui-slider-left>.mui-btn, .mui-table-view-cell>.mui-slider-right>.mui-btn {
+    position: relative;
+    left: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    padding: 0 30px;
+    color: #fff;
+    border: 0;
+    border-radius: 0;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.mui-table-view-cell.mui-transitioning>.mui-slider-handle, .mui-table-view-cell.mui-transitioning>.mui-slider-left .mui-btn, .mui-table-view-cell.mui-transitioning>.mui-slider-right .mui-btn {
+    -webkit-transition: -webkit-transform 300ms ease;
+    transition: transform 300ms ease;
+}
+.mui-table-view-cell>.mui-slider-left>.mui-btn:after, .mui-table-view-cell>.mui-slider-right>.mui-btn:after {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    width: 600%;
+    height: 100%;
+    content: '';
+    background: inherit;
+}
+.mui-table-view-cell>.mui-slider-handle {
+    position: relative;
+    background-color: #fff;
+    width: 100%;
+	display: table;
+}
+.mui-table-view-cell>.mui-slider-handle, .mui-table-view-cell>.mui-slider-left .mui-btn, .mui-table-view-cell>.mui-slider-right .mui-btn {
+    -webkit-transition: -webkit-transform 0ms ease;
+    transition: transform 0ms ease;
+}
+.mui-table-view-cell.mui-transitioning>.mui-slider-handle, .mui-table-view-cell.mui-transitioning>.mui-slider-left .mui-btn, .mui-table-view-cell.mui-transitioning>.mui-slider-right .mui-btn {
+    -webkit-transition: -webkit-transform 300ms ease;
+    transition: transform 300ms ease;
+}
+.item-media{
+	display: table-cell;
+	vertical-align: middle;
+}
+.my-inner-list{
+	display: table-cell;
+	vertical-align: middle;
+	padding-left:1.33333333rem;
+}
+
+	</style>
+</head>
+</head>
+<body>
+    <div class="page-group" style="background-color:#f5f5f5;" id="chat-index">
+        <div class="page page-current" style="background-color:#f5f5f5;">
+        	<header class="bar bar-nav" style="padding-left:0;">
+        		<button class="button pull-left btn-back" onclick="clicked('chat-msg-center.html')" style="top:0;width:4rem;height:4rem;"><img src="images/icon/icon-chat-message.png" class="icon-close" style="width:4rem;"/></button>
+				<button class="button pull-right btn-back">
+					<img src="images/icon/icon-chat-search-big.png" class="icon-close" onclick="clicked('chat-search.html')"/>
+					<img src="images/icon/icon-chat-add.png" class="icon-close" id="dropmenu"/>
+				</button>
+        		<h1 class="title"></h1>
+			</header>
+        	<div class="content chat-content">
+			  	<div class="buttons-tab">
+				    <a href="#tab1" data-group="0" class="tab-link  button">好友</a>
+				    <a href="#tab2" data-group="1" class="tab-link button">群聊</a>
+			  	</div>
+			  	<div class="content-block add-content-content infinite-scroll native-scroll" id="page-infinite-scroll-top"  data-distance="100" style="padding:0;">
+		        	<div class="list-block content-div" style="display:block;" id="friendList0">
+		        		<!--<ul id="OA_task_1" class="mui-table-view">
+							<a class="msg-item" id="chat-chat.html?group_id=&from=100001" href="javascript:;" onclick="clicked(this.id)">	    
+								<li class="item-content mui-table-view-cell">
+									<div class="mui-slider-right mui-disabled">
+										<button class="mui-btn mui-btn-red" data-roomid="a10000010000100000100029">删除</button>
+									</div>
+									<div class="mui-slider-handle">
+										<div class="item-media" style="display: table-cell;vertical-align: middle;width: 4rem;">
+											<i class="icon icon-wallet face" style="background:url(http://www.quweilai.cn/new_api/res/100001/194.jpg) center center no-repeat;background-size:cover;width:4rem;height:4rem;"></i>
+										</div>
+										<div class="item-inner uc-list-inner my-inner-list">
+											<div class="item-title">
+												<p style="line-height:2rem;">王跃峰1疯了似的会计法律靠的就是了看法就死定了空间发了肯德基</p>
+												<p>啊啊啊啊</p>
+											</div>
+											<div class="item-after"></div>
+										</div>	
+									</div>
+								</li>
+							</a>
+						</ul>-->
+						<ul id="OA_task_1" class="mui-table-view">
+					    	<a href="javascript:;" class="msg-item group-chat" data-companyid="{{item.company_id}}" data-cateid="{{item.cates_id}}">
+								<li class="item-content mui-table-view-cell">
+									<div class="mui-slider-right mui-disabled">
+										<button class="mui-btn mui-btn-red" data-roomid="{{item.room_id}}">删除</button>
+									</div>
+									<div class="mui-slider-handle">
+										<div class="item-media" style="display: table-cell;vertical-align: middle;width: 4rem;">
+											<i class="icon icon-wallet face" style="background:url(http://www.quweilai.cn/new_api/res/100029/424m.jpg) center center no-repeat;background-size:cover;width:4rem;height:4rem;"></i>
+										</div>
+										<div class="item-inner uc-list-inner my-inner-list">
+											<div class="item-title">
+												<p style="line-height:2rem;width:18rem;">蜗蜗洗发水店铺</p>
+						            			<p  id="bq{{item.room_id}}">【店铺聊天】</p>
+											</div>
+											<div class="item-after"><span class="time" id="sj{{item.room_id}}">2017-07-03</span>
+						            		<span class="badge" id="wd{{item.room_id}}" style=" width:auto; padding-left: 0.5rem;padding-right: 0.5rem; height:1.5rem; line-height: 1.6rem; font-size: 1.2rem; ">21</span></div>
+										</div>
+									</div>					
+								</li>
+							</a>													
+						</ul>
+						
+		        	</div>
+		        	<div class="list-block content-div" style="display:none;" id="friendList1"></div>
+		        	<div class="list-block content-div" style="display:none;" id="friendList2"></div>
+		        	<div class="list-block content-div" style="display:none;" id="friendList3">
+		        		<div class="chat-contact list-group">
+					        <ul>
+					          	<li onclick="clicked('chat-new.html');">
+					            	<div class="item-content" style="padding-left:0;">
+					            		<div class="item-media"><img src="images/icon/icon-new-friend.png"  /></div>
+					              		<div class="item-inner">
+					                		<div class="item-title" style="font-size:1.33333333rem;">关系处理（加好友）</div>
+					                		<span class="mybadge">0</span>
+					              		</div>
+					            	</div>
+					          	</li>
+					          	<li onclick="clicked('chat-contact.html');">
+					            	<div class="item-content" style="padding-left:0;">
+					            		<div class="item-media"><img src="images/icon/icon-new-friend.png"  /></div>
+					              		<div class="item-inner">
+					                		<div class="item-title" style="font-size:1.33333333rem;">通讯录</div>					                		
+					              		</div>
+					            	</div>
+					          	</li>
+					        </ul>
+				      	</div>
+				      	<div class="list-block add-content-content" id="page-infinite-scroll-top"  data-distance="100">
+					    	<div class="chat-contact list-group" id="contactList">
+					    	</div>				      				      
+					    </div>
+				      	
+				      	
+		        	</div>
+		        	<!--
+				    <div class="infinite-scroll-preloader">
+		            	<div class="preloader"></div>
+		          	</div>
+		          	-->
+		       	</div>
+		       	<nav class="bar bar-tab bar-standard bottom-bar">
+				 	<a class="tab-item external bottom-tab-item" href="javascript:;" id="index.html" onclick="clicked(this.id)">
+					    <i class="iconfont icon-sousuo"><img src="images/logo.png"></i>
+					    <span class="tab-label ">唿唿</span>
+					</a>
+					<a class="tab-item external bottom-tab-active" id="chat-index.html" href="javascript:;" onclick="clicked(this.id)">
+					    <i class="iconfont icon-xin"><img src="images/lianxi.png"></i>
+					    <span class="tab-label">联系人</span>
+					    <!--<span class="badge">2</span>-->
+				  	</a>
+				  	<a class="tab-item external bottom-tab-item" id="zd-index.html" href="javascript:;" onclick="clicked(this.id)">
+					    <i class="iconfont icon-you"><img src="images/shop.png"></i>
+					    <span class="tab-label">黄金屋</span>
+				  	</a>
+				  	<a class="tab-item external bottom-tab-item" id="ucenter.html" href="javascript:;" onclick="clicked(this.id)">
+					    <i class="iconfont icon-wo"><img src="images/user.png"></i>
+					    <span class="tab-label">我</span>
+				  	</a>
+				</nav>
+			</div>
+			
+			<div class="backdrop" style="z-index: 99999;"></div>
+		    <div class="drop-menu drop-menu-shadow fadein-item" style="position:absolute;top:4rem;right:0rem;z-index:999999">
+				<ul>
+					<li id="menu_group_chat"><i class="icon icon-dropmenu-group"></i> 发起群聊</li>
+					<li id="menu_add_friend"><i class="icon icon-dropmenu-addfriend"></i> 添加朋友</li>
+					<li id="menu_saoyisao"><i class="icon icon-dropmenu-sys"></i> 扫一扫</li>
+					<li id="menu_pay"><i class="icon icon-dropmenu-pay"></i> 收付款</li>
+					<li id="menu_help"><i class="icon icon-dropmenu-help"></i> 帮助与反馈</li>
+				</ul>
+			</div>
+			
+			
+        </div>
+    </div>
+    
+    <script type="text/html" id="friendListT">
+    	<ul>
+    		{{each list as item i}}
+	    	<a id="chat-chat.html?group_id={{group_id}}&from={{item.user_id}}"  href="javascript:;" onclick="clicked(this.id)">
+		        <li class="item-content">
+		          	<div class="item-media"><i class="icon icon-wallet face"><img src="{{item.logo_src}}" /></i></div>
+		          	<div class="item-inner uc-list-inner my-inner-list" style="margin-left:1.333333rem;">
+		            	<div class="item-title">
+		            		<p style="line-height:2rem;">{{if item.remarks != ''}}{{item.remarks}}{{else}}{{item.nickname}}{{/if}}</p>
+		            		<p>{{item.signature}}</p>
+		            	</div>
+		            	<div class="item-after">
+		            		<!--<span class="time">5分钟前</span>
+		            		<span class="badge">5</span>-->
+		            	</div>
+		          	</div>
+		        </li>
+		    </a>
+		    {{/each}}
+	    </ul>
+    </script>
+    
+    <script type="text/html" id="gukeListT">
+    	<ul id="OA_task_1" class="mui-table-view">
+			{{each list as item i}}
+			{{if item.tag == 'a1'}}
+	    	<a class="msg-item" id="chat-chat.html?group_id={{group_id}}&from={{item.toid}}" href="javascript:;" onclick="clicked(this.id)">	    		
+	    	{{else}}
+	    		
+	    		{{if item.tag == 'b1'}}
+	    		<a href="javascript:;" class="msg-item group-chat" data-companyid="{{item.company_id}}" data-cateid="{{item.cates_id}}">
+	    		{{/if}}
+	    		{{if item.tag == 'b2'}}
+	    		 <a href="javascript:;" class="msg-item group-chat" data-companyid="{{item.company_id}}" data-cateid="{{item.cates_id}}">
+	    		{{/if}}	    		
+	    		{{if item.tag == 'c1'}}
+	    		  <a href="javascript:;" class="msg-item group-chat" data-companyid="{{item.company_id}}" data-cateid="{{item.cates_id}}">
+	    		{{/if}}	    		
+	    		{{if item.tag == 'e1'}}
+	    		<a id="{{item.url}}" class="msg-item zd-item" data-roomid="{{item.room_id}}"  href="javascript:;">
+	    		{{/if}}
+    			{{if item.tag == 'd1'}}
+    			<a id="index-xunjia-chat.html?group_id='+group_id+'&from={{item.room_id}}" class="msg-item xj-item" data-companyid="{{item.company_id}}" data-roomid="{{item.room_id}}"  href="javascript:;">    			
+    			{{/if}}
+    			{{if item.tag == 'f1'}}
+    			<a id="{{item.url}}" class="msg-item chat-normal-item" data-roomid="{{item.room_id}}"  href="javascript:;">
+	    		{{/if}}
+	    	{{/if}}
+				<li class="item-content mui-table-view-cell">
+					<div class="mui-slider-right mui-disabled">
+						<button class="mui-btn mui-btn-red" data-roomid="{{item.room_id}}">删除</button>
+					</div>
+					<div class="mui-slider-handle">
+						<div class="item-media" style="display: table-cell;vertical-align: middle;width: 4rem;">
+							<i class="icon icon-wallet face" style="background:url({{item.pic}}) center center no-repeat;background-size:cover;width:4rem;height:4rem;"></i>
+						</div>
+						<div class="item-inner uc-list-inner my-inner-list">
+							<div class="item-title">
+								<p style="line-height:2rem;width:18rem;">{{if item.remarks != ''}}{{item.remarks}}{{else}}{{item.nickname}}{{/if}}</p>
+		            			<p  id="bq{{item.room_id}}">{{item.biaoqian}} {{item.note}} </p>
+							</div>
+							<div class="item-after"><span class="time" id="sj{{item.room_id}}">{{item.time}}</span>
+		            		<span class="badge" id="wd{{item.room_id}}" style=" {{if item.weidu == '0'}}   display: none; {{/if}} width:auto; padding-left: 0.5rem;padding-right: 0.5rem; height:1.5rem; line-height: 1.6rem; font-size: 1.2rem; ">{{item.weidu}}</span></div>
+						</div>
+					</div>					
+				</li>
+			</a>
+			{{/each}}
+		</ul>
+    </script>
+    
+    <script type="text/html" id="contactListT">  
+		<div class="list-block add-content-content" data-distance="100">
+	    	<div class="chat-contact list-group" id="contactList" style="background-color:#fff;margin-top:1rem;">
+	    		<!--童修改 注：type为好友商友分组-->
+	    		{{each list as item i}}
+	          	<a href="javascript:;" id="chat-chat.html?type={{item.type}}&from={{item.user_id}}" onclick="clicked(this.id)">
+		          	<li class=" inner-bottom-line">
+		            	<div class="item-content" style="padding-left:0;">
+		            		<div class="item-media"><img src="{{item.logo_src}}"  /></div>
+		              		<div class="item-inner">
+		              			<div class="item-title">
+				            		<p style="line-height:2rem;">{{if item.remarks != ''}}{{item.remarks}}{{else}}{{item.nickname}}{{/if}} <span style="color:#C6C6C6 ;font-size: 1rem;">【{{item.typename}}】</span></span></p>
+				            		<p>{{item.signature}}</p>
+				            	</div>
+		                		
+		                		
+		              		</div>
+		            	</div>
+		          	</li>
+	          	</a>
+	          	{{/each}}
+	    	</div>				      				      
+	    </div>
+    </script>
+    
+	<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/template.js' charset='utf-8'></script>
+	<script type="text/javascript" src="js/layer/layer.js" ></script>
+	
+	<script>
+		var page =1;
+		var token = localStorage.getItem('token');
+		var group_id=0;
+		if(token == '' || token == null || token == undefined){
+			$.myUtil().alert_msg('身份已过期，请重新登录',function(){
+				localStorage.clear();
+				clicked('login.html');
+			
+			});
+		}
+		var userinfo = JSON.parse(localStorage.getItem('userinfo'));
+		document.addEventListener('plusready',function(){
+			
+			//童增加切换
+			tgroup_id=localStorage.getItem("group_id");
+			if(tgroup_id != null){
+				group_id=tgroup_id;
+				now_div = "friendList"+group_id;
+				$(".tab-link").removeClass("active");
+				$(".tab-link:eq("+group_id+")").addClass("active");
+				qiehuantab(group_id,now_div);
+			}else{
+				now_div = "friendList0";
+				qiehuantab(0,now_div);
+				$(".tab-link:eq(0)").addClass("active");
+			}
+			
+			$("#dropmenu").click(function(){				
+				if($(".drop-menu").css('display') == 'none'){
+					$(".backdrop").show();
+					$(".drop-menu").show();				
+				}else{
+					$(".backdrop").hide();
+					$(".drop-menu").hide();
+				}
+			});
+			$(".backdrop").click(function(){
+				$(".backdrop").hide();
+				$(".drop-menu").hide();
+			})
+			
+			$("#menu_add_friend").click(function(){
+				clicked('chat-add-friend.html');
+			})
+			$("#menu_pay").click(function(){
+				clicked('uc-pay.html');
+			})
+			$("#menu_saoyisao").click(function(){
+				clicked('saoyisao.html');
+			})
+			$("#menu_group_chat").click(function(){
+				clicked('chat-group-friend.html?action=creategroup');
+			})
+			
+			
+//			getApply();			
+			var book = {};			
+			plus.contacts.getAddressBook( plus.contacts.ADDRESSBOOK_PHONE, function( addressbook ) {		
+				addressbook.find(["displayName","phoneNumbers"],function(contacts){					
+					phone_arr = [];
+					for(i in contacts){
+						phones = contacts[i].phoneNumbers;
+						for(j in phones){
+							phone_num = phones[j].value.replace(/\s/g, "");
+							phone_arr.push(phone_num);
+						}
+					}
+					
+					$.myUtil().ajax({
+						data:{
+							'api_name':'smsfriend_find',
+							'token':token,
+							'phone_arr':phone_arr.join(',')
+						},
+						beforeFn:function(){}
+					}).done(function(res){
+						if(res.state == 'ok'){
+							$ele = $("#contactList");
+							html = template('contactListT',{list:res.data});
+							//$ele.append(html);							 
+						}						
+					})
+					localStorage.removeItem('phone_contacts');
+					localStorage.setItem('phone_contacts',phone_arr.join(','));
+				}, function () {
+					console.log("error");
+				},{multiple:true});
+			}, function ( e ) {
+				console.log( "Get address book failed: " + e.message );
+			} );
+			
+			
+			$(".tab-link").on('click',function(){
+				groupid = $(this).attr('data-group');
+				localStorage.setItem("group_id",groupid);
+				now_div = "friendList"+groupid;
+				qiehuantab(groupid,now_div);
+			});
+			
+			
+			function qiehuantab(groupid,now_div){
+				console.log(groupid);
+				if(groupid == 3){
+					//getApply();
+					$.myUtil().ajax({
+						data:{
+							'api_name':'friendlist',
+							'token':token,
+							'group_id':0,
+							'keywords':'',
+							'page':1,
+							'pagenum':10000
+						},
+						beforeFn:function(){}
+					}).done(function(res){
+						
+						if(res.state == 'ok'){
+							$("#contactList").html(template('contactListT',{list:res.data.list}));
+						}
+					})
+				}else{
+					if(groupid == 0){
+						getGuke();						
+					}else if(groupid == 2){						
+						$.myUtil().ajax({
+							data:{
+								'api_name':'guke_lists',
+								'token':token
+							},
+							beforeFn:function(){}
+						}).done(function(res){
+							if(res.state == 'ok'){
+								for(i in res.data.list){
+									tag = res.data.list[i].room_id.substr(0,2);									
+									if(tag == 'a1'){
+										url = 'chat-chat.html?group_id='+group_id+'&from='+res.data.list[i].toid;
+									}else if(tag == 'e1'){
+										url = 'zd-chat.html?group_id='+group_id+'&from='+res.data.list[i].room_id;
+									}else if(tag == 'f1'){
+										url = 'chat-group-normal-chat.html?room_id='+res.data.list[i].room_id;
+									}else if(tag == 'd1'){
+										url = 'index-xunjia-chat.html?from='+res.data.list[i].room_id+"&company_id="+res.data.list[i].company_id;
+									}else{
+										url = 'chat-group-chat.html?='+res.data.list[i].toid;
+									}									
+									res.data.list[i].tag = tag;
+									res.data.list[i].remarks = res.data.list[i].room_name;
+									res.data.list[i].signature = res.data.list[i].room_name;
+									res.data.list[i].url = url;
+								}	
+								$('#friendList2').html(template('gukeListT',{'list':res.data.list}));
+								bindDelBtn();
+								$(".group-chat").click(function(){
+									companyid = $(this).attr('data-companyid');
+									cates_id = $(this).attr('data-catesid');
+									type = 1;
+									if(cates_id > 0){
+										type = 2;
+									}
+									groupChat(companyid,cates_id,type);
+								});
+								$(".zd-item").unbind('click').click(function(){
+									url = this.id;
+									room_id = $(this).attr('data-roomid');
+									$.myUtil().ajax({
+										data:{
+											'api_name':'zhida_findroombyid',
+											'token':token,
+											'room_id':room_id
+										}
+									}).done(function(res){
+										if(res.state == 'ok'){
+											cid = res.data.cid2;
+											$.myUtil().ajax({
+												data:{
+													'api_name':'zhida_companylist',
+													'token':token,
+													'cate_id':cid
+												},
+												beforeFn:function(){}
+											}).done(function(ress){
+												if(ress.state == 'ok'){
+													layer.closeAll();
+													ids = [];
+													for(i in ress.data.list){
+														ids.push(ress.data.list[i].info.intval_id);
+													}
+													console.log(ids);
+													localStorage.setItem('zhidao_now','{"id":"'+cid+'","name":"'+ress.data.cate_name+'","company_id":"'+ids.join('|')+'"}');
+													clicked(url);
+												}											
+											})
+										}
+									})
+								})
+								
+								$(".xj-item").unbind('click').click(function(){
+									
+									roomid = $(this).attr('data-roomid');
+									company_id = $(this).attr('data-companyid');
+									
+									$.myUtil().ajax({
+										data:{
+											'api_name':'guke_xunjialist',
+											'token':token,
+											'room_id':roomid
+										},
+										beforeFn:function(){}
+									}).done(function(res){									
+										if(res.state == 'ok'){
+		//										console.log(JSON.stringify(res.data.room_members));
+		//										return;
+											localStorage.setItem('memberinfo',JSON.stringify(res.data.room_members));										
+											clicked('index-xunjia-chat.html?group_id='+group_id+'&from='+roomid+'&company_id='+company_id+'&id='+roomid+company_id+userinfo.intval_id);
+										}
+									})
+								})
+								
+								$(".chat-normal-item").unbind('click').click(function(){
+									roomid = $(this).attr('data-roomid');
+									$.myUtil().ajax({
+										data:{
+											'api_name':'chatgroup_qunlists',
+											'token':token,
+											'room_id':roomid
+										},
+										beforeFn:function(){}
+									}).done(function(res){
+										if(res.state == 'ok'){											
+											localStorage.setItem('memberinfo',JSON.stringify(res.data.room_members));
+											clicked('chat-group-normal-chat.html?room_id='+roomid);
+										}
+									})
+								});
+							}
+						})						
+						
+//						getData(groupid).done(function(res){
+//							if(res.state == 'ok'){
+//								$('#'+now_div).html(template('friendListT',{'list':res.data.list}));
+//							}
+//						})	
+				}else if(groupid == 1){
+						$.myUtil().ajax({
+							data:{
+								'api_name':'guke_shangyou',
+								'token':token
+							},
+							beforeFn:function(){}
+						}).done(function(res){
+							if(res.state == 'ok'){
+								for(i in res.data.list){
+									tag = res.data.list[i].room_id.substr(0,2);
+									if(tag == 'a1'){
+										url = 'chat-chat.html?group_id='+group_id+'&from='+res.data.list[i].toid;
+									}else if(tag == 'e1'){
+										url = 'zd-chat.html?group_id='+group_id+'&from='+res.data.list[i].room_id;
+									}else if(tag == 'f1'){
+										url = 'chat-group-normal-chat.html?room_id='+res.data.list[i].room_id;
+									}else if(tag == 'd1'){
+										url = 'index-xunjia-chat.html?from='+res.data.list[i].room_id+"&company_id="+res.data.list[i].company_id;
+									}else{
+										url = 'chat-group-chat.html?='+res.data.list[i].toid;
+									}
+									
+									res.data.list[i].tag = tag;
+									res.data.list[i].remarks = res.data.list[i].room_name;
+									res.data.list[i].signature = res.data.list[i].room_name;
+									res.data.list[i].url = url;
+								}	
+								$('#friendList1').html(template('gukeListT',{'list':res.data.list}));
+								bindDelBtn();
+								$(".group-chat").click(function(){
+									companyid = $(this).attr('data-companyid');
+									cates_id = $(this).attr('data-catesid');
+									type = 1;
+									if(cates_id > 0){
+										type = 2;
+									}
+									groupChat(companyid,cates_id,type);
+								});
+								$(".zd-item").unbind('click').click(function(){
+									url = this.id;
+									room_id = $(this).attr('data-roomid');
+									$.myUtil().ajax({
+										data:{
+											'api_name':'zhida_findroombyid',
+											'token':token,
+											'room_id':room_id
+										}
+									}).done(function(res){
+										if(res.state == 'ok'){
+											cid = res.data.cid2;
+											$.myUtil().ajax({
+												data:{
+													'api_name':'zhida_companylist',
+													'token':token,
+													'cate_id':cid
+												},
+												beforeFn:function(){}
+											}).done(function(ress){
+												if(ress.state == 'ok'){
+													layer.closeAll();
+													ids = [];
+													for(i in ress.data.list){
+														ids.push(ress.data.list[i].info.intval_id);
+													}
+													localStorage.setItem('zhidao_now','{"id":"'+cid+'","name":"'+ress.data.cate_name+'","company_id":"'+ids.join('|')+'"}');
+													clicked(url);
+												}											
+											})
+										}
+									})
+								})
+								
+								$(".xj-item").unbind('click').click(function(){
+									roomid = $(this).attr('data-roomid');
+									company_id = $(this).attr('data-companyid');
+									$.myUtil().ajax({
+										data:{
+											'api_name':'guke_xunjialist',
+											'token':token,
+											'room_id':roomid
+										},
+										beforeFn:function(){}
+									}).done(function(res){									
+										if(res.state == 'ok'){
+		//										console.log(JSON.stringify(res.data.room_members));
+		//										return;
+											localStorage.setItem('memberinfo',JSON.stringify(res.data.room_members));										
+											clicked('index-xunjia-chat.html?group_id='+group_id+'&from='+roomid+'&company_id='+company_id);
+										}
+									})
+								})
+								$(".chat-normal-item").unbind('click').click(function(){
+									roomid = $(this).attr('data-roomid');
+									$.myUtil().ajax({
+										data:{
+											'api_name':'chatgroup_qunlists',
+											'token':token,
+											'room_id':roomid
+										},
+										beforeFn:function(){}
+									}).done(function(res){
+										if(res.state == 'ok'){											
+											localStorage.setItem('memberinfo',JSON.stringify(res.data.room_members));
+											clicked('chat-group-normal-chat.html?room_id='+roomid);
+										}
+									})
+								});
+							}
+						})
+					}
+				}
+				$(".content-div").hide();
+				$("#friendList"+groupid).show();
+				
+			}
+//			getData('0,2').done(function(res){
+//				if(res.state == 'ok'){
+//					$('#friendList0').html(template('friendListT',{'list':res.data.list}));
+//				}
+//			});
+			
+			//getGuke();
+
+			function getGuke(){
+				$.myUtil().ajax({
+					data:{
+						'api_name':'guke_haoyou',
+						'token':token
+					},
+					beforeFn:function(){}
+				}).done(function(res){
+					if(res.state == 'ok'){
+						console.log(JSON.stringify(res.data));
+						for(i in res.data.list){
+							tag = res.data.list[i].room_id.substr(0,2);
+							if(tag == 'a1'){
+								url = 'chat-chat.html?group_id='+group_id+'&from='+res.data.list[i].toid;
+							}else if(tag == 'e1'){
+								url = 'zd-chat.html?group_id='+group_id+'&from='+res.data.list[i].room_id;
+							}else if(tag == 'f1'){
+								url = 'chat-group-normal-chat.html?room_id='+res.data.list[i].room_id;
+							}else if(tag == 'd1'){
+								url = 'index-xunjia-chat.html?from='+res.data.list[i].room_id;
+							}else{
+								url = 'chat-group-chat.html?='+res.data.list[i].toid;
+							}				
+							
+							res.data.list[i].tag = tag;
+							res.data.list[i].remarks = res.data.list[i].room_name;
+							res.data.list[i].signature = res.data.list[i].room_name;
+							res.data.list[i].url = url;
+						}
+						//console.log("11111111111111111111111111111111111");						
+						$('#friendList0').html(template('gukeListT',{'list':res.data.list}));
+						bindDelBtn();
+						//$(".group-chat").on('tap',function(){});
+						$(".group-chat").click(function(){							
+							companyid = $(this).attr('data-companyid');
+							cates_id = $(this).attr('data-catesid');
+							type = 1;
+							if(cates_id > 0){
+								type = 2;
+							}
+							//console.log($(this).html());
+							//alert($(this).parent().html());
+							//console.log($("body").html());							
+							
+							groupChat(companyid,cates_id,type);
+						});
+						$(".zd-item").unbind('click').click(function(){
+							url = this.id;
+							room_id = $(this).attr('data-roomid');
+							
+							$.myUtil().ajax({
+								data:{
+									'api_name':'zhida_findroombyid',
+									'token':token,
+									'room_id':room_id
+								}
+							}).done(function(res){
+								if(res.state == 'ok'){
+									cid = res.data.cid2;
+									$.myUtil().ajax({
+										data:{
+											'api_name':'zhida_companylist',
+											'token':token,
+											'cate_id':cid
+										},
+										beforeFn:function(){}
+									}).done(function(ress){
+										if(ress.state == 'ok'){
+											layer.closeAll();
+											ids = [];
+											for(i in ress.data.list){
+												ids.push(ress.data.list[i].info.intval_id);
+											}											
+											localStorage.setItem('zhidao_now','{"id":"'+cid+'","name":"'+ress.data.cate_name+'","company_id":"'+ids.join('|')+'"}');											
+											clicked(url);
+										}											
+									})
+								}
+							})
+						})
+						
+						$(".xj-item").unbind('click').click(function(){
+							roomid = $(this).attr('data-roomid');
+							company_id = $(this).attr('data-companyid');
+							
+							$.myUtil().ajax({
+								data:{
+									'api_name':'guke_xunjialist',
+									'token':token,
+									'room_id':roomid
+								},
+								beforeFn:function(){}
+							}).done(function(res){									
+								if(res.state == 'ok'){
+//										console.log(JSON.stringify(res.data.room_members));
+//										return;
+									localStorage.setItem('memberinfo',JSON.stringify(res.data.room_members));	
+									clicked('index-xunjia-chat.html?group_id='+group_id+'&from='+roomid+'&company_id=0');
+								}
+							})
+						})
+						$(".chat-normal-item").unbind('click').click(function(){
+							roomid = $(this).attr('data-roomid');
+							$.myUtil().ajax({
+								data:{
+									'api_name':'chatgroup_qunlists',
+									'token':token,
+									'room_id':roomid
+								},
+								beforeFn:function(){}
+							}).done(function(res){
+								if(res.state == 'ok'){											
+									localStorage.setItem(roomid,JSON.stringify(res.data.room_members));
+									clicked('chat-group-normal-chat.html?room_id='+roomid);
+								}
+							})
+						});
+					}
+				});
+			}
+			
+			function getData(groupid){
+				return $.myUtil().ajax({
+					data:{
+						'token':token,
+						'api_name':'friend_lists',
+						'group_id':groupid,
+						'keywords':'',
+						'page':page,
+						'pagenum':$.pageNumber
+					},
+					beforeFn:function(){}
+				});
+			}
+			
+			function getApply(){
+				$.myUtil().ajax({
+					data:{
+						'api_name':'friend_applylists',
+						'token':token					
+					},
+					beforeFn:function(){}
+				}).done(function(res){
+					if(res.state == 'ok'){
+						$(".mybadge").html(res.data.count);
+					}
+				});
+			}
+			
+			function groupChat(company_id,cates_id,type){
+				$.myUtil().ajax({
+					data:{
+						'api_name':'chatgroup_findroomid',
+						'token':token,
+						'company_id':company_id,
+						'cates_id':cates_id,
+						'type':type
+					},
+					beforeFn:function(){}
+				}).done(function(res){
+					console.log(JSON.stringify(res));
+					if(res.state == 'ok'){
+						room_id = res.data.room_id;
+						localStorage.setItem(room_id,JSON.stringify(res.data.room_members));
+						clicked('chat-group-chat.html?room_id='+room_id);
+					}
+				})
+			}
+			
+			function bindDelBtn(){
+				$(".mui-btn").unbind('click').click(function(){
+					event.stopPropagation();
+					roomid = $(this).attr('data-roomid');
+					console.log(roomid);
+					obj = this;
+					var elem = this;
+					var li = elem.parentNode.parentNode;
+					$.myUtil().confirm('是否要删除对话？','确定','取消',function(){
+						$.myUtil().ajax({
+							data:{
+								'api_name':'guke_delete',
+								'token':token,
+								'room_id':roomid					
+							},
+							beforeFn:function(){}
+						}).done(function(res){
+							layer.closeAll();
+							if(res.state == 'ok'){
+								$(obj).parent().parent().parent().fadeIn(function(){$(this).remove()});
+							}
+						})
+					},function(){
+						setTimeout(function() {
+							mui.swipeoutClose(li);
+						}, 0);
+					})
+				});
+			}			
+		},false)
+		//.find("input[type=radio]")
+		 
+	</script>
+	
+</body>
+</html>

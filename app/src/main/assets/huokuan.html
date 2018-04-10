@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
+		<title></title>
+		<link rel="stylesheet" href="../css/profit.css" />
+		<link rel="stylesheet" href="../css/public.css" />
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+	    <script src="../js/config.js"></script>
+	    <script src="../js/util.js"></script>
+	    <script src="../js/huokuan.js"></script>
+	    <script type="text/javascript" src="../js/common.js" ></script>
+	    <script src="../js/layer2.0/layer.js"></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				clicked('login.html');
+			}
+		</script>
+		<style>
+			.header .back:before {
+			    content: '\e471';
+			    line-height: 44px;
+			    color: #0168B7;
+			}
+			/*弹窗*/
+			.Popup{
+				position: fixed;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				z-index: 99;
+				display:none;
+			}
+			.Popup-bg{
+				 position: absolute;
+				 width: 100%;
+				 min-height:100%;
+				 height:100% ;
+				 background-color: #000000;
+				 opacity: 0.3;
+				 top: 0;
+				 left: 0;
+				 z-index: 100;
+			}
+			.Popup-box{
+				 width: 80%;
+				 margin: auto;
+				 min-height: 10%;
+				 background-color: #FFFFFF;
+				 z-index: 101;
+				 position: absolute;
+				 margin-left: -40%;
+				 left: 50%;
+				 top: 20%;
+				 box-shadow: 0 1px 6px #CCCCCC;;
+			}
+			/*确认弹窗*/
+			.inf-box{
+				padding: 20px;
+			}
+			.inf-dete{
+				background-color: #f7f7f7;
+				padding: 10px;
+			}
+			.inf-dete p{
+				line-height: 32px;
+				font-size: 14px;
+				color: #999999;
+			}
+			.inf-dete p.inf-name span{
+				margin-left: 10px;
+				color: #333333;
+				font-size: 14px;
+			}
+			.inf-dete p.inf-tel span{
+				margin-left: 10px;
+				color: #333333;
+				font-size: 14px;
+			}
+			.inf-dete p.inf-number span{
+				margin:0 10px;
+				color: #00A4A6;
+				font-size: 16px;
+			}
+			.inf-dete p.inf-money span{
+				margin:0 10px;
+				color: #E24245;
+				font-size: 16px;
+			}
+			.remind{
+				line-height: 36px;
+				font-size: 14px;
+				margin-left: 10px;
+				color: red;
+			}
+			.inf-inf{
+				overflow: hidden;
+				width: 100%;
+				border-radius: 5px;
+			}
+			.inf-inf button{
+				width: 50%;
+				float: left;
+				height: 44px;
+				background-color: #eaeaea;
+				color: #999999;
+				font-size: 16px;
+			}
+			.inf-inf button.inf-yes{
+				background-color: #00A4A6;
+				color: #FFFFFF;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<header class="header" style="background-color:#fff; position:fixed;">
+			<a class="back" href="javascript:back();"  style="color:#777;"></a>
+			<h1 class="tit" style="color:#000">货款</h1>
+		</header>
+		
+		
+		<div class="content" style="margin-top: 45px;">
+			<div class="profit-top">
+				<div class="profit-pic">
+					<span>
+						<img src="../images/profit/profit.png">
+					</span>
+				</div>
+				<div class="profit-cont">
+					<p class="pro-current">可结算<span class="unused">0</span></p>
+					<div class="pro-td">
+						<!--
+						<a href="#" class="pro-ifi">
+								货款总额
+							<span class="total">0</span>
+						</a>
+						-->
+                        <!--
+						<a href="#" class="pro-cum">
+							累计收益
+							<span>20216</span>
+						</a>
+                        -->
+					</div>
+				</div>
+			</div>
+			<!--
+            	时间：2016-06-16
+            	描述：收益top
+            -->
+                  <div class="profit-details">
+                  	<ul>
+                  		<li>
+                  			<a href="javascript:void();" onclick="clicked('huokuan_deposit.html');">
+                  				<p class="used">457</p>
+                  				<span>已结算货款</span>
+                  			</a>
+                  		</li>
+                  		<li>
+                  			<a href="javascript:void();" onclick="clicked('hkmx.html');">
+                  				<p class="unused">457</p>
+                  				<span>未结算货款</span>
+                  			</a>
+                  		</li>
+                  	</ul>
+                  </div>
+            
+                  
+                  
+        	
+		</div>
+		
+		
+	</body>
+</html>

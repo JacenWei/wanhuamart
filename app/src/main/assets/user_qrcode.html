@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/global.css"/>
+    <link rel="stylesheet" href="../css/Personal-Center.css" />
+    <link rel="stylesheet" href="../css/public.css" />
+    	<script src="../js/qrcode.js"></script>
+    <script src="../js/mui.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+	<script src="../js/config.js"></script>
+	<script src="../js/util.js"></script>
+	<script src="../js/common.js"></script>
+	
+	<script src="../js/myqrcode.js?2=2122"></script>
+	<script src="../js/layer2.0/layer.js"></script>
+    <script type="text/javascript">
+    	
+    	 
+    	
+		if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+			clicked('login.html');
+		}
+		
+		 
+   		document.addEventListener('plusready', function(){
+   			//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
+   		});
+   		
+   		document.addEventListener('plusready', function(){
+			mui('body').on('tap', '.mui-tab-item', function(e) {
+		        var href = this.getAttribute('id');
+		        clicked(href);
+		   });
+		}, false );
+   		
+    </script>
+</head>
+<body style="margin:0; background-color: #f1f2f6;">
+	<header class="header" >
+			<a class="back" href="javascript:;" onClick="clicked('user-fenx.html');"></a>
+			<h1 class="tit">个人分享二维码</h1>
+			
+		</header>
+	
+		
+	
+	
+	<style>
+.mui-bar {
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    left: 0;
+    height: 44px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-bottom: 0;
+    background-color: #f7f7f7;
+    -webkit-box-shadow: 0 0 1px rgba(0,0,0,.85);
+    box-shadow: 0 0 1px rgba(0,0,0,.85);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.mui-bar-tab {
+    bottom: 0;
+    display: table;
+    width: 100%;
+    height: 50px;
+    padding: 0;
+    table-layout: fixed;
+    border-top: 0;
+    border-bottom: 0;
+    -webkit-touch-callout: none;
+}
+.mui-bar-tab .mui-tab-item {
+    display: table-cell;
+    overflow: hidden;
+    width: 1%;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #929292;
+}
+.mui-bar-tab .mui-tab-item.mui-active {
+    color: #007aff;
+}
+.mui-bar-tab .mui-tab-item .mui-icon {
+    top: 3px;
+    width: 24px;
+    height: 24px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.mui-bar .mui-icon {
+    font-size: 24px;
+    position: relative;
+    z-index: 20;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.mui-icon {
+    font-family: Muiicons;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1;
+    display: inline-block;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+}
+.mui-icon-home:before {
+    content: '\e500';
+}
+.mui-icon-email:before {
+    content: '\e201';
+}
+.mui-icon-contact:before {
+    content: '\e100';
+}
+.mui-icon-person:before {
+    content: '\e101';
+}
+.mui-icon-map:before {
+    content: '\e364';
+}
+.mui-icon-upload:before {
+    content: '\e402';
+}
+.mui-icon-list:before {
+    content: '\e301';
+}
+.mui-bar-tab .mui-tab-item .mui-icon~.mui-tab-label {
+    font-size: 11px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.mui-icon .mui-badge {
+    font-size: 10px;
+    line-height: 1.4;
+    position: absolute;
+    top: -2px;
+    left: 100%;
+    margin-left: -10px;
+    padding: 1px 5px;
+    color: #fff;
+    background: red;
+}
+.mui-badge {
+    font-size: 12px;
+    line-height: 1;
+    display: inline-block;
+    padding: 3px 6px;
+    color: #333;
+    border-radius: 100px;
+    background-color: rgba(0,0,0,.15);
+}
+.top_div{
+	border-right: 1px solid #e2e2e2;
+    margin-left: -1px;	
+}
+
+#myqrcode{
+	margin: 40px auto;
+}
+</style>
+
+
+<nav class="mui-bar mui-bar-tab">
+	<a class="mui-tab-item page_index" id="frame0.html"  onclick="clicked(this.id)">
+		<span class="mui-icon mui-icon-home"></span>
+		<span class="mui-tab-label">首页</span>
+	</a>
+	<a class="mui-tab-item page_index"   onclick="clicked(this.id)" id="frame1.html">
+		<span class="mui-icon mui-icon-list"></span>
+		<span class="mui-tab-label">扫码</span>
+	</a>
+	<a class="mui-tab-item page_index" id="frame2.html?dengji=1"   onclick="clicked(this.id)">
+		<span class="mui-icon mui-icon-map"></span>
+		<span class="mui-tab-label">附近</span>
+	</a>
+	<a class="mui-tab-item page_index" id="frame3.html"   onclick="clicked(this.id)">
+		<span class="mui-icon mui-icon-upload"><!--<span class="mui-badge"></span>--></span>
+		<span class="mui-tab-label">购物车</span>
+	</a>
+	<a class="mui-tab-item page_index mui-active" id="frame4.html"   onclick="clicked(this.id)">
+		<span class="mui-icon mui-icon-person"></span>
+		<span class="mui-tab-label">我的</span>
+	</a>
+</nav>
+	<div class="content">
+		<!--
+        	时间：2016-06-15
+        	描述：个人中心top板块
+        -->
+		<div class="top">			
+			
+			<p style="text-align:center;margin-top:2rem;">
+				<img src="../images/icon/ulogo.png" id="ulogo"  style="width:60px;height:60px; border-radius: 30px; " onerror="this.src='../images/icon/ulogo.png';"/><br /><br />
+				<span style="padding:5px;background:#fff;border-radius: 5px;font-size:0.8rem;"><span id="usertypename"></span>：<span id="nickname"></span></span>
+			</p>
+		
+            <div class="clear"></div>
+		</div>
+		
+	 <center>
+		<div id="myqrcode">
+			
+		</div>
+	<b>个人分享二维码</b>
+
+		</center>
+		</div>
+		 
+		
+	
+
+</body>
+</html>

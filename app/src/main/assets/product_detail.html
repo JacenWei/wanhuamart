@@ -1,0 +1,900 @@
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>商品详情</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="../css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../css/idangerous.swiper.css" />
+		<link rel="stylesheet" type="text/css" href="../css/public.css" />
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+		<script src="../js/util.js"></script>
+		<script src="../js/layer2.0/layer.js"></script>
+		<script src="../js/idangerous.swiper.min.js"></script>
+		<script src="../js/common.js"></script>
+
+		<style>
+			body {
+				font-family: '微软雅黑';
+			}
+			
+			.text-color-white {
+				color: #fff;
+			}
+			
+			.mui-grid-3 {
+				float: left;
+				width: 33.3%;
+			}
+			
+			.color-primary {
+				background-color: #0062cc;
+			}
+			
+			.text-center {
+				text-align: center;
+			}
+			
+			.color-error {
+				background-color: #dd524d;
+			}
+			
+			.swiper-container {
+				max-height: 364px;
+				margin-bottom: 10px;
+			}
+			
+			.btn-block {
+				padding: 15px;
+			}
+			
+			.pointer {
+				cursor: pointer;
+			}
+			
+			.sku-line {
+				width: 100%;
+				position: relative;
+				margin-bottom: 5%;
+			}
+			
+			.sku-line img {
+				width: 20%;
+				padding: 5px;
+				float: left;
+				margin-right: 2%;
+			}
+			
+			.sku-line p {
+				padding-right: 5%;
+			}
+			
+			.sku-line .sku_name {
+				padding: 2% 3% 2% 3%;
+				margin-right: 5%;
+			}
+			
+			.sku-line .sku-item {
+				padding: 2% 3%;
+				margin-right: 3%;
+				border: 1px solid #aaa;
+				color: #000;
+				position: relative;
+				margin-bottom: 2%;
+			}
+			
+			.sku-line .sku-jia {
+				border: 1px solid #aaa;
+				height: 24px;
+				padding: 7px 10px;
+				border-left: 0;
+			}
+			
+			.sku-line .sku-jian {
+				border: 1px solid #aaa;
+				height: 24px;
+				padding: 7px 10px;
+				border-right: 0;
+			}
+			
+			.sku-line .sku-num {
+				width: 5%;
+				height: 24px;
+				padding: 3px 20px;
+				border-radius: 0;
+			}
+			
+			.sku-line .sku-btn-block {
+				float: left;
+				width: 50%;
+				height: 50px;
+				line-height: 50px;
+				font-size: 16px;
+				text-align: center;
+				color: #fff;
+				font-family: '微软雅黑';
+			}
+			
+			.sku-line .sku-item-choose {
+				border: 1px solid red;
+			}
+			
+			.sku-line .sku-item-unable {
+				color: #b4b4b4;
+				border: 1px solid #b4b4b4;
+			}
+			
+			#content {
+				width: 100% !important;
+				overflow: hidden;
+			}
+			
+			#goTopBtn {
+				z-index: 99999;
+				position: fixed;
+				line-height: 36px;
+				width: 48px;
+				bottom: 60px;
+				height: 48px;
+				right:20px;
+				cursor: pointer;
+				display: none;
+				background: url(../images/totop2.png);
+			}
+			#kefulink {
+				z-index: 99999;
+				position: fixed;
+				line-height: 36px;
+				width: 60px;
+				bottom: 560px;
+				height: 70px;
+				right:20px;
+				cursor: pointer;
+				background: url(../images/icon/lll.png);
+				background-size:cover;
+				
+			}
+		</style>
+
+	</head>
+
+	<body>
+
+		<header class="header search-header">
+			<a class="back" href="javascript:;" id="proback" onclick='back();'></a>
+			<div class="search shop_name" style="text-align:center;font-size:1.5em;color:#fff;">商品详情</div>
+			<!--<a href="#" class="menu-iocn"></a>-->
+		</header>
+		<div class="mui-content" style="padding-top: 45px;">
+			<div class="mui-card" style="margin:0;padding:15px;margin-bottom:10px;border-radius: 0px;">
+				<div class="mui-card-header mui-card-media">
+					<div class="swiper-container">
+						<div class="swiper-wrapper" id="picList">
+
+						</div>
+					</div>
+					<div class="pagination" style="display: none;"></div>
+
+				</div>
+				<div class="mui-card-content">
+					<p style="color:#333;font-weight: 800; font-size: 14px;" id="pname"></p>
+					<div style="width: 50%; float: left; text-align: left;">市场价：<span id="price" style="    color: #b4b4b4;    text-decoration: line-through; font-size: 18px;">0.0</span> 元</div>
+					<div style="width: 50%; float: left; text-align: right;">万华价：<span id="point" style="    color: #d93600;    font-size: 18px;">0</span> 元</div>
+					<div style="width: 50%; float: left; text-align: left;">已售：<span id="sellnum" style="    color: #ff0000;    font-size: 14px;">0</span> </div>
+				</div>
+
+				<div style="width: 100%; text-align: left; clear: both;  padding-top: 12px;">支付方式一<br />万华积分:<span class="jje jje1">0</span>分,现金:<span class="jje jje2">0</span>元,积分赠送比例:0%</div>
+				<div style="width: 100%; text-align: left; clear: both; margin-top: 12px;">支付方式二<br />万华积分:0分,现金:<span class="jje jje3">0</span>元,积分赠送比例:0%</div>
+
+			</div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" style="padding: 15px;">
+					<a class="mui-navigate-right" href="javascript:void(0);" id="sku" style="margin: -15px;">选择尺寸颜色数量</a>
+				</li>
+			</ul>
+
+			<div style=" width: 100%;overflow: auto;background: #fff; position: fixed; bottom: 0; z-index: 9999;">
+				<div class="mui-grid-3 text-center pointer">
+					<a href="javascript:;" onclick="" id="shopdetail" style="display: block;"><img src="../images/icon/icon-i38.png" width="28" />
+						<p style="margin:0;">店铺</p>
+					</a>
+				</div>
+				<div class="mui-grid-3 color-primary mui-text-center text-color-white btn-block pointer cart">加入购物车</div>
+				<div class="mui-grid-3 color-error mui-text-center text-color-white btn-block pointer buy">立即购买</div>
+			</div>
+
+			<div>
+				<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+					<a class="mui-control-item mui-active" href="#item2mobile">
+						详情
+					</a>
+					<a class="mui-control-item" href="#item3mobile">
+						评价
+					</a>
+				</div>
+			</div>
+			<div style=" margin-bottom: 3rem;">
+				<div id="item2mobile" class="mui-control-content mui-active">
+					<div style="padding:11px 15px;background-color:#fff;" id="content"></div>
+				</div>
+				<div id="item3mobile" class="mui-control-content">
+					<ul class="mui-table-view" id="commentList"></ul>
+				</div>
+			</div>
+			<!--
+	<div id="slider" class="mui-slider">
+        <div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">            
+            <a class="mui-control-item mui-active" href="#item2mobile">详情</a>
+            <a class="mui-control-item" href="#item3mobile">评价</a>
+        </div>
+        <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
+        <div class="mui-slider-group" style="margin-bottom:64px;">            
+            <div id="item2mobile" class="mui-slider-item mui-control-content mui-active" style="height: initial;"><div style="padding:11px 15px;background-color:#fff;" id="content"></div></div>
+            <div id="item3mobile" class="mui-slider-item mui-control-content" style="height: initial;">
+                <ul class="mui-table-view" id="commentList"></ul>
+            </div>
+        </div>
+    </div>
+   -->
+
+			<!--
+    <ul class="mui-table-view" style="margin-top:10px;">
+        <li class="mui-table-view-cell" style="padding: 0px;">
+            <div class="mui-grid-3 text-center">
+                <img src="../images/icon/icon-i38.png" width="28" /> <p>店铺</p>
+            </div>
+            <div class="mui-grid-3 color-primary mui-text-center text-color-white btn-block">加入购物车</div>
+            <div class="mui-grid-3 color-error mui-text-center text-color-white btn-block">立即购买</div>
+        </li>
+    </ul>
+    -->	<div id="goTopBtn"></div> 
+    	<!--<div id="kefulink"></div>--> 
+		</div>
+	
+		<script src="../js/mui.min.js"></script>
+		<script>
+			/*
+						    var mySwiper = new Swiper('.swiper-container',{
+						        pagination: '.pagination',
+						        loop:true,
+						        grabCursor: true,
+						        paginationClickable: true
+						    })
+
+						    $('.arrow-left').on('click', function(e){
+						        e.preventDefault()
+						        mySwiper.swipePrev()
+						    })
+						    $('.arrow-right').on('click', function(e){
+						        e.preventDefault()
+						        mySwiper.swipeNext()
+						    })
+						    */
+		</script>
+		<script>
+			//取消浏览器的所有事件，使得active的样式在手机上正常生效
+			document.addEventListener('touchstart', function() {
+				return false;
+			}, true);
+			// 禁止选择
+			document.oncontextmenu = function() {
+				return false;
+			};
+			// H5 plus事件处理
+			var as = 'slide-in-right',
+				at = 200; // 默认动画时间
+			// 扩展API准备完成后要执行的操作
+
+			function plusReady() {
+				// 隐藏滚动条
+				plus.webview.currentWebview().setStyle({
+					scrollIndicator: 'none'
+				});
+				// Android处理返回键
+				var pageUrl = window.location.href;
+				var first = null;
+				plus.key.addEventListener('backbutton', function() {
+					//根据url判断是否返回到首页，是->退出,否则返回上一页
+					if(pageUrl.indexOf('index') == -1) {
+						history.back();
+					} else {
+						if(!first) {
+							first = new Date().getTime();
+							shouQuit(); //弹出窗
+							setTimeout(function() {
+								first = null;
+							}, 1000);
+						} else {
+							if(new Date().getTime() - first < 1500) {
+								plus.runtime.quit();
+							}
+						}
+					}
+				}, false);
+			}
+			//扩展API是否准备好，如果没有则监听“plusready"事件
+			if(window.plus) {
+				plusReady();
+			} else {
+				document.addEventListener('plusready', plusReady, false);
+			}
+
+			function shouQuit() {
+				var quit = $('<div class="quitBox" style="position: fixed;bottom: 11%;width: 100%;display:none;">' +
+					'<p style="background: #000;border-radius: 5px;width: 150px;margin: 0 auto;text-align: center;height: 36px;line-height: 36px;color: #fff;">再按一次退出程序</p>' +
+					'</div>');
+				$('body').append(quit);
+				$('.quitBox').fadeIn(500);
+				setTimeout(function() {
+					$('.quitBox').fadeOut(500);
+				}, 1000);
+			}
+
+			var pinjia;
+			mui.init({
+				swipeBack: false
+			});
+			(function($) {
+				mui('.mui-scroll-wrapper').scroll();
+				$('.mui-scroll-wrapper').scroll({
+					indicators: true //是否显示滚动条
+				});
+			})(mui);
+
+			$(function() {
+				var productInfo;
+				var param = $.fn.Util().toQueryParams();
+				var sku = {};
+				var c_size = 0;
+				var c_color = 0;
+				var spec = '';
+				var c_spec = 0;
+				var defaultsku = '';
+				var token = localStorage.getItem('token');
+				getProductInfo();
+
+				function getProductInfo() {
+					$.fn.Util().ajax({
+						url: 'http://www.tanglikeji.com/api.php/Details/Details',
+						data: {
+							id: param['id']
+						}, //{id:706}
+						beforeFn: function() {
+							layer.open({
+								type: 2,
+								content: '加载中',
+								shadeClose: false
+							});
+						},
+						afterFn: function() {
+							layer.closeAll();
+						}
+					}).done(function(res) {
+						console.log(JSON.stringify(res));
+						$("#picList").show();
+						defaultsku = res.data.xiangqing[0].productId;
+						fillDetail(res.data.product, res.data.prodimg, res.data.xiangqing[0]);
+						fillPic(res.data.prodimg);
+						fillConmment(res.data.comments);
+						productInfo = res.data.product;
+						productInfo.img = res.data.prodimg[0].image;
+						color = [];
+						size = [];
+						spec = res.data.xiangqing;
+						for(var i in res.data.xiangqing) {
+							color_obj = {
+								'id': res.data.xiangqing[i].colorId,
+								'name': res.data.xiangqing[i].colorName,
+								'sizeId': res.data.xiangqing[i].sizeId,
+								'pid': res.data.xiangqing[i].productId
+							};
+							size_obj = {
+								'id': res.data.xiangqing[i].sizeId,
+								'name': res.data.xiangqing[i].sizeName,
+								'colorId': res.data.xiangqing[i].colorId,
+								'pid': res.data.xiangqing[i].productId
+							};
+							if(color.length > 0) {
+								is_exist = true;
+								for(k in color) {
+									if(color[k].id == res.data.xiangqing[i].colorId) {
+										is_exist = false;
+									}
+								}
+								if(is_exist) {
+									color.push(color_obj);
+								}
+							} else {
+								color.push(color_obj);
+							}
+							//console.log(i,color);
+							if(size.length > 0) {
+								is_exist = true;
+								for(k in size) {
+									if(size[k].id == res.data.xiangqing[i].sizeId) {
+										is_exist = false;
+									}
+								}
+								if(is_exist) {
+									size.push(size_obj);
+								}
+							} else {
+								size.push(size_obj);
+							}
+						}
+						sku.size = size;
+						sku.color = color;
+					}).fail(function(err) {
+
+					});
+				}
+
+				function fillDetail(pro, imglist, xiangqing) {
+					$("#pname").html(pro.prodName);
+					
+					if(pro.shopid > 0) {
+						$("#shopdetail").attr('onclick', "clicked('shop_detail.html?id=" + pro.shopid + "')");
+						
+					}
+					$("#point").html(parseFloat(xiangqing.price));
+					$("#sellnum").html(pro.salenum);
+
+					$(".jje1").html(parseFloat(xiangqing.jifen));
+					if(parseFloat(xiangqing.price2) - parseFloat(xiangqing.jifen) > 0) {
+						ppr2 = parseFloat(xiangqing.price2) - parseFloat(xiangqing.jifen);
+					} else {
+						ppr2 = 0;
+					}
+					$(".jje2").html(ppr2);
+					$(".jje3").html(parseFloat(xiangqing.price2));
+					$('#price').html(xiangqing.price1);
+					$("#content").html(pro.prodInfo);
+					sku.img = 'http://www.tanglikeji.com/' + imglist[0].image;
+					autoimg();
+				}
+
+				function autoimg() {
+					$.each($("#content img"), function(index, vl, ar) {
+						$("#content img").eq(index).css("width", "100%").css("height", "auto");
+					});
+
+					$.each($("#content div"), function(index, vl, ar) {
+						$("#content div").eq(index).css("width", "100%").css("height", "auto");
+					});
+
+				}
+
+				function fillPic(list) {
+					$('#picList').html('');
+					html = '';
+					for(var i in list) {
+						html += '<div class="swiper-slide"> <img src="http://www.tanglikeji.com/' + list[i].image + '" width="100%"> </div>';
+					}
+					$('#picList').html(html);
+					var mySwiper = new Swiper('.swiper-container', {
+						pagination: '.pagination',
+						loop: true,
+						grabCursor: true,
+						paginationClickable: true
+					})
+				}
+
+				function fillConmment(list) {
+					html = '';
+					$("#commentList").html('');
+					for(var i in list) {
+						userimg = '../images/me_selected@2x.png';
+						if(list[i].userimg) {
+							userimg = 'http://www.tanglikeji.com/' + list[i].userimg;
+						}
+						html += '' +
+							'<li class="mui-table-view-cell mui-media">' +
+							'<a href="javascript:;">' +
+							'<img class="mui-media-object mui-pull-left" style="border-radius: 42px;" src="' + userimg + '">' +
+							'<div class="mui-media-body">' +
+							list[i].nickName +
+							'<span style="float:right;">' + list[i].commentsTime + '</span>' +
+							'<p class="mui-ellipsis" style="white-space: normal;">' + list[i].content + '</p>' +
+							'</div>' +
+							'</a>' +
+							'</li>';
+					}
+					$("#commentList").html(html);
+				}
+
+				function showDetail() {
+					sizeHtml = '';
+					for(var i in sku.size) {
+						if(sku.size[i].id) {
+							sizeHtml += '<a href="javascript:void(0);" data-type="size" data-id="' + sku.size[i].id + '"  data-pid="' + sku.size[i].pid + '" class="sku-item sku-size" style="float: left;">' + sku.size[i].name + '</a>';
+						}
+
+					}
+
+					if(sizeHtml != '') {
+						sizeHtml = '<div class="sku-line size-line" style="">' +
+							'<lable class="sku_name" style="float: left;" >尺寸</lable>' +
+							sizeHtml +
+							'<div style="clear:both;"></div>' +
+							'   </div>';
+
+					}
+
+					colorHtml = '';
+					for(var i in sku.color) {
+						if(sku.color[i].id) {
+							colorHtml += '<a href="javascript:void(0);" data-type="color" data-id="' + sku.color[i].id + '"  data-pid="' + sku.color[i].pid + '" class="sku-item sku-color" style="float: left;">' + sku.color[i].name + '</a>';
+						}
+
+					}
+
+					if(colorHtml != '') {
+						colorHtml = '<div class="sku-line color-line" style="">' +
+							'<lable class="sku_name" style="float: left;" >颜色</lable>' +
+							colorHtml +
+							'<div style="clear:both;"></div>' +
+							'   </div>';
+
+					}
+
+					layer.open({
+						type: 1,
+						content: '' +
+							'<div class="sku-line"  >' +
+							'<img style="" src="http://www.tanglikeji.com/' + productInfo.img + '"/>' +
+							'<p>' + productInfo.prodName + '</p>' +
+							'<p><span style="color:red;">￥<span id="dialog_price">' + productInfo.price + '</span></span>&nbsp;&nbsp;&nbsp;&nbsp;积分：<span id="dialog_point">' + parseFloat(productInfo.price) + '</span></p>' +
+							'<div class="mui-clearfix"></div>' +
+							'</div>' +
+							sizeHtml +
+							colorHtml +
+							'<div class="sku-line">' +
+							'<lable class="sku_name">数量</lable>' +
+							'<div class="mui-numbox" style="width:40px;">' +
+							'<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>' +
+							'<input class="mui-input-numbox" id=num type="number" disabled value="1">' +
+							'<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>' +
+							'</div>' +
+							'<!--<span class="sku-jian">-</span>' +
+							'<input class="sku-num" type="number" id="num" disabled value="1"/>' +
+							'<span class="sku-jia">+</span>-->' +
+							'   </div>' +
+							'<div class="sku-line">' +
+							'<div class="sku-btn-block color-primary sku-cart">放入购物车</div><div class="sku-btn-block color-error sku-buy">立即购买</div>' +
+							'</div>' +
+							'',
+						anim: 'up',
+						style: 'position:fixed; bottom:0; left:0; width: 100%; padding:10px 0 0px 0; border:none;'
+					});
+					$(".sku-line a").on('click', sku_click_fun);
+
+					function sku_click_fun() {
+						type = $(this).attr('data-type');
+						$(".sku-" + type).attr('style', 'float:left;');
+						id = $(this).attr('data-id');
+						defaultsku = $(this).attr('data-pid');
+						selector = type + '-line a';
+						if($(this).hasClass('sku-item-unable')) {
+							return;
+						}
+						//判断是选中还是取消
+						if(type == 'size') {
+							if(c_size == 0 || c_size != id) { //选中尺寸规格
+								//重置尺寸选项
+								sizeHtml = '<lable class="sku_name" style="float: left;">尺寸</lable>';
+								for(var i in sku.size) {
+									if(sku.size[i]) {
+										selected = '';
+										if(sku.size[i].id == id) {
+											selected = 'sku-item-choose';
+										} else {
+											if(c_color > 0) {
+												selected = sku.size[i].colorId == c_color ? '' : 'sku-item-unable';
+											}
+										}
+										sizeHtml += '<a href="javascript:void(0);" data-type="size" data-id="' + sku.size[i].id + '"  class="sku-item sku-size ' + selected + '" style="float: left;">' + sku.size[i].name + '</a>';
+									}
+								}
+								$(".size-line").html(sizeHtml);
+								$(".size-line").append('<div style="clear:both;"></div>');
+								//重置颜色选项
+								colorHtml = '<lable class="sku_name" style="float: left;">颜色</lable>';
+								for(var i in spec) {
+									if(spec[i].sizeId == id) {
+										selected = '';
+										if(c_color > 0 && spec[i].colorId == c_color) {
+											selected = 'sku-item-choose';
+										}
+										colorHtml += '<a href="javascript:void(0);" data-type="color" data-id="' + spec[i].colorId + '" class="sku-item sku-color ' + selected + '" style="float: left;">' + spec[i].colorName + '</a>';
+									}
+								}
+								$(".color-line").html(colorHtml);
+								$(".color-line").append('<div style="clear:both;"></div>');
+								c_size = id;
+							} else {
+								//重置尺寸选项
+								sizeHtml = '<lable class="sku_name" style="float: left;">尺寸</lable>';
+								selected = '';
+								if(c_color > 0) {
+									for(i in spec) {
+										if(spec[i].colorId == c_color) {
+											sizeHtml += '<a href="javascript:void(0);" data-type="size" data-id="' + spec[i].sizeId + '"  class="sku-item sku-size ' + selected + '" style="float: left;">' + spec[i].sizeName + '</a>';
+										}
+									}
+								} else {
+									for(i in sku.size) {
+										sizeHtml += '<a href="javascript:void(0);" data-type="size" data-id="' + sku.size[i].id + '"  class="sku-item sku-size ' + selected + '" style="float: left;">' + sku.size[i].name + '</a>';
+									}
+								}
+								$(".size-line").html(sizeHtml);
+								$(".size-line").append('<div style="clear:both;"></div>');
+								//重置颜色选项
+								colorHtml = '<lable class="sku_name" style="float: left;">颜色</lable>';
+								for(var i in sku.color) {
+									selected = '';
+									if(c_color > 0 && spec[i].colorId == c_color) {
+										selected = 'sku-item-choose';
+									}
+									colorHtml += '<a href="javascript:void(0);" data-type="color" data-id="' + spec[i].colorId + '" class="sku-item sku-color ' + selected + '" style="float: left;">' + spec[i].colorName + '</a>';
+								}
+								$(".color-line").html(colorHtml);
+								$(".color-line").append('<div style="clear:both;"></div>');
+								c_size = 0;
+							}
+						}
+						if(type == 'color') {
+							if(c_color == 0 || c_color != id) {
+								//重置尺寸选项
+								sizeHtml = '<lable class="sku_name" style="float: left;">尺寸</lable>';
+								for(i in spec) {
+									selected = '';
+									if(spec[i].colorId == id) {
+										if(c_size > 0 && spec[i].sizeId == c_size) {
+											selected = 'sku-item-choose';
+										}
+										sizeHtml += '<a href="javascript:void(0);" data-type="size" data-id="' + spec[i].sizeId + '"  class="sku-item sku-size ' + selected + '" style="float: left;">' + spec[i].sizeName + '</a>';
+									}
+								}
+								$(".size-line").html(sizeHtml);
+								$(".size-line").append('<div style="clear:both;"></div>');
+								//重置颜色选项
+								colorHtml = '<lable class="sku_name" style="float: left;">颜色</lable>';
+								for(var i in sku.color) {
+									if(sku.color[i]) {
+										selected = '';
+										if(c_size > 0) {
+											selected = sku.color[i].sizeId == c_size ? '' : 'sku-item-unable';
+										}
+										if(sku.color[i].id == id) {
+											selected = 'sku-item-choose';
+										}
+										colorHtml += '<a href="javascript:void(0);" data-type="color"  data-id="' + sku.color[i].id + '" class="sku-item sku-color ' + selected + '" style="float: left;">' + sku.color[i].name + '</a>';
+									}
+								}
+								$(".color-line").html(colorHtml);
+								$(".color-line").append('<div style="clear:both;"></div>');
+								c_color = id;
+							} else {
+								//重置尺寸选项
+								sizeHtml = '<lable class="sku_name" style="float: left;">尺寸</lable>';
+								for(var i in sku.size) {
+									if(sku.size[i]) {
+										if(c_size > 0 && sku.size[i].id == c_size) {
+											selected = 'sku-item-choose';
+										} else {
+											selected = '';
+										}
+										sizeHtml += '<a href="javascript:void(0);" data-type="size" data-id="' + sku.size[i].id + '"  class="sku-item sku-size ' + selected + '" style="float: left;">' + sku.size[i].name + '</a>';
+									}
+								}
+								$(".size-line").html(sizeHtml);
+								$(".size-line").append('<div style="clear:both;"></div>');
+								//重置颜色选项
+								colorHtml = '<lable class="sku_name" style="float: left;">颜色</lable>';
+								if(c_size > 0) {
+									for(i in spec) {
+										if(spec[i].sizeId == c_size) {
+											colorHtml += '<a href="javascript:void(0);" data-type="color"  data-id="' + spec[i].colorId + '" class="sku-item sku-color" style="float: left;">' + spec[i].colorName + '</a>';
+										}
+									}
+								} else {
+									for(i in sku.color) {
+										colorHtml += '<a href="javascript:void(0);" data-type="color"  data-id="' + sku.color[i].id + '" class="sku-item sku-color" style="float: left;">' + sku.color[i].name + '</a>';
+									}
+								}
+								$(".color-line").html(colorHtml);
+								$(".color-line").append('<div style="clear:both;"></div>');
+								c_color = 0;
+							}
+						}
+						$(".sku-line a").on('click', sku_click_fun);
+						if(c_color > 0 && c_size > 0) {
+							for(i in spec) {
+								if(spec[i].colorId == c_color && spec[i].sizeId == c_size) {
+									$("#dialog_price").html(spec[i].price);
+									$("#dialog_point").html(spec[i].maxjifen);
+								}
+							}
+						}
+					}
+					$(".mui-btn-numbox-minus").on('click', function() {
+						num = parseInt($("#num").val());
+						if(num <= 1) {
+							return;
+						}
+						num--;
+						$("#num").val(num);
+					})
+					$(".mui-btn-numbox-plus").on('click', function() {
+						num = parseInt($("#num").val());
+						num++;
+						$("#num").val(num);
+					})
+					$(".sku-cart").on('click', function() {
+
+						sku_id = 0;
+						if(sizeHtml != "" && colorHtml != "") {
+							if(c_size == 0 && c_color == 0) {
+								layer.open({
+									'content': '请选择产品的规格',
+								});
+								return;
+							}
+							for(i in spec) {
+								if(spec[i].colorId == c_color && spec[i].sizeId == c_size) {
+									sku_id = spec[i].productId;
+								}
+							}
+						}
+						if(sku_id == 0) {
+							sku_id = defaultsku;
+						}
+
+						num = $("#num").val();
+						$.fn.Util().ajax({
+							url: 'http://www.tanglikeji.com/api.php/cart/addcart',
+							data: {
+								'cookie': token,
+								'pid': sku_id,
+								'num': num
+							},
+							beforeFn: function() {
+								layer.open({
+									type: 2,
+									content: '加载中',
+									shadeClose: false
+								});
+							}
+						}).done(function(data) {
+							layer.closeAll();
+							layer.open({
+								'content': data.msg,
+								skin: 'msg',
+								time: 2
+							});
+
+						}).fail(function(err) {
+							layer.open({
+								'content': err.msg,
+								skin: 'msg',
+								time: 2 //2秒后自动关闭
+							});
+						})
+					});
+
+					$(".sku-buy").on('click', function() {
+						if(sizeHtml != "" && colorHtml != "") {
+							if(c_size == 0 && c_color == 0) {
+								layer.open({
+									'content': '请选择产品的规格',
+								});
+								return;
+							}
+							if(c_color > 0 && c_size > 0) {
+								for(i in spec) {
+									if(spec[i].colorId == c_color && spec[i].sizeId == c_size) {
+										$("#dialog_price").html(spec[i].price);
+										$("#dialog_point").html(spec[i].maxjifen);
+										c_spec = spec[i].productId;
+									}
+								}
+							}
+						}
+						if(c_spec == 0) {
+							c_spec = defaultsku;
+						}
+
+						num = $("#num").val();
+						$.fn.Util().ajax({
+							url: 'http://www.tanglikeji.com/api.php/cart/addcart',
+							data: {
+								'cookie': token,
+								'pid': c_spec,
+								'num': num
+							},
+							beforeFn: function() {
+								layer.open({
+									type: 2,
+									content: '加载中',
+									shadeClose: false
+								});
+							}
+						}).done(function(data) {
+							layer.closeAll();
+							if(data.state == "out") {
+								$.fn.Util().alert_msg('请先登录', function() {
+									location.href = 'login.html';
+								});
+								return false;
+							}
+
+							layer.open({
+								'content': data.msg,
+								skin: 'msg',
+								time: 2
+							});
+							clicked("./frame3.html");
+
+						}).fail(function(err) {
+							layer.open({
+								'content': err.msg,
+								skin: 'msg',
+								time: 2 //2秒后自动关闭
+							});
+						})
+					});
+
+				}
+				$("#sku").on('click', function() {
+					showDetail();
+				});
+				$(".cart").on('click', function() {
+					showDetail();
+				});
+				$(".buy").on('click', function() {
+					showDetail();
+				});
+			})
+		</script>
+
+		<script type="text/javascript">
+			$(window).scroll(function() {
+				
+				var sc = $(window).scrollTop();
+				var rwidth = $(window).width();
+				if(sc > 0) {
+					$("#goTopBtn").css("display", "block");
+				} else {
+					$("#goTopBtn").css("display", "none");
+				}
+			});
+			$("#goTopBtn").click(function() {
+				var sc = $(window).scrollTop();
+				$('body,html').animate({
+					scrollTop: 0
+				}, 500);
+			});
+			$("#kefulink").click(function() {
+				openhuhu();
+			});
+			
+				function openhuhu() {
+						token = localStorage.getItem('token');
+						if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined') {
+							location.href = 'login.html';
+						} else {
+							location.href = "paraches://?token=" + token+"&to=15038775472";
+						}
+					}
+		</script>
+	</body>
+
+</html>

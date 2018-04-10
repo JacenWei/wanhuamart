@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>加入群</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="css/sm.css">
+	<link rel="stylesheet" href="css/sm-extend.css">
+	<link rel="stylesheet" href="css/login.css">
+	<script type='text/javascript' src='js/zepto.js' charset='utf-8'></script>
+    <script type="text/javascript" src="js/update.js" ></script>
+    <script type="text/javascript" src="js/common.js" ></script>
+    
+	
+</head>
+<body>
+	
+    <div class="page-group" style="background-color:#f5f5f5;" id="chat-index">
+        <div class="page page-current page-from-right-to-center" style="background-color:#f5f5f5;">
+        	<header class="bar bar-nav">
+        		<button class="button pull-left btn-back" onclick="back()"><img src="images/icon/icon-arrow-left.png" class="icon-close" /></button>				
+        		<h1 class="title">加入群</h1>
+			</header>
+        	<div class="content chat-content" style="bottom:0;">			  	
+			  	<div class="inner-block" style="height:16rem;background:#fff;width:100%;border-bottom:2px solid #E2E2E2;">
+			  		<div class="inner-line">
+			  			<div style="width:6rem;height:6rem;margin:1rem auto;" id="logo_src"></div>
+			  			<p style="font-size:1.33333333rem;text-align:center;padding:0;margin:0;" id="group_name"></p>
+			  			<p style="font-size:1.33333333rem;text-align:center;padding:0;margin:0;" id="group_num"></p>
+			  		</div>
+			  	</div>
+			  	<div class="pull-bootom" style="position:relative;width:80%;margin-left:10%;margin-top:4rem;">
+					<button class="btn-big " id="btn-edit" style="background-color:#00C853;">加入群聊</button>
+				</div>
+			</div>
+        </div>
+    </div>
+   
+       
+	<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/template.js' charset='utf-8'></script>
+	<script type="text/javascript" src="js/layer/layer.js" ></script>
+	<script>		
+		$(function(){
+			var token = localStorage.getItem('token');
+			if(token == '' || token == null || token == undefined){
+//				$.myUtil().alert_msg('身份已过期，请重新登录',function(){localStorage.clear();location.href='login.html';});
+			}
+			room_id = $.myUtil().toQueryParams();
+			room_id = room_id['room_id'];
+			memberList = '';
+			$.myUtil().ajax({
+				data:{
+					'api_name':'chatgroup_qunlists',
+					'token':token,
+					'room_id':room_id
+				}
+			}).done(function(res){
+				layer.closeAll();
+				if(res.state == 'ok'){
+					num = 0;
+					for(i in res.data.room_members){
+						num++;
+					}					
+					$("#logo_src").html('<img src="'+res.data.img+'" style="width:6rem;height:6rem;"/>');
+					console.log($("#logo_src").html());
+					memberList = res.data.room_members;
+					$("#group_name").html(res.data.room_name);
+					$("#group_num").html("("+num+"人)");
+				}else{
+					$.myUtil().alert_msg(res.msg);
+				}
+			});
+			
+			$("#btn-edit").click(function(){
+				$.myUtil().ajax({
+					data:{
+						'api_name':'chatgroup_joinend',
+						'token':token,
+						'room_id':room_id
+					},beforeFn:function(){}
+				}).done(function(res){
+					$.myUtil().alert_msg(res.msg,function(){
+						if(res.state == 'ok'){
+							localStorage.setItem(room_id,JSON.stringify(memberList));
+							clicked('chat-group-normal-chat.html?room_id'+room_id);
+							
+						}
+					});
+				})
+			})
+		})
+		
+		function addmember(){
+			clicked('chat-group-friend2.html?room_id='+room_id);
+			
+		}
+		function delmember(){
+			clicked('chat-group-friend3.html?room_id='+room_id);
+			
+		}
+	</script>
+</body>
+</html>

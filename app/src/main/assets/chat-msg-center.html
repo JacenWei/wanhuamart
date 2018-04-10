@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>详细资料</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="css/sm.css">
+	<link rel="stylesheet" href="css/sm-extend.css">
+	<link rel="stylesheet" href="css/login.css">
+	<script type='text/javascript' src='js/zepto.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/config.js' charset='utf-8'></script>	
+	<script type="text/javascript" src="js/common.js" ></script>	
+	<script type="text/javascript" src="js/iscroll4.js" ></script>
+	
+</head>
+<body>
+    <div class="page-group page-from-right-to-center" style="background-color:#fff;">
+        <div class="page page-current" style="background-color:#fff;" id="uc-setting">
+        	<header class="bar bar-nav">
+        		<a class="button pull-left btn-back back" onclick="back()"><img src="images/icon/icon-arrow-left.png" class="icon-close" /></a>        		
+        		<h1 class="title">消息中心</h1>
+			</header>
+        	<div class="content" id="item-list" style="bottom:0;">
+        		<div id="scroller">
+        			<div id="msgList"></div>	        		
+        		</div>
+			</div>
+        </div>        
+    </div>
+    
+    <div class="backdrop"></div>
+    <div class="drop-menu drop-menu-shadow drop-menu-bottom">
+		<ul>
+			<li id="remark">
+				<i class="icon icon-user-editremark"></i>
+				<span>设置备注</span>
+			</li>
+			
+			<li id="attention">
+				<i class="icon icon-user-attention"></i>
+				<span>关注</span>
+			</li>
+			<li id="report">
+				<i class="icon icon-user-report"></i>
+				<span>投诉</span>
+			</li>
+			<li id="black">
+				<i class="icon icon-user-black"></i>
+				<span>加入黑名单</span>
+			</li>
+			<li id="del">
+				<i class="icon icon-user-del"></i>
+				<span>删除好友</span>
+			</li>
+			<li id="share">
+				<i class="icon icon-user-share"></i>
+				<span>分享</span>
+			</li>
+		</ul>
+	</div>	
+    
+    <script id='msgListT' type="text/html">
+    	
+		{{each list as item i}}
+		<a href="javascript:;" id="chat-msg-detail.html?id={{item.xid}}" onclick="clicked(this.id)">
+		<div class="inner-block">
+			<div class="inner-line message-item inner-bottom-line" data-id="{{item.xid}}">
+				<div>
+					<div class="substr"><span>【{{item.type}}】</span>{{item.title}}</div>
+					<div class="notice-time"></div>
+				</div>
+				<div>
+					<div class="substr left">{{item.addtime}}</div>
+					{{if item.is_read == 0}}
+					<div class="icon-warn"><span class="red-warn"></span></div>
+					{{/if}}
+				</div>
+			</div>
+		</div>
+		</a>
+		{{/each}}
+    </script>
+    
+	<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+	<script type="text/javascript" src="js/layer/layer.js" ></script>
+	<script type="text/javascript" src="js/template.js" ></script>
+	
+	<script>
+		var token = localStorage.getItem('token') || '';
+		if(token == '' || token == null || token == undefined){
+			$.myUtil().alert_msg('身份已过期，请重新登录',function(){localStorage.clear();clicked('login.html');});
+		}
+		var page = 1;
+		var hasnext = 0;
+		var loading = false;
+		var myScroll = '';
+		
+		$(function(){
+			getData();
+			myScroll = new iScroll('item-list',{
+				hideScrollbar:true,
+				fadeScrollbar:true,
+				onScrollMove: function () {
+					if(this.y < (this.maxScrollY - 30)){						
+						if(!loading && hasnext == 1){
+							loading = true;
+							pullUpAction();
+						} 
+					}
+				},
+			});
+			//下拉刷新
+			function pullDownAction () {}
+			//上拉加载
+			function pullUpAction () {
+				if(hasnext == 0) return;
+				page++;
+				getData();
+			}
+			
+			function getData(){
+				$.myUtil().ajax({
+					data:{
+						'api_name':'notice_getlist', 
+						'token':token,
+						'page':page,
+						'pagenum':$.pagenum
+					},
+					beforeFn:function(){}
+				}).done(function(res){
+					console.log("解析"+ JSON.stringify(res) );
+					hasnext = res.data.hasnext; 
+					$("#msgList").append(template('msgListT',{list:res.data.list}));
+					setTimeout(function(){myScroll.refresh();},400);
+					$(".message-item").unbind('click').click(function(){
+						id = $(this).attr('data-id');
+						clicked('chat-msg-detail.html?id='+id);
+					})
+					loading = false;
+				});
+			}
+			
+		});
+	</script>
+	
+</body>
+</html>

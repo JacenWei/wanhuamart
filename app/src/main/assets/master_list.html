@@ -1,0 +1,223 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css">
+		<link rel="stylesheet" href="../css/line.css">
+		<link rel="stylesheet" href="../css/profit.css" />
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+		<script src="../js/util.js"></script>
+	    <script type="text/javascript" src="../js/common.js" ></script>
+		<script src="../js/layer2.0/layer.js"></script> 
+        <script type="text/javascript">
+            if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+               clicked('login.html');
+            }
+        </script>
+	</head>
+
+	<body>
+		<header class="header" >
+			<a id="frame4.html" onclick="clicked(this.id)" class="back"></a>
+			<h1 class="tit">业务员管理</h1>
+			
+			<a class="edit" href="javascript:;" id="shop_user_add.html" onclick="clicked(this.id)" style="width:inherit;height:initial;top:10px;right:10px;">
+			
+				<div style="border:1px #ffffff solid;border-radius: 5px;padding:5px;margin-top: 2px;">添加</div>
+			</a>
+			
+		</header>
+		<div class="content" >
+			
+			<div style="font-size: 16px; font-weight: 700; text-align: center; margin-top: 10px; margin-bottom: 10px; ">业务员总数量: <span id="znum">0</span> 人</div>
+		
+			
+			<div class="refine-details">
+                <ul id="list"></ul>
+                <div style="text-align: center; display: none;">
+                	<button class="page_btn" id="page_pre">上一页</button>
+                	<button class="page_btn" id="page_next">下一页</button>	
+                </div>
+            </div>
+
+
+
+<script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	var shopInfo = '';
+var tokens=localStorage.getItem ("token");
+var userinfo = JSON.parse(localStorage.getItem('userInfo'));
+
+$(function(){	
+	var cateId;
+	var page = 1;
+	var next = false;
+	getList();
+	function getList(){		
+		$.fn.Util().ajax({
+			url : 'http://www.tanglikeji.com/api.php/Ucenter/master_list', 
+			data :{'cookie':tokens,'page':page},
+			beforeFn:function(){
+				layer.open({
+					type: 2,
+					content: '加载中',
+					shadeClose:false
+				});
+			},			
+		}).done(function(res){
+			console.error( JSON.stringify(res) );
+			layer.closeAll();
+			if(res.state == 'ok'){
+				list = res.data.list;
+				next = res.data.next;
+				$("#list").html('');
+				$("#znum").html( res.data.znum );
+				
+				for(i in list){
+					
+					var zt="<span style='color:#ff0000'>上线中</span>";
+					if(list[i].status==2)zt="已下线";
+					
+					$("#list").append(
+						'<li>'+
+	                         
+	                        '<div class="one">'+
+	                            '<p class="onr-let">'+
+	                                '<img src="../images/icon/icon-i12.png">'+
+	                                '<span class="list-muen">用户名</span>'+
+	                                '<span class="list-nr" style="width:150px;">'+list[i].uname+'</span>'+
+	                            '</p>'+
+	                        '</div>'+
+	                        '<div class="one">'+
+	                            '<p class="onr-let">'+
+	                                '<img src="../images/icon/icon-i15.png">'+
+	                                '<span class="list-muen">角色</span>'+
+	                                '<time>'+list[i].jiaose+'</time>'+
+	                            '</p>'+
+	                        '</div>'+
+	                        
+	                        '<div class="one">'+
+	                            '<p class="onr-let">'+
+	                                '<img src="../images/icon/icon-i12.png">'+
+	                                '<span class="list-muen">真实姓名</span>'+
+	                                '<time>'+list[i].lzhengName+'</time>'+
+	                            '</p>'+
+	                        '</div>'+
+	                        
+	                        '<div class="one">'+
+	                            '<p class="onr-let">'+
+	                                '<img src="../images/icon/icon-i10.png">'+
+	                                '<span class="list-muen">身份证号</span>'+
+	                                '<time>'+list[i].idcard+'</time>'+
+	                            '</p>'+
+	                        '</div>'+
+	                        
+	                        '<div class="one">'+
+	                            '<p class="onr-let">'+
+	                            '<a id="yewu_detail_yeji.html?id='+list[i].id+'" href="javascript::void(0)" onclick="localStorage.setItem(\'yewuid\',\''+ list[i].user_id +'\');clicked(this.id)"><div style="margin-right: 10px;float: left;text-align: center;padding: 5px;border: 1px #008000 solid;border-radius: 5px;width:100px;color: #008000;">查看业绩</div></a>'+
+	                                '<a id="shop_user_edit.html?id='+list[i].id+'" href="javascript::void(0)" onclick="clicked(this.id)"><div style="margin-right: 10px;float: left;text-align: center;padding: 5px;border: 1px #007FFF solid;border-radius: 5px;width:50px;color: #007AFF;">修改</div></a>'+
+	                                '<a href="javascript::void(0)" onclick="delmaster('+list[i].id+')"><div style="margin-right: 10px;float: left;text-align: center;padding: 5px;border: 1px #ff0000 solid;border-radius: 5px;width:50px;color: #FF0000;">删除</div></a>'+
+	                                ''+
+	                            '</p>'+
+	                        '</div>'+
+	                        
+	                        
+	                        
+	                    '</li>'
+	                );
+				}
+				if(next == 0){
+					$(".page_btn").hide();
+				}else{
+					$(".page_btn").show();
+				}
+				if(page == 1 && $("#list").html() == ''){
+					$("#list").html('<p style="text-align:center;padding:2rem;">暂无数据</p>')
+					$(".page_btn").hide();
+				}
+			}else{
+				layer.open({
+					'content':res.msg,		
+				})
+			}
+		}).fail(function(err){
+			layer.open({'content':err.msg});
+		})
+	}
+	
+	$("#page_pre").on('click',function(){
+		if(page > 1){
+			page = page - 1;
+			getList();
+		}else{
+			return;
+		}
+	});
+	
+	$("#page_next").on('click',function(){
+		if(next > 0){
+			page = page+1;
+			getList();
+		}else{
+			return;
+		}
+	});
+	
+	
+});
+
+function delmaster(id){
+	if(confirm("确定删除此业余员？")){
+		$.fn.Util().ajax({
+					url : 'http://www.tanglikeji.com/api.php/Ucenter/del_master',
+					data :{'id':id},
+					beforeFn:function(){
+						layer.open({
+							type: 2,
+							content: '加载中',
+							shadeClose:false
+						});
+					},
+				}).done(function(data){
+					layer.closeAll();
+					if(data.state == 'ok'){	
+						layer.open({
+							'content':'删除成功',
+							time : 2,
+							end : function(){
+								clicked("master_list.html");
+							}
+						})
+						
+					}else{
+						layer.open({
+							'content':data.msg,
+							time : 2,
+						})
+					}
+				}).fail(function(err){
+					alert(err.msg);
+					layer.open({'content':err.msg});
+				})
+	}
+}
+	
+</script>
+</body></html>

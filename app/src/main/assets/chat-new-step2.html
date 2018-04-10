@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>身份验证</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="css/sm.css">
+	<link rel="stylesheet" href="css/sm-extend.css">
+	<link rel="stylesheet" href="css/login.css">
+	<script type="text/javascript" src="js/common.js" ></script>
+</head>
+<body>
+    <div class="page-group" style="background-color:#fff;">
+        <div class="page page-current" style="background-color:#fff;">
+        	<header class="bar bar-nav">
+        		<a class="button pull-left btn-back back" href="javascript:;" onclick="back()"><img src="images/icon/icon-arrow-left.png" class="icon-close" /></a>
+				<button class="button pull-right btn-red" id="submit">完成</button>
+        		<h1 class="title">身份验证</h1>
+			</header>
+        	<div class="content" style="padding:0 1.333333rem;padding-top:1.666666rem;">        		
+				<div id="p" class="form-group">
+					<input id="remarks" spellcheck=false class="form-control" name="remarks" type="text" size="18" alt="login" required="">
+					<i class="icon icon-chat-del" style="position:absolute;top:0.333333rem;right:0;" onclick="this.previousElementSibling.value=''"></i>
+					<span class="form-highlight"></span>
+					<span class="form-bar"></span>
+					<label for="remarks" class="float-label">好友备注</label>					
+				</div>
+				<div id="addrr" class="form-group">					
+					<select class="form-control" id="group" style="position: absolute;z-index: 9;"></select>
+					<i class="icon icon-chat-arrow-down" style="position:absolute;top:0.333333rem;right:0;"></i>
+					<span class="form-highlight"></span>
+					<span class="form-bar"></span>
+					<label for="addr" class="float-label">添加分组</label>					
+				</div>				
+			</div>
+        </div>        
+    </div>   
+    
+    
+    <script type='text/javascript' src='js/zepto.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+	<script type="text/javascript" src="js/layer/layer.js" ></script>
+	
+	<script>
+		$(function(){
+			var token = localStorage.getItem('token');
+			if(token == '' || token == null || token == undefined){
+				$.myUtil().alert_msg('身份已过期，请重新登录',function(){localStorage.clear();clicked('login.html');});
+			}
+			id = $.myUtil().toQueryParams();
+			user_id = id['id'];
+			$.myUtil().ajax({
+				data:{
+					'api_name':'usergroup_lists',
+					'token':token
+				},
+				beforeFn:function(){}
+			}).done(function(res){
+				console.log(JSON.stringify(res));
+				if(res.state == 'ok'){
+					for(i in res.data){
+						$("#group").append('<option value="'+res.data[i].intval_id+'">'+res.data[i].group_name+'</option>');
+					}
+				}
+
+			});
+			$("#submit").on('click',function(){
+				remarks = $("#remarks").val();
+				group_id = $("#group").val();
+				$.myUtil().ajax({
+					data:{
+						'api_name':'friend_applyprocess',
+						'user_id':user_id,
+						'token':token,
+						'group_id':group_id,
+						'remarks':remarks
+					},
+					beforeFn:function(){}
+				}).done(function(res){
+					$.myUtil().toast(res.msg,2,function(){back();});
+					//$.myUtil().toast(res.msg,function(){back();});
+				})
+			})
+		})
+	</script>
+
+</body>
+</html>

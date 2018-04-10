@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css" />
+		
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+	    <script src="../js/util.js"></script>
+	    <script type="text/javascript" src="../js/common.js" ></script>
+	    <script src="../js/address_list.js"></script>
+	    <script src="../js/layer2.0/layer.js"></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				clicked('login.html');
+			}
+		</script>
+		<style>
+			
+.bank-main{
+	padding-top: 20px;
+}
+.bank-input{
+	overflow: hidden;
+	background-color: #FFFFFF;
+	border-top: 1px solid #ECECEC;
+	border-bottom: 1px solid #ECECEC;
+	margin-top: -1px;
+	padding: 10px;
+	line-height: 32px;
+	overflow: hidden;
+}
+.bank-input label{
+	float: left;
+	width: 20%;
+	font-size: 14px;
+	color: #333333;
+}
+.bank-input input{ 
+	float: left;
+	line-height: 32px;
+	font-size: 14px;
+	width: 60%;
+}
+.bank-input select{
+	float: left;
+	line-height: 32px;
+	font-size: 14px;
+	height: 32px;
+	width:80%;
+	color:#666666;
+}
+.bank-input select option{
+	
+	line-height: 32px;
+	font-size: 14px;
+}
+.bank-input span{
+	float: right;
+	width: 20px;
+	height: 20px;
+	margin-top: 10px;
+}
+.bank-input span.bank-important{ 
+	 background-image: url(../images/bank/important-icon.png);
+	 background-size: 100%;
+}
+.bank-input span.bank-clear{
+	font-family: Muiicons;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 20px;
+    display: inline-block;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+    color: #666666;
+    cursor: pointer;
+}
+.bank-input span.bank-clear:before{
+	content: '\e460';
+}
+.bank-input span.bank-fold{
+	font-family: Muiicons;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 20px;
+    display: inline-block;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+    color: #666666;
+    cursor: pointer;
+}
+.bank-input span.bank-fold:before{
+	content: '\e583';
+}
+
+.bank-button{
+	margin-top: 20px;
+}
+.bank-button p{
+	margin: 10px;
+	text-align: center;
+}
+.bank-button p.bank-button-next button{
+	width: 80%;
+	height: 44px;
+	background-color: #00a4a6;
+	color: #FFFFFF;
+	border-radius: 5px;
+	font-size: 16px;
+}
+
+.bank-button p.bank-button-next a{
+	display: block;
+	line-height: 44px;
+	text-align:center;
+	margin:auto;
+	width: 80%;
+	height: 44px;
+	background-color: #00a4a6;
+	color: #FFFFFF;
+	border-radius: 5px;
+	font-size: 16px;
+}
+
+
+
+.bank-button p.bank-button-up button{
+	width: 80%;
+	height: 44px;
+	background-color: #FFFFFF;
+	color: #666666;
+	border: 1px solid #ECECEC;
+	border-radius: 5px;
+	font-size: 16px;
+}
+
+/*错误提示*/
+.error-prompt{ 
+	margin: 10px 20px;
+	text-align: center;
+	color: red;
+	font-size: 12px;
+	min-height: 14px;
+}
+
+/*银行卡管理*/
+.bank-list li{ 
+	overflow: hidden;
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #ECECEC;
+	border-top: 1px solid #ECECEC;
+	margin-top: -1px;
+	padding: 10px;
+}
+.bank-list li img{
+	 float: left;
+	 width: 15%;
+}
+.bank-name-number{
+	float: left;
+	margin-left: 10px;
+	width: 40%;
+}
+.bank-name-number p{
+	line-height: 24px;
+	font-size: 14px;
+	color: #666666;
+}
+.bank-operation{
+	float: right;
+	overflow: hidden;
+	width: 40%;
+	margin-top: 20px;
+}
+.bank-operation a{
+	float: left;
+	width: 50%;
+	overflow: hidden;
+	font-size: 12px;
+	color: #666666;
+}
+
+.bank-operation .bank-delete{
+	position:relative;
+		top:0px;
+		left:11px;
+}
+.bank-operation a:hover{
+	color: red;
+}
+.bank-edit em{
+	display: block;
+	width: 12px;
+	height:12px;
+	margin-top: 2px;
+	margin-right: 3px;
+	float: left;
+	background-image: url(../images/bank/edit-icon.png);
+	background-size:100%;
+}
+.bank-delete em{
+	display: block;
+	width: 12px;
+	height:12px;
+	margin-top: 2px;
+	margin-right: 3px;
+	float: left;
+	background-image: url(../images/bank/delete-icon.png);
+	background-size:100%;
+}
+		</style>
+	</head>
+	<body>
+		<header class="header">
+			<a href="javascript:back();" class="back"></a>
+			<h1 class="tit">收货地址管理</h1>
+		</header>
+		<div class="content">
+			<div class="bank-main">				
+				<ul class="bank-list"></ul>
+				<div class="bank-button">
+					<p class="bank-button-next"><a href="add_address.html">添加地址</a></p>
+				</div>
+			</div>
+		</div>		
+	</body>
+</html>

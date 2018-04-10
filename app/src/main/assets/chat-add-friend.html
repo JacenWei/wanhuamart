@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>新的朋友</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="css/sm.css">
+	<link rel="stylesheet" href="css/sm-extend.css">
+	<link rel="stylesheet" href="css/login.css">
+	<script type="text/javascript" src="js/jquery.1.11.js" ></script>
+	<script>$.noConflict();</script>
+	<script type='text/javascript' src='js/zepto.js' charset='utf-8'></script>
+    <script type="text/javascript" src="js/update.js" ></script>
+    <script type="text/javascript" src="js/common.js" ></script>
+    <script type="text/javascript" src="js/template.js" ></script>
+    <script type="text/javascript" src="js/layer/layer.js" ></script>
+	
+</head>
+<body>
+    <div class="page-group" style="background-color:#f5f5f5;" id="chat-new">
+        <div class="page page-current" style="background-color:#f5f5f5;">
+        	<header class="bar bar-nav">
+        		<button class="button pull-left btn-back" onclick="back()"><img src="images/icon/icon-arrow-left.png" class="icon-close" /></button>
+        		<button class="button pull-right btn-back" onclick="clicked('chat-contact.html')" style="color:#fff;">通讯录添加</button>
+        		<h1 class="title">加好友</h1>
+			</header>
+        	<div class="content chat-content">
+			  	<div class="inner-block" style="background-color:transparent;padding:1.33333333rem;">
+			  		<div class="inner-line" style="display:table;background-color:#fff;border-radius: 0.33333333rem;padding:0.66666666rem;border:1px solid #E2E2E2;">
+			  			<span style="display:table-cell;vertical-align: middle;width:2.66666666rem;height:2.66666666rem;"><img style="width:2.66666666rem;height:2.66666666rem;" src="images/icon/icon-list-search.png" /></span>
+			  			<span style="display:table-cell;height:2.66666666rem;"><form id="search_form"><input type='search' id="phone" style="height:2.66666666rem;border:0;font-size:1.33333333rem;padding:0;" placeholder="输入您要搜索的手机号"/></form></span>
+			  			<span style="display:table-cell;height:2.66666666rem;border:1px solid #e2e2e2;text-align:center;padding:0 0.5rem;border-radius: 0.33333333rem;" id="search_btn">搜索</span>
+			  		</div>
+			  	</div>
+			  	<div class="inner-block" style="background-color:transparent;padding:1.33333333rem;">
+			  		<div class="inner-line" style="display:table;background-color:#fff;border-radius: 0.33333333rem;padding:1.33333333rem;border:1px solid #E2E2E2;text-align: center;">
+			  			<br />			  			
+			  			<div id="qrcode" style="width:13.91666666rem;height:13.91666666rem;margin:0 auto;"></div>
+			  			<p style="margin:1rem;font-size:1.33333333rem;color:#707070;" id="nickname">账号：</p>
+			  			<p style="border-bottom:1px solid #E2E2E2;"></p>
+			  			<p style="margin:0;color:#262626;" onclick="clicked('saoyisao.html')">扫一扫</p>
+			  			<p style="margin:0;color:#C5C5C5;font-size:1rem;">扫描对方二维码添加好友</p>
+			  		</div>
+			  	</div>
+			</div>
+        </div>        
+    </div>
+    
+    
+    
+	<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+	<script type="text/javascript" src="js/qrcode.js" ></script>
+	<script type="text/javascript" src="js/jquery.qrcode.js" ></script>
+	
+	<script>
+		$(function(){
+			var token = localStorage.getItem('token');
+			var userinfo = JSON.parse(localStorage.getItem('userinfo'));
+			_width = getSize(document.getElementById('qrcode')).width;
+			_height = getSize(document.getElementById('qrcode')).height;
+			
+			font_size = parseFloat($("html").css('font-size'));
+			_width = 13.91666666 * font_size;
+			jQuery("#qrcode").qrcode({"width":_width,"height":_width,"text":"fd://"+userinfo.intval_id});
+			
+//			var qrcode = new QRCode(document.getElementById("qrcode"), {width:_width,height : _height});  
+//			qrcode.makeCode("fd://"+userinfo.intval_id);
+			$("#nickname").html('账号：'+userinfo.nickname);
+			
+			
+			$("#search_btn").click(function(){
+				$("#search_form").submit();
+			})
+			
+			$("#search_form").on('submit',function(){
+				phone = $("#phone").val();
+				if(phone != ''){
+					$.myUtil().ajax({
+						data:{
+							'api_name':'search_phnk',
+							'token':token,
+							'search':phone,
+							'page':1,
+							'pagenum':1000
+						},
+						beforeFn:function(){}
+					}).done(function(res){
+						if(res.state == 'ok'){
+							if(res.data.list.length > 0){
+								clicked('userinfo.html?id='+res.data.list[0].user_id);	
+							}else{
+								$.myUtil().toast('暂无用户');
+							}
+							
+						}else{
+							$.myUtil().toast('暂无用户');
+						}
+					})
+				}
+				
+				return false;
+			})
+			
+			
+			
+			function getType(o){
+				var _t;
+				return ((_t = typeof(o)) == "object" ? o==null && "null" || Object.prototype.toString.call(o).slice(8,-1):_t).toLowerCase();  
+		    }
+		    //获取元素样式  
+			function getStyle(el, styleName) {
+				return el.style[styleName] ? el.style[styleName] : el.currentStyle ? el.currentStyle[styleName] : window.getComputedStyle(el, null)[styleName];
+			}  
+			function getStyleNum(el, styleName) {
+				return parseInt(getStyle(el, styleName).replace(/px|pt|em/ig,''));
+			}
+			function setStyle(el, obj){
+				if (getType(obj) == "object") {
+					for (s in obj) {
+						var cssArrt = s.split("-");
+						for (var i = 1; i < cssArrt.length; i++) {
+							cssArrt[i] = cssArrt[i].replace(cssArrt[i].charAt(0), cssArrt[i].charAt(0).toUpperCase());
+						}
+						var cssArrtnew = cssArrt.join("");
+						el.style[cssArrtnew] = obj[s];
+					}
+				}else{
+					if (getType(obj) == "string") {
+						el.style.cssText = obj;
+					}
+				}
+			}
+			function getSize(el) {
+				if (getStyle(el, "display") != "none") {
+					return { width: el.offsetWidth || getStyleNum(el, "width"), height: el.offsetHeight || getStyleNum(el, "height") };
+				}
+				var _addCss = { display: "", position: "absolute", visibility: 'hidden' };
+				var _oldCss = {};
+				for (i in _addCss) {
+					_oldCss[i] = getStyle(el, i);
+				}
+				setStyle(el, _addCss);
+				var _width = el.clientWidth || getStyleNum(el, "width");
+				var _height = el.clientHeight || getStyleNum(el, "height");
+				for (i in _oldCss) {
+					setStyle(el, _oldCss);
+				}
+				return { width: _width, height: _height };
+			}
+			
+		})
+		
+	</script>
+	
+</body>
+</html>

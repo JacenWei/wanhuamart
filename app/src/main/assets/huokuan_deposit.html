@@ -1,0 +1,74 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css">
+		<link rel="stylesheet" href="../css/line.css">
+		<link rel="stylesheet" href="../css/profit.css" />
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+	    <script src="../js/config.js"></script>
+	    <script src="../js/util.js"></script>
+	    <script src="../js/huokuan_deposit.js"></script>
+	    <script type="text/javascript" src="../js/common.js" ></script>
+	    <script src="../js/layer2.0/layer.js"></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				clicked('login.html');
+			}
+		</script>
+		<style>
+			.header .back:before {
+			    content: '\e471';
+			    line-height: 44px;
+			    color: #fff;
+			}
+			.shop-Submit {
+			    margin: 10px 10px;
+			    text-align: center;
+			}
+			.shop-Submit button {
+				margin: 0;
+			    padding: 0;
+			    background: none;
+			    list-style: none;
+			    border: none;
+			    width: 80%;
+			    background-color: #00A4A6;
+			    height: 34px;
+			    color: #FFFFFF;
+			    font-size: 16px;
+			    border-radius: 3px;
+			}
+			.order-nr li p{width:100%};
+		</style>
+	</head>
+
+	<body>
+            <header class="header" style="background-color:#0168B7;position:fixed;">
+                  <a class="back" href="javascript:back();"  style="color:#fff;"></a>
+                  <h1 class="tit" style="color:#fff">货款结算记录</h1>
+            </header>	
+		<div class="content">
+			<!--
+			<div class="profit-top">
+				<div class="profit-pic">
+					<span>
+						<img src="../images/profit/profit.png">
+					</span>
+				</div>
+				<div class="profit-cont" style="    margin-top: 40px;">
+					<p class="pro-current"><span style="margin-left: 0px;">547.00</span></p>
+					<div class="pro-td">
+						<a href="#" class="pro-ifi">已结算总货款</a>
+					</div>
+				</div>
+			</div>
+			-->
+			<div class="refine-details">
+            	<ul id="list"></ul>
+				<p class="shop-Submit"><button id="submit">下一页</button></p>
+            </div>
+
+</body></html>

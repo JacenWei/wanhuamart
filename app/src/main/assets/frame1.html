@@ -1,0 +1,259 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">	
+		<title></title> <meta name="HandheldFriendly" content="true"/>
+		<meta name="MobileOptimized" content="320"/>
+		<link rel="stylesheet" href="../css/public.css">
+		<link rel="stylesheet" href="../css/line.css">
+		<link rel="stylesheet" href="../css/mui.min.css" /> 
+	    <script src="../js/common.js"></script> 
+        <script type="text/javascript">
+            if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+                clicked( 'login.html');
+            }
+            var token=localStorage.getItem('token');
+        </script> 
+        <script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+		<script src="../js/util.js"></script>
+	    <script type="text/javascript" src="../js/common.js" ></script>
+		<script src="../js/layer2.0/layer.js"></script>
+		<script src="../js/jquery.qrcode.js"></script> 
+		<script>
+			function checkstatus(){
+	layer.open({'content':'您的店铺已下线'});
+	return;
+}
+
+			//$("#tyjf").html('0');
+			//$("#whjf").html('0'); 
+			$.fn.Util().ajax({
+		    	url : 'http://www.tanglikeji.com/api.php/Ucenter/get_user_info',
+		    	data : {'cookie':token},    	
+		    }).done(function(data){    	
+		    	
+		    	console.error( JSON.stringify( data ) ); 
+		    	
+		    	if(data.state == 'out'){
+		    		$.fn.Util().alert_msg('请先登录',function(){location.href='login.html';});
+		    	}
+		    	
+		    	if(data.state == 'ok'){
+		    		userInfo = data.data;
+		    		localStorage.removeItem('userInfo');
+		    		localStorage.setItem('userInfo',JSON.stringify(userInfo));
+		    	 	$("#user_mall_point").html(  userInfo.user_mall_point);	
+					$("#user_normal_point").html(  userInfo.user_normal_point);		
+					$("#hkje").html(  userInfo.shop_goods); 
+					
+					if(userInfo.type!="1"){
+						$("#shangjia").show();						
+					}
+					 if(userInfo.status==2){
+        	 $(".checks").attr("onclick","checkstatus()");
+        }
+		    	}    	
+		    });
+		    
+		    
+		    
+		 </script>
+	</head>
+
+	<body>  
+		<header class="mui-bar mui-bar-nav" style="position:fixed;background-color:#046AB2" >	
+			<a class=" mui-icon mui-icon-left-nav mui-pull-left" style="color:#fff"    id="frame0.html" onclick="clicked(this.id)"></a>
+			 <h1 class="mui-title" style="color:#fff">万华商城扫码支付</h1>
+		</header>
+		
+		<div class="content" style="position: fixed; top: 12px; width:100%;">
+			<div class="business-main">
+				
+				<div  onclick="location.href='saoyisao.html';" style="height: 40px; letter-spacing: 2px; width: 84%; margin-left: 8%; background-color: #0168B7; border-radius: 5px; color: #fff; font-size: 18px; line-height: 40px;  text-align: center;"  >
+					扫一扫向商家支付
+				</div>
+				
+				<div style="height: 430px; width: 84%; margin-top: 15px; margin-left: 8%; background-color: #0168B7; border-radius: 5px; color: #fff; font-size: 18px; line-height: 55px; text-align: center;">
+					我的万华商城收款码
+				<br />
+				<div style="width:72%; margin-left: 14%; background-color: #fff; height: 216px; padding: 3px; position: relative;"  id="qrcode">
+				</div>
+				<img src="../images/icon/logo2.png" style="position: absolute; top:50%; left:50%; margin-top: -60px; margin-left:  -25px;" width="50px" height="50px">
+				
+				 
+				 	
+				 	
+				 
+					<div id="shezhije" class="checks" onclick="sk();" style="width: 70%; margin-left: 15%; height: 30px; background:#26a5f2; line-height: 30px; margin-top: 15px;">						
+						设置收款金额
+					</div>
+					
+				 
+					<div onclick="clicked('hkmx.html')" id="shangjia" style="width: 90%; margin-left: 5%; height: 30px; background:#04a5f2;  line-height: 30px; margin-top: 15px; display:none ;">						
+						未结算货款金额为:<span id="hkje" style="font-size:26px;color:#ff0">0.00</span>元  
+					</div>
+					
+					
+					<div onclick="clicked('user_normal_point.html')" style="width: 90%; margin-left: 5%; height: 30px; background:#04a5f2;  line-height: 30px; margin-top: 15px;">						
+						万华积分:<span id="user_mall_point"  >0</span>，通用积分<span id="user_normal_point"  >0</span>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		<div id="skbg" onclick="$('#skbg').hide();$('#skqg').hide();" style=" display:none;position: fixed; top: 0; left: 0; height: 100%; width: 100%;  background-color: #000; opacity: 0.9; z-index: 1348;"></div>
+		<div id="skqg" style=" display:none;position: fixed; bottom: 30%; height: 200px; width:80%; left: 10%; background-color:#fff; border: #f1f1f1 solid 1px; z-index: 1349;">
+			<div style="height: 40px; border-bottom: #e6e6e6 solid 1px;background-color:#efefef; line-height: 40px; font-size: 18px; text-align: center;">
+				设置收款金额
+			</div>
+			<input type="number" id="jine" style="height: 40px; width: 80%; margin-left: 10%; margin-top: 30px; text-align: center;" placeholder="请输入收款金额" />
+			<input type="button" onclick="scewm();" value="确认生成" style=" width: 40%; margin-left: 30%; height: 40px; line-height: 30px; background-color:#0168B7; color: #fff; font-size: 16px;   margin-top: 10px; border:#e2e2e2 solid 1px " />
+		</div>
+		
+		
+		
+		
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item" id="frame0.html" onclick="clicked(this.id)">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item mui-active" id="frame1.html"  onclick="clicked(this.id)">
+				<span class="mui-icon mui-icon-list"></span>
+				<span class="mui-tab-label">扫码</span>
+			</a>
+			<a class="mui-tab-item" id="frame2.html?dengji=1"  onclick="clicked(this.id)">
+				<span class="mui-icon mui-icon-map"></span>
+				<span class="mui-tab-label">附近</span>
+			</a>
+			<a class="mui-tab-item" id="frame3.html"  onclick="clicked(this.id)">
+				<span class="mui-icon mui-icon-upload"><!--<span class="mui-badge"></span>--></span>
+				<span class="mui-tab-label">购物车</span>
+			</a>
+			<a class="mui-tab-item" id="frame4.html"  onclick="clicked(this.id)">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+		
+
+	<script>
+		
+	$(function(){
+	
+	
+			//plus.push.addEventListener('click', function(e) {
+				
+			//	var nnn=plus.webview.create('hkmx.html',"bs" + Date.parse(new Date())  );
+			//	nnn.evalJS('location.reload();');
+            //    nnn.show();
+				
+			//}, false);
+			
+			
+			console.log(localStorage.getItem('userInfo'));
+			
+			var userInfo= JSON.parse( localStorage.getItem('userInfo'));
+			 
+			if(userInfo.type!="2"){
+		    			$("#shezhije").hide();		    			
+		    }
+			 
+			font_size = parseFloat($("html").css('font-size'));
+			_width = 15 * font_size;
+			jQuery("#qrcode").qrcode({"width":_width,"height":_width,"text":"http://www.tanglikeji.com/api.php/saoma/index/t/"+ Date.parse(new Date())  + "/ph/" + userInfo.uname + "/je/" + "0" });
+			 
+	 	});
+		
+		function scewm(){
+			var je=$("#jine").val();
+			if(je<0){
+				alert("金额错误,请重新输入金额");
+				$("#jine").val('');
+				return false;
+			}
+			
+			if(je>3000){
+				alert("金额不能超过三千,请重新输入");
+				$("#jine").val('');
+				return false;
+			}
+			
+			var userInfo= JSON.parse( localStorage.getItem('userInfo'));
+			 jQuery("#qrcode").html('');
+			font_size = parseFloat($("html").css('font-size'));
+			_width = 15 * font_size;
+			jQuery("#qrcode").qrcode({"width":_width,"height":_width,"text":"http://www.tanglikeji.com/api.php/saoma/index/t/"+ Date.parse(new Date())  + "/ph/" + userInfo.uname + "/je/" + je });
+			if(je!=0){
+				$("#shezhije").html("当前收款金额为：<span style='color:#0f0; background-color:#000 ; font-size: 16px;'>" + fmoney(je,2) + "</span>&nbsp;元");			
+			}else{
+				$("#shezhije").html("设置收款金额");
+			}
+			$("#skbg").hide();
+			$("#skqg").hide();
+		}
+		
+		function sk(){			
+			$("#skbg").show();
+			$("#skqg").show();
+			$("#jine").focus();
+		}
+		
+		function fmoney(s, n) { 
+			n = n > 0 && n <= 20 ? n : 2; 
+			s = parseFloat((s + "").replace(/[^\d\.-]/g, "")).toFixed(n) + ""; 
+			var l = s.split(".")[0].split("").reverse(), r = s.split(".")[1]; 
+			t = ""; 
+			for (i = 0; i < l.length; i++) { 
+			t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : ""); 
+			} 
+			return t.split("").reverse().join("") + "." + r; 
+		} 
+		
+		function createLocalPushMsg(je){
+			var options = {
+				cover:false,
+				title:"收到一笔货款 "+je+" 元,请注意查收"
+			};
+			var str = "点击查看店铺货款收入明细记录";
+			//plus.push.createMessage( str, "LocalMSG", options ); 
+		}
+		
+		function gengxin(){
+			$.fn.Util().ajax({
+		    	url : 'http://www.tanglikeji.com/api.php/Ucenter/get_user_info',
+		    	data : {'cookie':token},    	
+		    }).done(function(data){    	
+		    	
+		    	if(data.state == 'out'){
+		    		$.fn.Util().alert_msg('请先登录',function(){location.href='login.html';});
+		    	}
+		    	
+		    	if(data.state == 'ok'){
+		    		userInfo = data.data;
+		    		
+		    		console.err( JSON.stringify( userInfo ));
+		    			 
+		    		
+		    		localStorage.removeItem('userInfo');
+		    		localStorage.setItem('userInfo',JSON.stringify(userInfo));
+		    		 
+					  
+		    	 	var je2=parseFloat(userInfo.shop_goods)-parseFloat($("#hkje").html());
+					$("#hkje").html(  userInfo.shop_goods);					
+					if(je2>0){
+						createLocalPushMsg( fmoney(je2,2) );						
+					} 
+		    	}    	
+		    });			
+		}
+
+		//setInterval( function(){gengxin();},10800);
+		  
+	</script>
+	
+	</body>
+</html>

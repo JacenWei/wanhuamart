@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css">
+		<link rel="stylesheet" href="../css/line.css">		
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+		<script src="../js/util.js"></script>
+		<script src="../js/zuodan_list.js"></script>
+	    <script src="../js/common.js"></script>
+		<script src="../js/layer2.0/layer.js"></script>
+        <script type="text/javascript">
+            if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+                clicked( 'login.html');
+            }
+        </script>
+	</head>
+
+	<body>
+		<header class="header"  >
+			<a href="javascript:back();" class="back"></a>
+			<h1 class="tit">做单记录</h1>
+		</header>
+		
+		<div class="content">
+			<div class="refine-details">
+                <ul class="list"></ul>
+                <div style="text-align: center;">
+                	<button class="page_btn" id="page_pre">上一页</button>
+                	<button class="page_btn" id="page_next">下一页</button>	
+                </div>
+                
+            </div>
+        </div>
+	</body>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css" /> <!--公用css-->
+		<link rel="stylesheet" href="../css/business.css" />
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+	    <script src="../js/util.js"></script>
+	    <script src="../js/layer2.0/layer.js"></script>
+	    <script type="text/javascript" src="../js/common.js" ></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				clicked('login.html');
+			}
+		</script> 
+	</head>
+	<body>
+		<header class="header" >
+			<a class="back" id="frame4.html" onclick="clicked(this.id)"></a>
+			<h1 class="tit">结算</h1>
+			<a class="edit" href="javascript:;" style="width:inherit;height:initial;top:10px;right:10px;">
+				<div style="border:1px #ffffff solid;border-radius: 5px;padding:5px;margin-top: 2px;">结算记录</div>
+			</a>
+		</header>
+		<div class="content">
+			<div class="business-main">
+				<form>
+					<ul>
+						<li>
+							<div class="classifi">
+								<select id="type">
+									<option value="0">选择结算种类</option>
+									<option value="1">保证金结算</option>
+									<option value="2">货款结算</option>
+								</select>
+								<span class="point-cion"></span>
+							</div>
+						</li>
+						<li>
+							<p>保证金总额 <span id="used1">0</span>
+							货款总额 <span id="used2">0</span></p>
+						<span id="used" style="display:none">0</span>
+						</li>
+						<li>
+							<em></em>
+							<input placeholder="请输入结算金额[最低结算100,最高5万]" type="number" id="money" style="width:90%;" onfocus="$('#tixing').hide();" onfocusout="panduan();">
+						</li>
+						
+						 <li id="tixing" style="display: none;">
+							<p style="text-align: center; font-size: 14px; color: #f00;">结算金额必须是100的正整数倍,并且不得超过五万 </p>
+						</li>
+						
+						<li>
+							<div class="classifi">
+								<select id="bank_list">									
+									<option>招商银行 &nbsp; 167654787 </option>
+								</select>
+								<span class="point-cion"></span>
+							</div>
+						</li>
+						<li>
+							<em></em>
+							<input placeholder="请输入支付密码" type="password" id="password" style="width:90%;">
+						</li>
+					</ul>
+					<p class="determine"><a href="#" id="determine">确定</a></p>
+				</form>
+			</div>
+		</div>
+		
+		<!--发积分弹窗-->
+		<div class="Popup" id="dete-Popup" style="display:none;">
+			<div class="Popup-box">
+				<div class="inf-box">
+					<div class="inf-dete">
+						<p class="inf-name">商家 <span id="shop_name">金果牧场商城</span></p>
+						<p class="inf-name">电话 <span id="shop_tel">13603777341</span></p>
+						<p class="inf-money">结算金额 <span id="js_money"></span></p>
+						<p class="inf-number">结算类型 <span id="js_type">保证金结算</span></p>
+					</div>
+					<p class="remind">是否确认结算？</p>
+					<p class="inf-inf">
+						<button class="inf-no" id="no">否</button>
+						<button class="inf-yes" id="chongzhi_yes">是</button>
+					</p>
+				</div>
+			</div>
+			<div class="Popup-bg"></div>
+		</div>
+		
+		
+		
+		<script>
+			
+			function panduan(){
+				
+				var money = $("#money").val();
+				
+				if(isNaN(money)){
+					$('#tixing').show();
+					return false;
+				}
+				
+				if( money<=0){
+					$('#tixing').show();
+					return false;
+				}
+				
+				if( money>50000){
+					$('#tixing').show();
+					return false;
+				}
+				
+				
+				if( parseInt(money/100) != money/100    ){
+					$('#tixing').show();
+					return false;
+				}
+				
+				
+				
+			}
+			
+			
+			var shopInfo = '';
+var tokens=localStorage.getItem ("token");
+var userinfo = JSON.parse(localStorage.getItem('userInfo'));
+var shopinfo = JSON.parse(localStorage.getItem('shopInfo'));
+var now_money = 0;
+var js_type = '';
+function doSubmit(){
+	uname = $("#uname").val();
+	shopid = shopInfo['id'];
+	money = $("#money").val();
+	point = $("#point").val();
+	goods_name = $("#goods_name").val();
+	password = $("#password").val();
+	userday = $("#userday").val();
+	password = $("#password").val();
+	$.fn.Util().ajax({
+		url : 'http://www.tanglikeji.com/api.php/Ucenter/doshop',
+		data :{'cookie':tokens,type:1,'uname':uname,shop_id:shopid,goods_name:goods_name,goods_num:1,amount:money,point:point,userday:userday,paypassword:password},
+		beforeFn:function(){
+			layer.open({
+				type: 2,
+				content: '加载中',
+				shadeClose:false
+			});
+		}
+	}).done(function(data){
+		layer.closeAll();
+		if(data.state == 'ok'){	
+			layer.open({
+				'content':data.msg,
+				time : 2,
+				end : function(){
+					location.reload();
+				}
+			})
+		}else{
+			layer.open({
+				'content':data.msg,
+				time : 2,
+			})
+		}
+	}).fail(function(err){
+		layer.open({'content':err.msg});
+	})
+}
+$(function(){	
+	var cateId;
+	$("#used1").html(userinfo['shop_promise']);
+	$("#used2").html(userinfo['shop_goods']);
+	$("#type").on('change',function(){
+		if($(this).val() == 1){
+			$("#used").html(userinfo['shop_promise']);
+			now_money = parseFloat(userinfo['shop_promise']);
+			js_type = '保证金结算';
+		}else if($(this).val() == 2){
+			$("#used").html(userinfo['shop_goods']);
+			now_money = parseFloat(userinfo['shop_goods']);
+			js_type = '货款结算';
+		}else{
+			$("#used").html(0);
+			now_money = 0;
+		}
+	});
+	$(".con-input").click(function(){
+		//location.href = "history-seach.html";
+	});
+	$(".edit").on('click',function(){
+		location.href='jiesuan_list.html';
+	});
+	if(localStorage.getItem('shopInfo')){
+		shopInfo = JSON.parse(localStorage.getItem('shopInfo'));
+		$("#shop_name").html(shopInfo['title']);
+	}else{
+		
+	}
+	$("#uname").on('blur',function(){
+		phone = $(this).val();
+		$.fn.Util().ajax({
+			url : 'http://www.tanglikeji.com/api/index.php?n=user&f=getUserName',
+			data : {'cookie':tokens,'phone':phone},
+		}).done(function(res){
+			if(res.state == 'ok'){
+				$("#real_name").html(res.data.lzhengName + '|' + phone);
+			}
+		})
+	});	
+	getList();
+	function getList(){		
+		$.fn.Util().ajax({
+			url : 'http://www.tanglikeji.com/api/?n=card&f=mybanklist0',
+			data :{'phone':userinfo['uname'],'psm':userinfo['upwd']},
+			beforeFn:function(){
+				layer.open({
+					type: 2,
+					content: '加载中',
+					shadeClose:false
+				});
+			},
+			afterFn : function(){
+				layer.closeAll();
+			}
+		}).done(function(data){			
+			if(data.state == 'ok'){				
+				$("#bank_list").html('<option value="">选择银行卡</option>');
+				for(var i in data.data){					
+					html = '<option value="'+data.data[i].id+'">'+data.data[i].bank_name+'&nbsp;&nbsp;'+data.data[i].bank_num+'</optioin>';
+					$("#bank_list").append(html);
+				}				
+			}
+		}).fail(function(err){
+			layer.open({'content':err.msg});
+		})
+	}
+	
+	function checkOrder(){
+		type = $("#type").val();
+		money = $("#money").val();
+		bank_list = $("#bank_list").val();
+		password = $("#password").val();
+		if(type == 0){			
+			layer.open({
+				'content':'请选择结算类型',
+				time : 2
+			})
+			return;
+		}
+		console.log(money);
+		if(money == '' || money <= 0){
+			layer.open({
+				'content':'结算金额不正确',
+				time : 2
+			})
+			return;
+		}
+		if(parseFloat(money) > now_money){			
+			layer.open({
+				'content':'您的可结算金额不足',
+				time : 2
+			})
+			return;
+		}
+		if(bank_list == ''){			
+			layer.open({
+				'content':'请选择结算银行卡',
+				time : 2
+			})
+			return;
+		}
+		if(password == ''){			
+			layer.open({
+				'content':'请输入支付密码',
+				time : 2
+			})
+			return;
+		}
+		$("#shop_name").html(shopinfo['title']);
+		$("#shop_tel").html(shopinfo['tel']);
+		$("#js_money").html(money);
+		$("#js_type").html(js_type);
+		
+	}
+	
+	$("#dete-Popup").hide();
+	$("#determine").click(function(){
+		type = $("#type").val();
+		money = $("#money").val();
+		bank_list = $("#bank_list").val();
+		password = $("#password").val();
+		if(type == 0){			
+			layer.open({
+				'content':'请选择结算类型',
+				time : 2
+			})
+			return;
+		}
+		if(money == '' || money <= 0){
+			layer.open({
+				'content':'结算金额不正确',
+				time : 2
+			})
+			return;
+		}
+		if(parseFloat(money) > now_money){			
+			layer.open({
+				'content':'您的可结算金额不足',
+				time : 2
+			})
+			return;
+		}
+		if(bank_list == ''){			
+			layer.open({
+				'content':'请选择结算银行卡',
+				time : 2
+			})
+			return;
+		}
+		if(password == ''){			
+			layer.open({
+				'content':'请输入支付密码',
+				time : 2
+			})
+			return;
+		}
+		$("#shop_name").html(shopinfo['title']);
+		$("#shop_tel").html(shopinfo['tel']);
+		$("#js_money").html(money);
+		$("#js_type").html(js_type);
+		$("#dete-Popup").show();
+	});
+	$("#no").click(function(){
+		$("#dete-Popup").hide();
+	});
+	$("#chongzhi_yes").click(function(){
+		type = $("#type").val();
+		money = $("#money").val();
+		bank_list = $("#bank_list").val();
+		password = $("#password").val();
+		$.fn.Util().ajax({
+			url : 'http://www.tanglikeji.com/api.php/Ucenter/domoney',
+			data :{'shop_id':shopinfo['id'],'money':money,'type':type,'paypassword':password},
+			beforeFn:function(){
+				layer.open({
+					type: 2,
+					content: '加载中',
+					shadeClose:false
+				});
+			} 
+		}).done(function(data){
+			
+			console.error(JSON.stringify( data  ));
+			
+			
+			if(data.state == 'ok'){
+				
+				
+				layer.open({
+						'content':'申请成功，请等待审核',
+						time : 2,
+						end : function(){
+							location.reload();
+						}
+				});
+				
+				
+			}else{
+			
+			
+					layer.open({
+						'content':data.msg,
+						time : 2,
+						end:function(){
+							layer.closeAll();
+							
+						}
+					});
+				
+			
+			}
+		}).fail(function(err){
+			
+			
+					layer.open({
+						'content':err.msg,
+						time : 2
+					});
+					
+					
+					
+		})
+	})
+});
+			
+			
+			
+			
+		</script>
+	</body>	
+</html>

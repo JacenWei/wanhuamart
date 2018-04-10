@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
+		<title></title>
+		<link rel="stylesheet" href="../css/profit.css" />
+		<link rel="stylesheet" href="../css/public.css" />
+	    <script src="../js/common.js"></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				clicked( 'login.html');
+			}
+		</script>
+		<style>
+			.header .back:before {
+			    content: '\e471';
+			    line-height: 44px;
+			    color: #0168B7;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="header" style="background-color:#fff;position:inherit;">
+			<a class="back" href="javascript:back();" style="color:#777;"></a>
+			<h1 class="tit" style="color:#000">商家让利</h1>
+		</header>
+		<div class="content">
+			<div class="profit-top">
+				<div class="profit-pic">
+					<span>
+						<img src="../images/profit/profit.png">
+					</span>
+				</div>
+				<div class="profit-cont">
+					<p class="pro-current"><span>3547.00</span></p>
+					<div class="pro-td">
+						<a href="#" class="pro-ifi">
+								总让利额
+							<!--<span>254321.00</span>-->
+						</a>
+                                    <!--
+						<a href="#" class="pro-cum">
+							累计收益
+							<span>20216</span>
+						</a>
+                                    -->
+					</div>
+				</div>
+			</div>
+			<!--
+            	时间：2016-06-16
+            	描述：收益top
+            -->
+              <div class="profit-details">
+              	<ul>
+              		<li>
+              			<a href="shop_send_out.html">
+              				<p>457.00</p>
+              				<span>送出让利总额</span>
+              			</a>
+              		</li>
+              		<li>
+              			<a href="shop_send_in.html">
+              				<p>1457.00</p>
+              				<span>充值总额</span>
+              			</a>
+              		</li>
+              	</ul>
+              </div>                  
+		</div>
+	</body>
+</html>

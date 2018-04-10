@@ -1,0 +1,383 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1.0" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>万华专营</title>
+		<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+		<link rel="stylesheet" type="text/css" href="../css/new_css.css">
+		<script type="text/javascript" src="../js/Adaptive.js"></script>
+		<link href="../css/global.css" type="text/css" rel="stylesheet">
+		<link href="../css/main.css" type="text/css" rel="stylesheet">
+		<link href="../css/public.css" type="text/css" rel="stylesheet">
+		<link rel="stylesheet" href="../css/business.css">
+		<link rel="stylesheet" href="../css/myindex.css">
+		<link rel="stylesheet" href="../css/ectouch.css" />
+		<link rel="stylesheet" href="../css/search.css">
+		<link rel="stylesheet" href="../css/swiper-3.4.1.min.css">
+		<link href="../css/mui.poppicker.css" type="text/css" rel="stylesheet">
+		<link href="../css/mui.picker.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+		<script src="../js/util.js"></script>
+		<script src="../js/new_whzy.js?dnes2s2w2s=3ssss2dss"></script>
+		<script src="../js/layer2.0/layer.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/mui.picker.js"></script>
+		<script src="../js/mui.poppicker.js"></script>
+		<script type="text/javascript" src="../js/ectouch.js"></script>
+		<script src="../js/city.data-3.js"></script>
+		<script type="text/javascript" src="../js/swiper-3.4.1.jquery.min.js" charset="utf-8"></script>
+		<style>
+			.header .back:before {
+				content: '\e471';
+				line-height: 44px;
+				color: #0168B7;
+			}
+			
+			.product header h1 {
+				font-size: 0.75rem;
+			}
+			
+			.shopList li h2,
+			p {
+				padding: 0;
+			}
+		</style>
+		<style>
+			.mui-bar {
+				position: fixed;
+				z-index: 10;
+				right: 0;
+				left: 0;
+				height: 44px;
+				padding-right: 10px;
+				padding-left: 10px;
+				border-bottom: 0;
+				background-color: #f7f7f7;
+				-webkit-box-shadow: 0 0 1px rgba(0, 0, 0, .85);
+				box-shadow: 0 0 1px rgba(0, 0, 0, .85);
+				-webkit-backface-visibility: hidden;
+				backface-visibility: hidden;
+			}
+			
+			.mui-bar-tab {
+				bottom: 0;
+				display: table;
+				width: 100%;
+				height: 50px;
+				padding: 0;
+				table-layout: fixed;
+				border-top: 0;
+				border-bottom: 0;
+				-webkit-touch-callout: none;
+			}
+			
+			.mui-bar-tab .mui-tab-item {
+				display: table-cell;
+				overflow: hidden;
+				width: 1%;
+				height: 50px;
+				text-align: center;
+				vertical-align: middle;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				color: #929292;
+			}
+			
+			.mui-bar-tab .mui-tab-item.mui-active {
+				color: #007aff;
+			}
+			
+			.mui-bar-tab .mui-tab-item .mui-icon {
+				top: 3px;
+				width: 24px;
+				height: 24px;
+				padding-top: 0;
+				padding-bottom: 0;
+			}
+			
+			.mui-bar .mui-icon {
+				font-size: 24px;
+				position: relative;
+				z-index: 20;
+				padding-top: 10px;
+				padding-bottom: 10px;
+			}
+			
+			.mui-icon {
+				font-family: Muiicons;
+				font-size: 24px;
+				font-weight: 400;
+				font-style: normal;
+				line-height: 1;
+				display: inline-block;
+				text-decoration: none;
+				-webkit-font-smoothing: antialiased;
+			}
+			
+			.mui-icon-home:before {
+				content: '\e500';
+			}
+			
+			.mui-icon-email:before {
+				content: '\e201';
+			}
+			
+			.mui-icon-contact:before {
+				content: '\e100';
+			}
+			
+			.mui-icon-person:before {
+				content: '\e101';
+			}
+			
+			.mui-icon-map:before {
+				content: '\e364';
+			}
+			
+			.mui-icon-upload:before {
+				content: '\e402';
+			}
+			
+			.mui-icon-list:before {
+				content: '\e301';
+			}
+			
+			.mui-bar-tab .mui-tab-item .mui-icon~.mui-tab-label {
+				font-size: 11px;
+				display: block;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			
+			.mui-icon .mui-badge {
+				font-size: 10px;
+				line-height: 1.4;
+				position: absolute;
+				top: -2px;
+				left: 100%;
+				margin-left: -10px;
+				padding: 1px 5px;
+				color: #fff;
+				background: red;
+			}
+			
+			.mui-badge {
+				font-size: 12px;
+				line-height: 1;
+				display: inline-block;
+				padding: 3px 6px;
+				color: #333;
+				border-radius: 100px;
+				background-color: rgba(0, 0, 0, .15);
+			}
+			
+			.wh-search {
+				top: 55px;
+				width: 100%;
+				background-color: #0062CC;
+				z-index: 88;
+				padding: 5px;
+				
+			position: fixed;
+			}
+			
+			.wh-search-input {
+				
+				height:30px;
+				left: 80px;
+				width: 70%;	
+				background-color: #ffffff;
+				text-align: center;
+				font-size: 16px;
+				cursor: pointer;
+				color: #000000;
+				border-radius:10px ;
+			}
+			
+			.wh-cate {
+				
+				height: 30px;
+				width: 80px;
+				background-color: #0062CC;
+				float: left;
+				color: white;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="header" style="background-color:#fff;">
+			<a class="back" id="frame0.html" onclick="clicked(this.id)" style=""></a>
+			<h1 class="tit" style="color:#000">万华专营</h1>
+		</header>
+		<div class="wh-search">
+			<div class="wh-cate">
+				<img src="../image/m10.png" onclick="clicked('category2.html')" height="30px" style="margin-left: 15px;">
+			</div>
+			<input class="wh-search-input" readonly="readonly" value="搜索商品" onclick="clicked('search.html')" />
+		</div>
+
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item mui-active page_index" id="frame0.html" href="javascript:;" onclick="clicked(this.id)">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item page_index" href="javascript:void(0);" id="frame1.html" onclick="clicked(this.id)">
+				<span class="mui-icon mui-icon-list"></span>
+				<span class="mui-tab-label">扫码</span>
+			</a>
+			<a class="mui-tab-item page_index" id="frame2.html?dengji=1" href="javascript:;" onclick="clicked(this.id)">
+				<span class="mui-icon mui-icon-map"></span>
+				<span class="mui-tab-label">附近</span>
+			</a>
+			<a class="mui-tab-item page_index" id="frame3.html" href="javascript:;" onclick="clicked(this.id)">
+				<span class="mui-icon mui-icon-upload"><!--<span class="mui-badge"></span>--></span>
+				<span class="mui-tab-label">购物车</span>
+			</a>
+			<a class="mui-tab-item page_index" id="frame4.html" href="javascript:;" onclick="clicked(this.id)">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+		<div style="clear: both;"></div>
+		<div class="top" style="margin-top: 1.55rem;">
+			<div class="top-pic" style="margin-top: 50px;">
+				<div class="swiper-container" id="banner_box" style=" height:183px; width: 50%; float:left; margin: 0; ">
+					<div class="swiper-wrapper" id="bannerList" style=" height:183px;  ">
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+				<div style=" height:180px;  width: 25%; float:left ">
+					<div class="swiper-container" id="banner_box1">
+						<div class="swiper-wrapper" id="bannerList1" style="width: 100%;  float: left; height: 90px; background: #FFFFFF;">
+						</div>
+						<div class="swiper-pagination"></div>
+					</div>
+					<div class="swiper-container" id="banner_box2">
+						<div class="swiper-wrapper" id="bannerList2" style="width: 100%;  float: left; height: 90px; background: #FFFFFF;">
+						</div>
+						<div class="swiper-pagination"></div>
+					</div>
+
+				</div>
+
+				<div style=" height:180px;  width: 25%; float:left ">
+					<div class="swiper-container" id="banner_box3">
+						<div class="swiper-wrapper" id="bannerList3" style="width: 100%;  float: left; height: 90px; background: #FFFFFF;">
+						</div>
+						<div class="swiper-pagination"></div>
+					</div>
+
+					<div class="swiper-container" id="banner_box4">
+						<div class="swiper-wrapper" id="bannerList4" style="width: 100%;  float: left; height: 90px; background: #FFFFFF;">
+						</div>
+						<div class="swiper-pagination"></div>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+		<div class="menu">
+			<ul>
+				<li onclick="tejia(1)">
+					<div class="img-wrapper color-a"><img src="../image/m6.png"></div>
+					<p style="text-align: center;"> 天天特价</p>
+				</li>
+				<li onclick="tejia(3)">
+					<div class="img-wrapper color-b"><img src="../image/m7.png"></div>
+					<p> 新品推荐</p>
+				</li>
+				<li onclick="tejia(2)">
+					<div class="img-wrapper color-c"><img src="../image/m8.png"></div>
+					<p> 人气产品</p>
+				</li>
+				<li onclick="clicked('new_whzy_jf.html')">
+					<div class="img-wrapper color-c"><img src="../image/m9.png"></div>
+					<p> 全积分</p>
+				</li>
+				<li onclick="clicked('category2.html')">
+					<div class="img-wrapper color-d"><img src="../image/m10.png"></div>
+					<p> 分类</p>
+				</li>
+				<!--<li onclick="viewfl(137)"><div class="img-wrapper color-e"><img src="../image/m5.png"></div> <p> 美妆/洗护</p></li>
+			<li onclick="viewfl(407)"><div class="img-wrapper color-f"><img src="../image/m6.png"></div> <p> 百货</p></li>
+			<li onclick="viewfl(419)"><div class="img-wrapper color-g"><img src="../image/m7.png"></div> <p> 美食</p></li>
+			<li onclick="viewfl(428)"><div class="img-wrapper color-h"><img src="../image/m8.png"></div> <p> 生活服务</p></li>
+			<li onclick="viewfl(173)"><div class="img-wrapper color-i"><img src="../image/m9.png"></div> <p> 家具/建材/家饰</p></li>
+			<li onclick="viewfl(438)"><div class="img-wrapper color-j"><img src="../image/m10.png"></div> <p> 中外名酒</p></li>-->
+			</ul>
+		</div>
+		<script>
+			function viewfl(id) {
+				localStorage.setItem("whfl", id);
+				clicked("new_whzy_fl.html");
+			}
+
+			function tejia(id) {
+				localStorage.setItem("tjzq", id);
+				if(id == 1) {
+					localStorage.setItem("tjzqname", "万华专营 - 天天特价专区");
+				}
+				if(id == 2) {
+					localStorage.setItem("tjzqname", "万华专营 - 人气热销专区");
+				}
+				if(id == 3) {
+					localStorage.setItem("tjzqname", "万华专营 - 新品上市专区");
+				}
+				clicked("new_whzy_new.html");
+			}
+		</script>
+
+		<div class="channe">
+			<dl>
+				<dt onclick="tejia(1);"><img src="../image/k1.jpg"></dt>
+				<dd onclick="tejia(2);" class="under"><img src="../image/k2-1.jpg"></dd>
+				<dd onclick="tejia(3);"><img src="../image/k3.jpg"></dd>
+			</dl>
+		</div>
+		<div class="product">
+			<header>
+				<h1>特价专区</h1>
+				<hr>
+			</header>
+			<ul id="cp1">
+			</ul>
+		</div>
+		<div class="publicize"><img src="../image/b.jpg"></div>
+		<div class="product">
+			<header>
+				<h1>热销推荐</h1>
+				<hr>
+			</header>
+			<ul id="cp2">
+			</ul>
+		</div>
+		<div class="publicize"><img src="../image/b2.jpg"></div>
+		<div class="product" id="last-wrapper">
+			<header>
+				<h1>新品推荐</h1>
+				<hr>
+			</header>
+			<ul id="cp3">
+			</ul>
+		</div>
+
+		<div class="product" id="last-wrapper">
+			<header>
+				<h1>猜你喜欢</h1>
+				<hr>
+			</header>
+			<ul id="cp4">
+			</ul>
+		</div>
+	</body>
+
+</html>

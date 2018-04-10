@@ -1,0 +1,252 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css">
+		<link rel="stylesheet" href="../css/line.css">
+		<link rel="stylesheet" href="../css/profit.css" />
+		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+	    <script src="../js/common.js"></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				clicked('login.html');
+			}
+		</script>
+		<style>
+			.header .back:before {
+			    content: '\e471';
+			    line-height: 44px;
+			    color: #0168B7;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="header" style="background-color:#fff;">
+			<a href="javascript:back();" class="back" style="color:#777;"></a>
+			<h1 class="tit" style="color:#000">积分兑换额</h1>
+		</header>
+		<style>
+.mui-bar {
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    left: 0;
+    height: 44px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-bottom: 0;
+    background-color: #f7f7f7;
+    -webkit-box-shadow: 0 0 1px rgba(0,0,0,.85);
+    box-shadow: 0 0 1px rgba(0,0,0,.85);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.mui-bar-tab {
+    bottom: 0;
+    display: table;
+    width: 100%;
+    height: 50px;
+    padding: 0;
+    table-layout: fixed;
+    border-top: 0;
+    border-bottom: 0;
+    -webkit-touch-callout: none;
+}
+.mui-bar-tab .mui-tab-item {
+    display: table-cell;
+    overflow: hidden;
+    width: 1%;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #929292;
+}
+.mui-bar-tab .mui-tab-item.mui-active {
+    color: #007aff;
+}
+.mui-bar-tab .mui-tab-item .mui-icon {
+    top: 3px;
+    width: 24px;
+    height: 24px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.mui-bar .mui-icon {
+    font-size: 24px;
+    position: relative;
+    z-index: 20;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.mui-icon {
+    font-family: Muiicons;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1;
+    display: inline-block;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+}
+.mui-icon-home:before {
+    content: '\e500';
+}
+.mui-icon-email:before {
+    content: '\e201';
+}
+.mui-icon-contact:before {
+    content: '\e100';
+}
+.mui-icon-person:before {
+    content: '\e101';
+}
+.mui-icon-map:before {
+    content: '\e364';
+}
+.mui-icon-upload:before {
+    content: '\e402';
+}
+.mui-icon-list:before {
+    content: '\e301';
+}
+.mui-bar-tab .mui-tab-item .mui-icon~.mui-tab-label {
+    font-size: 11px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.mui-icon .mui-badge {
+    font-size: 10px;
+    line-height: 1.4;
+    position: absolute;
+    top: -2px;
+    left: 100%;
+    margin-left: -10px;
+    padding: 1px 5px;
+    color: #fff;
+    background: red;
+}
+.mui-badge {
+    font-size: 12px;
+    line-height: 1;
+    display: inline-block;
+    padding: 3px 6px;
+    color: #333;
+    border-radius: 100px;
+    background-color: rgba(0,0,0,.15);
+}
+</style>
+<nav class="mui-bar mui-bar-tab">
+	<a class="mui-tab-item mui-active" href="html/frame0.html">
+		<span class="mui-icon mui-icon-home"></span>
+		<span class="mui-tab-label">首页</span>
+	</a>
+	<a class="mui-tab-item" href="html/frame1.html">
+		<span class="mui-icon mui-icon-list"></span>
+		<span class="mui-tab-label">扫码</span>
+	</a>
+	<a class="mui-tab-item" href="html/frame2.html">
+		<span class="mui-icon mui-icon-map"></span>
+		<span class="mui-tab-label">附近</span>
+	</a>
+	<a class="mui-tab-item" href="html/frame3.html">
+		<span class="mui-icon mui-icon-upload"><!--<span class="mui-badge"></span>--></span>
+		<span class="mui-tab-label">购物车</span>
+	</a>
+	<a class="mui-tab-item" href="html/frame4.html">
+		<span class="mui-icon mui-icon-person"></span>
+		<span class="mui-tab-label">我的</span>
+	</a>
+</nav>
+		<div class="content">
+			<div class="profit-top">
+				<div class="profit-pic">
+					<span>
+						<img src="../images/profit/profit.png">
+					</span>
+				</div>
+				<div class="profit-cont" style="    margin-top: 40px;">
+					<p class="pro-current"><span style="margin-left: 0px;">547.00</span></p>
+					<div class="pro-td">
+						<a href="#" class="pro-ifi">积分兑换总额</a>
+					</div>
+				</div>
+			</div>
+			<div class="line">
+				<ul>
+					<li class="line-list">
+						<div class="line-tit">
+							<p class="order-number">订单号:<span>08797337057941</span></p>
+							<!--
+							<p class="state">
+								<span>已付款</span>
+								<img src="http://www.sugemall.com/themes/wapmall/default/styles/default/images/line/fukuan.png">
+							</p>
+							-->
+							
+						</div>
+						<div class="order-nr">
+							<ul>								
+								<li>
+									<p><img src="../images/icon/icon-i10.png"><span>消费类别：</span><span>积分兑换</span></p>
+								</li>
+								<li>
+									<p><img src="../images/icon/icon-i5.png"><span>购买商品：</span><span>广告设计</span></p>
+								</li>								
+								<li>
+									<p><img src="../images/icon/icon-i22.png"><span>消费金额：</span><span style="color:#FF413F;">3600.00</span></p>
+								</li>
+								<li>
+									<p><img src="../images/icon/icon-i18.png"><span>让利金额：</span><span>36000</span></p>
+								</li>
+							</ul>
+							<div class="time" style="padding: 10px 0;">
+								<p><img src="../images/icon/icon-i1.png" width="16" style="margin-right:5px;"><span>下单时间：</span><span>2016-07-25 17:12</span></p>
+								<!--<a href="index.php?app=offline_order&amp;act=order_detail&amp;id=3178">查看详情</a>-->
+							</div>
+						</div>
+					</li>
+
+				
+					<li class="line-list">
+						<div class="line-tit">
+							<p class="order-number">订单号:<span>08797337057941</span></p>
+							<!--
+							<p class="state">
+								<span>已付款</span>
+								<img src="http://www.sugemall.com/themes/wapmall/default/styles/default/images/line/fukuan.png">
+							</p>
+							-->
+							
+						</div>
+						<div class="order-nr">
+							<ul>								
+								<li>
+									<p><img src="../images/icon/icon-i10.png"><span>消费类别：</span><span>积分兑换</span></p>
+								</li>
+								<li>
+									<p><img src="../images/icon/icon-i5.png"><span>购买商品：</span><span>广告设计</span></p>
+								</li>								
+								<li>
+									<p><img src="../images/icon/icon-i22.png"><span>消费金额：</span><span style="color:#FF413F;">3600.00</span></p>
+								</li>
+								<li>
+									<p><img src="../images/icon/icon-i18.png"><span>让利金额：</span><span>36000</span></p>
+								</li>
+							</ul>
+							<div class="time" style="padding: 10px 0;">
+								<p><img src="../images/icon/icon-i1.png" width="16" style="margin-right:5px;"><span>下单时间：</span><span>2016-07-25 17:12</span></p>
+								<!--<a href="index.php?app=offline_order&amp;act=order_detail&amp;id=3178">查看详情</a>-->
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+</body></html>

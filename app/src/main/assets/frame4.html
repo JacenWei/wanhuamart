@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/global.css"/>
+    <link rel="stylesheet" href="../css/Personal-Center.css" />
+    <link rel="stylesheet" href="../css/public.css" />
+    <script src="../js/mui.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+	<script src="../js/config.js"></script>
+	<script src="../js/util.js"></script>
+	<script src="../js/common.js"></script>
+	<script src="../js/usercenter.js?2=21222"></script>
+	<script src="../js/layer2.0/layer.js"></script>
+    <script type="text/javascript">
+    	
+    	 
+    	
+		if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+			clicked('login.html');
+		}
+		
+		 
+   		document.addEventListener('plusready', function(){
+   			//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
+   		});
+   		
+   		document.addEventListener('plusready', function(){
+			mui('body').on('tap', '.mui-tab-item', function(e) {
+		        var href = this.getAttribute('id');
+		        clicked(href);
+		   });
+		}, false );
+   		
+    </script>
+</head>
+<body style="margin:0; background-color: #f1f2f6;">
+	<header class="header" >
+			<a class="back" href="javascript:;" onClick="clicked('frame0.html');"></a>
+			<h1 class="tit">个人中心</h1>
+			<a class="edit" href="javascript:;" id="account-management.html" onclick="clicked(this.id)" style="width:inherit;height:initial;top:10px;right:10px;">
+			
+				<div style="border:1px #ffffff solid;border-radius: 5px;padding:5px;margin-top: 2px;">设置</div>
+			</a>
+		</header>
+	
+		
+	
+	
+	<style>
+.mui-bar {
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    left: 0;
+    height: 44px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-bottom: 0;
+    background-color: #f7f7f7;
+    -webkit-box-shadow: 0 0 1px rgba(0,0,0,.85);
+    box-shadow: 0 0 1px rgba(0,0,0,.85);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.mui-bar-tab {
+    bottom: 0;
+    display: table;
+    width: 100%;
+    height: 50px;
+    padding: 0;
+    table-layout: fixed;
+    border-top: 0;
+    border-bottom: 0;
+    -webkit-touch-callout: none;
+}
+.mui-bar-tab .mui-tab-item {
+    display: table-cell;
+    overflow: hidden;
+    width: 1%;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #929292;
+}
+.mui-bar-tab .mui-tab-item.mui-active {
+    color: #007aff;
+}
+.mui-bar-tab .mui-tab-item .mui-icon {
+    top: 3px;
+    width: 24px;
+    height: 24px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.mui-bar .mui-icon {
+    font-size: 24px;
+    position: relative;
+    z-index: 20;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.mui-icon {
+    font-family: Muiicons;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1;
+    display: inline-block;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+}
+.mui-icon-home:before {
+    content: '\e500';
+}
+.mui-icon-email:before {
+    content: '\e201';
+}
+.mui-icon-contact:before {
+    content: '\e100';
+}
+.mui-icon-person:before {
+    content: '\e101';
+}
+.mui-icon-map:before {
+    content: '\e364';
+}
+.mui-icon-upload:before {
+    content: '\e402';
+}
+.mui-icon-list:before {
+    content: '\e301';
+}
+.mui-bar-tab .mui-tab-item .mui-icon~.mui-tab-label {
+    font-size: 11px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.mui-icon .mui-badge {
+    font-size: 10px;
+    line-height: 1.4;
+    position: absolute;
+    top: -2px;
+    left: 100%;
+    margin-left: -10px;
+    padding: 1px 5px;
+    color: #fff;
+    background: red;
+}
+.mui-badge {
+    font-size: 12px;
+    line-height: 1;
+    display: inline-block;
+    padding: 3px 6px;
+    color: #333;
+    border-radius: 100px;
+    background-color: rgba(0,0,0,.15);
+}
+.top_div{
+	border-right: 1px solid #e2e2e2;
+    margin-left: -1px;	
+}
+</style>
+
+
+<nav class="mui-bar mui-bar-tab">
+	<a class="mui-tab-item page_index" id="frame0.html"  onclick="clicked(this.id)">
+		<span class="mui-icon mui-icon-home"></span>
+		<span class="mui-tab-label">首页</span>
+	</a>
+	<a class="mui-tab-item page_index"   onclick="clicked(this.id)" id="frame1.html">
+		<span class="mui-icon mui-icon-list"></span>
+		<span class="mui-tab-label">扫码</span>
+	</a>
+	<a class="mui-tab-item page_index" id="frame2.html?dengji=1"   onclick="clicked(this.id)">
+		<span class="mui-icon mui-icon-map"></span>
+		<span class="mui-tab-label">附近</span>
+	</a>
+	<a class="mui-tab-item page_index" id="frame3.html"   onclick="clicked(this.id)">
+		<span class="mui-icon mui-icon-upload"><!--<span class="mui-badge"></span>--></span>
+		<span class="mui-tab-label">购物车</span>
+	</a>
+	<a class="mui-tab-item page_index mui-active" id="frame4.html"   onclick="clicked(this.id)">
+		<span class="mui-icon mui-icon-person"></span>
+		<span class="mui-tab-label">我的</span>
+	</a>
+</nav>
+	<div class="content">
+		<!--
+        	时间：2016-06-15
+        	描述：个人中心top板块
+        -->
+		<div class="top">			
+			
+			<p style="text-align:center;margin-top:2rem;">
+				<img src="../images/icon/ulogo.png" id="ulogo"  style="width:60px;height:60px; border-radius: 30px; " onerror="this.src='../images/icon/ulogo.png';"/><br /><br />
+				<span style="padding:5px;background:#fff;border-radius: 5px;font-size:0.8rem;"><span id="usertypename"></span>：<span id="nickname"></span></span>
+			</p>
+			<!--
+			<div class="userpic">
+				<a id="#"><img id="userimg" src="../images/Personal/User-profile.png"></a>
+			</div>
+			<div class="userinf">
+				<h4 id="nickname"></h4>
+				<div class="user-identity">
+					<div class="user-id">
+						<img src="../images/Personal/gm-sale.png">
+						<a id="javascript:void(0);" id="type_cn">商户</a>
+						<em class="icon-jx"></em>
+					</div>                    
+				</div>				
+			</div>
+			-->
+			<!--
+			<div class="useradmin">
+				<a id="#">
+					<sapn>帐户管理</span>
+				</a>
+			</div>
+            	时间：2016-06-15
+            	描述：屏幕宽度不同时无法保证正确显示
+            -->
+            <div class="clear"></div>
+		</div>
+		
+	 
+		
+		<!--
+		<div class="capital">
+			<div class="user_type1 user_type2 user_type3" style="display:none;">
+				<div class="cap-two" style="width:100%">
+					<div class="cap-box">
+						<a id="xiaofeirangli.html">
+							<h4 style="margin-bottom:10px;">
+								<span class="user_real_point" style="font-size:1.6rem;">10000</span>
+								<br />
+								<span style="font-size:14px;">可用积分</span>
+							</h4>
+						</a>
+						<div class="top_div" style="width:25%;float:left;">
+							<p style="text-align:center;">
+								<span class="user_mall_point">5000</span>
+								<br />
+								<span>商城积分</span>
+							</p>
+						</div>
+						
+						<div class="top_div"  style="width:25%;float:left;">
+							<p style="text-align:center;">
+								<span class="user_normal_point">5000</span>
+								<br />
+								<span>可用积分</span>
+							</p>
+						</div>
+						
+						<div class="top_div" style="width:25%;float:left;">
+							<p style="text-align:center;">
+								<span class="user_p_point">1000</span>
+								<br />
+								<span>奖励积分</span>
+							</p>
+						</div>
+						<div style="width:25%;float:left;">
+							<p style="text-align:center;">
+								<span class="user_happyness">5000</span>
+								<br />
+								<span>慈善积分</span>
+							</p>
+						</div>
+						<div style="clear:both;"></div>
+							
+						
+					</div>
+				</div>				
+			</div>
+		</div>
+		
+		<div class="capital">
+			<div class="user_type2" style="display:none;">
+				<div class="cap-two" style="width:100%">
+					<div class="cap-box">
+						<a id="xiaofeirangli.html">
+							<h4 style="margin-bottom:10px;">
+								<span class="user_real_point" style="font-size:1.6rem;">10000</span>
+								<br />
+								<span style="font-size:14px;">让利金额</span>
+							</h4>
+						</a>
+						<div class="top_div" style="width:50%;float:left;">
+							<p style="text-align:center;">
+								<span class="user_mall_point">5000</span>
+								<br />
+								<span>货款</span>
+							</p>
+						</div>
+						
+						<div style="width:50%;float:left;">
+							<p style="text-align:center;">
+								<span class="user_normal_point">5000</span>
+								<br />
+								<span>保证金</span>
+							</p>
+						</div>
+						<div style="clear:both;"></div>
+							
+						
+					</div>
+				</div>
+			</div>	
+		</div>
+		-->
+		
+		<!--
+        	时间：2016-06-15
+        	描述：管理
+        -->
+        <!--
+		<div class="user_type2" style="display:none;">
+			<div class="recommend">
+				<div class="rec-one w50 fl">
+					<a id="huokuan.html" onclick="clicked(this.id);">
+						<img src="../images/Personal/icon-1.png">
+						<p>							
+							商家货款
+						</p>
+					</a>
+				</div>
+				<div class="rec-one w50 fl">
+					<a id="promise.html" onclick="clicked(this.id);">
+						<img src="../images/Personal/icon-2.png">
+						<p>保证金额</p>
+					</a>
+				</div>
+			</div>
+		</div>
+		-->
+        
+
+		<div class="user_type2" style="display:none;">
+			<div class="recommend">
+						
+			<div style="width: 100%; height: 35px; color: #fff; background: #1af;border-bottom:#f0f0f0 solid 1px; line-height: 35px; text-align: center;">万华商城-商家功能</div>
+			
+				<div class="rec-one w25 fl" >
+					<a id="chongzhi.html" class="checks" onclick="clicked(this.id);">
+						<img src="../images/new/chongzhi.png" >
+				 		<p>充值</p>
+					</a>
+				</div>
+				
+				
+				
+				<div class="rec-one w25 fl" >
+					<a id="zuodan.html"  class="checks"  onclick="clicked(this.id);">
+						<img src="../images/new/zuodan.png" >
+						 <p>做单</p>
+					</a>
+				</div>
+				
+				
+				<div class="rec-one w25 fl" >
+					<a id="jiesuan.html" onclick="clicked(this.id);" >
+						<img src="../images/new/jiesuan.png"  >
+						<p>结算</p>
+					</a>
+				</div>	
+				
+				
+				
+				<div class="rec-one w25 fl"  >
+					<a id="shop_qb.html" onclick="clicked(this.id);">
+						<img src="../images/shop_qb.png">
+						<p>商家钱包</p>
+					</a>
+				</div>
+				
+				 
+				
+				<div class="rec-one w25 fl" >
+					<a id="jifenduihuan.html"  class="checks"  onclick="clicked(this.id);">
+						<img src="../images/Personal/icon-c1.png">
+						<p>兑换积分</p>
+					</a>
+				</div> 	
+				
+				<div class="rec-one w25 fl">
+					<a id="user_order.html"  class="checks"  onclick="clicked(this.id);">
+						<img src="../images/Personal/icon-c6.png">
+						<p>会员订单</p>
+					</a>
+				</div>
+				
+				<div class="rec-one w25 fl" >
+					<a id="shop_user.html"  class="checks"  onclick="clicked(this.id);">
+						<img src="../images/Personal/icon-c7.png">
+						<p>会员管理</p>
+					</a>
+				</div>
+				
+				<div class="rec-one w25 fl" >
+					<a id="shop-setup.html"  class="checks"  onclick="clicked(this.id);">
+						<img src="../images/Personal/icon-c5.png">
+						<p>店铺管理</p>
+					</a>
+				</div>
+				
+				<div class="rec-one w25 fl">
+					<a id="tongzhi2.html" onclick="clicked(this.id);">
+						<img src="../images/new/laba3.png">
+						<p>信息通知</p>
+					</a>
+				</div>
+				
+				<!---->
+				
+				<div style="clear:both"></div>
+			</div>
+		</div>
+
+		<div class="user_type3" style="display:none;">
+			<div class="recommend"> 
+				<div style="width: 100%; height: 35px; color: #fff; background: #919;border-bottom:#f0f0f0 solid 1px; line-height: 35px; text-align: center;">万华商城-区域代理功能</div>
+			
+				<div class="rec-one w25 fl role_id2" style="display:none;">
+					<a id="agent_order.html" onclick="clicked(this.id);">
+						<img src="../images/Personal/icon-c8.png">
+						<p>区域订单</p>
+					</a>
+				</div>
+				<div class="rec-one w25 fl" style="display:none;">
+					<a id="agent_shop.html" onclick="clicked(this.id);">
+						<img src="../images/Personal/icon-13.png">
+						<p>商家管理</p>
+					</a>
+				</div>
+				
+				<div class="rec-one w25 fl role_id3" style="display:none;">
+					<a id="add_shop.html" onclick="clicked(this.id);">
+						<img src="../images/Personal/icon-116.png">
+						<p>商家入驻</p>
+					</a>
+				</div>
+				
+
+				
+				
+				<div class="rec-one w25 fl" style="display:none;">
+					<a id="agent_shop_point_main.html" onclick="clicked(this.id);">
+						<img src="../images/Personal/icon-1113.png">
+						<p>区域业绩</p>
+					</a>
+				</div>
+				
+				<!--
+                	作者：380623650@qq.com
+                	时间：2017-06-28
+                	描述：
+                	-->
+				<div class="rec-one w25 fl" style="display:none;">
+					<a id="ad_check_list.html" onclick="clicked(this.id);">
+						<img src="../images/Personal/icon-113.png">
+						<p>广告管理</p>
+					</a>
+				</div>
+			
+				
+				<div class="rec-one w25 fl" style="display:none;">
+					<a id="master_list.html" onclick="clicked(this.id);">
+						<img src="../images/Personal/icon-6.png">
+						<p>业务员管理</p>
+					</a>
+				</div>
+				
+				
+				
+				<div class="rec-one2 w25 fl role_id3" style="display:none;">
+					<a id="yewu_detail_yeji1" onclick="">
+						<img src="../images/Personal/icon-14.png">
+						<p>业绩查看</p>
+					</a>
+				</div>
+ 				
+				
+				
+				<div class="rec-one w25 fl role_id3" style="display:none;">
+					<a id="tongzhi3.html" onclick="clicked(this.id);">
+						<img src="../images/new/laba2.png">
+						<p>区域通知</p>
+					</a>
+				</div>
+				
+				<div style="clear:both"></div>
+			</div>
+		</div>
+
+		 
+		<div class="user_type1">
+			<div class="recommend">
+				<div style="width: 100%; height: 35px; color: #fff; background: #18f;border-bottom:#f0f0f0 solid 1px; line-height: 35px; text-align: center;">万华商城-会员功能</div>
+			
+				
+				<div class="rec-one w25 fl">
+					<a id="user-qb.html" onclick="clicked(this.id);">
+						<img src="../images/user_qb.png">
+						<p>我的钱包</p>
+					</a>
+				</div>
+				<div class="rec-one w25 fl">
+					<a id="user_jfdh.html" onclick="clicked(this.id);">
+						<img src="../images/Personal/icon-c1.png">
+						<p>积分兑换</p>
+					</a>
+				</div>
+				<div class="rec-one w25 fl">
+					<a id="user_all_order.html" onclick="clicked(this.id);">
+						<img src="../images/Personal/icon-12.png">
+						<p>我的订单</p>
+					</a>
+				</div>
+				
+				<div class="rec-one w25 fl">
+					<a id="account-management.html" onclick="clicked(this.id);">
+						<img src="../images/arecord.png">
+						<p>会员信息</p>
+					</a>
+				</div>
+				
+				
+				<div class="rec-one2 w25 fl isagent" style="display: none;">
+					<a id="user_tjp.html" onclick="clicked(this.id);">
+						<img src="../images/Personal/icon-6.png">
+						<p>推荐奖励</p>
+					</a>
+				</div>
+				
+				
+				
+				<div class="rec-one w25 fl">
+					<a id="user-fenx.html" onclick="clicked(this.id);">
+						<img src="../images/Personal/icon-116.png">
+						<p>分享</p>
+					</a>
+				</div>
+				
+			
+				<div class="rec-one w25 fl">
+					<a id="tongzhi1.html" onclick="clicked(this.id);">
+						<img src="../images/new/laba1.png">
+						<p>系统通知</p>
+					</a>
+				</div>
+				<!---->
+				<div style="clear:both"></div>
+			</div>
+		</div>
+		 
+		
+		
+
+	</div>
+	
+	
+	<script>
+		
+		var uu= JSON.parse(localStorage.getItem('userInfo')) ; 
+				
+				$("#ulogo").attr("src","http://www.tanglikeji.com/Public/Uploads/"+uu.touxiang );
+		
+	</script>
+</body>
+</html>

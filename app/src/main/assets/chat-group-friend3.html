@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>通讯录</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="css/sm.css">
+	<link rel="stylesheet" href="css/sm-extend.css">
+	<link rel="stylesheet" href="css/login.css">
+	<script type="text/javascript" src="js/common.js" ></script>
+</head>
+<body>
+    <div class="page-group" style="background-color:#fff;">
+        <div class="page page-current" id="chat-contact" style="background-color:#fff;">
+        	<header class="bar bar-nav">
+        		<a class="button pull-left btn-back back" href="javascript:;" onclick="back()"><img src="images/icon/icon-arrow-left.png" class="icon-close" /></a>
+				<button class="button pull-right btn-back" id="submit" style="color:#fff;">删除</button>
+        		<h1 class="title">群成员</h1>
+			</header>
+        	<div class="content chat-content" style="">
+        		<div class="searchbar" style="margin:0;">
+		        	<div class="search-input">
+		        		<label class="icon icon-search" style="font-size:1.3333333rem" for="search"></label>
+		        		<input type="search" id="search" style="padding-left:2rem;" placeholder="手机号">
+		        	</div>
+		      	</div>
+		      	<div class="list-block contacts-block">			    	
+	        		<div class="list-block add-content-content infinite-scroll native-scroll" id="page-infinite-scroll-top"  data-distance="100" id="contactList">
+				    	<div class="chat-contact list-group" id="contactList"></div>				      				      
+				    </div>
+				</div>
+        	</div>        
+    	</div>
+    </div>
+    
+    <script type="text/html" id="contactListT">
+    	<div class="chat-contact list-group">
+	        <ul>	        	
+	          	<li class="list-group-title">A</li>
+	          	{{each list as item i}}
+	          	<a href="javascript:;" id="chat-chat.html?id={{item.info.user_id}}" data-uid="{{item.info.user_id}}">
+		          	<li style="border-bottom: 1px solid #eee;">
+		            	<div class="item-content" style="padding-left:0;">
+		            		<div class="item-media"><img src="{{item.info.head_portrait}}"  /></div>
+		              		<div class="item-inner">
+		                		<div class="item-title" style="font-size:1.33333333rem;">{{item.info.nickname}}</div>
+		                		<div class="item-after" data-check="1" data-info='{{item.info.user_id}}'><img src="images/icon/icon-yw-friend-uncheck.png" style="width:2.66666666rem;"/></div>
+		              		</div>
+		            	</div>
+		          	</li>
+	          	</a>
+	          	{{/each}}
+	        </ul>
+      	</div>    	
+    </script>
+    
+    
+    <script type='text/javascript' src='js/zepto.js' charset='utf-8'></script>
+    <script type="text/javascript" src="js/update.js" ></script>
+	<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+	<script type="text/javascript" src="js/template.js" ></script>
+	<script type="text/javascript" src="js/layer/layer.js" ></script>
+	
+	
+	
+	<script>
+		$(function(){
+			var token = localStorage.getItem('token');
+			var userinfo = localStorage.getItem('userinfo');
+			var param = $.myUtil().toQueryParams();
+			var room_id = param['room_id'];
+			var creategroup = 0;
+			if(param['action'] == 'creategroup'){
+				creategroup = 1;
+				
+			}
+			if(token == null){
+				$.myUtil().alert_msg('用户失效，请重新登录',function(){clicked('login.html');});
+				return;
+			}
+			if(userinfo == null){
+				$.myUtil().alert_msg('用户失效，请重新登录',function(){clicked('login.html');});
+				return;
+			}
+			var userList = [];
+			if(token == '' || token == null || token == undefined){
+				$.myUtil().alert_msg('身份已过期，请重新登录',function(){clicked('login.html');});
+			}
+			$.myUtil().ajax({
+				data:{
+					'api_name':'friend_applylists',
+					'token':token					
+				},
+				beforeFn:function(){}
+			}).done(function(res){
+				if(res.state == 'ok'){
+					$(".mybadge").html(res.data.length);
+				}
+			});
+			getFriendList();
+			
+			$("#submit").click(function(){
+				if(userList.length == 0){
+					$.myUtil().alert_msg('至少选择一项');return;
+				}
+				userids = [];
+				if(userList.length==1){
+					userids.push(userList);
+				}else{	
+					for(i in userList){
+						users = JSON.parse(userList[i]);					
+						userids.push(users.user_id);
+					}
+				}
+				
+				$.myUtil().ajax({
+					data:{
+						'api_name':'chatgroup_delmember',
+						'token':token,
+						'ids':userList.join('|'),
+						'room_id':room_id
+					}
+				}).done(function(res){
+					layer.closeAll();
+					console.log(JSON.stringify(res));
+					if(res.state == 'ok'){
+						clicked('chat-group-detail.html?room_id='+room_id);	
+					}else{
+						$.myUtil().alert_msg(res.msg);
+					}
+				});	
+			});
+			
+			function getFriendList(){
+				$.myUtil().ajax({
+					data:{
+						'api_name':'chatgroup_qunlists',
+						'token':token,
+						'room_id':room_id
+										
+					},
+					beforeFn:function(){}
+				}).done(function(res){
+					
+					if(res.state == 'ok'){
+						
+						for(i in res.data.list){							
+							res.data.list[i].json_str = JSON.stringify(res.data.list[i]);
+							console.log(res.data.list[i].json_str);
+						}
+					
+						$("#contactList").html(template('contactListT',{list:res.data.room_members}));
+						$(".item-after").each(function(){
+							if($(this).attr("data-info")==res.data.room_admin){
+								$(this).html("");
+							}
+							
+						});
+						$(".item-after").click(function(){
+							
+							is_check = $(this).attr('data-check');
+							json_str = $(this).attr('data-info');
+							
+							if(is_check == 1){
+								userList.push(json_str);
+								
+								$(this).find('img').attr('src','images/icon/icon-yw-friend-check.png');
+								$(this).attr('data-check',2);
+							}else if(is_check == 2){
+								temp = [];
+								for(i in userList){
+									if(userList[i] != json_str){
+										temp.push(userList[i]);
+									}
+								}
+								userList = temp;
+								$(this).find('img').attr('src','images/icon/icon-yw-friend-uncheck.png');
+								$(this).attr('data-check',1);
+							}							
+						})
+					}
+				});
+			}
+		})		
+	</script>
+
+</body>
+</html>

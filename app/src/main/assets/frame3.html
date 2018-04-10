@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>购物车</title>
+    <link rel="stylesheet" href="../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/global.css"/>
+    <link href="../css/public.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/business.css" />
+    <script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+    <script src="../js/mui.min.js?a=2"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/util.js"></script>
+	<script type="text/javascript" src="../js/common.js" ></script> 
+    <script src="../js/layer2.0/layer.js"></script>    
+    <script src="../js/mui.picker.js"></script>
+    <script src="../js/mui.poppicker.js"></script>
+    <style>.empty{ text-align: center; padding: 120px 0; }</style>
+</head>
+<body>
+<header class="mui-bar mui-bar-nav" style="position:fixed; top: 0; background-color:#046AB2">
+    <a class="mui-icon mui-icon-left-nav mui-pull-left" style="color:#fff" href='javascript:void(0);' onclick="clicked('frame0.html');"></a>
+    <h1 class="mui-title" style="color:#fff">购物车</h1>
+    <button style="float: right;border: 1px #ffffff solid;margin-top: 11px; color: #ffffff;padding: 2px;" onclick="clicked('user_all_order.html')";>订单列表</button>
+      
+</header>
+<style>
+.mui-bar {
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    left: 0;
+    height: 44px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-bottom: 0;
+    background-color: #f7f7f7;
+    -webkit-box-shadow: 0 0 1px rgba(0,0,0,.85);
+    box-shadow: 0 0 1px rgba(0,0,0,.85);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.mui-bar-tab {
+    bottom: 0;
+    display: table;
+    width: 100%;
+    height: 50px;
+    padding: 0;
+    table-layout: fixed;
+    border-top: 0;
+    border-bottom: 0;
+    -webkit-touch-callout: none;
+}
+.mui-bar-tab .mui-tab-item {
+    display: table-cell;
+    overflow: hidden;
+    width: 1%;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #929292;
+}
+.mui-bar-tab .mui-tab-item.mui-active {
+    color: #007aff;
+}
+.mui-bar-tab .mui-tab-item .mui-icon {
+    top: 3px;
+    width: 24px;
+    height: 24px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.mui-bar .mui-icon {
+    font-size: 24px;
+    position: relative;
+    z-index: 20;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.mui-icon {
+    font-family: Muiicons;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1;
+    display: inline-block;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+}
+.mui-icon-home:before {
+    content: '\e500';
+}
+.mui-icon-email:before {
+    content: '\e201';
+}
+.mui-icon-contact:before {
+    content: '\e100';
+}
+.mui-icon-person:before {
+    content: '\e101';
+}
+.mui-icon-map:before {
+    content: '\e364';
+}
+.mui-icon-upload:before {
+    content: '\e402';
+}
+.mui-icon-list:before {
+    content: '\e301';
+}
+.mui-bar-tab .mui-tab-item .mui-icon~.mui-tab-label {
+    font-size: 11px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.mui-icon .mui-badge {
+    font-size: 10px;
+    line-height: 1.4;
+    position: absolute;
+    top: -2px;
+    left: 100%;
+    margin-left: -10px;
+    padding: 1px 5px;
+    color: #fff;
+    background: red;
+}
+.mui-badge {
+    font-size: 12px;
+    line-height: 1;
+    display: inline-block;
+    padding: 3px 6px;
+    color: #333;
+    border-radius: 100px;
+    background-color: rgba(0,0,0,.15);
+}
+</style>
+<nav class="mui-bar mui-bar-tab">
+	<a class="mui-tab-item page_index" href="javascript:void(0);" onclick="clicked('frame0.html');">
+		<span class="mui-icon mui-icon-home"></span>
+		<span class="mui-tab-label">首页</span>
+	</a>
+	<a class="mui-tab-item page_index" href="javascript:void(0);" onclick="clicked('frame1.html');">
+		<span class="mui-icon mui-icon-list"></span>
+		<span class="mui-tab-label">扫码</span>
+	</a>
+	<a class="mui-tab-item page_index" href="javascript:void(0);" onclick="clicked('frame2.html');">
+		<span class="mui-icon mui-icon-map"></span>
+		<span class="mui-tab-label">附近</span>
+	</a>
+	<a class="mui-tab-item mui-active page_index" href="javascript:void(0);" onclick="clicked('frame3.html');">
+		<span class="mui-icon mui-icon-upload"><!--<span class="mui-badge"></span>--></span>
+		<span class="mui-tab-label">购物车</span>
+	</a>
+	<a class="mui-tab-item page_index" href="javascript:void(0);" onclick="clicked('frame4.html');">
+		<span class="mui-icon mui-icon-person"></span>
+		<span class="mui-tab-label">我的</span>
+	</a>
+</nav>
+<!--{foreach from=$carts item=cart key=store_id}-->
+<div class="cartList" style=" margin-top: 45px;">
+<section class="cart-list"></section>
+</div>
+<!--{/foreach}-->
+
+
+
+<script>
+	
+var tokens=localStorage.getItem ("token");
+$(function(){
+	var cateId;
+	$(".con-input").click(function(){
+		//location.href = "history-seach.html";
+	});
+	getData();
+	function getData(){
+		$.fn.Util().ajax({
+			url : 'http://www.tanglikeji.com/api.php/cart/index',
+			data :{'cookie':tokens},
+			beforeFn:function(){
+				layer.open({
+					type: 2,
+					content: '加载中',
+					shadeClose:false
+				});
+			},
+			afterFn : function(){
+				layer.closeAll();
+			}
+		}).done(function(data){
+			if(data.state == 'ok'){
+				$(".cartList").html('');
+				for(i in data.data){
+					shop = data.data[i];
+					
+					console.error(  JSON.stringify(  shop )  );
+					
+					
+					html = '<section class="cart-list" id="list'+shop.id+'">' +
+								'<div class="mt">' +
+			                        '<a href="javascript:;">店铺: '+shop.shop_name+'</a>' +
+			                    '</div>';
+			        total = 0;
+			        sum_point = 0;
+					for(j in shop.goods){
+						item = shop.goods[j];
+						
+						console.error( JSON.stringify( item ) );
+						total += parseFloat(item.sum_money) + parseFloat(item.yunfei);
+						sum_point += item.sum_point+ parseFloat(item.yunfei);
+						end = '';
+						if(j == shop.goods.length-1){
+							end = '<div class="count">' +
+			                            '<a>合计(含运费): <strong id="cart1017_amount">¥'+total+'</strong><br/>最多可用积分：'+sum_point+'</a>' +
+			                            '<a href="order_confirm.html" class="jie" style="    padding: 20px 0">去结算</a>' +
+			                        '</div>';
+						}
+						var shuxing='';
+						if(item.color){							
+							shuxing+='颜色：'+item.color.colorName;
+						}
+						if(item.size){							
+							shuxing+=' 尺寸：'+item.size.sizeName;
+						}
+						
+						html += '<div class="mc">' +
+			                        '<dl id="cart_item_'+item.productId+'">' +
+			                            '<dt>' +
+			                                '<a href="product_detail.html?id='+item.prodId+'"> <img src="http://www.tanglikeji.com/Public/Uploads/'+item.img+'"></a>' +
+			                            '</dt>' +
+			                            '<dd>' +
+			                                '<p class="name">'+item.prodName+'</p>' +
+			                                '<p class="price">价格：<strong>'+item.price1+'</strong> &nbsp;数量 ：'+item.num+'</p>' +
+			                               	'<p>'+ shuxing +'</p>'+
+			                                '<p class="c_oprate">' +
+			                                '<span class="white_btn" onclick="add_quantity('+item.productId+',-1);" style="padding:0px;">-</span>' +
+			                                '<input type="text" id="input_item_'+item.productId+'" value="'+item.num+'" orig="1" class="addtext" style="padding:0px;" disabled>' +
+			                                '<span class="white_btn" onclick="add_quantity('+item.productId+',1);" style="padding:0px;">+</span>' +
+			                                '<a href="#" onclick="drop_cart_item('+item.productId+');" ><span class="close" data-prodid="'+item.productId+'"></span></a>' +
+			                                '<span  style="padding-left:12px; color:#3f3f3f" > 运费：' + item.yunfei + '</span></p>' +
+			                            '</dd>' +
+			                        '</dl>' +
+			                        end +
+			                    '</div>';
+					}
+			        html += '</section>';
+			        $(".cartList").append(html);
+			        $(".cartList").height(  ($(".cartList").height()+50) );
+				}
+				$(".close").on('click',function(){
+					id = $(this).attr('data-prodid');
+					$("#list"+id).fadeOut(200);
+				});
+			}
+		}).fail(function(err){
+			layer.open({'content':err.msg});
+		})
+	}	
+});
+
+
+
+function add_quantity(pid,num){
+	now_num = parseInt($("#input_item_"+pid).val());
+	r_num = now_num + parseInt(num);
+	if(r_num < 1){
+		$.fn.Util().alert_msg('数量不能小于1');
+		return;
+	}
+	$.fn.Util().ajax({
+		url :'http://www.tanglikeji.com/api.php/cart/setcart',
+		data :{'pid':pid,'num':r_num,'cookie':tokens},		
+	}).done(function(res){
+		//console.error( JSON.stringify(  res   ) );
+		location.reload();
+	})
+}
+function drop_cart_item(pid){
+	$.fn.Util().ajax({
+		url :'http://www.tanglikeji.com/api.php/cart/delCartGood',
+		data :{'pid':pid,'cookie':tokens},		
+	}).done(function(res){
+		
+		//console.error( JSON.stringify(  res   ) );		
+		location.reload();
+	})
+	
+}
+
+	
+	
+</script>
+</body>
+</html>

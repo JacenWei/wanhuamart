@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css" /><!--公用css-->
+		<link rel="stylesheet" href="../css/shop-setup.css" />
+		<link rel="stylesheet" href="../css/test.css" />
+	    <script type="text/javascript" src="../js/common.js" ></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				clicked('login.html');
+			}
+		</script>
+		<style>
+			
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.article-list {
+    padding:0 10px;
+    font-size:14px
+}
+.article-list a {
+    color:#444
+}
+.article-list img {
+    width:100%;
+    display:block
+}
+.article-list .article-item {
+    position:relative;
+    padding:13px 10px;
+    min-height:60px;
+    background-color:#fff;
+    border-bottom:1px solid #e7e7e7;
+    overflow:hidden;
+    margin-bottom:10px
+}
+.article-list .article-item .article-img {
+    width:100px;
+    height:64px;
+    margin-right:10px;
+    background-color:#f0f0f0
+}
+.article-list .article-item .article-title {
+    height:42px;
+    line-height:1.5;
+    overflow:hidden
+}
+.article-list .article-item .pos-right-bottom {
+    position:absolute;
+    right:10px;
+    bottom:13px;
+    font-size:10px
+}
+.article-list .article-item .article-time {
+    color:#888;
+    font-size:10px
+}
+.article-list .article-item .article-promote {
+    color:#888;
+    font-size:10px
+}
+.article-list.kuaixun-list .article-item .article-title {
+    height:auto;
+    max-height:52px
+}
+.article-list.kuaixun-list .article-item .article-title a {
+    color:#000;
+    font-size:18px
+}
+.article-list.kuaixun-list .article-item .kuaixun-time-author {
+    padding:10px 0
+}
+.article-list.kuaixun-list .article-item .kuaixun-time-author span {
+    display:inline-block;
+    margin-right:5px
+}
+.article-list.kuaixun-list .article-item .article-content {
+    color:#323232
+}
+
+      .slideout-menu { left: auto; }
+      .btn-hamburger { left: auto; right: 12px;}
+      
+    
+		</style>
+	</head>
+	<body>	<style>
+.mui-bar {
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    left: 0;
+    height: 44px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-bottom: 0;
+    background-color: #f7f7f7;
+    -webkit-box-shadow: 0 0 1px rgba(0,0,0,.85);
+    box-shadow: 0 0 1px rgba(0,0,0,.85);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.mui-bar-tab {
+    bottom: 0;
+    display: table;
+    width: 100%;
+    height: 50px;
+    padding: 0;
+    table-layout: fixed;
+    border-top: 0;
+    border-bottom: 0;
+    -webkit-touch-callout: none;
+}
+.mui-bar-tab .mui-tab-item {
+    display: table-cell;
+    overflow: hidden;
+    width: 1%;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #929292;
+}
+.mui-bar-tab .mui-tab-item.mui-active {
+    color: #007aff;
+}
+.mui-bar-tab .mui-tab-item .mui-icon {
+    top: 3px;
+    width: 24px;
+    height: 24px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.mui-bar .mui-icon {
+    font-size: 24px;
+    position: relative;
+    z-index: 20;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.mui-icon {
+    font-family: Muiicons;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1;
+    display: inline-block;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+}
+.mui-icon-home:before {
+    content: '\e500';
+}
+.mui-icon-email:before {
+    content: '\e201';
+}
+.mui-icon-contact:before {
+    content: '\e100';
+}
+.mui-icon-person:before {
+    content: '\e101';
+}
+.mui-icon-map:before {
+    content: '\e364';
+}
+.mui-icon-upload:before {
+    content: '\e402';
+}
+.mui-icon-list:before {
+    content: '\e301';
+}
+.mui-bar-tab .mui-tab-item .mui-icon~.mui-tab-label {
+    font-size: 11px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.mui-icon .mui-badge {
+    font-size: 10px;
+    line-height: 1.4;
+    position: absolute;
+    top: -2px;
+    left: 100%;
+    margin-left: -10px;
+    padding: 1px 5px;
+    color: #fff;
+    background: red;
+}
+.mui-badge {
+    font-size: 12px;
+    line-height: 1;
+    display: inline-block;
+    padding: 3px 6px;
+    color: #333;
+    border-radius: 100px;
+    background-color: rgba(0,0,0,.15);
+}
+</style>
+		<nav class="mui-bar mui-bar-tab">
+	<a class="mui-tab-item  mui-active page_index" href="javascript:void(0);" onclick="clicked('frame0.html');">
+		<span class="mui-icon mui-icon-home"></span>
+		<span class="mui-tab-label">首页</span>
+	</a>
+	<a class="mui-tab-item page_index" href="javascript:void(0);" onclick="clicked('frame1.html');">
+		<span class="mui-icon mui-icon-list"></span>
+		<span class="mui-tab-label">扫码</span>
+	</a>
+	<a class="mui-tab-item page_index" href="javascript:void(0);" onclick="clicked('frame2.html');">
+		<span class="mui-icon mui-icon-map"></span>
+		<span class="mui-tab-label">附近</span>
+	</a>
+	<a class="mui-tab-item page_index" href="javascript:void(0);" onclick="clicked('frame3.html');">
+		<span class="mui-icon mui-icon-upload"><!--<span class="mui-badge"></span>--></span>
+		<span class="mui-tab-label">购物车</span>
+	</a>
+	<a class="mui-tab-item page_index" href="javascript:void(0);" onclick="clicked('frame4.html');">
+		<span class="mui-icon mui-icon-person"></span>
+		<span class="mui-tab-label">我的</span>
+	</a>
+</nav>
+		
+		
+		<div id="menu" class="menu">
+	      <a href="javascript:;" target="_blank">
+	        <header class="menu-header">
+	          <span class="menu-header-title">公司证照</span>
+	        </header>
+	      </a>
+	
+	      <section class="menu-section">	        
+	        <ul class="menu-section-list">
+	          <li id="li_1" style="border-bottom: 1px solid rgba(255, 255, 255, 0.12);"><a href="article_detail.html?id=5" ><img src="../images/article_info.png" style="width:20px;vertical-align: middle;"/>  公司信息</a></li>
+	          <li id="li_2" style="background-color:darkorange; border-bottom: 1px solid rgba(255, 255, 255, 0.12);"><a href="article_pic.html?id=1"  ><img src="../images/article_pic.png" style="width:20px;vertical-align: middle;"/>公司证照</a></li>
+	          <li id="li_3" style="border-bottom: 1px solid rgba(255, 255, 255, 0.12);"><a href="article_detail.html?id=2"   ><img src="../images/article_wenhua.png" style="width:20px;vertical-align: middle;"/>公司文化</a></li>
+	          <li id="li_4" style="border-bottom: 1px solid rgba(255, 255, 255, 0.12);"><a href="article_detail.html?id=3" ><img src="../images/article_mubiao.png" style="width:20px;vertical-align: middle;"/>公司目标</a></li>
+	          <li id="li_5" style="border-bottom: 1px solid rgba(255, 255, 255, 0.12);"><a href="article_list.html?id=4"  ><img src="../images/article_news.png" style="width:20px;vertical-align: middle;"/>公司新闻</a></li>
+	          <li id="li_6" style="border-bottom: 1px solid rgba(255, 255, 255, 0.12);"><a href="article_detail.html?id=4"  ><img src="../images/article_link.png" style="width:20px;vertical-align: middle;"/>联系我们</a></li>
+	        </ul>
+	      </section>
+	    </div><header class="header" style="position: fixed; top: 0; z-index: 9999;"   >
+			<a class="back"  href="javascript:;" onclick='clicked("frame0.html");'></a>
+			<h1 class="tit">公司证照</h1>
+			<a class="edit" href="javascript:;" style="width:inherit;height:initial;top:10px;right:10px;">
+				<img src="../images/menu.png" style="width:35px;"/>
+			</a>
+		</header>
+		<main id="panel"   style="position:  absolute; top: 0;  z-index: 0">
+		
+		<div class="content list-page" style="background-color: #f1f1f1;;"></div>
+		</main>
+	</body>	
+	<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/slideout.min.js"></script>
+	<script src="../js/config.js"></script>
+	<script src="../js/util.js"></script>
+	<script src="../js/layer2.0/layer.js"></script>	
+	<script>
+	var slideout = new Slideout({
+	    'panel': document.getElementById('panel'),
+	    'menu': document.getElementById('menu'),
+	    'side':'right',
+	    'padding': 156,
+	    'tolerance': 70
+	});
+	</script>
+	<script>
+		$(function(){
+			param = $.fn.Util().toQueryParams();
+			id = param['id'];			
+			getDetail(id);
+			$(".edit").on('click',function(){
+				slideout.toggle();
+			});
+			function getDetail(id){
+				$.fn.Util().ajax({
+					url : apiUrl + '/Index/article_list',
+					data : {'id':id},
+					beforeFn:function(){
+						layer.open({
+							type: 2,
+							content: '加载中',
+							shadeClose:false
+						});
+					},
+					afterFn : function(){
+						layer.closeAll();
+					}
+				}).done(function(res){
+					if(res.state == 'ok'){
+						$(".content").html('');
+						list = res.data;
+						html = '';
+						for(var i in list){
+							html += ''+
+							'<div class="list-item">'+
+							    '<div class="thumb-box">'+
+							        '<img image-lazy-src="http://www.tanglikeji.com/'+list[i].thumb+'" src="http://www.tanglikeji.com/'+list[i].thumb+'">'+
+							    '</div>'+
+							    '<div class="list-box">'+
+							        '<div class="intro">'+
+							            '<h2 ng-bind="item.title" class="ng-binding">'+list[i].title+'</h2>'+			            
+							        '</div>'+
+							    '</div>'+
+							    '<a class="click-url" href="article_list.html?id='+list[i].id+'"></a>'+
+							'</div>'
+						}
+						$(".content").html(html);
+					}
+					
+				});
+			}
+		});
+	</script>
+</html>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">万华商城</string>
+    <string name="mark">万华商城</string>
+    <string name="location">卧龙区</string>
+    <string name="logout">退出登录</string>
+
+</resources>

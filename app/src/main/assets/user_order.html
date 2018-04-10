@@ -1,0 +1,152 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">	
+		<title></title> 
+		<link rel="stylesheet" href="../css/public.css">
+		<link rel="stylesheet" href="../css/line.css">
+		<link rel="stylesheet" href="../css/mui.min.css" />
+	    <script src="../js/common.js"></script>
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+        <script type="text/javascript">
+            if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+                clicked( 'login.html');
+            }
+        </script><script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+		<script src="../js/util.js"></script>
+		<script src="../js/layer2.0/layer.js"></script> 
+	</head>
+
+	<body>
+		<header class="header"   style="margin-bottom: 0px;" >
+			<a id="frame4.html" class="back" onclick="clicked(this.id)"></a>
+			<h1 class="tit">会员订单管理</h1>
+		</header>
+		<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted"
+            		style=" border-bottom:  dashed #0168B7 1px; position: fixed; z-index: 19;"  >
+	                <button style="z-index: 15;color: #ffffff;margin-top:10px;width: 32%;height: 50px; background-color: #007FFF;border: 1px #ffffff solid;" class="mui-active" id="user_order.html" onclick="clicked(this.id)">线下订单</button> 
+	                <button style="z-index: 15;color: #007FFF;margin-top:10px;width: 32%;height: 50px; background-color: #ffffff;border: 1px #007FFF solid;" class=""  id="jifenduihuan_list.html" onclick="clicked(this.id)">积分订单</button>
+	                <button style="z-index: 15;color: #007FFF;margin-top:10px;width: 32%;height: 50px; background-color: #ffffff;border: 1px #007FFF solid;" class=""  id="online_list.html" onclick="clicked(this.id)">线上订单</button>
+                </div>
+		<div class="content">
+			
+			<div class="refine-details">
+				
+                <ul id="dlist" style="margin-top: 56px;">
+                     
+ 
+                </ul>
+            </div>
+<script>
+	
+	
+	$(function(){
+	var tokens=localStorage.getItem ("token");
+	var page=1;
+	getData(); 
+	function getData(){
+		$.fn.Util().ajax({
+			url : 'http://www.tanglikeji.com/api.php/Ucenter/shop_order',
+			data :{'cookie':tokens,page:1,type:1},
+			beforeFn:function(){
+				layer.open({
+					type: 2,
+					content: '加载中',
+					shadeClose:false
+				});
+			},			
+		}).done(function(data){
+			layer.closeAll();
+			if(data.state == 'out'){
+				layer.open({
+					content:data.msg,
+					time : 2,
+					end : function(){
+						location.href='login.html';
+					}
+				});
+				return;
+			}else if(data.state == 'ok'){
+				
+				for(var i in data.data.list){
+					var d=data.data.list[i];
+					console.error( JSON.stringify(d));
+					var html='';
+					html= '<li>'+
+                        '<div class="one">'+
+                           ' <p class="onr-let">'+
+                           '     <img src="../images/icon/icon-i3.png">'+
+                           '     <span class="list-muen">订单号</span>'+
+                            '    <span class="list-nr" style="width:120px;">'+d.ordersn+'</span>'+
+                           ' </p>'+
+                           ' <p class="onr-rgh">'+
+                            '    <img src="../images/icon/icon-i37.png">'+
+                            '    <span>'+d.status_cn+'</span>'+
+                            '</p>'+
+                        '</div>'+
+                        '<div class="one">'+
+                            '<p class="onr-let">'+
+                             '   <img src="../images/icon/icon-i10.png">'+
+                             '   <span class="list-muen">类别</span>'+
+                             '   <span class="list-nr">线下订单</span>'+
+                            '</p>'+
+                        '</div>'+
+                        '<div class="one">'+
+                           ' <p class="onr-let">'+
+                            '    <img src="../images/icon/icon-i14.png">'+
+                            '    <span class="list-muen">消费用户</span>'+
+                            '    <span class="list-nr" style="width:150px;">'+d.uname+'|'+d.lzhengName+'</span>'+
+                            '</p>'+
+                        '</div>'+
+                        '<div class="one">'+
+                          '  <p class="onr-let">'+
+                            '    <img src="../images/icon/icon-i5.png">'+
+                            '    <span class="list-muen">购买商品</span>'+
+                            '    <span class="list-nr">'+d.goods_name+'</span>'+
+                            '</p>'+
+                        '</div>'+
+                        '<div class="one">'+
+                           ' <p class="onr-let">'+
+                             '   <img src="../images/icon/icon-i9.png">'+
+                             '   <span class="list-muen">消费金额</span>'+
+                             '   <span class="list-nr">￥'+d.amount+'</span>'+
+                           ' </p>'+
+                        '</div>'+
+                        '<div class="one">'+
+                           ' <p class="onr-let">'+
+                            '    <img src="../images/icon/icon-i18.png">'+
+                             '   <span class="list-muen">让利金额</span>'+
+                             '   <span class="list-nr">'+d.point+'</span>'+
+                           ' </p>'+
+                       ' </div>'+
+                        '<div class="one">'+
+                           ' <p class="onr-let">'+
+                              '  <img src="../images/icon/icon-i15.png">'+
+                               ' <span class="list-muen">下单时间</span>'+
+                               ' <time>'+d.createtime+'</time>'+
+                           ' </p>'+
+                       ' </div>'+
+                    '</li>';
+                    $("#dlist").append(html);
+				}
+				if($("#dlist").html().trim() == ''){
+					$("#dlist").html('<p style="text-align:center;padding:2rem;">暂无数据</p>')
+					
+				}
+				
+				
+				
+				 			
+			}
+			
+			
+		}).fail(function(err){
+			layer.open({'content':err.msg});
+		})
+	}
+ 
+});
+	
+</script>
+</body></html>

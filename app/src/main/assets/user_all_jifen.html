@@ -1,0 +1,398 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">	
+		<title></title>
+        <link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/public.css">
+        <link rel="stylesheet" href="../css/line.css">
+		<link rel="stylesheet" href="../css/global.css">
+		<link rel="stylesheet" href="../css/user.css" />
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>		
+	    <script src="../js/config.js"></script>
+	    <script src="../js/common.js"></script>
+	    <script src="../js/util.js"></script>	    
+	    <script src="../js/layer2.0/layer.js"></script>
+		<script src="../js/jquery.Huploadify.js"></script>	
+	    <script src="../js/user_all_jifen.js?aa233ss"></script>
+	    
+		<style>
+		    .avatorUpload {
+		        margin: 0 auto;
+		        position: relative;
+		        width: 50px;
+		        height:50px;
+		        background-size: 100%;
+		        background-image: url('../images/jiancai.png');
+		        background-repeat:no-repeat;
+		        -webkit-background-size:cover;
+		        background-size:cover;
+		        background-position: center center;
+		        /*border-radius: 50%;*/
+		        overflow: hidden;
+		        float:right;
+		    }
+		    .avatorUpload .uploadify-button {
+		        position: absolute;
+		        top: 0;
+		        left: 0;
+		        width: 100%;
+		        height: 100%;
+		        opacity: 0;
+		        padding:0;
+		    }
+		    .avatorUpload .uploadify-queue {
+		        display: none;
+		    }
+		    .avatarImg {
+		        width: 10rem;
+		        display: block;
+		    }
+		    .media-inline .media {
+		        display: inline-block;
+		        margin-right: 15px;
+		        margin-top: 0;
+		    }
+		
+		    .media:first-child {
+		        margin-top: 0;
+		    }
+		    .clearfix, .layout, .container, .container-layout, .line, .line-small, .line-middle, .line-big, .nav-main, .nav-sub, .navbar {
+		        display: block;
+		    }
+		    .media, .media .media {
+		        margin-top: 15px;
+		    }
+		    .media, .media-body {
+		        overflow: hidden;
+		        zoom: 1;
+		    }
+		</style>
+		
+		
+        <style>
+            .mui-slider .mui-slider-group .mui-slider-item img {
+                width: 20px;
+            }
+            .onr-let{width:100%};
+            .onr-let img {padding:0;}
+            .list-muen {width: 65px;}
+            .jja{width: 33%; float: left; height: 36px; line-height: 36px;}
+            .jjb{ background-color: #0168B7; color: #fff!important;}
+            .onldiv{width: 20%; text-align: center; font-size: 1rem; line-height: 2.7rem; height: 2.7rem; float: left;}
+            .onldiv2{width: 25%; text-align: center; font-size: 1rem; line-height: 2.7rem; height: 2.7rem; float: left;}
+            .onll{border-bottom:#FF9933 solid 3px; color: #FF9933;}
+        </style>
+        <script type="text/javascript">
+            if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+                clicked( 'login.html');
+            }
+            var dianji=false;
+            function xianshi(id){ 
+        		if(dianji==true){
+        			dianji=false;
+        			return false;
+        		}
+        		if($("#" + id).attr("xs")=="0"){
+        			$("#" + id).attr("xs","1");
+					$("#" + id).find("div").show();
+				}else{
+					$("#" + id).attr("xs","0");
+					$("#" + id).find("div").hide();
+					
+					$("#" + id).find(".xxs").show();
+				}
+			}
+        </script>
+	</head>
+
+	<body>
+
+    <header class="mui-bar mui-bar-nav" style="position:fixed; top: 0; background-color:#046AB2">
+    <a class="mui-icon mui-icon-left-nav mui-pull-left" style="color:#fff" href='javascript:void(0);' onclick="back()"></a>
+    <h1 class="mui-title" style="color:#fff">积分明细</h1>
+    
+</header>
+		
+		
+        <div   style="background-color:#fff; margin-top: 51px;">
+            <!--<div  class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted"  style=" border-bottom:  dashed #0168B7 1px; position: fixed; z-index: 9; background: #fff;  top: 44px;"  >
+                <a  class="jja jjb"  id="xxt2"  onclick="xs(2);">线下订单</a>
+                <a  class="jja" id="xxt1"  onclick="xs(1);">线上订单</a> 
+                <a  class="jja"  id="xxt3"  onclick="xs(3);">积分明细</a>
+            </div> -->
+            
+            <div class="mui-slider-group" style="margin-bottom:64px; margin-top: 60px;">
+                <div id="item2mobile" class="mui-control-content" style="height: initial;border-bottom:0;">
+                    <div class="refine-details">
+                        <ul id="offline"></ul>
+                    </div>
+                </div>
+                <div id="item3mobile" class="mui-control-content" style="height: initial;border-bottom:0; ">
+                    <div class="refine-details">
+                    	
+                    	<div style="height: 2.9rem; width: 100%; background-color: #fff; position: fixed; margin-top: -1rem;border-bottom:	#CCCCCC solid 1px;z-index: 12;">
+                    		<div class="onldiv2 onll" onclick="chag2(1,this);">获赠积分</div>
+                    		<div class="onldiv2" onclick="chag2(2,this);">奖励积分</div>
+                    		<div class="onldiv2" onclick="chag2(3,this);">待用积分</div> 
+                    		<div class="onldiv2" onclick="chag2(4,this);">商品详情</div>
+                    		
+                    	</div>
+                    	
+                        <ul id="daigou" style=" padding-top: 2.65rem;"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+<script>
+	var tokens=localStorage.getItem ("token");
+	var orderState="1";
+	var page=1;
+	 
+
+
+	function viewnextoff(){
+		$("#fanyeoff").remove();		
+		offpage=parseInt(offpage)+1;
+		getOrderOffline();
+	}
+	
+	
+	function chag2(id,tt){
+		$(".onldiv2").attr("class","onldiv2");
+		$(tt).attr("class","onldiv2 onll");
+		jfpage=1;
+		jftype=id;
+		getOrtherList();
+	}
+	
+	function viewnextjf(){
+		$("#fanyejf").remove();	 
+		jfpage=parseInt(jfpage)+1;
+		getOrtherList();
+	}
+	
+	 
+	function viewnext(){
+		$("#fanye").remove();
+		page=parseInt(page)+1;
+		getData();
+	}
+
+	$("#item2mobile").show();
+	function xs(iid){		 
+		$(".jja").attr("class","jja");
+		$("#xxt"+iid).attr("class","jja jjb");
+		
+		$(".mui-control-content").hide();
+		$("#item" + iid + "mobile").show();
+	}
+	
+	var jfpage=1;
+	var jftype=1;
+	
+	function getOrtherList(){
+		$.fn.Util().ajax({
+			url : 'http://www.tanglikeji.com/api.php/jifen/getlist',
+			data : {
+				'cookie':tokens,'type':jftype,'page':jfpage
+			},
+			beforeFn:function(){
+				layer.open({
+					type: 2,
+					content: '加载中',
+					shadeClose:false
+				});
+			},
+		}).done(function(data){
+			 
+			layer.closeAll();			
+			if(jfpage==1){
+				$("#daigou").html('');
+			}
+			var list = data.data.list;
+			for(i in list){
+				
+				
+			console.error(  JSON.stringify( list[i] ) );
+			    
+				if(jftype==1){
+					html = '<li style="border-bottom: 1px solid #e2e2e2;">'+
+                                '<div class="one">'+
+                                    '<p class="onr-let" style="width:247px;">'+
+                                        '<img src="../images/icon/icon-i15.png">'+
+                                        '<span class="list-muen">获赠日期</span>'+
+                                        '<span class="list-nr" style="width:140px;">'+list[i].addtime+'</span>'+
+                                    '</p>'+
+                                    '<p class="onr-rgh">'+
+                                        '<img src="../images/icon/icon-i37.png">'+
+                                        '<span>完成</span>'+
+                                    '</p>'+
+                                '</div>'+
+                                '<div class="one">'+
+                                    '<p class="onr-let">'+
+                                        '<img src="../images/icon/icon-i14.png">'+
+                                        '<span class="list-muen">通用积分</span>'+
+                                        '<span class="list-nr" style="width:150px;">'+list[i].normal_point+'</span>'+
+                                    '</p>'+
+                                '</div>'+
+                                '<div class="one">'+
+                                    '<p class="onr-let">'+
+                                        '<img src="../images/icon/icon-i5.png">'+
+                                        '<span class="list-muen">万华积分</span>'+
+                                        '<span class="list-nr" style="width:68%;">'+list[i].mall_point+'</span>'+
+                                        '<div style="clear:both;"></div>' +
+                                    '</p>'+
+                                '</div>'+
+                                '<div class="one">'+
+                                    '<p class="onr-let">'+
+                                        '<img src="../images/icon/icon-i9.png">'+
+                                        '<span class="list-muen">爱心基金</span>'+
+                                        '<span class="list-nr">￥'+list[i].happy_point+'</span>'+
+                                    '</p>'+
+                                '</div>'+
+                            '</li>';
+					$("#daigou").append(html);
+				}
+				
+				
+				if(jftype==2){ //奖励积分
+					html = '<li style="border-bottom: 1px solid #e2e2e2;">'+
+                                '<div class="one">'+
+                                    '<p class="onr-let" style="width:247px;">'+
+                                        '<img src="../images/icon/icon-i15.png">'+
+                                        '<span class="list-muen">奖励时间</span>'+
+                                        '<span class="list-nr" style="width:140px;">'+list[i].createtime+'</span>'+
+                                    '</p>'+
+                                    '<p class="onr-rgh">'+
+                                        '<img src="../images/icon/icon-i37.png">'+
+                                        '<span>完成</span>'+
+                                    '</p>'+
+                                '</div>'+
+                                '<div class="one">'+
+                                    '<p class="onr-let">'+
+                                        '<img src="../images/icon/icon-i14.png">'+
+                                        '<span class="list-muen">获得积分</span>'+
+                                        '<span class="list-nr" style="width:150px;">'+list[i].real_point+'</span>'+
+                                    '</p>'+
+                                '</div>'+
+                                '<div class="one">'+
+                                    '<p class="onr-let">'+
+                                        '<img src="../images/icon/icon-i5.png">'+
+                                        '<span class="list-muen">积分来源</span>'+
+                                        '<span class="list-nr" style="width:68%;">'+list[i].from_cn+'</span>'+
+                                        '<div style="clear:both;"></div>' +
+                                    '</p>'+
+                                '</div>'+ 
+                            '</li>';
+					$("#daigou").append(html); 
+				}
+				
+				
+				
+				
+				if(jftype==3){ //奖励积分
+					html = '<li style="border-bottom: 1px solid #e2e2e2;">'+
+                                '<div class="one">'+
+                                    '<p class="onr-let" style="width:247px;">'+
+                                        '<img src="../images/icon/icon-i15.png">'+
+                                        '<span class="list-muen">时间</span>'+
+                                        '<span class="list-nr" style="width:140px;">'+list[i].createtime+'</span>'+
+                                    '</p>'+
+                                    '<p class="onr-rgh">'+
+                                        '<img src="../images/icon/icon-i37.png">'+
+                                        '<span>完成</span>'+
+                                    '</p>'+
+                                '</div>'+
+                                '<div class="one">'+
+                                    '<p class="onr-let">'+
+                                        '<img src="../images/icon/icon-i14.png">'+
+                                        '<span class="list-muen">待用积分</span>'+
+                                        '<span class="list-nr" style="width:150px;">'+list[i].total_point+'</span>'+
+                                    '</p>'+
+                                '</div>'+
+                                '<div class="one">'+
+                                    '<p class="onr-let">'+
+                                        '<img src="../images/icon/icon-i5.png">'+
+                                        '<span class="list-muen">积分更改</span>'+
+                                        '<span class="list-nr" style="width:68%;">'+list[i].fee+'</span>'+
+                                        '<div style="clear:both;"></div>' +
+                                    '</p>'+
+                                '</div>'+ 
+                                '<div class="one">'+
+                                    '<p class="onr-let">'+
+                                        '<img src="../images/icon/icon-i9.png">'+
+                                        '<span class="list-muen">积分来源</span>'+
+                                        '<span class="list-nr" style="width:68%;">'+list[i].from_sn+'</span>'+
+                                        '<div style="clear:both;"></div>' +
+                                    '</p>'+
+                                '</div>'+ 
+                            '</li>';
+					$("#daigou").append(html); 
+				}
+				
+				
+				
+				if(jftype==4){ //商品积分
+					html = '<li style="border-bottom: 1px solid #e2e2e2;">'+
+                                '<div class="one">'+
+                                    '<p class="onr-let" style="width:247px;">'+
+                                        '<img src="../images/icon/icon-i15.png">'+
+                                        '<span class="list-muen">时间</span>'+
+                                        '<span class="list-nr" style="width:140px;">'+list[i].receiveTime+'</span>'+
+                                    '</p>'+
+                                    '<p class="onr-rgh">'+
+                                        '<img src="../images/icon/icon-i37.png">'+
+                                        '<span>完成</span>'+
+                                    '</p>'+
+                                '</div>'+
+                                '<div class="one">'+
+                                    '<p class="onr-let">'+
+                                        '<img src="../images/icon/icon-i14.png">'+
+                                        '<span class="list-muen">万华积分</span>'+
+                                        '<span class="list-nr" style="width:150px;">'+list[i].mall_point+'</span>'+
+                                    '</p>'+
+                                '</div>'+
+                                '<div class="one">'+
+                                    '<p class="onr-let">'+
+                                        '<img src="../images/icon/icon-i5.png">'+
+                                        '<span class="list-muen">通用积分</span>'+
+                                        '<span class="list-nr" style="width:68%;">'+list[i].normal_point+'</span>'+
+                                        '<div style="clear:both;"></div>' +
+                                    '</p>'+
+                                '</div>'+ 
+                                '<div class="one">'+
+                                    '<p class="onr-let">'+
+                                        '<img src="../images/icon/icon-i9.png">'+
+                                        '<span class="list-muen">当前状态</span>'+
+                                        '<span class="list-nr" style="width:68%;">'+list[i].orderState_sn+'</span>'+
+                                        '<div style="clear:both;"></div>' +
+                                    '</p>'+
+                                '</div>'+ 
+                                '<div class="one">'+
+                                    '<p class="onr-let">'+
+                                        '<img src="../images/icon/icon-i1.png">'+
+                                        '<span class="list-muen">订单编号</span>'+
+                                        '<span class="list-nr" style="width:68%;">'+list[i].orderNum+'</span>'+
+                                        '<div style="clear:both;"></div>' +
+                                    '</p>'+
+                                '</div>'+ 
+                            '</li>';
+					$("#daigou").append(html); 
+				}
+				
+				
+			}
+		if(data.data.hasnext==1){  
+				html='<div style="width:100%;font-size:1rem; color:#FFFFFF; text-align:center; background-color:#0066FF; height:2rem; line-height:2rem; " onclick="viewnextjf();" id="fanyejf">点击查看下一页</div>';
+				$("#daigou").append(html);
+		}
+            
+		}).fail(function(err){
+			layer.open({'content':err.msg});
+		})
+	}
+
+</script>
+</body></html>

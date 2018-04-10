@@ -1,0 +1,139 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css">
+		<link rel="stylesheet" href="../css/line.css">
+		<link rel="stylesheet" href="../css/profit.css" />
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+	    <script type="text/javascript" src="../js/common.js" ></script>
+		<script src="../js/util.js"></script>
+		<script src="../js/layer2.0/layer.js"></script>
+		<script type="text/javascript" src="../js/common.js" ></script>
+		<script src="../js/ad_check_list.js" ></script>		
+        <script type="text/javascript">
+            if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+                clicked('login.html');
+            }
+            
+             function tonguo(id){
+            	var ts="您确定要通过审核吗?";
+            	layer.open({
+					content: ts,
+					btn: ['确定', '取消'],
+					yes: function(index){
+						
+						
+						
+						
+						$.fn.Util().ajax({
+							url : 'http://www.tanglikeji.com/api.php/Ad/dosh',
+							data :{'cookie':tokens,'oid':id,'check':1},
+							beforeFn:function(){
+								layer.open({
+									type: 2,
+									content: '加载中',
+									shadeClose:false
+								});
+							},			
+						}).done(function(res){
+							
+							if(res.data.state == 'ok'){
+								layer.open({
+									'content':'操作成功',
+									end:function(){location.reload();}
+								});
+							}else{
+								layer.open({
+									content:res.data.msg,														
+								})	
+							}
+								
+							
+						});
+						
+						
+						
+						
+						
+						
+						location.reload();
+						
+					}
+            	});
+            	
+            	
+            }
+             
+              function bohui(id){
+            	var ts="您确定要驳回吗?";
+            	layer.open({
+					content: ts,
+					btn: ['确定', '取消'],
+					yes: function(index){
+						
+						
+						
+						
+						$.fn.Util().ajax({
+							url : 'http://www.tanglikeji.com/api.php/Ad/dosh',
+							data :{'cookie':tokens,'oid':id,'check':0},
+							beforeFn:function(){
+								layer.open({
+									type: 2,
+									content: '加载中',
+									shadeClose:false
+								});
+							},			
+						}).done(function(res){
+							
+							if(res.data.state == 'ok'){
+								layer.open({
+									'content':'操作成功',
+									end:function(){location.reload();}
+								});
+							}else{
+								layer.open({
+									content:res.data.msg,																
+								})	
+							}
+								
+							
+						});
+						
+						
+						
+						
+						
+						
+						location.reload();
+						
+					}
+            	});
+            	
+            	
+            }
+        </script>
+        
+        
+	</head>
+
+	<body>
+		<header class="header" >
+			<a href="frame4.html" class="back"></a>
+			<h1 class="tit">广告列表</h1>
+            <!--<button class="edit" id="all-edit" onclick="location.href='shop_user_add.html'">开通</button>-->
+		</header>
+		<div class="content" style="margin-top: 60px;">
+			<div class="refine-details">
+                <ul id="list"></ul>
+                <div style="text-align: center;">
+                	<button class="page_btn" id="page_pre">上一页</button>
+                	<button class="page_btn" id="page_next">下一页</button>	
+                </div>
+            </div>
+
+</body></html>

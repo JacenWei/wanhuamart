@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
+		<title></title>
+		<link rel="stylesheet" href="../css/profit.css" />
+		<link rel="stylesheet" href="../css/public.css" />
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/util.js"></script>
+		<script src="../js/shop_qb.js?d=2d"></script>
+		<script src="../js/layer2.0/layer.js"></script>
+	    <script src="../js/common.js"></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				clicked( 'login.html' );
+			}
+		</script>
+		<style>
+			.header .back:before {
+			    content: '\e471';
+			    line-height: 44px;
+			    color: #0168B7;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="header" style="background-color:#fff;">
+			<a class="back"  id="frame4.html" onclick="clicked(this.id)" style=""></a>
+			<h1 class="tit" style="color:#000">商家钱包</h1>
+		</header>
+		<div class="content" style="	margin-top: 45px;" >
+			<div class="profit-top">
+				<div class="profit-pic">
+					<span>
+						<img src="../images/shop_qb_white.png" style="    width: 60px;padding: 10px;">
+					</span>
+				</div>
+				<div class="profit-cont"><a href="#" class="pro-ifi" style="margin-left: 10px; color: #fff;">
+								充值金额
+								<!--<span class="total_point">0</span>-->
+						</a>
+					<p class="pro-current"><span class="now_point">0</span></p>
+					<div class="pro-td">
+						<a href="javascript:void(0);" class="pro-cum" style="font-size: 16px; margin-left: 15px;">
+							保证权:
+							<span id="shop_rights">0</span>
+						</a>
+                                    <!--
+						<a href="#" class="pro-cum">
+							累计收益
+							<span>20216</span>
+						</a>
+                                    -->
+					</div>
+				</div>
+			</div>
+			<!--
+            	时间：2016-06-16
+            	描述：收益top
+            -->
+            <div class="line">
+				<ul id="list"></ul>
+			</div>			
+            <div class="profit-details">
+              	<ul>
+              		<li>
+              			<a id="cz_return.html" onclick="clicked(this.id)">
+              				<p class='rangli'>0</p>
+              				<span>让利金额</span>
+              			</a>
+              		</li>              		
+              		<li>
+              			<a id="promise.html" onclick="clicked(this.id)">
+              				<p class='baozhengjin'>0</p>
+              				<span>保证金</span>
+              			</a>
+              		</li>
+              		<li>
+              			<a id="huokuan.html"  onclick="clicked(this.id)">
+              				<p class='huokuan'>0</p>
+              				<span>货款</span>
+              			</a>
+              		</li>
+              	</ul>
+            </div>                  
+		</div>
+	</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
+		<title></title>
+		<link rel="stylesheet" href="../css/profit.css" />
+		<link rel="stylesheet" href="../css/public.css" />
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/util.js"></script>
+		<script src="../js/layer2.0/layer.js"></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				clicked( 'login.html' );
+			}
+		</script>
+		<style>
+			.header .back:before {
+			    content: '\e471';
+			    line-height: 44px;
+			    color: #0168B7;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="header" style="background-color:#fff;">
+			<a class="back"  id="frame4.html" onclick="clicked(this.id)" style=""></a>
+			<h1 class="tit" style="color:#000">区域业绩</h1>
+		</header>
+		<div class="content" style="	margin-top: 45px;" >
+			<div style="margin-top: 20px;width: 100%;text-align: center;line-height: 40px;font-weight: bold;text-align: center;"><input style="border:1px #007AFF solid;border-radius:5px;font-weight: bold;font-size: 16px;" type="month" id="selectmonth" value=""/></div>
+			
+			<div class="profit-top">
+				<div class="profit-pic">
+					<span>
+						<img src="../images/shop_qb_white.png" style="    width: 60px;padding: 10px;">
+					</span>
+				</div>
+			
+				<div class="profit-cont">
+					
+					<a  href="javascript::void(0)" >
+					<div style="border: 1px #ffffff solid;width: 30%;color:#ffffff;border-radius: 5px;padding: 5px;float: left;font-size: 16px;">当月<br/><br/>
+						<p class="pro-current-month"><span class="total_money_month">0</span></p>
+					</div>
+					</a>
+					<a href="javascript::void(0)">
+					<div style="margin-left: 10px;border: 1px #ffffff solid;width: 30%;color:#ffffff;border-radius: 5px;padding: 5px;float: left;font-size: 16px">总计<br/><br/>
+						<p class="pro-current-month"><span class="total_money">0</span></p>
+					</div>
+					</a>
+			<br/><br/><br/><br/><br/>
+					<div class="pro-td">
+						<a href="javascript:void(0);" class="pro-cum" style="font-size: 16px; margin-left: 15px;">
+							商家总数量:
+							<span id="total_shop">0</span>
+						</a>
+                                    <!--
+						<a href="#" class="pro-cum">
+							累计收益
+							<span>20216</span>
+						</a>
+                                    -->
+					</div>
+				</div>
+			</div>
+			<!--
+            	时间：2016-06-16
+            	描述：收益top
+            -->
+            <div class="line">
+				<ul id="list"></ul>
+			</div>			
+            <div class="profit-details">
+              	<ul>
+              		<li>
+              			<a id="agent_shop_point_on" onclick="clicked('agent_shop_point_on.html')">
+              				<p class='total_shop_on'>0</p>
+              				<span>上线商家</span>
+              			</a>
+              		</li>              		
+              		<li>
+              			<a id="agent_shop_point_off" onclick="clicked('agent_shop_point_off.html')">
+              				<p class='total_shop_off'>0</p>
+              				<span>下线商家</span>
+              			</a>
+              		</li>
+              		 
+              	</ul>
+            </div>                  
+		</div>
+	</body>
+</html>
+
+<script>
+	
+function GetQueryString(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return '';
+}
+	
+	$(function(){
+		var currDate = getNowFormatDate();
+		var ddd = GetQueryString('date');
+		if(ddd!=null && ddd.length>0){
+			$('#agent_shop_point_on').attr("onclick","clicked('agent_shop_point_on.html?date="+ddd+"')")	
+		$('#agent_shop_point_off').attr("onclick","clicked('agent_shop_point_off.html?date="+ddd+"')")	
+		
+		}else{
+			$('#agent_shop_point_on').attr("onclick","clicked('agent_shop_point_on.html?date="+currDate+"')")	
+		$('#agent_shop_point_off').attr("onclick","clicked('agent_shop_point_off.html?date="+currDate+"')")	
+		
+		}
+		
+		
+		$("#selectmonth").val(currDate);
+		$('#a-currmonth').attr("onclick","clicked('agent_shop_point_main.html?date="+currDate+"')")	
+	var token = localStorage.getItem('token');
+	userInfo = JSON.parse(localStorage.getItem('userInfo'));
+	$(".total_point").html(userInfo.point);	
+	getData();
+	
+	
+	$('#selectmonth').change(function(){
+		
+		currDate = $(this).val();
+		$('#a-currmonth').attr("onclick","clicked('agent_shop_point_main.html?date="+currDate+"')")	
+		$('#agent_shop_point_on').attr("onclick","clicked('agent_shop_point_on.html?date="+currDate+"')")	
+		$('#agent_shop_point_off').attr("onclick","clicked('agent_shop_point_off.html?date="+currDate+"')")			
+		
+		getData();
+	})
+	
+	function getData(){
+		$.fn.Util().ajax({
+			url : 'http://www.tanglikeji.com/api.php/Ucenter/agent_shop_point_main',
+			data : {'cookie':token,'date':currDate},
+			beforeFn:function(){
+				layer.open({
+					type: 2,
+					content: '加载中',
+					shadeClose:false
+				});
+			},			
+		}).done(function(data){
+			console.log(JSON.stringify( data  ) );
+			layer.closeAll();
+			if(data.state == 'ok'){				
+				$(".total_money").html(data.data.total_money);
+				$(".total_money_month").html(data.data.total_money_month);
+				
+				$("#total_shop").html(data.data.total_shop_on);
+				$(".total_shop_on").html(data.data.total_shop_on);
+				$(".total_shop_off").html(data.data.total_shop_off);
+				 
+			}
+		}).fail(function(err){
+			layer.open({'content':err.msg});
+		})
+	}
+	
+});
+	function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month 
+    return currentdate;
+}
+</script>

@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css">
+		<link rel="stylesheet" href="../css/line.css">
+		<link rel="stylesheet" href="../css/profit.css" />
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+	    <script type="text/javascript" src="../js/common.js" ></script>
+		<script src="../js/util.js"></script>
+		<script src="../js/layer2.0/layer.js"></script>
+		<script type="text/javascript" src="../js/common.js" ></script>
+		<script src="../js/agent_shop_list.js?aa=asda" ></script>		
+        <script type="text/javascript">
+            if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+                clicked('login.html');
+            }
+        </script>
+        
+        
+	</head>
+
+	<body>
+		<header class="header" >
+			<a href="frame4.html" class="back"></a>
+			<h1 class="tit">商家列表</h1>
+            <!--<button class="edit" id="all-edit" onclick="location.href='shop_user_add.html'">开通</button>-->
+		</header>
+		<div class="content" style="margin-top: 60px;">
+			<div class="refine-details">
+                <ul id="list"></ul>
+                <div style="text-align: center;">
+                	<button class="page_btn" id="page_pre">上一页</button>
+                	<button class="page_btn" id="page_next">下一页</button>	
+                </div>
+            </div>
+
+</body></html>

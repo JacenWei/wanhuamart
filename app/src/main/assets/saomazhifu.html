@@ -1,0 +1,459 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <title>向商户付款</title> 
+    <link rel="stylesheet" href="../css/default.css">
+    <link rel="stylesheet" href="../css/spay_scan.css">
+        <script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+		<script src="../js/util.js"></script>
+	    <script type="text/javascript" src="../js/common.js" ></script>
+		<script src="../js/layer2.0/layer.js"></script> 
+		<link rel="stylesheet" href="../css/public.css" /><!--公用css-->
+		
+		<script>
+			var shopid=0;
+			$(function(){
+				
+				var token = localStorage.getItem('token');
+				var saoma=localStorage.getItem('saoma');
+				
+				 console.log(saoma);
+				
+				tel = saoma.split(':');
+				
+				if(tel[2]!=0){
+					$("#amount").html(   format2(  tel[2]   ) );
+					valueFinal=tel[2];
+					$("#clearBtn").hide();
+					$(".keyboard").hide();
+					$("#line").hide();
+					$(".keyboard2").show();
+					 
+				}else{
+					$(".keyboard").show();
+					$(".keyboard2").hide();					
+				}
+		    	$.fn.Util().ajax({
+					url : 'http://www.tanglikeji.com/api.php/Ucenter/getShopByTel',
+					data : {'cookie':token,'tel':tel[1]},
+					beforeFn:function(){
+						layer.open({
+							type: 2,
+							content: '加载中',
+							shadeClose:false
+						});
+					},
+				}).done(function(data){
+					
+					console.log(  JSON.stringify( data  ) );
+					layer.closeAll();
+					if(data.state == 'err'){
+						scan.close();
+						$.fn.Util().alert_msg(data.msg,function(){						
+							clicked("frame1.html");
+						});
+						return;
+					}
+					shopid = data.data.id;
+					$("#sjname").html(data.data.title);	
+			    	  
+				}).fail(function(err){
+					layer.open({'content':err.msg});
+				});
+		    	
+				
+			});
+			
+		</script>
+		
+</head>
+<body>
+  
+	<header class="header"  >
+		<a class="back" href="frame4.html"></a>
+		<h1 class="tit">万华商城扫码支付</h1>
+	</header>
+		<div id="skbg" onclick1="$('#skbg').hide();$('#skqg').hide();" style=" display: none;  position: fixed; top: 0; left: 0; height: 100%; width: 100%;  background-color: #000; opacity: 0.9; z-index: 13411;"></div>
+		<div id="skqg" style="  display: none; position: fixed; bottom: 30%; height: 200px; width:80%; left: 10%; background-color:#fff; border: #f1f1f1 solid 1px; z-index: 13511;">
+			<div style="height: 40px; border-bottom: #e6e6e6 solid 1px;background-color:#efefef; line-height: 40px; font-size: 18px; text-align: center;">
+				请输入支付密码
+				<img src="../images/sys-close.png" style="width: 25px; height: 25px; position: absolute; right: 10px; top: 5px;"
+					onclick="$('#skbg').hide();$('#skqg').hide();"
+					>
+			</div>
+			<input type="password" id="paypass" style=" height: 40px; width: 90%;  margin-top: 30px; text-align: center; border:double #0168B7 1px; font-size: 18px;" placeholder="请在此输入支付密码" />
+			<input type="button" onclick="zhifu();" value="确认支付" style=" width: 60%;  height: 40px; line-height: 30px; background-color:#0168B7; color: #fff; font-size: 16px;   margin-top: 30px; border:#e2e2e2 solid 1px; border-radius: 5px;" />
+		</div>
+		
+		
+		
+    <div class="layout-flex" >
+        <!-- content start -->
+        <div class="content" style="min-height: 290px;">
+            <p class="sico_pay_p"><span class="sico_pay"></span></p>
+            <div class="amount_title"><em>向</em><span id="sjname" style="font-size: 16px; margin-left: 3px; margin-right: 3px; color: #4182E2;"></span><em>付款</em></div>
+            <div class="set_amount">
+                <div class="amount_hd">消费总额</div>
+                <div class="amount_bd">
+                    <i class="i_money">¥</i>
+                    <span class="input_simu" id="amount"></span>
+                    <!-- 模拟input -->
+                    <em class="line_simu" id="line"></em>
+                    <!-- 模拟闪烁的光标 -->
+                    <div class="clearBtn none" id="clearBtn"><b class="btn_clear"></b></div>
+                    <!-- 清除按钮 -->
+                </div>
+            </div>
+            <p class="remark"><span id="remarkBtn">付款备注</span></p>
+        </div>
+        <!-- content end -->
+		<div class="keyboard2" onclick="pdje();" style="display: none; position:absolute;bottom: 200px; width: 200px; background-color:#0168B7; height: 45px; line-height: 45px; font-size: 16px; color: #fff;left: 50%; margin-left: -100px;">
+			确认支付	
+		</div>
+        <!-- 键盘 -->
+        <div class="keyboard" style="display: none;">
+            <table class="key_table" id="keyboard">
+                <tr>
+                    <td class="key border b_rgt_btm" data-value="1">1</td>
+                    <td class="key border b_rgt_btm" data-value="2">2</td>
+                    <td class="key border b_rgt_btm" data-value="3">3</td>
+                    <td class="key border b_btm clear" data-value="delete"></td>
+                </tr>
+                <tr>
+                    <td class="key border b_rgt_btm" data-value="4">4</td>
+                    <td class="key border b_rgt_btm" data-value="5">5</td>
+                    <td class="key border b_rgt_btm" data-value="6">6</td>
+                    <td class="pay_btn disable" rowspan="3" id="payBtn">付<br />款</td>
+                </tr>
+                <tr>
+                    <td class="key border b_rgt_btm" data-value="7">7</td>
+                    <td class="key border b_rgt_btm" data-value="8">8</td>
+                    <td class="key border b_rgt_btm" data-value="9">9</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="key border b_rgt" data-value="0">0</td>
+                    <td class="key border b_rgt" data-value="dot">.</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 添加备注弹窗 -->
+        <div class="pop-wrap none" id="remarkPop">
+            <div class="pop_remark">
+                <div class="pop_title">添加付款备注</div>
+                <div class="input_wrap border b_all2">
+                    <input type="text" id="remarkInput" maxlength="60" placeholder="最多输入60个字符">
+                </div>
+                <div class="btn_wrap border b_top">
+                    <span id="remarkCancel">取消</span>
+                    <span class="border b_lft" id="remarkConfirm">确定</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="none">
+        <input type="hidden" id="mchId" value="101500007766">
+        <input type="hidden" id="userId" value="1789655">
+        <input type="hidden" id="sign" value="">
+        <input type="hidden" id="mchName" value="豪享来南阳南航店">
+        <input type="hidden" id="outTradeNo" value="">
+        <input type="hidden" id="body" value="移动支付">
+        <input type="hidden" id="client" value="SPAY_IOS">
+        <input type="hidden" id="userName" value="">
+        <input type="hidden" id="payType" value="">
+        <input type="hidden" id="openID" value="">
+        <input type="hidden" id="subOpenID" value="ovNm4s3W2xmzhdIVW6qccfpeuZLQ">
+        <input type="hidden" id="basePath" value="https://spay3.swiftpass.cn/spay">
+    </div>
+    
+    <script src="../js/hammer.js"></script>
+    <script src="../js/saomafukuan.js"></script>
+    <script>
+    //insert
+    function keypress(e){
+        e.preventDefault();
+        var target = e.target;
+        var value = target.getAttribute('data-value');
+        var dot = valueCur.match(/\.\d{2,}$/);
+        if(!value || (value !== 'delete' && dot)){
+            return;
+        }
+        switch(value){
+            case '0' :
+                valueCur = valueCur === '0' ? valueCur : valueCur + value;
+                break;
+            case 'dot' : 
+                valueCur = valueCur === '' ? valueCur : valueCur.indexOf('.') > -1 ? valueCur : valueCur + '.'; 
+                break;
+            case 'delete' : 
+                valueCur = valueCur.slice(0,valueCur.length-1);
+                break;
+            default : 
+                valueCur = valueCur === '0' ? value : valueCur + value;
+        }
+        format();
+    }
+
+    //format
+    function format2(str){
+        var arr = str.split('.');
+        var right = arr.length === 2 ? '.'+arr[1] : '';
+        var num = arr[0];
+        var left = '';
+        while(num.length > 3){
+            left = ',' + num.slice(-3) + left;
+            num = num.slice(0,num.length - 3);
+        }
+        left = num + left;
+        return left+right;
+        
+    }
+    function format(){
+        var arr = valueCur.split('.');
+        var right = arr.length === 2 ? '.'+arr[1] : '';
+        var num = arr[0];
+        var left = '';
+        while(num.length > 3){
+            left = ',' + num.slice(-3) + left;
+            num = num.slice(0,num.length - 3);
+        }
+        left = num + left;
+        valueFormat = left+right;
+        valueFinal = valueCur === '' ? 0 : parseFloat(valueCur);
+        check();
+    }
+
+    //check
+    function check(){
+        amount.innerHTML = valueFormat;
+        if(valueFormat.length > 0){
+            clearBtn.classList.remove('none');
+        }else{
+            clearBtn.classList.add('none');
+        }
+        if(valueFinal === 0 || valueCur.match(/\.$/)){
+            payBtn.classList.add('disable');
+        }else{
+            payBtn.classList.remove('disable');
+        }
+    }
+
+    //clear
+    function clearFun(){
+        valueCur = '';
+        valueFormat = '';
+        valueFinal = 0;
+        amount.innerHTML = '';
+        clearBtn.classList.add('none');
+        payBtn.classList.add('disable');
+    }
+
+    //show remark
+    function remarkShowFun(){
+        remarkPop.classList.remove('none');
+    }
+
+    //cancel remark
+    function remarkCancelFun(){
+        var value = remarkBtn.innerHTML === '付款备注' ? '' : remarkBtn.innerHTML;
+        remarkInput.value = value;
+        remarkPop.classList.add('none');
+    }
+
+    //confirm remark
+    function remarkConfirmFun(){
+        var value = trim(remarkInput.value) || '付款备注';
+        remarkBtn.innerHTML = value;
+        remarkPop.classList.add('none');
+    }
+	function pdje(){
+		
+		if(valueFinal === 0){
+            tips.show('请输入金额！');
+            return;
+        }
+
+        if(valueFinal > 3000){
+            tips.show('支付金额不能大于三千');
+            return;
+        }
+		$('#skbg').show();
+		$('#skqg').show();
+		
+		$("#paypass").val(''); 
+		$("#paypass").focus();
+		return false;
+		
+	}
+	
+	function zhifu(){	
+		
+		var userInfo = JSON.parse(localStorage.getItem('userInfo')); 
+		
+		user_name=userInfo['uname'];
+		product_name="扫码付";
+		product_num=1;
+		product_price= $("#amount").html().replace(",","");
+		product_param="";
+		buyer_name="";
+		buyer_add="";
+		buyer_mobile="";
+		psw = $("#paypass").val();
+		code = "";
+		
+		
+		$.fn.Util().ajax({
+			url : 'http://www.tanglikeji.com/api.php/Ucenter/dojfbuy_saoma',
+			data : {
+				'user_name' : user_name,
+				'product_name' : product_name,
+				'product_num' : product_num,
+				'product_price' : product_price,
+				'product_param' : product_param,
+				'buyer_name' : buyer_name,				
+				'buyer_add' : buyer_add,
+				'buyer_mobile' : buyer_mobile,
+				'shopid' : shopid,
+				'code' : code,
+				'psw' : psw,
+			},
+			beforeFn:function(){
+				layer.open({
+					type: 2,
+					content: '加载中',
+					shadeClose:false
+				});
+			},
+		}).done(function(data){
+			layer.closeAll();			
+			if(data.state == 'ok'){
+				$.fn.Util().alert_msg(data.msg,function(){
+					
+					localStorage.setItem("amount",$("#amount").html());
+					
+					location.href='saomaok.html';
+				});
+			}else if(data.state == 'out'){
+				$.fn.Util().alert_msg('请先登录',function(){location.href='login.html';});
+			}else{
+				$.fn.Util().alert_msg(data.msg);
+			}
+		}).fail(function(err){
+			layer.open({'content':err.msg});
+		})
+		
+		
+		
+		
+		//location.href="saomaok.html";
+		return false;
+	}
+    //submit
+    function submitFun(){
+        if(!submitAble || payBtn.classList.contains('disable')){
+            return;
+        }
+        if(valueFinal === 0){
+            tips.show('请输入金额！');
+            return;
+        }
+
+        if(valueFinal > 3000){
+            tips.show('支付金额不能大于三千');
+            return;
+        }
+		$('#skbg').show();
+		$('#skqg').show();
+		$("#paypass").val('').focus();
+		return false;
+		
+		$(".keyboard").hide();
+        submitAble = false;
+        loading.show();
+
+        data.money = Math.round(valueFinal*100);
+        data.attach = trim(remarkInput.value);
+		
+		
+        new Post({
+            url : '/spay/fixedCodePay',
+            data : data,
+            error : function(){
+                loading.hide();
+                submitAble = true;
+                tips.show('网络异常，请稍后重试！');
+            },
+            success : function(response){
+                var basePath = getId('basePath').value;
+                if(response.status == 200){
+                    var payInfo = response.message;
+                    WeixinJSBridge.invoke('getBrandWCPayRequest',{
+                        "appId": payInfo.appId, //公众号名称，由商户传入
+                        "timeStamp": payInfo.timeStamp, //时间戳，自1970 年以来的秒数
+                        "nonceStr": payInfo.nonceStr, //随机串
+                        "package": payInfo.package,
+                        "signType": payInfo.signType, //微信签名方式:
+                        "paySign": payInfo.paySign//微信签名,
+                    },function(res){
+                        if (res.err_msg == "get_brand_wcpay_request:ok") {
+                            // 此处可以使用此方式判断前端返回,微信团队郑重提示：res.err_msg 将在用户支付成功后返回ok，但并不保证它绝对可靠。
+                            location.href =  "/spay/getCallbackUrl?mchId=" + payInfo.mchId + "&userId=" + payInfo.userId + "&outTradeNo=" + payInfo.outTradeNo + "&payType=" + payInfo.payType;
+                        }
+                    });
+                }else if(response.status == 201){
+                    location.href = "/spay/jumpToReduce?map="
+                    + JSON.stringify(response.message);
+                }else{
+                    tips.show(response.message);
+                }
+                loading.hide();
+                submitAble = true;
+            }
+        });
+
+    }
+
+    var keyboard = getId('keyboard');
+    var amount = getId('amount');
+    var clearBtn = getId('clearBtn');
+    var payBtn = getId('payBtn');
+    var remarkBtn = getId('remarkBtn');
+    var remarkPop = getId('remarkPop');
+    var remarkInput = getId('remarkInput');
+    var remarkCancel = getId('remarkCancel');
+    var remarkConfirm = getId('remarkConfirm');
+    var valueCur = '';
+    var valueFormat = '';
+    var valueFinal = 0;
+    var submitAble = true;
+    var data = {
+        mchId : getId('mchId').value,
+        userId : getId('userId').value,
+        sign : getId('sign').value,
+        mchName : getId('mchName').value,
+        outTradeNo : getId('outTradeNo').value,
+        body : getId('body').value,
+        client : getId('client').value,
+        userName : getId('userName').value,
+        payType : getId('payType').value,
+        openID : getId('openID').value,
+        subOpenID : getId('subOpenID').value
+    };
+
+    new Hammer(keyboard).on('tap',keypress);
+    new Hammer(payBtn).on('tap',submitFun);
+    new Hammer(clearBtn).on('tap',clearFun);
+    new Hammer(remarkBtn).on('tap',remarkShowFun);
+    new Hammer(remarkCancel).on('tap',remarkCancelFun);
+    new Hammer(remarkConfirm).on('tap',remarkConfirmFun);
+    remarkInput.value = '';
+
+    </script>
+</body>
+</html>

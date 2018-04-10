@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
+		<title></title>
+		<link rel="stylesheet" href="../css/profit.css" />
+		<link rel="stylesheet" href="../css/public.css" />
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+		<script src="../js/util.js"></script>
+		<script src="../js/user_qb.js?2=s22"></script>
+	    <script src="../js/common.js"></script>
+		<script src="../js/layer2.0/layer.js"></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				clicked( 'login.html');
+			}
+		</script>
+		<style>
+			.header .back:before {
+			    content: '\e471';
+			    line-height: 44px;
+			    color: #0168B7;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="header" style="background-color:#fff;">
+			<a class="back" id="frame4.html" onclick="clicked(this.id)" style=""></a>
+			<h1 class="tit" style="color:#000">推荐</h1>
+		</header>
+		<div class="content">
+			<div class="profit-top">
+				
+			</div>
+			<!--
+            	时间：2016-06-16
+            	描述：收益top
+            -->
+              <div class="profit-details">
+              	<ul>
+              		
+              		<li>
+              			<a  href="javascript:void(0);" onclick="clicked('user_tjp_users.html');">
+              				<p class=''>推荐列表</p>
+              			
+              			</a>
+              		</li>              		
+              		<li>
+              			<a  href="javascript:void(0);" onclick="clicked('user_agent_point.html');">
+              				<p class="">奖励合计</p>
+              				
+              			</a>
+              		</li>
+              		
+              		<!--<li>
+              			<a    href="javascript:void(0);" onclick="clicked('profit_use_record.html');">
+              				<span>积分来源</span>
+              			</a>
+              		</li>-->
+              	</ul>
+              </div>                  
+		</div>
+	</body>
+</html>

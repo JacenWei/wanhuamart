@@ -1,0 +1,125 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css">
+		<link rel="stylesheet" href="../css/line.css">
+		<link rel="stylesheet" href="css/profit.css" />
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+	    <script type="text/javascript" src="../js/common.js" ></script>
+		<script src="../js/util.js"></script> 
+		<script src="../js/layer2.0/layer.js"></script>
+        <script type="text/javascript">
+            if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+                clicked('login.html');
+            }
+        </script>
+	</head>
+
+	<body>
+		<header class="header"  >
+			<a  id="frame4.html" onclick="clicked(this.id)" class="back"></a>
+			<h1 class="tit">货款收入明细记录</h1>
+		</header>
+		<div class="content">
+			<div class="refine-details">
+                <ul class="list"></ul>
+                <div class="page_btn" style="width: 50%; margin-left: 20%; text-align: center;" >下一页</div>
+            </div>
+        </div>
+        
+        <script>
+        	$(function(){
+				var token = localStorage.getItem('token');	
+				var page = 1;
+				var next = 0;
+				var type = 1;
+				getlist();
+				function getlist(){		
+					$.fn.Util().ajax({
+						url : 'http://www.tanglikeji.com/api.php/Ucenter/shop_hkmx_list',
+						data : {'cookie':token,'page':page},
+						beforeFn:function(){
+							layer.open({
+								type: 2,
+								content: '加载中',
+								shadeClose:false
+							});
+						},
+					}).done(function(data){
+						
+						console.log( JSON.stringify( data ) ); 
+						
+						layer.closeAll();
+						if(data.state == 'ok'){
+							list = data.data.list;
+							next = data.data.next;
+							if(page==1){
+								$('.list').html('');
+							}
+							for(i in list){					
+								
+								html = 
+								'<li>' +
+							        '<div class="one">' +
+								        '<p class="onr-let">' +
+									        '<img src="../images/icon/icon-i3.png">' +
+									        '<span class="list-muen">货款单号</span>' +
+									        '<span class="list-nr" style="width:120px;">'+list[i].ordersn+'</span>' +
+								        '</p>' +
+								        
+							        '</div>' +
+							        '<div class="one">' +
+								        '<p class="onr-let">' +
+									        '<img src="../images/icon/icon-i14.png">' +
+									        '<span class="list-muen">收入金额</span>' +
+									        '<span class="list-nr" style="width:150px;">¥ '+list[i].amount+'</span>' +
+								        '</p>' + 
+							        '</div>' + 
+							        '<div class="one">' +
+								        '<p class="onr-let">' +
+									        '<img src="../images/icon/icon-i1.png">' +
+									        '<span class="list-muen">货款来源</span>' +
+									        '<span class="list-nr" style="width:150px;">'+list[i].goods_name+'</span>' +
+								        '</p>' + 
+							        '</div>' +  
+							        '<div class="one">' + 
+								        '<p class="onr-let">' + 
+									        '<img src="../images/icon/icon-i15.png">' +
+									        '<span class="list-muen">进账时间</span>' +
+									        '<time>'+list[i].updatetime+'</time>' +
+								        '</p>' +
+							        '</div>' +
+							    '</li>';
+								$(".list").append(html);
+							}
+							if(next == 1){
+								page++;
+							}else if(next == 0){
+								$('.page_btn').hide();
+							}
+							if(page == 1 && $(".list").html() == ''){
+								$(".list").html('<p style="text-align:center;padding:2rem;">暂无数据</p>')
+								$(".page_btn").hide();
+							}
+						}
+					}).fail(function(err){
+						layer.open({'content':err.msg});
+					})
+				}
+				
+				$(".page_btn").on("click",function(){
+					getlist();					
+				});
+				
+				
+			});
+        	
+        	
+        </script>
+        
+	</body>
+</html>

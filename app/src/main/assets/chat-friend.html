@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>好友列表</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="css/sm.css">
+	<link rel="stylesheet" href="css/sm-extend.css">
+	<link rel="stylesheet" href="css/login.css">
+	<script type="text/javascript" src="js/common.js" ></script>
+</head>
+<body>
+    <div class="page-group" style="background-color:#fff;">
+        <div class="page page-current" id="chat-contact" style="background-color:#fff;">
+        	<header class="bar bar-nav">
+        		<a class="button pull-left btn-back back" href="javascript:;" onclick="back()"><img src="images/icon/icon-arrow-left.png" class="icon-close" /></a>
+				<!--<button class="button pull-right btn-back" id="submit" style="color:#fff;">加好友</button>-->
+				<button class="button pull-right btn-back" id="add_friend" style="color:#fff;" onclick="clicked('chat-add-friend.html')">加好友</button>
+        		<h1 class="title">好友列表</h1>
+			</header>
+        	<div class="content chat-content" style="">
+        		<!--<div class="searchbar" style="margin:0;">
+		        	<div class="search-input">
+		        		<label class="icon icon-search" style="font-size:1.3333333rem" for="search"></label>
+		        		<input type="search" id="search" style="padding-left:2rem;" placeholder="手机号">
+		        	</div>
+		      	</div>-->
+		      	<div class="list-block contacts-block">
+			    	<div class="chat-contact list-group" id="xinyou">
+				        <ul>
+				          	<li onclick="clicked('chat-new.html');">
+				            	<div class="item-content" style="padding-left:0;">
+				            		<div class="item-media"><img src="images/icon/icon-new-friend.png"  /></div>
+				              		<div class="item-inner">
+				                		<div class="item-title" style="font-size:1.33333333rem;">关系处理</div>
+				                		<span class="mybadge">0</span>
+				              		</div>
+				            	</div>
+				          	</li>
+				        </ul>
+			      	</div>
+	        		<div class="list-block add-content-content infinite-scroll native-scroll" id="page-infinite-scroll-top"  data-distance="100" id="contactList">
+				    	<div class="chat-contact list-group" id="contactList"></div>				      				      
+				    </div>
+				</div>
+        	</div>        
+    	</div>
+    </div>
+    
+    <script type="text/html" id="contactListT">
+    	<div class="chat-contact list-group">
+	        <ul>	        		          	
+	          	{{each list as item i}}
+	          	<li class="inner-bottom-line" style="background-color:#e2e2e2;padding-left:1.33333333rem;font-size:1.33333333rem;">{{i}}</li>
+	          	{{each item as v k}}
+	          	<a href="javascript:;" id="userinfo.html?id={{v.user_id}}" onclick="clicked(this.id)">
+		          	<li class="inner-bottom-line">
+		            	<div class="item-content" style="padding-left:0;">
+		            		<div class="item-media"><img src="{{v.logo_src}}"  /></div>
+		              		<div class="item-inner">
+		                		<div class="item-title" style="font-size:1.33333333rem;">{{v.nickname}}</div>
+		              		</div>
+		            	</div>
+		          	</li>
+	          	</a>
+	          	{{/each}}
+	          	{{/each}}
+	        </ul>
+      	</div>    	
+    </script>
+    
+    <script type="text/html" id="chengyouListT">
+    	<div class="chat-contact list-group">
+	        <ul>	        		          	
+	          	{{each list as item i}}
+	          	<a href="javascript:;" id="{{if item.type == 6}}userinfo.html?id={{item.intval_id}}{{else}}index-shop-index.html?id={{item.intval_id}}{{/if}}" onclick="clicked(this.id)">
+		          	<li class="inner-bottom-line">
+		            	<div class="item-content" style="padding-left:0;">
+		            		<div class="item-media"><img src="{{item.logo_src}}"  /></div>
+		              		<div class="item-inner">
+		                		<div class="item-title" style="font-size:1.33333333rem;">{{item.name}}</div>
+		              		</div>
+		            	</div>
+		          	</li>
+	          	</a>
+	          	{{/each}}
+	        </ul>
+      	</div>    	
+    </script>
+    
+    
+    <script type='text/javascript' src='js/zepto.js' charset='utf-8'></script>
+    <script type="text/javascript" src="js/update.js" ></script>
+	<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+	<script type="text/javascript" src="js/template.js" ></script>
+	<script type="text/javascript" src="js/layer/layer.js" ></script>	
+	
+	
+	
+	<script>
+		var page = 1;
+		var pagenum = 15;
+		var loadding = false;
+		var hasnext = 0;
+		var type = 'xinyou';
+		$(function(){
+			var token = localStorage.getItem('token');
+			if(token == '' || token == null || token == undefined){
+				$.myUtil().alert_msg('身份已过期，请重新登录',function(){localStorage.clear();clicked('login.html');});
+			}
+			param = $.myUtil().toQueryParams();
+			type = param['type'];
+			if(type == 'xinyou'){
+				$(".title").html('信友列表');
+				$.myUtil().ajax({
+					data:{
+						'api_name':'friend_applylists',
+						'token':token					
+					},
+					beforeFn:function(){}
+				}).done(function(res){			
+					if(res.state == 'ok'){
+						$(".mybadge").html(res.data.count);
+					}
+				});
+			}else{
+				$("#add_friend").hide();
+				$(".title").html('城友列表');
+				$("#xinyou").hide();
+				$.myUtil().ajax({
+					data:{
+						'api_name':'main_sclist',
+						'token':token,
+						'page':1,
+						'pagenum':5000,
+						'type':'5,6'
+					},
+					beforeFn:function(){}
+				}).done(function(res){			
+					if(res.state == 'ok'){
+						//$(".mybadge").html(res.data.count);
+						console.error(JSON.stringify(res.data));
+						$("#contactList").html(template('chengyouListT',{list:res.data.list}));
+						
+					}
+				});
+			}
+			
+		})
+		
+		document.addEventListener("plusready", function(){
+			token = localStorage.getItem('token');
+			if(type == 'xinyou'){
+				$.myUtil().ajax({
+					data:{
+						'api_name':'friend_lists',
+						'token':token,
+						'group_id':0,
+						'keywords':'',
+						'page':page,
+						'pagenum':10000
+					},
+					beforeFn:function(){}
+				}).done(function(res){
+					if(res.state == 'ok'){
+						$("#contactList").html(template('contactListT',{list:res.data.list}));
+					}
+				})
+			}
+			
+			/*
+			var book = {};
+			plus.contacts.getAddressBook( plus.contacts.ADDRESSBOOK_PHONE, function( addressbook ) {		
+				addressbook.find(["displayName","phoneNumbers"],function(contacts){					
+					phone_arr = [];
+					for(i in contacts){
+						phones = contacts[i].phoneNumbers;
+						for(j in phones){
+							phone_num = phones[j].value.replace(/\s/g, "");
+							phone_arr.push(phone_num);
+						}
+					}
+					
+					$.myUtil().ajax({
+						data:{
+							'api_name':'smsfriend_find',
+							'token':token,
+							'phone_arr':phone_arr.join(',')
+						}
+					}).done(function(res){
+						layer.closeAll();
+						console.log(res);
+						res = typeof res == 'string' ? JSON.parse(res) : res;
+						if(res.state == 'ok'){
+							$ele = $("#contactList");
+							html = template('contactListT',{list:res.data});
+							$ele.append(html);							 
+						}
+						//$.myUtil().alert_msg(res.msg);
+						
+					})
+					localStorage.removeItem('phone_contacts');
+					localStorage.setItem('phone_contacts',phone_arr.join(','));
+				}, function () {
+					alert("error");
+				},{multiple:true});
+			}, function ( e ) {
+				alert( "Get address book failed: " + e.message );
+			} );*/
+		}, false );
+	</script>
+
+</body>
+</html>

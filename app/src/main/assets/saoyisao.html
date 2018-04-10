@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>扫一扫</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="../css/sm.css">
+	<link rel="stylesheet" href="../css/sm-extend.css">  
+	<link rel="stylesheet" href="../css/login.css">
+    <script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/config.js"></script>
+	<script src="../js/util.js"></script>
+    <script type="text/javascript" src="../js/common.js" ></script>
+	<script src="../js/layer2.0/layer.js"></script> 
+	<script>
+		
+		
+		
+		var ws=null,wo=null;
+		var scan=null,domready=false;
+		var FlashControl;
+		var token = localStorage.getItem('token');
+		
+		    	$.fn.Util().ajax({
+			    	url : 'http://www.tanglikeji.com/api.php/Ucenter/get_user_info',
+			    	data : {'cookie':token},    	
+			    }).done(function(data){    	
+			    	
+			    	console.error( JSON.stringify( data ) );
+			    	
+			    	if(data.state == 'out'){
+			    		$.fn.Util().alert_msg('请先登录',function(){location.href='login.html';});
+			    	}
+			    	
+			    	if(data.state == 'ok'){
+			    		userInfo = data.data;
+			    		localStorage.removeItem('userInfo');
+			    		localStorage.setItem('userInfo',JSON.stringify(userInfo));
+			    		
+			    	}    	
+			    });
+		
+		
+		
+		
+		
+		 
+		// H5 plus事件处理
+		function plusReady(){
+			
+			
+			
+			$(".pull-left").on('click',function(){				
+				//FlashControl.open();
+			})
+			$(".pull-right").on('click',function(){
+				back();
+			})
+			if(ws||!window.plus||!domready){
+				return;
+			}
+			// 获取窗口对象
+			ws=plus.webview.currentWebview();
+			wo=ws.opener();
+			// 开始扫描
+			scan=new plus.barcode.Barcode('bcid');
+			console.log(typeof scan);
+		    scan.onmarked=onmarked;
+		    scan.start({conserve:true,filename:'_doc/barcode/'});	
+			
+			ws.addEventListener('show', function(){				
+						    
+			}, false);
+			 
+		}
+		if(window.plus){
+			plusReady();
+		}else{
+			document.addEventListener('plusready', plusReady, false);
+		}
+		// 监听DOMContentLoaded事件
+		document.addEventListener('DOMContentLoaded', function(){
+			domready=true;
+			plusReady();
+		}, false);
+		// 二维码扫描成功
+		function onmarked(type, result, file){
+		    switch(type){
+		    	case plus.barcode.QR:
+		    	type = 'QR';
+		    	break;
+		    	case plus.barcode.EAN13:
+		    	type = 'EAN13';
+		    	break;
+		    	case plus.barcode.EAN8:
+		    	type = 'EAN8';
+		    	break;
+		    	default:
+		    	type = '其它'+type;
+		    	break;
+		    }
+		    console.log("扫描成功:" + result );
+		    result = result.replace(/\n/g, '');
+		    arr = result.split('://');
+		    f_ext = arr[0];		    
+		    
+		    if(  arr[0] == 'http'  ){
+		    	tel = arr[1].split('/');
+		    	console.error(  JSON.stringify( tel  )  );
+		    	if(tel[0]!="www.tanglikeji.com"){ 
+		    		scan.close();
+		    		$.fn.Util().alert_msg("暂不支持打开万华商城以外的二维码."  ,function(){
+							clicked("frame1.html");
+					});
+		    		
+		    		return false;
+		    	}
+		    	if(tel.length!=10){
+		    		scan.close();
+		    		$.fn.Util().alert_msg("错误的二维码,请联系万华商城管理员解决."  ,function(){
+							clicked("frame1.html");
+					});
+		    		return false;		    		
+		    	}
+		    	arr[0] = 'whsc';
+		    	arr[1] = tel[5] + ":" + tel[7] + ":" + tel[9];
+		    }
+		     
+		    
+		    if( arr[0] == 'whsc'){
+		    	
+		    	console.error(arr[1]  );
+		    	tel = arr[1].split(':');
+		    	$.fn.Util().ajax({
+					url : 'http://www.tanglikeji.com/api.php/Ucenter/getShopByTel',
+					data : {'cookie':token,'tel':tel[1]},
+					beforeFn:function(){
+						layer.open({
+							type: 2,
+							content: '加载中',
+							shadeClose:false
+						});
+					},
+				}).done(function(data){
+					layer.closeAll();
+					if(data.state == 'err'){
+						scan.close();
+						$.fn.Util().alert_msg("对方不是商家无法支付," + data.msg,function(){
+							clicked("frame1.html");
+						});
+						return;
+					}
+					
+					localStorage.setItem('saoma',arr[1]);
+					
+					
+					
+			    	scan.close();
+			    	location.href="saomazhifu.html";
+			    	//clicked('saomazhifu.html');
+				}).fail(function(err){
+					layer.open({'content':err.msg});
+				});
+		    	
+		    	
+		    	
+		    	
+		    	
+		    	
+		    	
+		    	
+		    	 
+		    }else{
+		    	
+		    	plus.nativeUI.alert('无法识别此图片');
+		    	
+		    }
+		}
+		// 从相册中选择二维码图片 
+		function scanPicture(){
+		    plus.gallery.pick(function(path){
+			    plus.barcode.scan(path,onmarked,function(error){
+					plus.nativeUI.alert('无法识别此图片');
+				});
+		    }, function(err){
+		        console.log('Failed: '+err.message);
+		    });
+		}
+		function setFlash() {
+			scan.cancel();
+			scan.setFlash();			
+			scan.start();
+		}
+	</script>
+</head>
+<body>
+    <div class="page-group " style="">
+        <div class="page page-current" style="background-color:#f5f5f5;bottom:0;" id="routers-ucenter">
+        	<header class="bar bar-nav" style="background-color:#0168B7;">        		
+        		<h1 class="title">万华商城扫一扫</h1>
+			</header>
+			<div class="content saoyisao" style="bottom:0;background-color: rgba(0,0,0,.8);">
+				<div id="bcid" style="margin-top: 48px; width: 100%;bottom: 7rem;">
+					
+				</div>
+				<div class="bcid">
+					<div class="bottom-bar bottom-btn" style="bottom: 7rem;"> 
+						<p style="text-align:center;color:#fff;font-size:1.16666666rem;">请将对方的万华商城二维码放入此框<br />付款或添加好友</p>
+						<span class="pull-right" style="width:100%;margin-top: 0rem;"><img src="../images/sys-close.png?2=s" /></span>
+					</div>
+				</div>
+			</div>
+        	
+        </div>        
+    </div>
+     
+	 
+</body>
+</html>

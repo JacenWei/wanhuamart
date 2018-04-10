@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css" /> <!--公用css-->
+		<link rel="stylesheet" href="../css/password.css" />
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<link href="../css/mui.picker.css" rel="stylesheet" />
+		<script src="../js/config.js"></script>
+	    <script src="../js/util.js"></script>	    
+	    <script src="../js/common.js"></script>
+	    <script src="../js/layer2.0/layer.js"></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				clicked('login.html');
+			}
+		</script>
+		<style>
+			.mui-btn {
+				font-size: 16px;
+				padding: 8px;
+				margin: 3px;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="header"  >
+			<a class="back" href="javascript:back();"></a>
+			<h1 class="tit">添加业务员</h1>
+		</header>
+		<div class="content">
+			<div class="password-Back">
+				<form>
+					<ul>
+						<li class="password-input">
+							<label style="color:#000000;width: 32%;">选择角色</label>
+							<select class="mui-btn mui-btn-block" name="role_id" id="role_id">
+									<option value = '1'>广告管理</option>
+									<option value = '2'>订单管理</option>
+									<option value = '3'>业务员</option>
+ 
+                                </select>
+						</li>
+						<li class="password-input">
+							<label style="color:#000000;width: 32%;">业务员账号</label>
+							<input style="width: 65%" placeholder="请输入业务员账号"  id='user_name' name="username" type="text">
+						</li>
+						<li class="password-input">
+							<label style="color:#000000;width: 32%;">真实姓名</label>
+							<input style="width: 65%"  placeholder="请输入真实姓名" name="realname" id="realname" type="text">
+						</li>
+						<li class="password-input">
+							<label style="color:#000000;width: 32%;">身份证号</label>
+							<input style="width: 65%"  placeholder="请输入身份证号" name="idcard" id="idcard" type="text">
+						</li>
+					</ul>
+					<p class="password-next"><button type="button" id="submit">提交</button></p>
+				</form>
+			</div>
+		</div>
+	</body>
+	<script>
+		$(function(){
+			var tokens = localStorage.getItem('token');
+			$("#submit").on('click',function(){
+				
+				$.fn.Util().ajax({
+					url : 'http://www.tanglikeji.com/api.php/Ucenter/add_master',
+					data :{'cookie':tokens,'role_id':$("#role_id").val(),'username':$("#user_name").val(),'idcard':$("#idcard").val(),'realname':$("#realname").val()},
+					beforeFn:function(){
+						layer.open({
+							type: 2,
+							content: '加载中',
+							shadeClose:false
+						});
+					},
+				}).done(function(data){
+					layer.closeAll();
+					if(data.state == 'ok'){	
+						layer.open({
+							'content':'添加成功',
+							time : 2,
+							end : function(){
+								clicked("master_list.html");
+							}
+						})
+					}else{
+						layer.open({
+							'content':data.msg,
+							time : 2,
+						})
+					}
+				}).fail(function(err){
+					alert(err.msg);
+					layer.open({'content':err.msg});
+				})
+			});
+		});
+	</script>
+</html>

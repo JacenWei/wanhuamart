@@ -1,0 +1,112 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css">		
+		<link rel="stylesheet" href="../css/profit.css" />
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+		<script src="../js/util.js"></script>
+		<script src="../js/profit.js?1as=322s2a"></script>
+		<script src="../js/layer2.0/layer.js"></script>
+		<script type="text/javascript" src="../js/common.js" ></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				clicked('login.html');
+			}
+		</script>
+		<style>
+			.header .back:before {
+			    content: '\e471';
+			    line-height: 44px;
+			    color: #fff;
+			}
+			.shop-Submit {
+			    margin: 10px 10px;
+			    text-align: center;
+			}
+			.shop-Submit button {
+				margin: 0;
+			    padding: 0;
+			    background: none;
+			    list-style: none;
+			    border: none;
+			    width: 80%;
+			    background-color: #00A4A6;
+			    height: 34px;
+			    color: #FFFFFF;
+			    font-size: 16px;
+			    border-radius: 3px;
+			}
+			.order-nr li p{width:100%};
+		</style>
+		<script>
+			
+	 function sendsms(tt){
+	 	if($(tt).html()=="已发送"){
+	 		return false;	 		
+	 	}
+	 	
+	 	$.ajax({
+			url : 'http://www.tanglikeji.com/api.php/Ucenter/sendprofitcode',
+			type :'POST',
+			dataType : 'JSON',
+			data :{'cookie':localStorage.getItem('token')},
+			success:function(res){ 
+				console.log( JSON.stringify( res ));
+				if(res.state == 'ok'){
+					$(tt).html("已发送");
+				}else{
+					layer.open({
+						content:res.msg,																
+					})	
+				}
+													
+			}
+		}); 
+	 }
+			
+		</script>
+	</head>
+
+	<body>
+		<header class="header" style="background-color:#0168B7;">
+            <a href="javascript:back();" class="back" style="color:#777;"></a>
+            <h1 class="tit" style="color:#fff">奖励积分</h1>
+            <a class="edit" href="javascript:;" style="width:inherit;height:initial;top:10px;right:10px;">
+				<div style="border:1px #ffffff solid;border-radius: 5px;padding:5px;margin-top: 2px;">提取记录</div>
+			</a> 
+			<!--            
+            <a class="edit" href="javascript:;" style="width:inherit;height:initial;top:10px;right:10px;">
+				<img src="../images/tiqu.png" style="width:35px;">
+			</a>
+			-->
+        </header>
+				
+		<div class="content"  style="margin-top: 55px;">
+			<!--
+			<div class="profit-top">
+				<div class="profit-pic">
+					<span>
+						<img src="../images/profit/profit.png">
+					</span>
+				</div>
+				<div class="profit-cont" style="    margin-top: 40px;">
+					<p class="pro-current"><span style="margin-left: 0px;">547.00</span></p>
+					<div class="pro-td">
+						<a href="#" class="pro-ifi">已返还保证金</a>
+					</div>
+				</div>
+			</div>
+			-->
+			<div class="refine-details">
+            	<ul id="list"></ul>
+            	<p class="shop-Submit page"><button id="submit">下一页</button></p>
+            </div>
+            <div class="refine-details">            	
+            	<p class="shop-Submit"><button id="edit">提取奖励<span id="profit_point"></span></button></p>
+            </div>
+		</div>
+</body></html>

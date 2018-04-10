@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css" />		
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+	    <script src="../js/util.js"></script>
+	    <script type="text/javascript" src="../js/common.js" ></script>
+	    <script src="../js/add_bank.js?212=222"></script>
+	    <script src="../js/layer2.0/layer.js"></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				clicked('login.html');
+			}
+		</script>
+				<style>
+			
+.bank-main{
+	padding-top: 20px;
+}
+.bank-input{
+	overflow: hidden;
+	background-color: #FFFFFF;
+	border-top: 1px solid #ECECEC;
+	border-bottom: 1px solid #ECECEC;
+	margin-top: -1px;
+	padding: 10px;
+	line-height: 32px;
+	overflow: hidden;
+}
+.bank-input label{
+	float: left;
+	width: 20%;
+	font-size: 14px;
+	color: #333333;
+}
+.bank-input input{ 
+	float: left;
+	line-height: 32px;
+	font-size: 14px;
+	width: 60%;
+}
+.bank-input select{
+	float: left;
+	line-height: 32px;
+	font-size: 14px;
+	height: 32px;
+	width:80%;
+	color:#666666;
+}
+.bank-input select option{
+	
+	line-height: 32px;
+	font-size: 14px;
+}
+.bank-input span{
+	float: right;
+	width: 20px;
+	height: 20px;
+	margin-top: 10px;
+}
+.bank-input span.bank-important{ 
+	 background-image: url(../images/bank/important-icon.png);
+	 background-size: 100%;
+}
+.bank-input span.bank-clear{
+	font-family: Muiicons;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 20px;
+    display: inline-block;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+    color: #666666;
+    cursor: pointer;
+}
+.bank-input span.bank-clear:before{
+	content: '\e460';
+}
+.bank-input span.bank-fold{
+	font-family: Muiicons;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 20px;
+    display: inline-block;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+    color: #666666;
+    cursor: pointer;
+}
+.bank-input span.bank-fold:before{
+	content: '\e583';
+}
+
+.bank-button{
+	margin-top: 20px;
+}
+.bank-button p{
+	margin: 10px;
+	text-align: center;
+}
+.bank-button p.bank-button-next button{
+	width: 80%;
+	height: 44px;
+	background-color: #00a4a6;
+	color: #FFFFFF;
+	border-radius: 5px;
+	font-size: 16px;
+}
+
+.bank-button p.bank-button-next a{
+	display: block;
+	line-height: 44px;
+	text-align:center;
+	margin:auto;
+	width: 80%;
+	height: 44px;
+	background-color: #00a4a6;
+	color: #FFFFFF;
+	border-radius: 5px;
+	font-size: 16px;
+}
+
+
+
+.bank-button p.bank-button-up button{
+	width: 80%;
+	height: 44px;
+	background-color: #FFFFFF;
+	color: #666666;
+	border: 1px solid #ECECEC;
+	border-radius: 5px;
+	font-size: 16px;
+}
+
+/*错误提示*/
+.error-prompt{ 
+	margin: 10px 20px;
+	text-align: center;
+	color: red;
+	font-size: 12px;
+	min-height: 14px;
+}
+
+/*银行卡管理*/
+.bank-list li{ 
+	overflow: hidden;
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #ECECEC;
+	border-top: 1px solid #ECECEC;
+	margin-top: -1px;
+	padding: 10px;
+}
+.bank-list li img{
+	 float: left;
+	 width: 15%;
+}
+.bank-name-number{
+	float: left;
+	margin-left: 10px;
+	width: 40%;
+}
+.bank-name-number p{
+	line-height: 24px;
+	font-size: 14px;
+	color: #666666;
+}
+.bank-operation{
+	float: right;
+	overflow: hidden;
+	width: 40%;
+	margin-top: 20px;
+}
+.bank-operation a{
+	float: left;
+	width: 50%;
+	overflow: hidden;
+	font-size: 12px;
+	color: #666666;
+}
+
+.bank-operation .bank-delete{
+	position:relative;
+		top:0px;
+		left:11px;
+}
+.bank-operation a:hover{
+	color: red;
+}
+.bank-edit em{
+	display: block;
+	width: 12px;
+	height:12px;
+	margin-top: 2px;
+	margin-right: 3px;
+	float: left;
+	background-image: url(../images/bank/edit-icon.png);
+	background-size:100%;
+}
+.bank-delete em{
+	display: block;
+	width: 12px;
+	height:12px;
+	margin-top: 2px;
+	margin-right: 3px;
+	float: left;
+	background-image: url(../images/bank/delete-icon.png);
+	background-size:100%;
+}
+		</style>
+	</head>
+	<body>
+		<header class="header">
+			<a id="bank_list.html" onclick="clicked(this.id)" class="back"></a>
+			<h1 class="tit">添加银行卡</h1>
+		</header>
+		<div class="content">
+			<div class="bank-main">
+				<form action="{url app=bank&act=commit_bankcard}" method="post">
+					<div class="bank-input">
+						<label>开户类型</label>						
+						<select type="bank_type" id="bank_type">
+							<option value="private">个人银行卡</option>
+							<option value="public">对公银行卡</option>
+						</select>						
+					</div>
+					<div class="bank-input">
+						<label>开户行</label>
+						<select id="bank_list" name="bank_name">
+							<option value="">请选择开户行</option>
+						</select>
+					</div>
+					<div class="bank-input">
+						<label>卡号</label>
+						<input type="tel" placeholder="请输入银行卡号" id="bank_num" name="bank_num">
+						<span class="bank-clear"></span>
+					</div>
+					<div class="bank-input">
+						<label id="account_name_html">开户姓名</label>
+						<input type="text" placeholder="请输入开户人姓名" id="account_name" name="account_name">
+						
+					</div>
+					
+					<div class="bank-input">
+							<label>支行名称</label>
+							<input type="text" placeholder="请输入支行名称" id="zhihang" name="zhihang">
+							<span class="bank-clear"></span>
+					</div>
+					
+					
+					<div id="public" style="display:none;">						
+						<div class="bank-input">
+							<label>公司地址</label>
+							<input type="text" placeholder="请输入公司地址" id="address" name="address">
+							
+						</div>
+						<div class="bank-input">
+							<label>公司电话</label>
+							<input type="text" placeholder="请输入公司电话" id="tel" name="tel">
+							
+						</div>
+					</div>
+					<div id="private">
+						
+						<div class="bank-input">
+							<label>身份证号</label>
+							<input type="text" placeholder="请输入持卡人身份证号" id="id_card" name="id_card">
+							<span class="bank-clear"></span>
+						</div>
+					</div>
+					
+					<!-- <p class="error-prompt">银行卡号填写错误一次只显示一条错误从上到下</p> -->
+					<!--
+					<div class="bank-button" id="show_step" >						
+						<p class="bank-button-next"><button type="button" id="next_step">下一步</button></p>
+					</div>
+					-->
+					<div class="bank-button" id="save" style="">
+						<p class="bank-button-next"><button type="button" id="submit">保存</button></p>
+					</div>					
+				</form>
+			</div>
+		</div>
+		<!--银行卡重要弹窗-->
+		<!--
+		<div class="Popup" id="bankim-Popup">
+			<div class="Popup-box">
+				<p class="pop-tit">持卡人说明</p>
+				<p class="pop-nr">为了您的帐户资金安全，只能绑定制卡人本人的银行卡，一旦保存，不能修改，请确认正确的银行卡信息</p>
+				<p class="pop-tel">获取更多帮助，请致电万华城客服<a href="tel:400-666-0509">400-666-0509</a></p>
+				<button class="pop-zdl">知道了</button>
+			</div>
+			<div class="Popup-bg"></div>
+		</div>
+		-->
+	</body>
+</html>

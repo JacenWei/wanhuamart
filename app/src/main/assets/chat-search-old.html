@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>发布</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="css/sm.css">
+	<link rel="stylesheet" href="css/sm-extend.css">
+	<link rel="stylesheet" href="css/login.css">
+	<script type='text/javascript' src='js/zepto.js' charset='utf-8'></script>
+    <script type="text/javascript" src="js/update.js" ></script>
+    <script type="text/javascript" src="js/common.js" ></script>
+	
+</head>
+<body>
+    <div class="page-group" style="background-color:#f5f5f5;" id="chat-search">
+        <div class="page page-current chat-page" style="background-color:#f5f5f5;">
+        	<header class="bar bar-nav">        		
+        		<div class="bar bar-header-secondary">
+				    <div class="searchbar">
+				    	<a class="searchbar-cancel">搜索</a>
+				    	<div class="search-input">
+				    		<label class="icon icon-search" for="search"></label>
+				    		<input type="search" id="search" placeholder="输入手机号或昵称">
+				   		</div>
+				    </div>
+				</div>
+			</header>
+        	<div class="content chat-content" style="bottom:0;">			  	
+			  	<div class="content-block add-content-content infinite-scroll native-scroll" id="page-infinite-scroll-top"  data-distance="100" style="padding:0;">
+		        	<div class="list-block" id="searchList"></div> 
+		       	</div>
+		       	
+			</div>
+        </div>        
+    </div>
+    
+    
+    <script type="text/html" id="searchListT">
+    	<ul>
+    		{{each list as item i}}
+    		<a id="userinfo.html?id={{item.user_id}}"  href="javascript:;" onclick="clicked(this.id);">
+		        <li class="item-content">
+		          	<div class="item-media"><i class="icon icon-wallet face"><img src="{{item.head_pic}}" /></i></div>
+		          	<div class="item-inner uc-list-inner my-inner-list" style="margin-left:1.333333rem;">
+		            	<div class="item-title">
+		            		<p style="line-height:2rem;">{{item.nickname}}</p>
+		            		<p>{{item.signature}}</p>
+		            	</div>
+		            	<div class="item-after"><i class="icon icon-arrow-right"></i></div>
+		          	</div>
+		        </li>
+		    </a>
+		    {{/each}}
+	    </ul>
+    </script>
+    
+	<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/template.js' charset='utf-8'></script>
+	<script type="text/javascript" src="js/layer/layer.js" ></script>
+	<script type="text/javascript" src="js/chat-search.js" ></script>
+	
+</body>
+</html>

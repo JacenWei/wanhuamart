@@ -1,0 +1,71 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">	
+		<title></title>
+        <link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/public.css">
+        <link rel="stylesheet" href="../css/line.css">
+		<link rel="stylesheet" href="../css/global.css">
+		<link rel="stylesheet" href="../css/user.css" />
+        <style>
+            .mui-slider .mui-slider-group .mui-slider-item img {
+                width: 20px;
+            }
+        </style>
+        <script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+	    <script src="../js/config.js"></script>
+	    <script src="../js/util.js"></script>	    
+	    <script src="../js/layer2.0/layer.js"></script>
+	    <script src="../js/shop_online_order.js"></script>
+	    <script src="../js/common.js"></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				clicked('login.html');
+			}
+		</script>
+	</head>
+
+	<body style="padding-top:20px;">
+        <header class="header"  >
+            <a href="javascript:back();" class="back"></a>
+            <h1 class="tit">购物订单</h1>
+        </header>
+        <div class="u_order" style="margin-top:0;" id="online">
+            <div class="orderbox">
+                <h2><span>订单号码：1626861709</span><b><font style="color:#b20005;">2016-09-20 16:26</font></b></h2>
+                <h2><span>买家：张三|1354587654</span><b><font style="color:#b20005;">等待买家付款</font></b></h2>
+                <div class="detail">
+                    <a href="index.php?app=goods&amp;id=87"> <img src="http://www.shadouxing.net/data/files/store_1185/goods_170/small_201608301356106534.jpg" style="width: inherit;"></a>
+                    <p class="title">Whoo后精华 秘贴焕然新生精华液45ml 自生力精华 官方正品</p>
+                    <p>&#8203;颜色:精华密贴 尺码:45ml&#8203;</p>&#8203;
+                    <p>价格：<strong style="float:none;">¥939.00</strong><span>数量：1</span></p>
+                </div>
+                <div class="detail">
+                    <a href="index.php?app=goods&amp;id=87"> <img src="http://www.shadouxing.net/data/files/store_1185/goods_170/small_201608301356106534.jpg" style="width: inherit;"></a>
+                    <p class="title">Whoo后精华 秘贴焕然新生精华液45ml 自生力精华 官方正品</p>
+                    <p>&#8203;颜色:精华密贴 尺码:45ml&#8203;</p>&#8203;
+                    <p>价格：<strong style="float:none;">¥939.00</strong><span>数量：1</span></p>
+                </div>
+                <div class="detail">
+                    <a href="index.php?app=goods&amp;id=87"> <img src="http://www.shadouxing.net/data/files/store_1185/goods_170/small_201608301356106534.jpg" style="width: inherit;"></a>
+                    <p class="title">Whoo后精华 秘贴焕然新生精华液45ml 自生力精华 官方正品</p>
+                    <p>&#8203;颜色:精华密贴 尺码:45ml&#8203;</p>&#8203;
+                    <p>价格：<strong style="float:none;">¥939.00</strong><span>数量：1</span></p>
+                </div><div class="detail">
+                <a href="index.php?app=goods&amp;id=87"> <img src="http://www.shadouxing.net/data/files/store_1185/goods_170/small_201608301356106534.jpg" style="width: inherit;"></a>
+                <p class="title">Whoo后精华 秘贴焕然新生精华液45ml 自生力精华 官方正品</p>
+                <p>&#8203;颜色:精华密贴 尺码:45ml&#8203;</p>&#8203;
+                <p>价格：<strong style="float:none;">¥939.00</strong><span>数量：1</span></p>
+            </div>
+
+                <p class="opr" style="text-align: right;">
+                    <input type="button" value="发货" class="white_btn" ectype="dialog" dialog_width="100%" dialog_title="发货" dialog_id="buyer_order_cancel_order" uri="index.php?app=buyer_order&amp;act=cancel_order&amp;order_id=80&amp;ajax" id="order80_action_cancel">
+                    <input type="button" value="取消订单" class="white_btn" ectype="dialog" dialog_width="100%" dialog_title="取消订单" dialog_id="buyer_order_cancel_order" uri="index.php?app=buyer_order&amp;act=cancel_order&amp;order_id=80&amp;ajax" id="order80_action_cancel">
+                    <input type="button" value="查看订单" class="white_btn" ectype="dialog" dialog_width="100%" dialog_title="查看订单" dialog_id="buyer_order_cancel_order" uri="index.php?app=buyer_order&amp;act=cancel_order&amp;order_id=80&amp;ajax" id="order80_action_cancel">
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

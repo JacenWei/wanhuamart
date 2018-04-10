@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>身份验证</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="css/sm.css">
+	<link rel="stylesheet" href="css/sm-extend.css">
+	<link rel="stylesheet" href="css/login.css">
+	<script type="text/javascript" src="js/common.js" ></script>
+</head>
+<body>
+    <div class="page-group" style="background-color:#fff;">
+        <div class="page page-current" style="background-color:#fff;">
+        	<header class="bar bar-nav">
+        		<a class="button pull-left btn-back back" href="javascript:;" onclick="back()"><img src="images/icon/icon-arrow-left.png" class="icon-close" /></a>
+				<button class="button pull-right btn-red" id="submit">同意</button>
+        		<h1 class="title">身份验证</h1>
+			</header>
+        	<div class="content" style="padding:0 1.333333rem;padding-top:1.666666rem;">
+        		<div id="u" class="form-group">
+					<input id="reason" spellcheck=false class="form-control" name="reason" value="我是 " style="" type="text" size="18" alt="login" required="">
+					<span class="form-highlight"></span>
+					<span class="form-bar"></span>
+					<label for="reason" class="float-label">添加对方为好友的理由</label>					
+				</div>
+				<div id="p" class="form-group">
+					<input id="remarks" spellcheck=false class="form-control" name="remarks" id="remarks" type="text" size="18" alt="login" required="">
+					<i class="icon icon-chat-del" style="position:absolute;top:0.333333rem;right:0;" onclick="this.previousElementSibling.value=''"></i>
+					<span class="form-highlight"></span>
+					<span class="form-bar"></span>
+					<label for="remarks" class="float-label">好友备注</label>
+				</div>
+				<div id="addrr" class="form-group">					
+					<select class="form-control" id="group" style="position: absolute;z-index: 9;">
+						<option value="1">好友</option>
+					</select>
+					<i class="icon icon-chat-arrow-down" style="position:absolute;top:0.333333rem;right:0;"></i>
+					<span class="form-highlight"></span>
+					<span class="form-bar"></span>
+					<label for="addr" class="float-label">添加分组</label>					
+				</div>				
+			</div>
+        </div>        
+    </div>   
+    
+    
+    <script type='text/javascript' src='js/zepto.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+	<script type="text/javascript" src="js/layer/layer.js" ></script>
+	
+	<script>
+		$(function(){
+			var token = localStorage.getItem('token');
+			if(token == '' || token == null || token == undefined){
+				$.myUtil().alert_msg('身份已过期，请重新登录',function(){localStorage.clear();clicked('login.html');});
+			}
+			param = $.myUtil().toQueryParams();			
+			user_id = param['id'];
+			$("#submit").on('click',function(){
+				$.myUtil().ajax({
+					data:{
+						'api_name':'friend_add',
+						'token':token,
+						'user_id':user_id,
+						'reason':$("#reason").val(),
+						'remarks':$("#remarks").val(),
+						'group_id':$("#group").val()
+					},					
+				}).done(function(res){
+					layer.closeAll();
+					res = typeof res == 'string' ? JSON.parse(res) : res;
+					$.myUtil().alert_msg(res.msg);
+					clicked('xin-index.html');
+				})
+			})
+			
+		})
+	</script>
+
+</body>
+</html>

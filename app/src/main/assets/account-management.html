@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css" />
+		<link rel="stylesheet" href="../css/set-up.css" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/layer2.0/layer.js"></script>
+	    <script type="text/javascript" src="../js/common.js" ></script>
+		<script src="../js/jquery.Huploadify.js"></script>		
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				closed('login.html');
+			}
+		</script>
+		<style>
+			
+		    .avatorUpload {
+		        margin: 0 auto;
+		        position: relative;
+		        width: 30px;
+		        height:30px;
+		        background-size: 100%;
+		        background-image: url('../images/arecord.png');
+		        background-repeat:no-repeat;
+		        -webkit-background-size:cover;
+		        background-size:cover;
+		        background-position: center center;
+		        /*border-radius: 50%;*/
+		        overflow: hidden;
+		        float:right;
+		    }
+		    .avatorUpload .uploadify-button {
+		        position: absolute;
+		        top: 0;
+		        left: 0;
+		        width: 100%;
+		        height: 100%;
+		        opacity: 0;
+		        padding:0;
+		    }
+		    .avatorUpload .uploadify-queue {
+		        display: none;
+		    }
+		    .avatarImg {
+		        width: 10rem;
+		        display: block;
+		    }
+		    .media-inline .media {
+		        display: inline-block;
+		        margin-right: 15px;
+		        margin-top: 0;
+		    }
+		
+		    .media:first-child {
+		        margin-top: 0;
+		    }
+		    .clearfix, .layout, .container, .container-layout, .line, .line-small, .line-middle, .line-big, .nav-main, .nav-sub, .navbar {
+		        display: block;
+		    }
+		    .media, .media .media {
+		        margin-top: 15px;
+		    }
+		    .media, .media-body {
+		        overflow: hidden;
+		        zoom: 1;
+		    }
+		</style>
+		
+	</head>
+	<body>		
+		<header class="header">
+			<a href="frame4.html" class="back"></a>
+			<h1 class="tit">帐户管理</h1>
+		</header>
+		<div class="content">
+			<ul class="setup" style="margin-top: 15px;">
+				<li>
+					<a href="javascript:;">
+						<div class="setup-inf">头像</div>
+						<div class="setup-explain">							
+							<div class="avatorUpload" id="avatorUpload" style=""></div>						
+						</div>
+						<em></em>
+					</a>
+				</li>
+				<!--
+				<li>
+					<a href="#">
+						<p class="setup-inf">二维码</p>
+						<p class="setup-explain">
+							<img src="../images/setup/qrcode.png" class="srtup-qr">
+							<em></em>
+						</p>
+					</a>
+				</li>
+				-->
+				<li>
+					<a href="javascript:;">
+						<p class="setup-inf">用户名</p>
+						<p class="setup-explain">
+							<span id="mobile"></span>
+						</p>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;" ids="truename">
+						<p class="setup-inf">真实姓名</p>
+						<p class="setup-explain">
+							<span id="realname"></span>
+							<em></em>
+						</p>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="truename">
+						<p class="setup-inf">昵称</p>
+						<p class="setup-explain">
+							<span id="nickname"></span>
+							<em></em>
+						</p>
+					</a>
+				</li>
+				<!--
+				<li>
+					<a href="#">
+						<p class="setup-inf">性别</p>
+						<p class="setup-explain">
+							<span id="sex">保密</span>
+							<em></em>
+						</p>
+					</a>
+				</li>
+				-->
+				<li>
+					<a href="javascript:void(0);" onClick="  clicked('bank_list.html');">
+						<p class="setup-inf">银行卡管理</p>
+						<p class="setup-explain">							
+							<em></em>
+						</p>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0);" onClick="  clicked('address_list.html');">
+						<p class="setup-inf">收货地址管理</p>
+						<p class="setup-explain">
+							<em></em>
+						</p>
+					</a>
+				</li>
+				<!--
+				<li>
+					<a href="#">
+						<p class="setup-inf">出生日期</p>
+						<p class="setup-explain">
+							<em></em>
+						</p>
+					</a>
+				</li>
+				-->
+				<li class="account">
+					<a   href="javascript:void(0);" onClick="  clicked('password_phone.html');">
+						<p class="setup-inf">修改密码</p>
+						<p class="setup-explain">
+							<em></em>
+						</p>
+					</a>
+				</li>
+				<li>
+					<a  href="javascript:void(0);" onClick=" clicked('pay_password.html');">
+						<p class="setup-inf">支付密码</p>
+						<p class="setup-explain">
+							<em></em>
+						</p>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0);">
+						<p class="setup-inf">当前版本</p>
+						<p class="setup-explain">
+							<span>9.0.72</span>							
+						</p>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0);" onClick=" clicked('aboutus.html');">
+						<p class="setup-inf">关于我们</p>
+						<p class="setup-explain">
+							<em></em>					
+						</p>
+					</a>
+				</li>
+			</ul>
+			<p class="sign-out"><button onClick="localStorage.clear();clicked('login.html');">退出登录</button></p>
+		</div>
+		<script>
+			$(function(){
+				console.error(localStorage.getItem('userInfo'));
+				userinfo = JSON.parse(localStorage.getItem('userInfo'));
+				$("#mobile").html(userinfo.uname);
+				if(userinfo.lzhengName != '' && userinfo.lzhengName != null){
+					$("#realname").html(userinfo.lzhengName);	
+				}else{
+					$("#realname").html('未填写');
+				}
+				if(userinfo.nickName != '' && userinfo.nickName != null){
+					$("#nickname").html(userinfo.nickName);	
+				}else{
+					$("#nickname").html('未填写');
+				}
+				 
+				if(userinfo.touxiang != '' && userinfo.touxiang != null){
+					$("#avatorUpload").css('background-image','url(http://www.tanglikeji.com/Public/Uploads/'+userinfo.touxiang+")");	
+				}				
+				
+				
+				$("#truename").on('click',function(){					
+					layer.open({
+						content: '<input type="text" id="true_name" style="border-bottom: 1px solid #e2e2e2;padding: 10px;" value="'+userinfo.nickName+'" />',
+						btn: ['保存', '取消'],
+						yes: function(index){
+							truename = $("#true_name").val();
+							if(truename == ''){
+								$("#nickname").html('未填写');
+							}else{
+								$("#nickname").html(truename);
+							}
+							$.ajax({
+								url : 'http://www.tanglikeji.com/api.php/Ucenter/update_nickname',
+								type :'POST',
+								dataType : 'JSON',
+								data :{'cookie':localStorage.getItem('token'),'nick_name':truename},
+								success:function(res){
+									if(res.state == 'ok'){
+										userinfo.nickName = truename;
+			                        	localStorage.removeItem('userInfo');
+			                        	localStorage.setItem('userInfo',JSON.stringify(userinfo));
+									}
+									layer.open({
+										content:res.msg,
+										time:2,
+										skin:'msg'
+									})									
+								}
+							});
+						}
+					});
+				});
+				
+				function getData(typename,id){
+	                var uploadData = {
+	                    auto: true,
+	                    fileTypeExts: '*.jpg;*.jpeg;*.png;*.JPG;*.JPEG;*.PNG;',
+	                    multi: false,
+	                    fileObjName: typename,
+	                    formData: {
+	                        'cookie': localStorage.getItem('token'),
+	                    },
+	                    fileSizeLimit: 99999999999,
+	                    showUploadedPercent: false,
+	                    showUploadedSize: false,
+	                    removeTimeout: 9999999,
+	                    uploader: "http://www.tanglikeji.com/api.php/Ucenter/multiupload",
+	                    //uploader:"http://aapi.vipiao.com/client" + "/user/header",
+	                    //uploader: api"' + Url + 'uploadFace",
+	                    onUploadStart: function(file) {
+	                        console.log(file.name + '开始上传');
+	                    },
+	                    onInit: function(obj) {
+	                        console.log('初始化');
+	                    },
+	                    onUploadComplete: function(file, res) {	                        
+	                        if(res != 0){
+	                        	$("#avatorUpload").css('background-image','url(http://www.tanglikeji.com/Public/Uploads/'+res+")");
+	                        	userinfo.userimg = res;
+	                        	localStorage.removeItem('userInfo');
+	                        	localStorage.setItem('userInfo',JSON.stringify(userinfo));
+	                        }
+	                        /*
+	                        //$("#"+id).css("backgroundImage", "url('/"+res.data+"')");
+	                        img_list.push(res.data);
+							 
+	                        $("#piclist").val(img_list.join(','));
+	                        $("#big_img").css('background-image','url(/'+res.data+')');
+	                        $("#big_img").css('background-size','contain');
+	                        $("#pic_list").append('' +
+	                                '<div class="media clearfix" style="position:relative;width:80px;display: inline-block;margin-right: 10px;border: 1px solid #979797;padding: 2px;">' + 
+	                                    '<span style="position: absolute;top:4px;right:6px;color:red;cursor: pointer;" class="del-img" data-src="'+res.data+'">[x]</span>'+
+	                                    '<img src="/'+res.data+'" class="radius" style="width:80px;height:80px;">' + 
+	                                '</div>');
+	                        $(".del-img").on('click',function(){
+	                            src = $(this).attr('data-src');
+	                            img_tmp = [];
+	                            for(i in img_list){
+	                                if(img_list[i] == src){
+	                                    continue;
+	                                }
+	                                img_tmp.push(img_list[i]);
+	                            }
+	                            img_list = img_tmp;
+	                            $("#imgs").val(img_list.join(','));
+	                            $(this).parent().fadeOut(300);
+	                        })
+	                        */
+	                    },
+	                    onCancel: function(file) {
+	                        console.log(file.name + '删除成功');
+	                    },
+	                    onClearQueue: function(queueItemCount) {
+	                        console.log('有' + queueItemCount + '个文件被删除了');
+	                    },
+	                    onDestroy: function() {
+	                        console.log('destroyed!');
+	                    },
+	                    onSelect: function(file) {
+	                        console.log(file.name + '加入上传队列');
+	                    },
+	                    onQueueComplete: function(queueData) {
+	                        console.log('队列中的文件全部上传完成', queueData);
+	                    }
+	                };
+	                return uploadData;
+	            }
+	            var logoUp = $("#avatorUpload").Huploadify(getData('thumb','avatorUpload'));            
+	            
+			});
+		</script>
+		
+	</body>
+</html>

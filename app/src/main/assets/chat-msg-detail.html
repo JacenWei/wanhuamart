@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>详细资料</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="css/sm.css">
+	<link rel="stylesheet" href="css/sm-extend.css">
+	<link rel="stylesheet" href="css/login.css">
+	<script type='text/javascript' src='js/zepto.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/config.js' charset='utf-8'></script>	
+	<script type="text/javascript" src="js/common.js" ></script>	
+	
+</head>
+<body>
+    <div class="page-group page-from-right-to-center" style="background-color:#fff;">
+        <div class="page page-current" style="background-color:#fff;" id="uc-setting">
+        	<header class="bar bar-nav">
+        		<a class="button pull-left btn-back back" onclick="back()"><img src="images/icon/icon-arrow-left.png" class="icon-close" /></a>        		
+        		<h1 class="title">消息详情2</h1>
+			</header>
+        	<div class="content" style="">
+        		<div class="inner-block">
+        			<div class="inner-line message-item" style="text-align:left;">
+        				<div>
+        					<div class="substr" id="ptit"></div>
+        					<p style="margin-top:0;font-size:1rem;color:#959595;" id="pdate">5分钟前</p>
+        				</div>
+        				<div style="line-height:2rem;" id="pstr">
+        				</div>
+        			</div>
+        		</div>
+			</div>
+        </div>        
+    </div>
+    
+    <div class="backdrop"></div>
+    <div class="drop-menu drop-menu-shadow drop-menu-bottom">
+		<ul>
+			<li id="remark">
+				<i class="icon icon-user-editremark"></i>
+				<span>设置备注</span>
+			</li>
+			<li id="attention">
+				<i class="icon icon-user-attention"></i>
+				<span>关注</span>
+			</li>
+			<li id="report">
+				<i class="icon icon-user-report"></i>
+				<span>投诉</span>
+			</li>
+			<li id="black">
+				<i class="icon icon-user-black"></i>
+				<span>加入黑名单</span>
+			</li>
+			<li id="del">
+				<i class="icon icon-user-del"></i>
+				<span>删除好友</span>
+			</li>
+			<li id="share">
+				<i class="icon icon-user-share"></i>
+				<span>分享</span>
+			</li>
+		</ul>
+	</div>	
+    
+    
+	<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+	<script type="text/javascript" src="js/layer/layer.js" ></script>	
+	
+	<script>
+		$(function(){
+			
+			var token = localStorage.getItem('token') || '';
+			if(token == '' || token == null || token == undefined){
+				$.myUtil().alert_msg('身份已过期，请重新登录',function(){localStorage.clear();clicked('login.html');});
+			}
+			
+			param = $.myUtil().toQueryParams();
+			console.log(JSON.stringify( param));
+			if(param.id == undefined || param.id == null || param.id == ''){
+				$.myUtil().alert_msg('消息异常',function(){back();});
+			}else{
+				getDetail(param.id);
+			}
+			
+			function getDetail(id){
+				$.myUtil().ajax({
+					data:{
+						'api_name':'notice_read',
+						'token':token,
+						'xid':id
+					}
+				}).done(function(res){					
+					//$("#ptit").html( res.data.msg  );					
+					$("#pdate").html( res.data.addtime  );			
+					$("#pstr").html( res.data.msg  );
+					
+					layer.closeAll();
+					console.log(JSON.stringify( res));
+				})
+			}
+		})
+	</script>
+	
+</body>
+</html>

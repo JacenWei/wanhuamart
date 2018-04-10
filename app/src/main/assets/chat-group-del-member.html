@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>通讯录</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="css/sm.css">
+	<link rel="stylesheet" href="css/sm-extend.css">
+	<link rel="stylesheet" href="css/login.css">
+	<script type="text/javascript" src="js/common.js" ></script>
+</head>
+<body>
+    <div class="page-group" style="background-color:#fff;">
+        <div class="page page-current" id="chat-contact" style="background-color:#fff;">
+        	<header class="bar bar-nav">
+        		<a class="button pull-left btn-back back" href="javascript:;" onclick="back()"><img src="images/icon/icon-arrow-left.png" class="icon-close" /></a>
+				<button class="button pull-right btn-back" id="submit" style="color:#fff;">删除</button>
+        		<h1 class="title">聊天成员</h1>
+			</header>
+        	<div class="content chat-content" style="">        		
+		      	<div class="list-block contacts-block">			    	
+	        		<div class="list-block add-content-content infinite-scroll native-scroll" id="page-infinite-scroll-top"  data-distance="100" id="contactList">
+				    	<div class="chat-contact list-group" id="contactList"></div>				      				      
+				    </div>
+				</div>
+        	</div>        
+    	</div>
+    </div>
+    
+    <script type="text/html" id="contactListT">
+    	<div class="chat-contact list-group">
+	        <ul>	          	
+	          	{{each list as v k}}
+	          	<a href="javascript:;" id="userinfo.html?id={{v.user_id}}" data-uid="{{v.user_id}}">
+		          	<li style="border-bottom: 1px solid #eee;">
+		            	<div class="item-content" style="padding-left:0;">
+		            		<div class="item-media"><img src="{{v.head_portrait}}"  /></div>
+		              		<div class="item-inner">
+		                		<div class="item-title" style="font-size:1.33333333rem;">{{v.nickname}}</div>
+		                		<div class="item-after" data-check="1" data-info='{{v.user_id}}'><img src="images/icon/icon-yw-friend-uncheck.png" style="width:2.66666666rem;"/></div>
+		              		</div>
+		            	</div>
+		          	</li>
+	          	</a>
+	          	{{/each}}	          	
+	        </ul>
+      	</div>    	
+    </script>
+    
+    
+    <script type='text/javascript' src='js/zepto.js' charset='utf-8'></script>
+    <script type="text/javascript" src="js/update.js" ></script>
+	<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+	<script type="text/javascript" src="js/template.js" ></script>
+	<script type="text/javascript" src="js/layer/layer.js" ></script>
+	
+	
+	
+	<script>
+		$(function(){
+			var token = localStorage.getItem('token');
+			var userinfo = localStorage.getItem('userinfo');
+			var param = $.myUtil().toQueryParams();
+			var roomid = param.id;
+			console.error(localStorage.getItem(roomid));
+			room_members = JSON.parse(localStorage.getItem(roomid));
+			if(token == null){
+				$.myUtil().alert_msg('用户失效，请重新登录',function(){clicked('login.html');});
+				return;
+			}
+			if(userinfo == null){
+				$.myUtil().alert_msg('用户失效，请重新登录',function(){clicked('login.html');});
+				return;
+			}
+			var userList = [];
+			if(token == '' || token == null || token == undefined){
+				$.myUtil().alert_msg('身份已过期，请重新登录',function(){clicked('login.html');});
+			}
+//			$.myUtil().ajax({
+//				data:{
+//					'api_name':'friend_applylists',
+//					'token':token					
+//				},
+//				beforeFn:function(){}
+//			}).done(function(res){
+//				if(res.state == 'ok'){
+//					$(".mybadge").html(res.data.length);
+//				}
+//			});
+			getFriendList();
+			
+			$("#submit").click(function(){				
+				if(userList.length == 0){
+					$.myUtil().alert_msg('至少选择一项');return;
+				}
+				userids = [];
+				console.log(userList);
+				for(i in userList){										
+					userids.push(userList[i]);
+				}
+				$.myUtil().ajax({
+					data:{
+						'api_name':'chatgroup_delmember',
+						'token':token,
+						'ids':userids.join('|'),
+						'room_id':roomid
+					}
+				}).done(function(res){
+					layer.closeAll(); 
+					$.myUtil().alert_msg(res.msg,function(){
+						if(res.state == 'ok'){							
+							cgd = plus.webview.getWebviewById('chat-group-detail.html?room_id='+roomid);							
+							cgd.reload();
+							back();
+						}						
+					});
+				});	
+				
+			});
+			
+			function getFriendList(){
+				list = [];
+				for(i in room_members){
+					list.push(room_members[i].info);
+				}				
+				$("#contactList").html(template('contactListT',{'list':list}));
+				$(".item-after").click(function(){
+					id = $(this).attr('data-info');
+					is_check = $(this).attr('data-check');
+					json_str = $(this).attr('data-info');
+					if(is_check == 1){
+						userList.push(id);
+						$(this).find('img').attr('src','images/icon/icon-yw-friend-check.png');
+						$(this).attr('data-check',2);
+					}else if(is_check == 2){
+						temp = [];
+						for(i in userList){
+							if(userList[i] != id){
+								temp.push(id);
+							}
+						}
+						userList = temp;
+						$(this).find('img').attr('src','images/icon/icon-yw-friend-uncheck.png');
+						$(this).attr('data-check',1);
+					}							
+				})
+			}
+		})		
+	</script>
+
+</body>
+</html>

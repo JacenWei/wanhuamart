@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css" /> <!--公用css-->
+		<link rel="stylesheet" href="../css/business.css" />
+	    <script type="text/javascript" src="../js/common.js" ></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				clicked('login.html');
+			}
+		</script>
+	</head>
+	<body>
+		<header class="header" >
+			<a class="back" href="javascript:back();"></a>
+			<h1 class="tit">支付详情</h1>
+		</header>
+		<div class="content">
+			<div class="pay-status"><img src="../images/icon/icon-i37.png"  style="width: 24px;vertical-align: text-bottom;"/> 支付成功</div>
+			<div class="business-main">
+				<form>
+					<ul>						
+						<li style="text-align:center;font-size:36px;padding:40px;color:#000;">524.00</li>
+						<li style="border-bottom:0;">
+							<span class="payinfo-left">流水号</span>
+							<span class="payinfo-right">12154321543213545</span>
+						</li>
+						<li style="border-bottom:0;border-top:0">
+							<span class="payinfo-left">交易类型</span>
+							<span class="payinfo-right">充值</span>
+						</li>
+						<li style="border-bottom:0;border-top:0">
+							<span class="payinfo-left">交易时间</span>
+							<span class="payinfo-right">2016-08-12 09:25</span>
+						</li>
+						<li style="border-top:0;">
+							<span class="payinfo-left">支付方式</span>
+							<span class="payinfo-right">微信支付</span>
+						</li>
+						
+					</ul>
+					<p class="determine"><a href="./frame4.html" id="determine">确定</a></p>
+				</form>
+			</div>
+		</div>
+		
+		
+	</body>
+	<script type="text/javascript" src="../js/jquery-1.8.3.min.js" ></script>
+	<script type="text/javascript" src="../js/business-hairintegral.js" ></script>	
+</html>

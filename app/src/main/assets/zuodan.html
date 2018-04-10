@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css" /><!--公用css-->
+		<link rel="stylesheet" href="../css/shop-setup.css" />
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+	    <script src="../js/util.js"></script>
+	    <script src="../js/zuodan.js?2=2"></script>
+	    <script src="../js/common.js"></script>
+	    <script src="../js/layer2.0/layer.js"></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				clicked( 'login.html');
+			}
+		</script>
+	</head>
+	<body>
+		<header class="header"  >
+			<a class="back" href="javascript:back()"></a>
+			<h1 class="tit">做单</h1>
+			<a class="edit" href="javascript:;" style="width:inherit;height:initial;top:10px;right:10px;">
+				<div style="border:1px #ffffff solid;border-radius: 5px;padding:5px;margin-top: 2px;">做单记录</div>
+			</a>
+		</header>
+		<div class="content" style="	margin-top: 45px;">
+			<ul class="shop-list">
+				<li>
+					<p class="shop-name">会员账号</p>
+					<p class="shop-nr"><input type="tel" id="uname" value="" placeholder="请输入11位电话号码"></p>
+				</li>
+				<li>
+					<p class="shop-name">姓名电话</p>
+					<p class="shop-nr" id="real_name"></p>
+				</li>
+				<li>
+					<p class="shop-name">店铺名称</p>
+					<p class="shop-nr" id="shop_name"></p>
+				</li>
+				<li>
+					<p class="shop-name">商品名称</p>
+					<p class="shop-nr"><input type="text" id="goods_name" placeholder="请填写商品名称"></p>
+				</li>
+				<li>
+					<p class="shop-name">消费金额</p>
+					<p class="shop-nr"><input type="tel" value="" id="money" placeholder="填写购物金额"></p>
+				</li>
+				<!--
+				<li>
+					<p class="shop-name">积分模式</p>
+					<p class="shop-right" style="text-align:left;">
+						<span>B模式</span>						
+						<a class="point-cion"></a>
+					</p>
+				</li>
+				-->
+				<li>
+					<p class="shop-name">让利金额</p>
+					<p class="shop-nr"><input type="tel" id="point" placeholder="请填写让利金额"></p>
+				</li>
+				
+				<!--
+				<li>
+					<p class="shop-name">下单时间</p>
+					<p class="shop-nr"><input type="date" id="userday" value=""></p>
+				</li>
+				
+				<li>
+					<p class="shop-name">短信验证</p>
+					<p class="shop-nr">
+						<input type="tel" id="code" value="" style="width:120px;display:inline;" placeholder="填写短信验证码">
+						<button style="    float: right;border: 1px solid #e2e2e2;padding: 5px 10px;color: #fff;background: #00A4A6;border-radius: 3px;" id="sendsms" type="button">发送验证码</button>
+					</p>
+				</li>
+				-->
+				<li>
+					<p class="shop-name">交易密码</p>
+					<p class="shop-nr"><input type="password" id="pasword" placeholder="请填写交易密码"></p>
+				</li>
+			</ul>
+			<p class="shop-Submit"><button type="button" id="submitBtn">生成订单</button></p>
+		</div>
+		
+	</body>	
+</html>

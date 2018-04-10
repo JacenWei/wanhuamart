@@ -1,0 +1,5212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>发布</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="css/font_tbfy9ndgkdwjyvi.css">
+	<link rel="stylesheet" href="css/sm.css">
+	<link rel="stylesheet" href="css/sm-extend.css">
+	<link rel="stylesheet" href="css/login.css">
+	<link rel="stylesheet" href="css/wxzf.css">
+	<link rel="stylesheet" href="js/layer/need/layer.css">
+	<script type='text/javascript' src='js/zepto.js' charset='utf-8'></script>
+    <script type="text/javascript" src="js/update.js" ></script>    
+    <script type="text/javascript" src="js/cache.js" ></script>
+    <script type="text/javascript" src="js/mui.min.js" ></script>
+    <script type='text/javascript' src="http://api.map.baidu.com/api?v=2.0&ak=C8Pn598qtNvbvOFXuLhN8z2j" ></script>
+	<style>
+		footer {
+			position: fixed;
+			width: 100%;
+			height: 4.666666rem;
+			min-height: 4.666666rem;
+			border-top: solid 1px #bbb;
+			left: 0px;
+			bottom: 0px;
+			overflow: hidden;
+			
+			background-color: #fafafa;
+		}
+		.footer-left {
+			display: inline-block;
+			width: 2.666666rem;
+			height: 2.666666rem;			
+			text-align: center;			
+			line-height: 100%;
+		}
+		.footer-left img{
+			width:4rem;
+			height:4rem;
+			
+		}
+		.footer-right {			
+			text-align: center;
+			display: inline;
+		}
+		.footer-right img{
+			width:4rem;
+			height:4rem;
+		}
+		
+		.footer-center {
+			width:17.416666rem;			
+			padding: 0.833333rem 0px;
+			display: inline-block;
+			margin-left: 0.666666rem;
+			
+		}
+		.footer-center [class*=input] {
+			width: 100%;
+			height: 100%;
+			border-radius: 5px;
+		}
+		.footer-center .input-text {
+			height:3rem;
+			background: #fff;
+			border: solid 1px #ddd;			
+			font-size: 1.333333rem !important;
+			line-height: 3rem !important;
+			font-family: verdana !important;
+			overflow: hidden;
+		}
+		.footer-center .input-sound {
+			background-color: #eee;
+		}
+		.mui-content {
+			height: 100%;
+			padding: 5.666666rem 0px 4.666666rem 0px;
+			overflow: auto;
+			background-color: #E5E5E5;
+			position: relative;
+		}
+		#msg-list {
+			height: 100%;
+			overflow: auto;
+			-webkit-overflow-scrolling: touch;
+		}
+		.msg-item {
+			padding: 8px;
+			clear: both;
+		}
+		.msg-item .mui-item-clear {
+			clear: both;
+		}
+		.msg-item .msg-user {
+			width: 3.333333rem;
+			height: 3.333333rem;			
+			display: inline-block;			
+			border-radius: 3px;
+			vertical-align: top;
+			text-align: center;
+			float: left;
+			padding: 3px;
+			color: #ddd;
+		}
+		
+		.msg-item .msg-user-img{
+			width: 2.666666rem;
+			height: 2.666666rem;
+			display: inline-block;
+			border-radius: 3px;
+			vertical-align: top;
+			text-align: center;
+			float: left;
+			color: #ddd;
+		}
+		
+		.msg-item .msg-content {
+			display: inline-block;
+			border-radius: 0 0.5rem 0.5rem 0.5rem;
+			border: solid 1px #d3d3d3;
+			background-color: #FFFFFF;
+			color: #333;
+			padding: 1rem;
+			vertical-align: top;
+			font-size: 1.333333rem;
+			position: relative;
+			margin: 0px 0.666666rem;
+			max-width: 75%;
+			min-width: 3.333333rem;
+			float: left;
+		}
+		.msg-item .msg-content .msg-content-inner {
+			overflow-x: hidden;
+		}
+		.msg-item .msg-content .msg-content-arrow {
+			position: absolute;
+			border: solid 1px #d3d3d3;
+			border-right: none;
+			border-top: none;
+			background-color: #FFFFFF;
+			width: 10px;
+			height: 10px;
+			left: -5px;
+			top: 12px;
+			-webkit-transform: rotateZ(45deg);
+			transform: rotateZ(45deg);
+		}
+		.msg-item-self .msg-user,
+		.msg-item-self .msg-content {
+			float: right;
+		}
+		.msg-item-self .msg-content .msg-content-arrow {
+			left: auto;
+			right: -5px;
+			-webkit-transform: rotateZ(225deg);
+			transform: rotateZ(225deg);
+		}
+		.msg-item-self .msg-content,
+		.msg-item-self .msg-content .msg-content-arrow {
+			background-color: #53CF5C;
+			color: #262626;
+			border-color: #53CF5C;
+			border-radius: 0.5rem 0rem 0.5rem 0.5rem;
+		}
+		footer .mui-icon {
+			color: #000;
+		}
+		footer .mui-icon:active {
+			color: #007AFF !important;
+		}
+		footer .mui-icon-paperplane:before {
+			content: "发送";
+		}
+		footer .mui-icon-paperplane {
+			/*-webkit-transform: rotateZ(45deg);
+			transform: rotateZ(45deg);*/
+			
+			font-size: 16px;
+			word-break: keep-all;
+			line-height: 100%;
+			padding-top: 6px;
+			color: rgba(0, 135, 250, 1);
+		}
+		#msg-sound {
+			-webkit-user-select: none !important;
+			user-select: none !important;
+			height:2.666666rem;
+			width:100%;
+			background: transparent;
+		    border: 1px solid #eee;
+		    border-radius: 0.25rem;
+		    margin-top: 0.666666666rem;
+		}
+		.rprogress {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			width: 140px;
+			height: 140px;
+			margin-left: -70px;
+			margin-top: -70px;
+			background-image: url(../images/arecord.png);
+			background-repeat: no-repeat;
+			background-position: center center;
+			background-size: 30px 30px;
+			background-color: rgba(0, 0, 0, 0.7);
+			border-radius: 5px;
+			display: none;
+			-webkit-transition: .15s;
+		}
+		.rschedule {
+			background-color: rgba(0, 0, 0, 0);
+			border: 5px solid rgba(0, 183, 229, 0.9);
+			opacity: .9;
+			border-left: 5px solid rgba(0, 0, 0, 0);
+			border-right: 5px solid rgba(0, 0, 0, 0);
+			border-radius: 50px;
+			box-shadow: 0 0 15px #2187e7;
+			width: 46px;
+			height: 46px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin-left: -23px;
+			margin-top: -23px;
+			-webkit-animation: spin 1s infinite linear;
+			animation: spin 1s infinite linear;
+		}
+		.r-sigh{
+			display: none;
+			border-radius: 50px;
+			box-shadow: 0 0 15px #2187e7;
+			width: 46px;
+			height: 46px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin-left: -23px;
+			margin-top: -23px;
+			text-align: center;
+			line-height: 46px;
+			font-size: 40px;
+			font-weight: bold;
+			color: #2187e7;
+		}
+		.rprogress-sigh{
+			background-image: none !important;
+		}
+		.rprogress-sigh .rschedule{
+			display: none !important;
+		}
+		.rprogress-sigh .r-sigh{
+			display: block !important;
+		}
+		.rsalert {
+			font-size: 12px;
+			color: #bbb;
+			text-align: center;
+			position: absolute;
+			border-radius: 5px;
+			width: 130px;
+			margin: 5px 5px;
+			padding: 5px;
+			left: 0px;
+			bottom: 0px;
+		}
+		@-webkit-keyframes spin {
+			0% {
+				-webkit-transform: rotate(0deg);
+			}
+			100% {
+				-webkit-transform: rotate(360deg);
+			}
+		}
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+		#h {
+			background: #fff;
+			border: solid 1px #ddd;
+			padding: 10px !important;
+			font-size: 16px !important;
+			font-family: verdana !important;
+			line-height: 18px !important;
+			overflow: visible;
+			position: absolute;
+			left: -1000px;
+			right: 0px;
+			word-break: break-all;
+			word-wrap: break-word;
+		}
+		.cancel {
+			background-color: darkred;
+		}
+		.inner-line{padding:0.66666666rem 0;}
+		.inner-block{padding:0 1.33333333rem;}
+		.btn-big-disable {
+		    border-radius: 2px;
+		    color: #737373;
+		    background-color: #5f5f5f;
+		    border: 1px solid #ddd;
+		}
+		.chat-content{
+			padding-bottom:4rem;
+		}
+		.msg-item .msg-promise{
+			background-color: transparent;
+			border:0;
+			padding:0;
+		}
+		#msg-scroll{
+			position: absolute;
+			top:4rem;
+			bottom: 0rem;
+			width:100%;
+			height:80%;
+		}
+	</style>
+	
+</head>
+<body>
+    <div class="page-group" style="background-color:#f5f5f5;" id="chat-index">
+    	<!--打开红包页面-->
+    	<div class="page" id='zd-chat-chai' style="background-color:#f5f5f5;">        	
+			<header class="bar bar-nav mynav">				
+				<a class="button pull-left btn-back myback"><img src="images/icon/icon-arrow-left.png" class="icon-close" /></a>				
+        		<h1 class="title">红包详情</h1>
+			</header>
+			
+        	<div class="content chat-content" style="position: relative;height:100%;">
+        		<div class="numb_box" id="get_hongbao" style="display: block;background-color:#fff;z-index:9999;height:100%;top:0;">
+					<div class="hongbao-page">
+						<div class="hongbao-page-top">
+							<span class="hongbao-page-close">+</span>
+							<span class="hongbao-page-title">红包详情</span>	
+						</div>
+						<div class="hongbao-page-top-bg" style="" ></div>
+						<div id="hongbao-page-info">
+							<div class="hongbao-page-face">
+								<p class="hongbao-page-face-img" style="">
+									<img id="hb_user_pic" src="images/pay-eqcode.png" style="" />
+								</p>
+								<p id="hb_nickname">Key Mini</p>
+								<p id="hb_money">￥222.22</p>
+								<p>已存入余额，可直接提现</p>
+								<div id="hongbao_log">
+									<div class="inner-line inner-bottom-line">已抢红包 10/25 个</div>
+									<div class="inner-line hongbao-log-item" style="display:table;">
+										<span><img src="images/chat1.png"  /></span>
+										<span class="inner-bottom-line">
+											<span class="hongbao-log-userinfo">
+												<p>MUCU设计</p>
+												<p>11:24:11</p>
+											</span>
+											<span class="hongbao-log-money">￥50.55</span>
+										</span>
+									</div>
+								</div>
+							</div>				
+							
+						</div>			
+					</div>		
+				</div>
+			</div>
+        </div>
+    	
+    	
+    	<!--发送红包页面-->
+    	<div class="page" id='zd-chat-hongbao' style="background-color:#f5f5f5;">        	
+			<header class="bar bar-nav mynav">				
+				<a class="button pull-left btn-back myback"><img src="images/icon/icon-arrow-left.png" class="icon-close" /></a>				
+        		<h1 class="title">红包</h1>
+			</header>
+			
+        	<div class="content chat-content" style="position: relative;height:100%;padding:1.33333333rem">
+        		<div class="inner-block">
+        			<div class="inner-line">
+	        			<span style="display: table-cell;">红包金额</span>
+	        			<span style="display: table-cell;"><input type="number" id="hongbao_money" placeholder="0.00"/> 元</span>
+	        		</div>	
+        		</div>
+        		<br />
+        		<div class="inner-block" id="group_hongbao" style="display:none;">
+        			<div class="inner-line">
+	        			<span style="display: table-cell;">红包数量</span>
+	        			<span style="display: table-cell;"><input type="number" id="hongbao_num" placeholder="填写数量"/> 个</span>
+	        		</div>
+        		</div>
+        		<p style="font-size: 4rem;text-align: center;margin: 1rem 0;">￥<span id="hongbao_total">0.00</span></p>
+        		<button class="btn-big " id="hongbao_pay_btn" style="background-color:#EB454B;color:#FFD783;">塞进红包</button>
+			</div>
+        </div>
+    	<!--诚信金子页面-->
+    	<div class="page" id='zd-chat-promise' style="background-color:#f5f5f5;">
+			<header class="bar bar-nav mynav">				
+				<a class="button pull-left btn-back myback"><img src="images/icon/icon-arrow-left.png" class="icon-close" /></a>				
+        		<h1 class="title">诚信金</h1>
+			</header>
+			
+        	<div class="content chat-content" style="position: relative;height:100%;">
+        		<div class="inner-block">
+        			<div class="inner-line">
+        				<div class="inner-label">金额</div>
+        				<div class="inner-content"><input type="number" placeholder="输入约定的诚信金额" id="promise_money"/></div>
+        			</div>
+        		</div>
+				<!--        		
+        		<p style="padding:0 1.33333333rem;">约定条件（非必填项）</p>
+        		<div class="inner-block">
+        			<div class="inner-line inner-bottom-line">
+        				<div class="inner-label">约定位置</div>
+        				<div class="inner-content">
+        					<span class="inner-text" id="promise_position" style="width:17.2056151rem;"></span>
+        					<a href="#zd-chat-position"><i class="icon icon-map pull-right"></i></a>
+        				</div>
+        			</div>
+        			<div class="inner-line inner-bottom-line">
+        				<div class="inner-label">约定时间</div>
+        				<div class="inner-content">
+        					<div class="inner-top inner-bottom-line">从<input type="text" placeholder="约定开始时间" id="start_time" /></div>
+        					<div class="inner-bottom inner-bottom-line">至<input type="text" placeholder="约定截止时间" id="end_time" /></div>
+        				</div>
+        			</div>
+        			<div class="inner-line inner-bottom-line">
+        				<div class="inner-label">浮动范围</div>
+        				<div class="inner-content">
+        					<div class="inner-text">
+        						<input type="text" placeholder="可浮动时间范围" id="float_time"/>
+        					</div>
+        				</div>
+        			</div>
+        			<div class="inner-line inner-bottom-line">
+        				<div class="inner-label">备注</div>
+        				<div class="inner-content">
+        					<div class="inner-text">
+        						<textarea id="note" placeholder="输入所需的备注"></textarea>
+        					</div>
+        				</div>
+        			</div>
+        			<div class="inner-line inner-bottom-line">
+        				<div class="inner-label">最晚取消时间</div>
+        				<div class="inner-content">
+        					<div class="inner-text">
+        						<input type="text" placeholder="最迟取消约定时间" id="last_time"  />
+        					</div>
+        				</div>
+        			</div>
+        		</div>
+        		<p style="padding:0 1.33333333rem;">在最晚时间之前取消，可以免扣诚信金</p>
+        		-->
+        		<p style="padding:0 1.33333333rem;"><button class="btn-big " id="promise_pay_btn">确定并支付</button></p>
+			</div>
+			
+			<script>
+				$(function(){
+					var can_submit = 0;
+					$("#start_time").datetimePicker({});					
+					$("#end_time").datetimePicker({});
+					$("#last_time").datetimePicker({});
+					$("#float_time").picker({
+						toolbarTemplate: '<header class="bar bar-nav">\
+						<button class="button button-link pull-right close-picker">确定</button>\
+  						<h1 class="title">请选择时间</h1>\
+						</header>',
+						cols: [
+							{
+						      textAlign: 'center',
+						      values: ['0小时','1小时','2小时','3小时','4小时','5小时','6小时','7小时','8小时','9小时','10小时','11小时','12小时','13小时','14小时','15小时','16小时','17小时','18小时','19小时','20小时','21小时','22小时','23小时','24小时']
+						    },
+							{
+						      textAlign: 'center',
+						      values: ['0分钟','1分钟','2分钟','3分钟','4分钟','5分钟','6分钟','7分钟','8分钟','9分钟','10分钟','11分钟','12分钟','13分钟','14分钟','15分钟','16分钟','17分钟','18分钟','19分钟','20分钟','21分钟','22分钟','23分钟','24分钟','25分钟','26分钟','27分钟','28分钟','29分钟','30分钟','31分钟','32分钟','33分钟','34分钟','35分钟','36分钟','37分钟','38分钟','39分钟','40分钟','41分钟','42分钟','43分钟','44分钟','45分钟','46分钟','47分钟','48分钟','49分钟','50分钟','51分钟','52分钟','53分钟','54分钟','55分钟','56分钟','57分钟','58分钟','59分钟']
+						    }
+						]
+					});
+					$("#promise_money").on('keyup',function(){
+						value = $(this).val();
+						if(value == ''){
+							$("#promise_pay_btn").addClass('btn-big-disable');
+							can_submit = 0;
+						}else{
+							$("#promise_pay_btn").removeClass('btn-big-disable');
+							can_submit = 1;
+						}
+					})
+					
+					$(".myback").click(function(){
+						cxj_is_open = false;
+						hongbao_is_open = false;
+						position_is_open = false;
+						$.router.back();
+					})
+					
+				})
+			</script>
+        
+			
+			<script>
+				$(function(){
+					var can_submit = 0;
+					$("#start_time").datetimePicker({});					
+					$("#end_time").datetimePicker({});
+					$("#last_time").datetimePicker({});
+					$("#float_time").picker({
+						toolbarTemplate: '<header class="bar bar-nav">\
+						<button class="button button-link pull-right close-picker">确定</button>\
+  						<h1 class="title">请选择时间</h1>\
+						</header>',
+						cols: [
+							{
+						      textAlign: 'center',
+						      values: ['0小时','1小时','2小时','3小时','4小时','5小时','6小时','7小时','8小时','9小时','10小时','11小时','12小时','13小时','14小时','15小时','16小时','17小时','18小时','19小时','20小时','21小时','22小时','23小时','24小时']
+						    },
+							{
+						      textAlign: 'center',
+						      values: ['0分钟','1分钟','2分钟','3分钟','4分钟','5分钟','6分钟','7分钟','8分钟','9分钟','10分钟','11分钟','12分钟','13分钟','14分钟','15分钟','16分钟','17分钟','18分钟','19分钟','20分钟','21分钟','22分钟','23分钟','24分钟','25分钟','26分钟','27分钟','28分钟','29分钟','30分钟','31分钟','32分钟','33分钟','34分钟','35分钟','36分钟','37分钟','38分钟','39分钟','40分钟','41分钟','42分钟','43分钟','44分钟','45分钟','46分钟','47分钟','48分钟','49分钟','50分钟','51分钟','52分钟','53分钟','54分钟','55分钟','56分钟','57分钟','58分钟','59分钟']
+						    }
+						]
+					});
+					$("#promise_money").on('keyup',function(){
+						value = $(this).val();
+						if(value == ''){
+							$("#promise_pay_btn").addClass('btn-big-disable');
+							can_submit = 0;
+						}else{
+							$("#promise_pay_btn").removeClass('btn-big-disable');
+							can_submit = 1;
+						}
+					})
+					$("#promise_pay_btn").click(function(){
+						money = $("#promise_money").val();
+						if(money == ''){
+							$.myUtil().alert_msg('请填写约定的诚信金额');return;
+						}
+						if(money <= 0){
+							$.myUtil().alert_msg('请填写正确的诚信金额');return;
+						}
+						posi = $("#position").html();
+						//lng = $()
+					})
+				})
+			</script>
+        </div>
+    	    	
+    	<!--位置选择子页面-->
+    	<div class="page" id='zd-chat-position' style="background-color:#f5f5f5;">        	
+			<header class="bar bar-nav mynav">				
+				<a class="button pull-left btn-back myback"><img src="images/icon/icon-arrow-left.png" class="icon-close" /></a>
+				<a class="button pull-right btn-back span-btn" style="background-color: #53CE5A;color: #fff;" id="position_send">发送</a>
+        		<h1 class="title">位置</h1>
+			</header>
+			
+        	<div class="content chat-content" style="position: relative;height:100%;">
+        		<div id="bmap" style="height:26rem;"></div>
+        		<div class="drop-menu drop-menu-bottom" style="padding-bottom:4rem;background-color:#fff;max-height: none;overflow-y: scroll;height:27rem;">
+				  	<ul id="poisList"></ul>
+				</div>
+			</div>			
+        </div>
+    	
+    	
+        <div class="page page-current page-from-right-to-center" id='zd-chat' style="background-color:#f5f5f5;">
+        	<header class="bar bar-nav">
+        		<button class="button pull-left btn-back mybackbtn"><img src="images/icon/icon-arrow-left.png" class="icon-close" /></button>        		
+				<button class="button pull-right btn-back " >					
+					<img src="images/icon/icon-chat-user.png" class="icon-close" id="chat-detail"/>
+				</button>
+				<button class="button pull-right btn-back cyj" style="display:none;">
+					<img src="images/icon/icon-cyj.png" class="icon-close" id="chat-detail" style="width:2.66666rem;"/>
+				</button>
+        		<h1 class="title"></h1>
+			</header>
+        	<div class="content chat-content">
+			  	
+			</div>
+			<div class="mui-content" style="padding-bottom:4rem;">
+				<div id="msg-scroll">
+					<div id="scroller">						
+				
+				<div id='msg-list'>
+					<div style="height:2rem"></div>
+					<!--<div id="111222333444" class="msg-item msg-item-self" msg-type='{{item.type}}' msg-content='{{item.content}}' msg-show_path='{{item.show_path}}' >					
+						
+						<img class="msg-user mui-icon mui-icon-person" src="{{if item.logo_src == ''}}images/chat1.png{{else}}{{item.logo_src}}{{/if}}" />
+						
+						<div class="msg-content" style="width:100%;background-color:#fff;border:#fff;">
+							<div class="msg-content-inner">
+								<div class="msg-content-promise" id="{{item.promise_data.id}}" style="background-color:#fff;width:20rem;color:#262626;">
+									<div class="msg-content-promise-head" style="border-radius:0;">
+										<span><img src="images/chat-promise-msg.png" /></span>
+										
+										<span style="font-size:1.33333333rem;">诚信金</span>
+										<span class="promise-tip" style="text-align:right;color:#999;"></span>
+									</div>
+									<div class="msg-content-promise-body" style="padding:0.66666666rem 0;">
+										<div class="inner-line" style="padding:0;font-size:2rem;color:#262626;text-align: center;">￥11</div>
+									</div>									
+									<div class="msg-content-promise-foot" style="display:none;" id="p_1">
+										<span class="promise-chexiao" data-id="{{item.promise_data.id}}">撤销</span>	
+									</div>
+									<div class="msg-content-promise-foot" style="display:none;" id="p_2">
+										<span class="promise-complate" data-id="{{item.promise_data.id}}">同意</span>
+										<span class="promise-cancel" data-id="{{item.promise_data.id}}">拒绝</span>
+									</div>
+									<div class="msg-content-promise-foot" style="display:none;" id="p_3">
+										<span class="promise-tousu"  data-id="{{item.promise_data.id}}">投诉</span>
+										<span class="promise-complate" data-id="{{item.promise_data.id}}">完成</span>
+										<span class="promise-cancel" data-id="{{item.promise_data.id}}">赔付</span>		
+									</div>
+									<div class="msg-content-promise-foot" style="display:none;" id="p_">																				
+										<span class="promise-tousu"  data-id="{{item.promise_data.id}}4">投诉</span>
+										<span class="promise-complate" data-id="{{item.promise_data.id}}">同意完成</span>
+										<span class="promise-cancel" data-id="{{item.promise_data.id}}">拒绝完成</span>										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>-->
+					
+				</div>
+					</div>
+				</div>
+			</div>
+			<script id='msg-template' type="text/html">
+				
+				{{each record as item i}}
+				{{if item.type == 'notice'}}
+				<div class="msg-notice" style="width:100%;display:block;">
+					<span>{{item.msg}}</span>
+				</div>
+				{{else}}
+				<div id="{{item.mid}}" class="msg-item {{if item.sender == 'self'}}msg-item-self{{/if}} " msg-type='{{item.type}}' msg-content='{{item.content}}' msg-show_path='{{item.show_path}}' {{if item.objid != undefined || item.objid != ''}} msg-objid="{{item.objid}}" {{/if}}>					
+					{{if(item.sender=='self' )}}
+						<img class="msg-user mui-icon mui-icon-person" src="{{if item.logo_src == ''}}images/chat1.png{{else}}{{item.logo_src}}{{/if}}" />
+					{{else}}
+						<img class="msg-user" src="{{if item.logo_src == ''}}images/chat2.png{{else}}{{item.logo_src}}{{/if}}" />
+					{{/if}}
+					<div class="msg-content" {{if item.type != 'text' && item.type != 'sound' }}style="background-color:#fff;padding:0;border:0;width:100%;"{{/if}}>
+						<div class="msg-content-inner">
+							{{if item.type=='text' }}
+								{{item.content}}
+							{{/if}}
+							{{if item.type == 'image' }}
+								<img class="msg-content-image" src="{{item.content}}" style="max-width: 20rem;" onerror="this.str='{{item.show_path}}'" />
+							{{/if}}
+							{{if item.type == 'position' }}
+								<img class="msg-content-image" src="{{item.content}}" style="max-width: 20rem;" />
+							{{/if}}
+							{{ if item.type=='sound' }}
+								<span class="mui-icon mui-icon-mic" style="font-size: 18px;font-weight: bold;"></span>
+								<span class="play-state">点击播放</span>
+							{{/if}}
+							{{ if item.type=='video' }}
+								<span class="mui-icon mui-icon-mic" style="font-size: 18px;font-weight: bold;"></span>
+								<span class="play-state">点击播放</span>
+							{{/if}}
+							{{if item.type == 'face' }}
+								<img class="msg-content-image" src="{{item.content}}" style="max-width: 100px;" />
+							{{/if}}
+							{{if item.type == 'hongbao'}}
+								<div class="inner-line" style="display:table;background-color:#FA9E3B;height:4rem;width:100%;">
+									<span style="display:table-cell;vertical-align: middle;text-align:center">
+										<img src="images/icon/icon-chat-hongbao.png" style="width:3rem;vertical-align: middle;"/>
+									</span>
+									<span style="display:table-cell;vertical-align: middle;text-align:center;color:#fff;font-size:1.3333333rem;padding-left: 0.5rem;">
+										{{if item.title == ''}}恭喜发财，大吉大利{{else}}{{item.title}}{{/if}}
+									</span>
+								</div>
+								<div style="padding-left:0.66666666rem;height:1.5rem;background-color:#fff;line-height:1.5rem;font-size:0.8rem;color:#959595">诚信红包</div>
+							{{/if}}
+							{{if item.type == 'share'}}
+								<div class="inner-line share-item table" style="background-color:#fff;height:2rem;width:20rem;color:#262626;">									
+									<div style="display:table-cell;vertical-align: middle;text-align:center;width:3rem;padding-left:1rem;">
+										<div class="img-div" style="background-image:url({{item.share_data.thumb}})"></div>										
+									</div>
+									<div style="display:table-cell;vertical-align: middle;text-align:left;color:#959595;font-size:1rem;padding-left: 0.5rem;">
+										<p style="margin-bottom:0.66666666rem;font-size:1.33333333rem;width:100%;color:#262626;">{{item.share_data.title}}</p>
+										<p style="margin:0;font-size:1rem;color:#959595;width:100%;">{{item.share_data.desc}}</p>
+									</div>								
+								</div>														
+							{{/if}}
+							{{if item.type == 'promise'}}
+								<div class="msg-content-promise" id="{{item.promise_data.id}}" style="background-color:#fff;width:100%;color:#262626;">
+									<div class="msg-content-promise-head" style="border-radius:0;">
+										<span><img src="images/chat-promise-msg.png" /></span>
+										
+										<span style="font-size:1.33333333rem;">诚信金</span>
+										<span class="promise-tip" style="text-align:right;color:#999;"></span>
+									</div>
+									<div class="msg-content-promise-body" style="padding:0.66666666rem 0;">
+										<div class="inner-line" style="padding:0;font-size:2rem;color:#262626;text-align: center;">￥{{item.promise_data.price}}</div>
+									</div>
+									<!--									
+									<div class="msg-content-promise-body">
+										<div class="inner-line">
+											<div class="inner-label">约定位置</div>
+											<div class="inner-content">{{item.promise_data.addr}}</div>
+										</div>
+										<div class="inner-line">
+											<div class="inner-label">约定时间</div>
+											<div class="inner-content">
+												<div class="inner-top">从 {{item.promise_data.start}}</div>
+    											<div class="inner-bottom">至 {{item.promise_data.end}}</div>
+											</div>
+										</div>
+										<div class="inner-line">
+											<div class="inner-label">备注</div>
+											<div class="inner-content">{{item.promise_data.note}}</div>
+										</div>
+										<div class="inner-line">
+											<div class="inner-label">违约时间</div>
+											<div class="inner-content">{{item.promise_data.last}}</div>
+										</div>
+									</div>
+									-->
+									<div class="msg-content-promise-foot" style="display:none;" id="p_1">
+										<span class="promise-chexiao" data-id="{{item.promise_data.id}}">撤销</span>	
+									</div>
+									<div class="msg-content-promise-foot" style="display:none;" id="p_2">
+										<span class="promise-ok" data-id="{{item.promise_data.id}}">同意</span>
+										<span class="promise-err" data-id="{{item.promise_data.id}}">拒绝</span>
+									</div>
+									<div class="msg-content-promise-foot" style="display:none;" id="p_3">
+										<span class="promise-tousu"  data-id="{{item.promise_data.id}}" style="width:33%;">投诉</span>
+										<span class="promise-complate" data-id="{{item.promise_data.id}}" style="width:33%;">完成</span>
+										<span class="promise-peifu" data-id="{{item.promise_data.id}}" style="width:33%;">赔付</span>		
+									</div>
+									<div class="msg-content-promise-foot" style="display:none;" id="p_4">																				
+										<span class="promise-tousu"  data-id="{{item.promise_data.id}}" style="width:33%;">投诉</span>
+										<span class="promise-acomplate" data-id="{{item.promise_data.id}}" style="width:33%;">同意完成</span>
+										<span class="promise-acancel" data-id="{{item.promise_data.id}}" style="width:33%;">拒绝完成</span>										
+									</div>
+								</div>
+							{{/if}}
+						</div>
+					</div>					
+					<div class="mui-item-clear"></div>
+				</div>
+				{{/if}}
+				{{/each}}				
+			</script>
+			
+			<footer class="">
+				<div class="tool">
+					<ul>
+						<li class="footer-left">
+							<img id="chat-type" src="images/icon/icon-chat-sound.png" />							
+						</li>
+						<li>
+							<textarea id="msg-content" class="info-textarea chat-text" placeholder=""></textarea>
+							<button id='msg-sound' type="button" class='input-sound' style="display: none;margin-top:0.6666666666rem;margin-bottom: 1.333333rem;">按住说话</button>
+						</li>
+						<li class="footer-right">
+							<img id="msg-face" src="images/icon/icon-chat-face.png" />
+							<img id="msg-more" src="images/icon/icon-chat-more.png" />
+						</li>
+						<div class="clearfix"></div>
+					</ul>
+				</div>
+				
+				<!--
+				<div class="footer-left">
+					<img id="chat-type" src="images/icon/icon-chat-keybord.png" />
+				</div>
+				<div class="footer-center">					
+					<textarea id="msg-content" class="info-textarea chat-text" placeholder="输入详细信息（第一句默认为标题）"></textarea>
+					<button id='msg-sound' type="button" class='input-sound' style="display: none;">按住说话</button>
+				</div>
+				<div for="" class="footer-right">
+					<img id="msg-face" src="images/icon/icon-chat-face.png" />
+					<img id="msg-more" src="images/icon/icon-chat-more.png" />
+				</div>
+				<div class="clearfix"></div>
+				-->
+				<div class="footer-more">
+					<ul>
+						<li>
+							<a href="javascript:;" id="zd-chat-promise-btn">
+								<img id="choose-promise" src="images/chat-promise.png" />
+								<p>诚信金</p>
+							</a>
+						</li>
+						<li>
+							<a href="#zd-chat-position" data-no-cache="true" id="zd-chat-position-btn">
+								<img id="choose-position" src="images/chat-position.png" />
+								<p>位置</p>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;" id="uc-pay.html" onclick="clicked(this.id)">
+								<img id="choose-pay" src="images/chat-pay.png" />
+								<p>收付款</p>
+							</a>
+						</li>
+						<li>
+							<a href="#zd-chat-hongbao" data-no-cache="true" id="send_hongbao">
+								<img id="choose-hongbao" src="images/chat-hongbao.png" />
+								<p>红包</p>
+							</a>
+						</li>
+						
+						<li>
+							<img id="choose-pic" src="images/icon/icon-chat-picture.png" />
+							<p>图片</p>
+						</li>
+						<li>
+							<img id="choose-photo" src="images/icon/icon-chat-photo.png" />
+							<p>拍照</p>
+						</li>
+						<li>
+							<img id="choose-video" src="images/icon/icon-chat-video.png" />
+							<p>视频</p>
+						</li>
+						<li>
+							<img id="choose-card" src="images/chat-card.png" />
+							<p>名片</p>
+						</li>
+						<div class="clearfix"></div>
+					</ul>
+				</div>
+			</footer>
+			<div id='sound-alert' class="rprogress">
+				<div class="rschedule"></div>
+				<div class="r-sigh">!</div>
+				<div id="audio_tips" class="rsalert">手指上滑，取消发送</div>
+			</div>
+			
+        </div>        
+        <!--<script>
+        	$(function(){
+        		$("#zd-chat-promise-btn").click(function(){
+        			$.router.load("#zd-chat-promise");
+        			is_promist_page = 1;
+        		})
+        		$("#zd-chat-position-btn").click(function(){
+        			is_promist_page = 0;
+        		});
+        	})
+        </script>-->
+    </div>
+    
+    <div class="backdrop"></div>
+    <div class="numb_box" id="promise_pay_form" style="display: none;background-color:#fff;z-index:99999;">
+		<p style="height:4rem;display: table;width:100%;">
+			<span style="display:table-cell;vertical-align: middle;width:11rem;text-align:left;padding-left:1rem;" id="pay_close"><span class="span-btn">关闭</span></span>
+			<span style="display:table-cell;vertical-align: middle;text-align:left;font-size:1.33333333333rem;color:#262626;">输入支付密码</span>
+		</p>
+		<p style="padding:0 1.333333rem">
+			<!--<input type="password" readonly="" id="pay-money" placeholder="输入6位支付密码" class="pay-password">-->
+			<ul class="mm_box">
+		      	<li class=""></li>
+		      	<li class=""></li>
+		      	<li class=""></li>
+		      	<li class=""></li>
+		      	<li class=""></li>
+		      	<li></li>
+		    </ul>
+		</p>
+		
+		
+	    <!--<div class="xiaq_tb"><img src="images/jftc_14.jpg" height="10"></div>-->
+	    <ul class="nub_ggg">
+	    	<li><a href="javascript:void(0);">1</a></li>
+	      	<li><a href="javascript:void(0);" class="zj_x">2</a></li>
+	      	<li><a href="javascript:void(0);">3</a></li>
+	      	<li><a href="javascript:void(0);">4</a></li>
+	      	<li><a href="javascript:void(0);" class="zj_x">5</a></li>
+	      	<li><a href="javascript:void(0);">6</a></li>
+	      	<li><a href="javascript:void(0);">7</a></li>
+	      	<li><a href="javascript:void(0);" class="zj_x">8</a></li>
+	      	<li><a href="javascript:void(0);">9</a></li>
+	      	<li><span></span></li>
+	      	<li><a href="javascript:void(0);" class="zj_x">0</a></li>
+	      	<li><span class="del"> <img src="images/pay-confirm-back.png"></span></li>
+	    </ul>
+	</div>
+	
+	<!--<div class="numb_box" id="get_hongbao" style="display: none;background-color:#fff;z-index:9999;height:100%;top:0;">
+		<div class="hongbao-page">
+			<div class="hongbao-page-top">
+				<span class="hongbao-page-close">+</span>
+				<span class="hongbao-page-title">红包详情</span>	
+			</div>
+			<div class="hongbao-page-top-bg" style="" ></div>
+			<div id="hongbao-page-info">
+				<div class="hongbao-page-face">
+					<p class="hongbao-page-face-img" style="">
+						<img id="hb_user_pic" src="images/pay-eqcode.png" style="" />
+					</p>
+					<p id="hb_nickname">Key Mini</p>
+					<p id="hb_money">￥222.22</p>
+					<p>已存入余额，可直接提现</p>
+					<div id="hongbao_log">
+						<div class="inner-line inner-bottom-line">已抢红包 10/25 个</div>
+						<div class="inner-line hongbao-log-item" style="display:table;">
+							<span><img src="images/chat1.png"  /></span>
+							<span class="inner-bottom-line">
+								<span class="hongbao-log-userinfo">
+									<p>MUCU设计</p>
+									<p>11:24:11</p>
+								</span>
+								<span class="hongbao-log-money">￥50.55</span>
+							</span>
+						</div>
+					</div>
+				</div>				
+				
+			</div>			
+		</div>		
+	</div>-->
+    
+    <script id='hongbao_logT' type="text/html">
+    	<div class="inner-line inner-bottom-line">已抢红包 {{not_received_num}}/{{pnum}} 个</div>
+    		{{each receivelist as item i}}
+			<div class="inner-line hongbao-log-item" style="display:table;">
+				<span><img src="{{item.user_logo}}"  /></span>
+				<span class="inner-bottom-line">
+					<span class="hongbao-log-userinfo">
+						<p>{{item.nickname}}</p>
+						<p>{{item.receive_time}}</p>
+					</span>
+					<span class="hongbao-log-money">￥{{item.receive_money}}</span>
+				</span>
+			</div>
+			{{/each}}
+    </script>
+    
+    <div class="dialog-container" id="promist_show" style="display:none;">
+		<div class="promise-dialog" style="display:block;">
+			<div class="promise-dialog-head">
+				<p><span id="p_nickname"></span> 承诺诚信金 </p>
+				<p>￥<span id="p_price">0</span> 元</p>
+				<p>您是否同意出具同样金额的诚信金作为违约赔偿</p>
+			</div>
+			<!--			
+			<div class="promise-dialog-body">
+				<div class="inner-line">
+					<div class="inner-label">约定位置</div>
+					<div class="inner-content" id="p_addr"></div>						
+				</div>
+				<div class="inner-line">
+					<div class="inner-label">约定时间</div>
+					<div class="inner-content">
+    					<div class="inner-top" >从 <span id="p_start"></span></div>
+    					<div class="inner-bottom" >至 <span id="p_end"></span></div>
+    				</div>
+				</div>
+				<div class="inner-line">
+					<div class="inner-label">备注</div>
+					<div class="inner-content" id="p_note"></div>						
+				</div>
+				<div class="inner-line">
+					<div class="inner-label">违约时间</div>
+					<div class="inner-content" id="p_last"></div>						
+				</div>
+			</div>
+			-->
+			<div class="promise-dialog-foot" id="sp_1" style="display:none;">
+				<span id="promise_dialog_cancel" style="width:100%;">撤销</span>			
+			</div>
+			<div class="promise-dialog-foot" id="sp_2" style="display:none;">
+				<span id="promise_dialog_err" style="display:table-cell;width:50%;">拒绝</span>
+				<span id="promise_dialog_ok" style="display:table-cell;width:50%;">同意</span>				
+			</div>
+			<div class="promise-dialog-foot" id="sp_3" style="display: none;">
+				<span id="promise_dialog_tousu" style="display:table-cell;width:33%;">投诉</span>
+				<span id="promise_dialog_agree" style="display:table-cell;width:33%;">完成</span>
+				<span id="promise_dialog_peifu" style="display:table-cell;width:33%;">赔付</span>								
+			</div>			
+			<div class="promise-dialog-foot" id="sp_4" style="display: none;">
+				<span id="promise_dialog_tousu" style="display:table-cell;width:33%;">投诉</span>
+				<span id="promise_dialog_aagree" style="display:table-cell;width:33%;">同意完成</span>
+				<span id="promise_dialog_afailed" style="display:table-cell;width:33%;">拒绝完成</span>								
+			</div>
+		</div>
+	</div>
+    
+    
+    <script id='poisListT' type="text/html">				
+		{{each list as item i}}
+		<li class="position inner-bottom-line" data-type="0" data-lng="{{item.point.x}}" data-lat="{{item.point.y}}" data-name="{{item.name}}" data-addr="{{item.addr}}" style="height: inherit;">
+			<span style="width:100%;display:block;">{{item.name}}</span>
+			<p style="margin:0.66666666rem 0;color:#959595;font-size:1rem;width:80%;display: inline-block;">{{item.addr}}</p>
+			<i class="pull-right icon icon-cb-uncheck"></i>				
+		</li>
+		{{/each}}
+	</script>
+    
+<script>
+	var hongbao_is_open = false;
+	var cxj_is_open = false;
+	var position_is_open = false;	
+	var chai_is_open = false;
+(function(w){
+// 空函数
+function shield(){
+	return false;
+}
+document.addEventListener('touchstart',shield,false);//取消浏览器的所有事件，使得active的样式在手机上正常生效
+document.oncontextmenu=shield;//屏蔽选择函数
+// H5 plus事件处理
+var ws=null,as='pop-out';
+function plusReady(){
+	
+	ws=plus.webview.currentWebview();
+	// Android处理返回键
+	plus.key.addEventListener('backbutton',function(){		
+		now_ww = plus.webview.currentWebview();		
+		if(cxj_is_open || position_is_open){
+			$.router.back();
+			cxj_is_open = false;
+			position_is_open = false;				
+			return;
+		}		
+		if(hongbao_is_open){		
+			$.router.back();			
+			hongbao_is_open = false;
+			return;
+		}		
+		if(chai_is_open){			
+			$("#get_hongbao").hide();
+			console.log($("#get_hongbao").css('display'));
+			chai_is_open = false;
+			console.error("2");
+			return;
+		}
+//		hongbao_div = $("#get_hongbao").css('display');		
+//		if($("#get_hongbao").css('display') == 'block'){			
+//			$("#get_hongbao").hide();
+//			console.log("6");
+//			return;
+//		}
+		
+		xinPage = plus.webview.getWebviewById('xin-index.html');
+		if(xinPage){
+			socket.disconnect();
+			xinPage.evalJS('refreshPage()');
+		}
+		
+	},false);
+	compatibleAdjust();
+}
+if(w.plus){
+	plusReady();
+}else{
+	document.addEventListener('plusready',plusReady,false);
+}
+// DOMContentLoaded事件处理
+var domready=false;
+document.addEventListener('DOMContentLoaded',function(){
+	domready=true;
+	gInit();
+	document.body.onselectstart=shield;
+	compatibleAdjust();
+},false);
+
+w.qrcode_config = {};
+
+// 处理返回事件
+w.back=function(hide){
+//	taskList = plus.webview.getWebviewById("uc-usetting.html");
+//	taskList.reload();
+	
+    now_ww = plus.webview.currentWebview();
+    chat_index_page = plus.webview.getWebviewById('xin-index.html');
+    id = now_ww.id;    
+    if(chat_index_page != null){
+    	if( id.indexOf("chat-group-normal-chat.html")>=0 || id.indexOf("chat-chat.html")>=0 || id.indexOf("chat-group-chat.html")>=0 || id.indexOf("index-xunjia-chat.html")>=0 || id.indexOf("zd-chat.html")>=0 ){	
+			var qs=id.lastIndexOf("=")+1; 
+			//同时清除未读消息数量
+			cid = plus.webview.getWebviewById('index-all.html');
+			console.error("  $('#wd"+id.substr(qs,99) +"').html('0').hide(); ");
+			cid.evalJS("  $('#wd"+id.substr(qs,99) +"').html('0').hide(); ");
+			socket.disconnect();
+			history.back();
+		}
+    }    
+    if(now_ww.id == 'index-xunjia.html'){
+    	clicked('index-all.html');
+    }
+    
+    
+	if(w.plus){
+		ws||(ws=plus.webview.currentWebview());
+		if(hide||ws.preate){	
+			ws.hide('auto');
+		}else{
+			
+			if(ws.id == 'newdrag'){
+				nw = plus.webview.getWebviewById('index-map.html');			
+				nw.close('auto');
+			}
+			ws.hide('auto');
+		}
+	}else if(history.length>1){
+		history.back();
+	}else{
+		w.close();
+	}
+};
+// 处理点击事件
+var openw=null,waiting=null;
+/**
+ * 打开新窗口
+ * @param {URIString} id : 要打开页面url
+ * @param {boolean} wa : 是否显示等待框
+ * @param {boolean} ns : 是否不自动显示
+ * @param {JSON} ws : Webview窗口属性
+ */
+w.clicked=function(id,wa,ns,ws,myas){
+	
+	if( id.indexOf("ull?")>0)return;
+	
+	if( id.indexOf("chat-group-normal-chat.html")>=0 || id.indexOf("chat-chat.html")>=0 || id.indexOf("chat-group-chat.html")>=0 || id.indexOf("index-xunjia-chat.html")>=0 || id.indexOf("zd-chat.html")>=0){	
+		var qs=id.lastIndexOf("=")+1; 
+		console.log(qs);
+		//同时清除未读消息数量
+		//cid = plus.webview.getWebviewById('chat-index.html');
+		cid = plus.webview.getWebviewById('xin-index.html');
+		if(cid == null){
+		}else{
+			console.error("  $('#wd"+id.substr(qs,99) +"').html('0').hide(); ");				
+			cid.evalJS("  $('#wd"+id.substr(qs,99) +"').html('0').hide(); ");	
+		}
+		
+	}	
+	
+	console.log("正在打开页面：" + id);
+	openw = plus.webview.getWebviewById(id);
+	if(openw){//避免多次打开同一个页面
+		//.return null;
+		if(id == 'index-all.html'){
+			openw.show();
+			return;
+		}
+		if(id == 'index.html'){
+			if(plus.webview.getWebviewById('index2.html') != null){
+				plus.webview.getWebviewById('index2.html').close();	
+			}			
+		}
+		if(id == 'index-map.html'){
+			if(plus.webview.getWebviewById('index-list.html') != null){
+				plus.webview.getWebviewById('index-list.html').close();	
+			}			
+		}
+	 	if(id == 'chat-index.html'){
+	 		openw.reload();
+	 		setTimeout(function(){
+	 			openw.show();
+	 		},400);	 
+	 		return;	 		
+	 	}	 	
+	 	if( id.indexOf("hat-group-normal-chat.html")>0 ){
+	 		console.error("执行读取历史聊天记录");
+	 		//openw.evalJS("getHistoryMsg(room_id);");
+	 		openw.reload();
+	 		setTimeout(function(){
+	 			openw.show();
+	 		},400);	 
+	 		return;	
+	 	}
+	 	if( id.indexOf("hat-chat.html")>0 ){	 		
+	 		//openw.evalJS("getHistoryMsg(room_id);");
+	 		openw.reload();
+	 		setTimeout(function(){
+	 			openw.show();
+	 		},400);	
+	 		return;	
+	 	}
+	 	if( id.indexOf("hat-group-chat.html")>0 ){
+	 		//openw.evalJS("getHistoryMsg(room_id);");
+	 		openw.reload();
+	 		setTimeout(function(){
+	 			openw.show();
+	 		},400);	 
+	 		return;	
+	 	}
+	 	if( id.indexOf("ndex-xunjia-chat.html")>0 ){
+	 		//openw.evalJS("getHistoryMsg(room_id);");
+	 		openw.reload();
+	 		setTimeout(function(){
+	 			openw.show();
+	 		},400);	 
+	 		return;	
+	 	}
+	 	if( id.indexOf("d-chat.html")>0 ){
+	 		//openw.evalJS("getHistoryMsg(room_id);");
+	 		openw.reload();
+	 		setTimeout(function(){
+	 			openw.show();
+	 		},400);	 		
+	 		return;	
+	 	}
+		openw.close();
+	}
+	//plus.webview.close('newdrag');
+	if(w.plus){
+		wa&&(waiting=plus.nativeUI.showWaiting());
+		ws=ws||{};
+		ws.scrollIndicator||(ws.scrollIndicator='none');
+		ws.scalable||(ws.scalable=false);
+		var pre='';//'http://192.168.1.178:8080/h5/';
+		openw=plus.webview.create(pre+id,id,ws);		
+//		ns||openw.addEventListener('loaded',function(){//页面加载完成后才显示
+//		setTimeout(function(){//延后显示可避免低端机上动画时白屏		
+			if(myas != ''){
+				openw.show(myas);
+			}else{
+				openw.show(as);	
+			}			
+			closeWaiting();
+//		},100);
+//		},false);
+		openw.addEventListener('close',function(){//页面关闭后可再次打开
+			openw=null;
+		},false);
+		return openw;
+	}else{
+		w.open(id);
+	}
+	return null;
+};
+w.openDoc=function(t,c){
+	var d=plus.webview.getWebviewById('document');
+	if(d){
+		d.evalJS('updateDoc("'+t+'","'+c+'")');
+	}else{
+		d=plus.webview.create('/plus/doc.html','document',{zindex:9999,popGesture:'hide'},{preate:true});
+		d.addEventListener('loaded',function(){
+			d.evalJS('updateDoc("'+t+'","'+c+'")');
+		},false);
+	}
+}
+/**
+ * 关闭等待框
+ */
+w.closeWaiting=function(){
+	waiting&&waiting.close();
+	waiting=null;
+}
+// 兼容性样式调整
+var adjust=false;
+function compatibleAdjust(){
+	if(adjust||!w.plus||!domready){
+		return;
+	}	// iOS平台使用滚动的div
+	if('iOS'==plus.os.name){
+		var t=document.getElementById("dcontent");
+		t&&(t.className="sdcontent");
+		t=document.getElementById("content");
+		t&&(t.className="scontent");
+		//iOS8横竖屏切换div不更新滚动问题
+		var lasto=window.orientation;
+		window.addEventListener("orientationchange",function(){
+			var nowo=window.orientation;
+			if(lasto!=nowo&&(90==nowo||-90==nowo)){
+				window.dcontent&&(0==dcontent.scrollTop)&&(dcontent.scrollTop=1);
+				window.content&&(0==content.scrollTop)&&(content.scrollTop=1);
+			}
+			lasto=nowo;
+		},false);
+	}
+	adjust=true;
+};
+w.compatibleConfirm=function(){
+	plus.nativeUI.confirm('本OS原生层面不提供该控件，需使用mui框架实现类似效果。请点击“确定”下载Hello mui示例',function(e){
+		if(0==e.index){
+			plus.runtime.openURL("http://www.dcloud.io/hellomui/");
+		}
+	},"",["确定","取消"]);
+}
+// 通用元素对象
+var _dout_=null,_dcontent_=null;
+w.gInit=function(){
+	_dout_=document.getElementById("output");
+	_dcontent_=document.getElementById("dcontent");
+};
+// 清空输出内容
+w.outClean=function(){
+	_dout_.innerText="";
+	_dout_.scrollTop=0;//在iOS8存在不滚动的现象
+};
+// 输出内容
+w.outSet=function(s){
+	_dout_.innerText=s+"\n";
+	(0==_dout_.scrollTop)&&(_dout_.scrollTop=1);//在iOS8存在不滚动的现象
+};
+// 输出行内容
+w.outLine=function(s){
+	_dout_.innerText+=s+"\n";
+	(0==_dout_.scrollTop)&&(_dout_.scrollTop=1);//在iOS8存在不滚动的现象
+};
+// 格式化时长字符串，格式为"HH:MM:SS"
+w.timeToStr=function(ts){
+	if(isNaN(ts)){
+		return "--:--:--";
+	}
+	var h=parseInt(ts/3600);
+	var m=parseInt((ts%3600)/60);
+	var s=parseInt(ts%60);
+	return (ultZeroize(h)+":"+ultZeroize(m)+":"+ultZeroize(s));
+};
+// 格式化日期时间字符串，格式为"YYYY-MM-DD HH:MM:SS"
+w.dateToStr=function(d){
+	return (d.getFullYear()+"-"+ultZeroize(d.getMonth()+1)+"-"+ultZeroize(d.getDate())+" "+ultZeroize(d.getHours())+":"+ultZeroize(d.getMinutes())+":"+ultZeroize(d.getSeconds()));
+};
+/**
+ * zeroize value with length(default is 2).
+ * @param {Object} v
+ * @param {Number} l
+ * @return {String} 
+ */
+w.ultZeroize=function(v,l){
+	var z="";
+	l=l||2;
+	v=String(v);
+	for(var i=0;i<l-v.length;i++){
+		z+="0";
+	}
+	return z+v;
+};
+})(window);
+
+</script>
+   
+    
+	<script type="text/javascript" src="js/socket.js" ></script>
+	<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/template.js' charset='utf-8'></script>
+	<script type="text/javascript" src="js/layer/layer.js" ></script>
+	<script type="text/javascript" src="js/imgUpload/binaryajax.js" ></script>
+    <script type="text/javascript" src="js/imgUpload/canvasResize.js" ></script>
+    <script type="text/javascript" src="js/imgUpload/exif.js" ></script>
+	<script type="text/javascript" src="js/lrz.all.bundle.js" ></script>
+	<script type='text/javascript' src='js/demos.js' charset='utf-8'></script>
+	<script type="text/javascript" src="js/iscroll4.js" ></script>
+	
+	<script>
+		Date.prototype.format = function(partten){
+            if(partten ==null||partten==''){
+		        partten = 'y-m-d'    ;
+		    }
+		    var y = this.getFullYear();
+		    var m = this.getMonth()+1;
+		    var d = this.getDate();
+		    var r = partten.replace(/y+/gi,y);
+		    r = r.replace(/m+/gi,(m<10?"0":"")+m);
+		    r = r.replace(/d+/gi,(d<10?"0":"")+d);
+		    return r; 
+        }
+		
+		
+		var socket;
+		var radio_nw = '';
+		var send_text = false;
+		var chat_type = 'text';
+		var MIN_SOUND_TIME = 800;
+		var i=1;
+		var f1 = new Array();
+		var prarm = '';
+		var fromer = '';
+		var self = '';
+		var token = '';
+		var record = [];
+		var rootPath = '_doc/';
+		var room_id = '';
+		
+		
+		
+		
+		var zhida_now = localStorage.getItem('zhidao_now') || '';
+		var token = localStorage.getItem('token');
+		var userinfo = JSON.parse(localStorage.getItem('userinfo'));
+		var fromer = '';
+		self = userinfo;
+		token = localStorage.getItem('token');
+		if(token == '' || token == null || token == undefined){
+			$.myUtil().alert_msg('身份已过期，请重新登录',function(){localStorage.clear();clicked('login.html');});
+		}
+		var prarm = $.myUtil().toQueryParams();
+		from_id = prarm['from'];
+		var user_data = {"user_id":userinfo.intval_id,"nickname":userinfo.nickname,"logo_src":userinfo.head_pic};
+		var is_chage = 0;
+		var company_ids = [];
+		var device = '';
+		var companylist = [];					//该直达栏目下所有服务商信息
+		var get_room_id_data = {
+			'api_name':'chatgroup_findroomid',
+			'token':'',
+			'company_id':'',
+			'cates_id':'',
+			'type':4,
+			'ids':'',
+			'msg':'',
+			'mtype':'',
+			'guoqi':'',
+		};
+		var pwd_index = 0;
+		var pass = '';
+		var is_check = false;
+				
+		
+		var send_lng = '';
+		var send_lat = '';
+		var map = '';
+		var is_first = true;		//是否第一次发话，用来判断是否执行创建roomid动作
+		
+		var position_lng = '';
+		var position_lat = '';
+		var position_addr = '';
+		
+		
+		var promise_lng = '';		//诚信金经度
+		var promise_lat = '';		//诚信金维度
+		var promise_local = '';		//诚信金街道地址		
+		var is_promist_page = 0;
+		var promise_status = 0;		//诚意金状态
+		var launch_ok = '';			//未完成诚意金发起完成方id
+		var promise_data = {
+			'api_name':'deposit_add',
+			'token':token,
+			'price':0,
+			'res':0,
+			'local':'',
+			'addr':'',
+			'start':'',
+			'end':'',
+			'last':'',
+			'foruserid':'',
+			'note':'',
+			'room_id':'',
+		};
+		var promise_guoqi = 0;		//诚信金是否过期，1过期，0未过期
+		var promise_user_type = 'jia';		//诚信金用户类型，jia甲方（发起方），yi乙方（接受方）
+		var promise_guoqi_agree = '';		//对方是否发起过期完成请求，1表示对方发起完成请求，
+		var promise_complate_request = '';	//对方发起完成请求
+		var promise_json = '';
+		var promise_id = 0;
+		var font_size = 0;
+		var icon_width = 0;
+		var icon_height = 0;
+		var geoc = '';
+		var orderid = '';			//支付订单id
+		var paytype = '';			//支付类型，promise保证金支付，hongbao红包支付
+		var share_data = {
+			'title':'',
+			'thumb':'',
+			'desc':'',
+			'id':'',
+			'type':'',
+		};
+		
+		
+		
+		var history_back = false;		
+		var has_history = true;
+		var history_result = '';		
+		var is_end = false;
+		
+		
+		
+		
+		
+		var recorder = null;		//录音机对象
+		
+		var promist_html = '<div class="dialog-container">'+
+					'<div class="promise-dialog">'+
+						'<div class="promise-dialog-head">'+
+							'<p>136****5678 承诺诚信金 </p>'+
+							'<p>￥10 元</p>'+
+							'<p>您是否同意出具同样金额的诚信金作为违约赔偿</p>'+
+						'</div>'+
+//						'<div class="promise-dialog-body">'+
+//							'<div class="inner-line">'+
+//								'<div class="inner-label">约定位置</div>'+
+//								'<div class="inner-content">南阳建西路口</div>'+
+//							'</div>'+\n
+//							'<div class="inner-line">'+
+//								'<div class="inner-label">约定时间</div>'+
+//								'<div class="inner-content">'+
+//		        					'<div class="inner-top">从 2017-05-27 12:22</div>'+
+//		        					'<div class="inner-bottom">至 2017-05-28 09:12</div>'+
+//		        				'</div>'+
+//							'</div>'+
+//							'<div class="inner-line">'+
+//								'<div class="inner-label">备注</div>'+
+//								'<div class="inner-content">发牢骚的空间疯狂就冻死了分开多久</div>'+	
+//							'</div>'+
+//							'<div class="inner-line">'+
+//								'<div class="inner-label">违约时间</div>'+
+//								'<div class="inner-content">2017-05-28 12:00</div>'+
+//							'</div>'+
+//						'</div>'+
+						'<div class="promise-dialog-foot">'+
+							'<span>拒绝</span>'+
+							'<span>同意</span>'+
+						'</div>'+
+					'</div>'+
+				'</div>';
+				
+		var other_user = '';
+		var myScroll = '';
+		var now_date = (new Date()).format("y-m-d");	//当天日期
+		var day_index = 1;								//天数
+		var is_load_history = false;					//是否加载历史信息
+		var is_load = false;
+		var no_history = false;
+		var time2 = prarm.time2;
+		if(time2){
+			now_date = time2;
+		}
+		
+		/* 
+			{
+				"user_id": "100001",
+				"nickname": "王跃峰1",
+				"sex": "男",
+				"address": "河南省, 南阳市, 卧龙区, 光明巷,",
+				"signature": "彪悍的人生无需解释",
+				"head_pic": "http://www.quweilai.cn/new_api/res/100001/194s.jpg",
+				"focus": 0,
+				"friend": 1,
+				"remarks": "V5哦low咯",
+				"company_id": "c100003",
+				-"company_info": {
+				"_id": "00000000000000000c100003",
+				"company_logo": "82",
+				"company_logo_src": "http://www.quweilai.cn/new_api/images/default_company_face.png",
+				"company_name": "蜗蜗洗发水",
+				"company_local": "112.533862,33.010492",
+				"company_address": "河南省, 南阳市, 卧龙区, 建设西路, 98号",
+				"company_content": "提地沃4G你们",
+				"company_business_hours": "08:00-21:00",
+				"company_tel": "未填写",
+				"company_type": 0,
+				"user_id": 100029,
+				"top_id": 100033,
+				-"sq": {
+				"100001": 1495180906,
+				"100002": 1495181062
+				},
+				-"sonlist": {
+				-"c100012": {
+				"addtime": 1495269538
+				}
+				},
+				"zhida_id": "00000000002100000c100003",
+				"intval_id": "c100003"
+				}
+			}
+		 */
+		
+		mui.init({
+			gestureConfig:{
+				tap: true, //默认为true
+				doubletap: true, //默认为false
+				longtap: true, //默认为false
+				swipe: true, //默认为true
+				drag: true, //默认为true
+		 		hold:false,//默认为false，不监听
+		 		release:false//默认为false，不监听
+		  }
+		});
+		
+		function inityPay(){
+//			console.log('初始化支付控件');
+			$(".backdrop").hide();
+			$("#promise_pay_form").hide();
+			pwd_index = 0;
+			pass = '';
+			is_check = false;
+			$(".mm_box li").removeClass("mmdd");
+		}
+		
+		function showPromiseConfirm(promise,agreeFn,failedFn){
+			$("#p_nickname").html(promise.nickname);
+			$("#p_price").html(promise.price);
+			$("#p_addr").html(promise.addr);
+			$("#p_start").html(promise.start);
+			$("#p_end").html(promise.end);
+			$("#p_last").html(promise.last);
+			$("#p_note").html(promise.note);			
+//			$(".backdrop").show();
+			$("#promist_show").attr('style','display:block;');
+			$("#promise_dialog_agree").attr('data-id',promise.id);
+			$("#promise_dialog_failed").attr('data-id',promise.id);
+			$("#promise_dialog_agree").attr('style','display:table-cell');
+			$("#promise_dialog_failed").attr('style','display:table-cell');
+			document.getElementById('promist_show').style.display = 'block';		
+			
+			$("#promise_dialog_agree").click(function(){
+				id = $(this).attr('data-id');
+				agreeFn(id);
+			});
+			$("#promise_dialog_failed").click(function(){
+				id = $(this).attr('data-id');
+				failedFn(id);
+			});
+//			$(".backdrop").click(function(){
+//				$(this).hide();
+//				$(".promise-dialog").hide();
+//			});
+		}
+		
+		function initBmap(){
+			font_size = parseFloat($("html").css('font-size'));
+			icon_width = font_size*4; 
+        	icon_height = font_size*4;
+			device = JSON.parse(localStorage.getItem('device'));
+			phone_local = device.phone_local.split(',');
+			map = new BMap.Map("bmap");          // 创建地图实例  
+			point = new BMap.Point(phone_local[0], phone_local[1]);  // 创建点坐标			
+			map.centerAndZoom(point, 15);
+			myIcon = new BMap.Icon("images/chat-map-point.png", new BMap.Size(icon_width,icon_height));
+			marker = new BMap.Marker(new BMap.Point(phone_local[0], phone_local[1]),{icon:myIcon});
+			map.addOverlay(marker);
+			geoc = new BMap.Geocoder();
+			geoc.getLocation(point, function(rs){				
+				addComp = rs.addressComponents;
+				now_local_info = addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber				
+				getPois(point.lat,point.lng);
+			});			
+			map.addEventListener("touchstart", showInfo);
+			//map.addEventListener("click", showInfo);
+		}
+		
+		function addMarker(point){
+			map.clearOverlays();
+			myicon = new BMap.Icon("images/chat-map-point.png", new BMap.Size(icon_width,icon_height));			
+			map.addOverlay(new BMap.Marker(point),{icon:myicon});			
+		}
+		
+		function showInfo(e){
+			addMarker(e.point)
+			pt = e.point;
+			getPois(pt.lat,pt.lng);
+			geoc.getLocation(pt, function(rs){
+				var addComp = rs.addressComponents;
+				now_local_info = addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber					
+				if(is_promist_page == 1){
+					promise_lng = pt.lng;
+					promise_lat = pt.lat;
+					promise_local = now_local_info;
+					$("#promise_position").html(promise_local);
+				}else{
+					position_lng = pt.lng;
+					position_lat = pt.lat;
+				}
+//				console.log(position_lng+","+position_lat);
+			});
+		}
+		
+		function getPois(lat,lng){
+			api_url = 'http://api.map.baidu.com/geocoder/v2/?location='+lat+','+lng+'&output=json&pois=10&ak=C8Pn598qtNvbvOFXuLhN8z2j';			
+			$.ajax({
+				url :api_url,
+				type:'GET',
+				dataType :'JSON',
+				success:function(res){
+					res = JSON.parse(res);						
+					if(res.status == 0){
+						$("#poisList").html(template('poisListT',{list:res.result.pois}));						
+						$(".position").click(function(){
+							type = $(this).attr('data-type');
+							send_lng = $(this).attr('data-lng');
+							send_lat = $(this).attr('data-lat');
+							addr = $(this).attr('data-addr');
+							name = $(this).attr('data-name');
+							$("#poisList").find('i').attr('class','pull-right icon icon-cb-uncheck');
+							$(this).find('i').attr('class','pull-right icon icon-cb-check');
+							if(is_promist_page){
+								promise_lng = send_lng
+								promise_lat = send_lat;
+								promise_local = addr;
+								$("#promise_position").html(promise_local+name);
+							}else{
+								position_lng = send_lng;
+								position_lat = send_lat;
+								position_addr = addr;
+							}
+							addMarker(new BMap.Point(send_lng, send_lat));
+						});
+					}
+				}
+			})
+		}
+		
+		function getmsg(mid,fromid,roomid,msg,mtype,time){
+			msg_obj = {
+				"_id" : mid,
+			    "user_id" : fromid,
+			    "room_id" : roomid,
+			    "chat_content" : msg,
+			    "chat_type" : mtype,
+			    "addtime" : time
+			};
+			if(fromid == fromid){
+				type = 'text';
+				filename = '';				
+				if(mtype == 2){ 
+					
+				}else if(mtype == 3){
+					type = 'image';
+					filename = msg+"m.jpg";					
+					msg = "http://www.quweilai.cn/new_api/res/"+fromid+"/"+msg+"m.jpg";					
+				}else if(mtype == 4){
+					type = 'sound';
+					filename = msg+".amr";
+					msg = "http://www.quweilai.cn/new_api/res/"+fromid+"/"+msg+".amr";					
+				}else if(mtype == 5){
+					type = 'video';
+					filename = msg+".mp4";
+					msg = "http://www.quweilai.cn/new_api/res/"+fromid+"/"+msg+".mp4";					
+				}
+				filepath = '_doc/' + type + '/' + filename;
+//				console.log(JSON.stringify(fromer));
+
+
+
+				save_msg = {'send':'other','type':type,'content':msg_obj.chat_content,'logo_src':fromer.head_pic,'show_path':msg,'mid':mid,'room_id':$.myUtil().makeRoomId(self.intval_id,fromer.user_id)};
+				record.push({'send':'other','type':type,'content':msg,'logo_src':fromer.head_pic,'show_path':msg,'mid':mid});
+//				console.log(JSON.stringify(record));
+				var html = template('msg-template', {'record':record});
+    			$("#msg-list").html(html);
+    			
+				if(myScroll == ''){
+	    			myScroll = new iScroll('msg-scroll',{
+	    				hideScrollbar:true,
+						fadeScrollbar:true,
+	    			});
+	    		}else{
+	    			setTimeout(function(){
+	    				myScroll.refresh();
+	    				console.error($("#msg-scroll").height());
+	    				if(myScroll.maxScrollY > $("#msg-scroll").height()){
+	    					myScroll.scrollTo(0,myScroll.maxScrollY);
+	    				}
+	    			},400);
+	    		}
+    			
+    			var msgItems = document.querySelector('#msg-list').querySelectorAll('.msg-item');
+				[].forEach.call(msgItems, function(item, index) {
+					item.addEventListener('click', function(event) {
+						msgItem = item;						
+						var msgType = msgItem.getAttribute('msg-type');
+						var msgContent = msgItem.getAttribute('msg-content');
+						
+						if(window.plus){
+							if (msgType == 'sound') {
+								MobileFrame.getFileRealPath(msgContent,function(path){
+									player = plus.audio.createPlayer(path);
+									var playState = msgItem.querySelector('.play-state');
+									playState.innerText = '正在播放...';
+									player.play(function() {
+										playState.innerText = '点击播放';
+									}, function(e) {
+										playState.innerText = '点击播放';
+									});	
+								})
+								
+							}else if(msgType == 'video'){
+								MobileFrame.getFileRealPath(msgContent,function(path){
+									var name = msgContent;
+									var suffix = name.substr(name.lastIndexOf('.'));
+									var url = '';
+									if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){						
+										url = 'camera_video.html';
+									}
+									w=plus.webview.create(url,url,{hardwareAccelerated:true,scrollIndicator:'none',scalable:true,bounce:'all'});
+									w.addEventListener('loaded', function(){
+										w.evalJS('loadMedia("'+path+'")');
+										//w.evalJS('loadMedia("'+'http://localhost:13131/_doc/camera/'+name+'")');
+									}, false );
+									w.addEventListener('close', function(){
+										w = null;
+									}, false);
+									w.show('pop-in');
+								});
+								
+							}
+						}else{
+							document.addEventListener('plusready',function(){
+								if (msgType == 'sound') {							
+									player = plus.audio.createPlayer(msgContent);
+									var playState = msgItem.querySelector('.play-state');
+									playState.innerText = '正在播放...';
+									player.play(function() {
+										playState.innerText = '点击播放';
+									}, function(e) {
+										playState.innerText = '点击播放';
+									});
+								}else if(msgType == 'video'){
+									
+									var name = msgContent;
+									var suffix = name.substr(name.lastIndexOf('.'));
+									var url = '';
+									if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){						
+										url = 'camera_video.html';
+									}
+									w=plus.webview.create(url,url,{hardwareAccelerated:true,scrollIndicator:'none',scalable:true,bounce:'all'});
+									w.addEventListener('loaded', function(){
+										w.evalJS('loadMedia("'+msgContent+'")');
+										//w.evalJS('loadMedia("'+'http://localhost:13131/_doc/camera/'+name+'")');
+									}, false );
+									w.addEventListener('close', function(){
+										w = null;
+									}, false);
+									w.show('pop-in');
+								}
+							},false);
+						}						
+					}, false);
+				});	
+    			
+    			
+    			
+    			
+    			
+    			
+    			
+				
+				
+    			document.querySelector('#msg-list').scrollTop = document.querySelector('#msg-list').scrollHeight + document.querySelector('#msg-list').offsetHeight;
+    			msg_ele = $("#"+mid); 
+    			if(window.plus){
+    				console.error('[[[[[[[[[[[[[[[[[getMsg]]]]]]]]]]]]');
+    				MobileFrame.saveMsg(save_msg);
+//  				console.log("plusReady");
+    				if(type == 'text'){
+    					
+    				}else{    					
+    					MobileFrame.isExistSource(filepath,function(result){
+    						if(!result){
+//  							console.log('资源不存在，开始下载');
+    							MobileFrame.saveSource(type,msg,filename,function(path){
+//		    						console.log('下载完毕，更新资源地址');
+		    						msg_ele.attr('msg-content',path);
+		    					});		
+    						}else{
+    							msg_ele.attr('msg-content',filepath);
+//  							console.log('资源已存在');
+    						}
+    					})    					
+    				}    				
+    				
+    			}else{
+//  				console.error('[[[[[[[[[[[[[[[[[getMsg1]]]]]]]]]]]]');
+    				MobileFrame.saveMsg(save_msg);
+//  				console.log("plusNotReady");
+    				document.addEventListener('plusready',function(){
+//  					console.log("plusIsReady");    					
+    					if(type == 'text'){	    					
+	    				}else{
+	    					MobileFrame.isExistSource(filename,function(result){
+	    						if(!result){
+//	    							console.log('资源不存在，开始下载');
+	    							MobileFrame.saveSource(type,msg,filename,function(path){
+//			    						console.log('下载完毕，更新资源地址');
+			    						msg_ele.attr('msg-content',path);
+			    					});		
+	    						}else{
+	    							msg_ele.attr('msg-content',filename);
+//	    							console.log('资源已存在');
+	    						}
+	    					})    	
+	    				}	    				
+	    			});
+    			}
+    			
+    			
+			}
+							
+//			var msgItems = $('#msg-list .msg-item');
+//			[].forEach.call(msgItems, function(item, index) {
+//				item.addEventListener('click', function(event) {						
+//					msgItemTap(item, event);
+//				}, false);
+//			});				
+			//imageViewer.findAllImage();
+				
+	}
+		
+		$(function(){			
+			$("#choose-position").click(function(){
+				$.router.load("#chat-positioin");
+				position_is_open = true;
+			})
+			
+			$(".hongbao-page-close").click(function(){
+//				$("#hb_money").html(0.00);
+//				$("#hb_nickname").html("");
+//				$("#get_hongbao").hide();
+//				$("#hongbao_log").hide();
+//				$("#hongbao_log").html('');
+				$.router.back()
+				chai_is_open = false;
+			});						
+			function findOther(id){
+				$.myUtil().ajax({
+					data:{
+						'api_name':'userinfo_findother',
+						'token':token,
+						'user_id':id
+					},
+					beforeFn:function(){}
+				}).done(function(res){
+					if(res.state == 'ok'){
+						fromer = res.data;	
+					}
+					
+				});
+			}
+		})
+		
+		document.addEventListener('plusready',function(){
+			$(".mybackbtn").click(function(){
+				xinPage = plus.webview.getWebviewById('xin-index.html');
+				if(xinPage){
+					socket.disconnect();
+					xinPage.evalJS('refreshPage()');					
+					setTimeout(function(){
+						back();
+					},300);
+					
+				}
+			});
+			
+//			pullDownEl = document.getElementById('pullDown');  
+//		    pullDownOffset = pullDownEl.offsetHeight;		    
+//		    pullUpEl = document.getElementById('pullUp');     
+//		    pullUpOffset = pullUpEl.offsetHeight;		    
+//			myScroll = new iScroll('msg-list',{
+//				hideScrollbar:true,
+//				fadeScrollbar:true,				
+//				onRefresh: function () {
+//		            if (pullDownEl.className.match('loading')) {  
+//		                pullDownEl.className = '';  
+//		                pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉刷新';  
+//		            } else if (pullUpEl.className.match('loading')) {  
+//		                pullUpEl.className = '';  
+//		                pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多';  
+//		            }  
+//		        },  
+//		        onScrollMove: function () {
+//		            if (this.y > 50 && !pullDownEl.className.match('flip')) {  
+//		                pullDownEl.className = 'flip';  
+//		                pullDownEl.querySelector('.pullDownLabel').innerHTML = '释放刷新';  
+//		                this.minScrollY = 0;  
+//		            } else if (this.y < 50 && pullDownEl.className.match('flip')) {  
+//		                pullDownEl.className = '';  
+//		                pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉刷新页面...';  
+//		                this.minScrollY = -pullDownOffset;  
+//		            } else if (this.y < (this.maxScrollY - 50) && !pullUpEl.className.match('flip')) {  
+//		                pullUpEl.className = 'flip';  
+//		                pullUpEl.querySelector('.pullUpLabel').innerHTML = '释放加载';  
+//		                this.maxScrollY = this.maxScrollY;  
+//		            } else if (this.y > (this.maxScrollY + 50) && pullUpEl.className.match('flip')) {  
+//		                pullUpEl.className = '';  
+//		                pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多...';  
+//		                this.maxScrollY = pullUpOffset;  
+//		            }  
+//		        },  
+//		        onScrollEnd: function () {  
+//		            if (pullDownEl.className.match('flip')) {  
+//		                pullDownEl.className = 'loading';  
+//		                pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉刷新页面';                 
+//		                pullDownAction();   // Execute custom function (ajax call?)  
+//		            } else if (pullUpEl.className.match('flip')) {  
+//		                pullUpEl.className = 'loading';  
+//		                pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多';                 
+//		                pullUpAction(); // Execute custom function (ajax call?)  
+//		            }  
+//		        }				
+//			});			
+			
+			
+			
+			
+			$("#msg-list").on('scroll',function(){
+				if($(this).scrollTop() == 0){
+					
+				}				
+			})
+			
+			//上拉加载
+			function pullUpAction () {
+				if(hasnext == 0) return;
+				if(!loading && hasnext == 1){					
+					page++;
+					loading = true;
+					getList();
+				}
+			}
+			//下拉刷新
+			function pullDownAction () {
+				page = 1;
+				if(!loading){
+					loading = true;					
+					$("#commentList").html('');
+					getList();					
+				}
+			}
+			
+			
+			indeall = plus.webview.getWebviewById('index-all.html');
+			socket = io.connect('ws://123.57.172.113:3000');
+			socket.on('connect',function(e){
+				socket.emit('login',token,'baozheng',function(status,content){
+					if(status == 0){
+						console.log('连接失败');
+					}else{
+						console.log('连接成功');
+						socket.emit('jinrufangjian',token,0,0,room_id,0,function(){});
+					}
+				});
+			});
+			$("#zd-chat-promise-btn").click(function(){
+//				alert('功能开发中，敬请期待');
+//				return;
+    			sendNotice({"user_id":userinfo.intval_id,"nickname":userinfo.nickname,"logo_src":userinfo.head_pic},function(status,data){
+//  				console.log(status);
+//  				console.log(data);
+    				//if(status == 6){
+    					$.myUtil().ajax({
+    						data:{
+    							'api_name':'userinfo_findother',
+    							'token':token,
+    							'user_id':from_id
+    						},
+    						beforeFn:function(){}
+    					}).done(function(res){
+    						if(res.state == 'ok'){
+    							console.error("11111111");
+    							other_user = res.data;    							
+    							$.router.load("#zd-chat-promise");
+    							cxj_is_open = true;
+    							is_promist_page = 1;
+    							if(!$("footer").hasClass('chat-slideUp') && $("footer").classList == undefined){
+						    		$("footer").attr('class','chat-slideUp');
+						    	}else if($("footer").hasClass('chat-slideUp')){
+						    		$("footer").attr('class','chat-slideDown');
+						    	}
+    						}else{
+    							$.myUtil().alert_msg(res.msg);
+    						}
+    					});
+    				//}else{
+    					//$.myUtil().alert_msg(data);return;
+    				//}
+    			});
+    			
+//      			promise_data = JSON.parse('{"api_name":"deposit_add","token":"8bdef7fb5d06706fdb4ff8f4","price":"999","res":0,"local":"112.53377647079725,33.01088875727888","start":"2017-05-27 12:00","end":"2017-05-28 12:00","last":"2017-05-28 18:00","foruserid":"100029","note":"测试测试"}');
+//      			showPromiseConfirm(promise_data,function(){
+//      				alert('单击了确认');
+//      			},function(){
+//      				alert('单击了拒绝');
+//      			})
+    		})
+    		$("#zd-chat-position-btn").click(function(){
+    			if(!$("footer").hasClass('chat-slideUp') && $("footer").classList == undefined){
+		    		$("footer").attr('class','chat-slideUp');
+		    	}else if($("footer").hasClass('chat-slideUp')){
+		    		$("footer").attr('class','chat-slideDown');
+		    	}
+    			is_promist_page = 0;
+    		});
+			$("#send_hongbao").click(function(){
+				hongbao_is_open = true;
+				if(!$("footer").hasClass('chat-slideUp') && $("footer").classList == undefined){
+		    		$("footer").attr('class','chat-slideUp');
+		    	}else if($("footer").hasClass('chat-slideUp')){
+		    		$("footer").attr('class','chat-slideDown');
+		    	}
+			})
+			
+			socket = io.connect('ws://123.57.172.113:3000');
+			socket.on('connect',function(e){
+				socket.emit('login',token,'baozheng',function(status,content){
+					if(status == 0){
+						console.log('连接失败');
+					}else{
+						console.log('连接成功');
+						room_id = $.myUtil().makeRoomId(self.intval_id,from_id);						
+						socket.emit('jinrufangjian',token,0,0,room_id,0,function(){});
+					}
+				});
+				
+				socket.on('changechengxin',function(msg){
+					promise_json = msg.msg;
+//					console.log(JSON.stringify(msg));
+//					console.log(msg.mtypes == 40);
+//					if(msg.mtypes == 40){
+//						promise_data = JSON.parse(promise_json);
+//						promise_id = promise_data.id;
+//						promise_data.status = 40;						
+//						promise_guoqi = promise_data.guoqi ? promise_data.guoqi : 0; 
+//						promise_data.user_id = other_user['user_id'];
+//						promise_data.nickname = other_user['nickname'];
+//						$("#sp_1").show();
+//						$(".backdrop").show();
+//						$("#promist_show").show();
+//						showPromiseConfirm(promise_data,function(id){
+//							paytype = 'promise_other';							
+////							$("#promise_dialog_cancel").html('');
+////							$("#promise_dialog_cancel").attr('style','none');
+////							$("#promise_dialog_agree").html('同意');
+////							$("#promise_dialog_agree").attr('style','');
+////							$("#promise_dialog_failed").html('拒绝');
+////							$("#promise_dialog_failed").attr('style','');
+//							
+//							//$("#promise_pay_form").show();
+//							promise_other(promise_id,promise_json);
+//							
+//						},function(id){
+//							$.myUtil().ajax({
+//								data:{
+//									'api_name':'deposit_refuse',
+//									'token':token,
+//									'depositid':promise_id
+//								}
+//							}).done(function(res){
+//								layer.closeAll();
+//								$.myUtil().alert_msg(res.msg,function(){
+//									if(res.state == 'ok'){
+//										send_data = JSON.stringify(promise_data);
+//										sendStatus(41,send_data,function(status,data){
+//											if(status == 6){
+//												$(".backdrop").hide();
+//												$("#promist_show").hide();
+//												console.log('拒绝成功');
+//												$(".backdrop").show();
+//												$("#promist_show").hide();
+//											}else{
+//												alert(status,JSON.stringify(data));
+//												//$.myUtil().alert_msg(JSON.stringify(data));
+//											}
+//										});
+//									}
+//								})
+//							})
+//						});
+//					}
+					
+					if(msg.mtypes == 41){
+						obj = JSON.parse(msg.msg);
+//						console.error(typeof obj);
+						if(typeof obj == 'string'){
+							obj = obj.replace(/\s+/,"");
+							obj = JSON.parse(obj);
+						}						
+						promiseid = obj.id;
+						promisedata = obj;
+//						console.error(obj.id);
+//						console.log("对方拒绝诚意金请求："+JSON.stringify(obj));
+//						console.log($("#"+promiseid).length);
+						$(".cyj").hide();
+						$("#"+promiseid).find('.promise-tip').html('对方已取消');						
+						$("#"+promiseid).find('.msg-content-promise-foot').hide();
+					}
+					
+					if(msg.mtypes == 42){
+						//console.error('1) 接收到同意诚信金的Notice' + msg.msg);
+						obj = JSON.parse(msg.msg);
+						//console.error(typeof obj);
+						if(typeof obj == 'string'){
+							obj = obj.replace(/\s+/,"");
+							obj = JSON.parse(obj);
+						}
+						promiseid = obj.id;
+						promisedata = obj;
+						//console.error('2) 处理Notice携带参数内容：' + JSON.stringify(obj));						
+						$("#"+promiseid).find('.promise-tip').html('对方已同意');
+						$("#"+promiseid).find('#p_1').hide();
+						$("#"+promiseid).find('#p_2').hide();
+						$("#"+promiseid).find('#p_3').attr('style','display:table;');
+						//console.error('3) 处理UI：' + $("#"+promiseid).html());
+					}
+					
+					
+					if(msg.mtypes == 43 || msg.mtypes == 44){
+//						console.log("收到对方拒绝完成消息："+JSON.stringify(msg));
+						obj = JSON.parse(msg.msg);						
+						if(typeof obj == 'string'){
+							obj = obj.replace(/\s+/,"");
+							//console.log(typeof obj);
+							obj = JSON.parse(obj);
+//							console.error(obj);
+							if(typeof obj == 'string'){
+								obj = JSON.parse(obj);
+							}
+						}
+						promiseid = obj.id;
+						promisedata = obj;
+						$("#"+promiseid).find('.promise-tip').html('[对方拒绝完成请求]');
+						$("#"+promiseid).find('.msg-content-promise-foot').hide();
+						$("#"+promiseid).find('#p_1').hide();
+						$("#"+promiseid).find('#p_2').hide();
+						$("#"+promiseid).find('#p_4').hide();
+						$("#"+promiseid).find('#p_3').attr('style','display:table;');
+						
+						$("#sp_1").hide();
+						$("#sp_2").hide();
+						$("#sp_4").hide();
+						$("#sp_3").attr('style','display:table;');
+					}
+					
+					if(msg.mtypes == 45 || msg.mtypes == 46 || msg.mtypes == 49 || msg.mtypes == 50){
+//						console.log("收到对方完成消息："+msg.msg);
+						obj = JSON.parse(msg.msg);						
+						if(typeof obj == 'string'){
+							obj = obj.replace(/\s+/,"");
+							//console.log(typeof obj);
+							obj = JSON.parse(obj);
+//							console.error(obj);
+							if(typeof obj == 'string'){
+								obj = JSON.parse(obj);
+							}
+						}
+						promiseid = obj.id;
+						promisedata = obj;
+//						console.error($("#"+promiseid).html());
+						promise_guoqi = promisedata.guoqi;
+						$("#"+promiseid).find('#p_1').hide();
+						$("#"+promiseid).find('#p_2').hide();
+						$("#"+promiseid).find('#p_3').hide();
+						$("#"+promiseid).find('#p_4').attr('style','display:table;');
+						$("#sp_1").hide();
+						$("#sp_2").hide();
+						$("#sp_3").hide();
+						$("#sp_4").attr('style','display:table;');
+//						promise_guoqi_agree = 1;
+//						if(msg.mtypes == 49 || msg.mtypes == 50){
+//							$("#"+promiseid).find('.promise-tip').html('[已超时,对方请求完成]');
+//						}
+//						$("#"+promiseid).find('.msg-content-promise-foot').hide();
+					}
+					
+//					if(msg.mtypes == 47 || msg.mtypes == 48){
+//						obj = msg.msg.split('##');
+//						other_user = JSON.parse(obj[0]);
+//						promiseid = obj[1];
+//						promisedata = JSON.parse(obj[2]);
+//						console.log("收到对方超时取消消息："+JSON.stringify(msg));
+//						$("#"+promiseid).find('.promise-tip').html('[已超时,对方请求取消]');
+//						$("#"+promiseid).find('.msg-content-promise-foot').hide();
+//					}
+
+					if(msg.mtypes == 51 || msg.mtypes == 52){
+						obj = JSON.parse(msg.msg);
+						if(typeof obj == 'string'){
+							obj = obj.replace(/\s+/,"");
+							//console.log(typeof obj);
+							obj = JSON.parse(obj);
+							if(typeof obj == 'string'){
+								obj = JSON.parse(obj);
+							}
+						}
+						promiseid = obj.id;
+						promisedata = obj;
+//						console.log("收到对方投诉消息："+JSON.stringify(msg));
+						$("#"+promiseid).find('.promise-tip').html('对方已投诉');
+						$(".promise-dialog-foot").hide();
+						$("#"+promiseid).find('.msg-content-promise-foot').hide();
+					}
+					
+					if(msg.mtypes == 53 || msg.mtypes == 54){
+						obj = JSON.parse(msg.msg);
+						if(typeof obj == 'string'){
+							obj = obj.replace(/\s+/,"");
+							//console.log(typeof obj);
+							obj = JSON.parse(obj);
+							if(typeof obj == 'string'){
+								obj = JSON.parse(obj);
+							}
+						}
+						promiseid = obj.id;
+						promisedata = obj;
+//						console.log("收到对方赔付消息："+JSON.stringify(msg));
+						$("#"+promiseid).find('.promise-tip').html('对方已赔付');						
+						$("#"+promiseid).find('.msg-content-promise-foot').hide();
+					}
+					
+					if(msg.mtypes == 55 || msg.mtypes == 56){
+						obj = JSON.parse(msg.msg);
+						if(typeof obj == 'string'){
+							obj = obj.replace(/\s+/,"");
+							//console.log(typeof obj);
+							obj = JSON.parse(obj);
+							if(typeof obj == 'string'){
+								obj = JSON.parse(obj);
+							}
+						}
+						promiseid = obj.id;
+						promisedata = obj;
+						console.log("收到对方同意完成消息："+JSON.stringify(msg));
+						$("#"+promiseid).find('.promise-tip').html('对方同意完成');
+						$(".cyj").hide();
+						$("#"+promiseid).find('.msg-content-promise-foot').hide();
+					}
+//					
+//					if(msg.mtypes == 57 || msg.mtypes == 58){
+//						obj = msg.msg.split('##');
+//						other_user = JSON.parse(obj[0]);
+//						promiseid = obj[1];
+//						promisedata = JSON.parse(obj[2]);
+//						console.log("收到对方拒绝超时完成消息："+JSON.stringify(msg));
+//						$("#"+promiseid).find('.promise-tip').html('已超时,对方拒绝完成');
+//					}
+					
+					if(msg.mtypes == 59 || msg.mtypes == 60){
+						obj = JSON.parse(msg.msg);
+						if(typeof obj == 'string'){
+							obj = obj.replace(/\s+/,"");
+							//console.log(typeof obj);
+							obj = JSON.parse(obj);
+							if(typeof obj == 'string'){
+								obj = JSON.parse(obj);
+							}
+						}
+						promiseid = obj.id;
+						promisedata = obj;
+						console.log("收到对方拒绝完成消息："+JSON.stringify(msg));						
+						$("#"+promiseid).find('.promise-tip').html('对方拒绝完成');
+						$("#"+promiseid).find('#p_4').hide();
+						$("#"+promiseid).find('#p_3').attr('style','display:table;');
+					}
+					
+					if(msg.mtypes == 61 || msg.mtypes == 62){
+						obj = JSON.parse(msg.msg);
+						if(typeof obj == 'string'){
+							obj = obj.replace(/\s+/,"");
+							//console.log(typeof obj);
+							obj = JSON.parse(obj);
+							if(typeof obj == 'string'){
+								obj = JSON.parse(obj);
+							}
+						}
+						promiseid = obj.id;
+						promisedata = obj;
+						console.log("收到对方同意完成消息："+JSON.stringify(msg));
+						$("#"+promiseid).find('.promise-tip').html('对方同意完成');
+						$(".cyj").hide();
+						$("#"+promiseid).find('.msg-content-promise-foot').hide();
+					}
+					
+					if(msg.mtypes == 63){
+						obj = JSON.parse(msg.msg);
+						if(typeof obj == 'string'){
+							obj = obj.replace(/\s+/,"");
+							//console.log(typeof obj);
+							obj = JSON.parse(obj);
+							if(typeof obj == 'string'){
+								obj = JSON.parse(obj);
+							}
+						}
+						promiseid = obj.id;
+						promisedata = obj;
+						console.log("对方已撤销诚信金："+JSON.stringify(msg));
+						$("#"+promiseid).find('.promise-tip').html('对方已撤销');
+						$(".cyj").hide();
+						$("#"+promiseid).find('.msg-content-promise-foot').hide();
+					}
+				});
+			})
+			
+			function promise_other(promise_id,send_data){
+				$.myUtil().ajax({
+					data:{
+						'api_name':'deposit_agree',
+						'depositid':promise_id,
+						'token':token,
+						//'paypass':password
+					}
+				}).done(function(res){
+					layer.closeAll();
+					
+					$.myUtil().alert_msg(res.msg,function(){
+						if(res.state == 'ok'){
+							obj = user_data;
+//							send_data = promise_json;
+							promise_user_type = 'yi';
+							sendStatus(42,send_data,function(status,data){
+								if(status == 6){
+									console.error('发送消息：function promise_other');
+									send({
+										sender: 'self',
+										type: 'promise',
+										content: send_data,
+										logo_src: self.head_pic
+									});
+									inityPay();									
+								}else{
+									$.myUtil().alert_msg(data);
+								}
+							});
+						}else{
+							pwd_index = 0;
+							pass = '';
+							is_check = false;
+							$(".mm_box li").removeClass("mmdd");
+						}
+					})
+				})
+			}
+			
+			function sendNotice(msg,callBack){
+//				console.log(JSON.stringify({'token':token,'room_id':room_id,'msg':msg}));
+				socket.emit('baozheng2',token,0,39,room_id,msg,function(status,data){
+//					console.log(status+","+data);
+					callBack(status,data);
+				});
+			}
+			
+			getOfflineMsg();
+			
+			function getOfflineMsg(){
+				$.myUtil().ajax({
+					data:{
+						'api_name':'chat_history',
+						'token':token,
+						'addtime':''
+					},beforeFn:function(){}
+				}).done(function(res){
+					if(res.state == 'ok'){
+						console.error(JSON.stringify(res));
+					}
+				})
+			}
+			
+			function sendBaozheng(mtype,data){
+				radio_nw.evalJS('sendmsg("'+token+'","0","'+mtype+'","'+room_id+'","'+data+'");');
+			}
+						
+			function initCyj(){				
+				$.myUtil().ajax({
+					data:{
+						'api_name':'deposit_roomsearch',
+						'token':token,
+						'room_id':room_id
+					},beforeFn:function(){}
+				}).done(function(res){
+					if(res.state == 'ok'){
+						if(res.data.status > 0){
+							pdata = {'id':res.data.id,'room_id':$.myUtil().makeRoomId(self.intval_id,from_id),'status':42,'foruserid':res.data.user_a_id,'user_id':res.data.user_b_id,'price':res.data.price};
+							$("#promist_show").attr('data-id',res.data.id);
+							$("#promist_show").attr('data-status',res.data.status);
+							$("#p_price").html(res.data.price);
+							promise_status = res.data.status; 
+							if(res.data.status == 1){
+								if(res.data.user_a_id == self.intval_id){
+									$("#sp_1").attr('style','display:table');
+//									$("#promise_dialog_cancel").attr('style','');
+								}else{
+									$("#sp_2").attr('style','display:table');
+//									$("#promise_dialog_agree").attr('style','');
+//									$("#promise_dialog_failed").attr('style','');
+								}
+							}else if(res.data.status == 2){
+								launch_ok = res.data.launch_ok;
+								if(res.data.launch_ok == '0'){
+									$("#sp_3").attr('style','display:table');
+//									$("#promise_dialog_cancel").html('投诉');
+//									$("#promise_dialog_cancel").attr('style','');								
+//									$("#promise_dialog_agree").html('完成');
+//									$("#promise_dialog_agree").attr('style','');
+//									$("#promise_dialog_failed").html('赔付');
+//									$("#promise_dialog_failed").attr('style','');
+								}else if(res.data.launch_ok == self.intval_id){
+									$("#sp_3").attr('style','display:table');
+//									$("#promise_dialog_cancel").html('投诉');
+//									$("#promise_dialog_cancel").attr('style','');								
+//									$("#promise_dialog_agree").html('完成');
+//									$("#promise_dialog_agree").attr('style','');
+//									$("#promise_dialog_failed").html('赔付');
+//									$("#promise_dialog_failed").attr('style','');
+								}else{
+									$("#sp_4").attr('style','display:table');
+//									$("#promise_dialog_cancel").html('投诉');
+//									$("#promise_dialog_cancel").attr('style','width:33%;');
+//									$("#promise_dialog_agree").html('同意完成');
+//									$("#promise_dialog_agree").attr('style','width:33%;border-right:2px solid #e2e2e2;');
+//									$("#promise_dialog_failed").html('拒绝完成');
+//									$("#promise_dialog_failed").attr('style','width:33%;');
+								}								
+							}
+							
+							
+							
+							
+							$(".cyj").attr('data-id',res.data.id);
+							$(".cyj").show();
+							$(".cyj").click(function(){
+								id = $(this).attr('data-id');
+//								console.log($("#"+id).length);
+									$(".backdrop").show();
+									$("#promist_show").show();
+									$(".backdrop").unbind('click').click(function(){
+										$("#promist_show").hide();
+										$(".backdrop").hide();
+									})
+									
+									//点击赔付按钮事件
+									
+									$("#promise_dialog_peifu").click(function(){
+										id = $("#promist_show").attr('data-id');
+										$.myUtil().ajax({
+											data:{
+												'api_name':'deposit_peifu',
+												'token':token,
+												'depositid':id
+											}
+										}).done(function(res){
+											layer.closeAll();
+											promise_guoqi = res.data.guoqi;
+											if(promise_user_type == 'jia'){
+												mtypes = 54;
+											}else if(promise_user_type = 'yi'){
+												mtypes = 53;
+											}
+											pdata.status = mtypes;
+											content = JSON.stringify(pdata);
+											$.myUtil().alert_msg(res.msg,function(){												
+												if(res.state == 'ok'){
+													sendStatus(mtypes,content,function(status,data){
+//														console.log('发起赔付动作');														
+													});
+													$(".backdrop").hide();
+													$("#promist_show").hide();
+													$(".promise-dialog-foot").hide();
+												}else{
+													console.log('赔付动作失败:'+res.msg);
+												}
+												
+											})
+										})	
+									});
+									//投诉按钮点击事件
+									$("#promise_dialog_tousu").click(function(){
+										id = $("#promist_show").attr('data-id');
+										$.myUtil().confirm('确定要投诉吗？','确认','取消',function(){
+											$.myUtil().ajax({
+												data:{
+													'api_name':'deposit_tousu',
+													'token':token,
+													'depositid':id
+												}
+											}).done(function(res){
+												layer.closeAll();
+												$.myUtil().alert_msg(res.msg,function(){
+													if(res.state == 'ok'){													
+														$(".promise-dialog-foot").hide();
+														if(promise_user_type == 'jia'){
+															mtypes =  52;
+														}else if(promise_user_type == 'yi'){
+															mtypes = 51;
+														}
+														pdata.status = mtypes;
+														content = JSON.stringify(pdata);
+														sendStatus(mtypes,content,function(status,data){
+//															console.log('投诉诚信金');
+														});
+														$(".backdrop").hide();
+														$("#promist_show").hide();
+														$(".promise-dialog-foot").hide();
+													}
+												})
+											})
+										});
+									});
+									//完成按钮点击事件
+									$("#promise_dialog_agree").unbind('click').click(function(){										
+										id = $("#promist_show").attr('data-id');
+										$.myUtil().ajax({
+											data:{
+												'api_name':'deposit_done',
+												'token':token,
+												'depositid':id
+											}
+										}).done(function(res){
+											layer.closeAll();
+											promise_guoqi = res.data.guoqi;
+											if(promise_user_type == 'jia'){
+												mtypes =  46;
+											}else if(promise_user_type == 'yi'){
+												mtypes = 45;
+											}
+											
+											$.myUtil().alert_msg(res.msg,function(){
+												if(res.state == 'ok'){
+													pdata.status = mtypes;
+													content = JSON.stringify(pdata);
+													sendStatus(mtypes,content,function(status,data){
+//														console.log('发起完成诚信金动作：'+send_data);
+														$(item).find('.promise-tip').html('[等待对方同意完成]');
+													});
+													$("#sp_3").hide();
+													$("#sp_4").attr('style','display:table;');
+													//$(".backdrop").hide();
+													//$(".cyj").hide();
+													//$("#promist_show").hide();
+												}else{
+													
+												}
+											})
+										})
+									});
+									
+									//拒绝诚意金按钮点击事件									
+									$("#promise_dialog_err").unbind('click').click(function(){										
+										id = $("#promist_show").attr('data-id');
+										$.myUtil().ajax({
+											data:{
+												'api_name':'deposit_refuse',
+												'token':token,
+												'depositid':id
+											}
+										}).done(function(res){
+											layer.closeAll();
+											$.myUtil().alert_msg(res.msg,function(){
+												if(res.state == 'ok'){	
+													pdata.status = 41;													
+													content = JSON.stringify(pdata);
+//													console.error('弹窗拒绝：'+content);
+													sendStatus(41,content,function(status,data){
+														if(status == 6){
+															$(".backdrop").hide();															
+															$("#promist_show").hide();
+														}else{
+															alert(status,JSON.stringify(data));
+															//$.myUtil().alert_msg(JSON.stringify(data));
+														}
+													});
+													$("#sp_2").hide();
+													$("#sp_3").show();
+													$(".cyj").hide();
+													$("#promist_show").hide();
+												}else{
+													$.myUtil().toast(res.msg);
+												}
+											})
+										})
+									})
+									
+									//同意诚意金按钮点击事件
+									$("#promise_dialog_ok").click(function(){
+										id = $("#promist_show").attr('data-id');
+										$.myUtil().ajax({
+											data:{
+												'api_name':'deposit_agree',
+												'depositid':id,
+												'token':token,
+												//'paypass':password
+											}
+										}).done(function(res){
+											layer.closeAll();							
+											$.myUtil().alert_msg(res.msg,function(){
+												if(res.state == 'ok'){																										
+													pdata.status = 42;
+													content = JSON.stringify(pdata);
+													sendStatus(42,content,function(status,data){
+														if(status == 6){
+//															console.error('发送消息：$("#promise_dialog_ok").click');
+//															send({
+//																sender: 'self',
+//																type: 'promise',
+//																content: content,
+//																logo_src: self.head_pic
+//															});
+															$("#sp_2").hide();
+															$("#sp_3").show();
+															$(".backdrop").hide();
+															$("#promist_show").hide();
+															//$("#"+id).find(".promise-tip").html('已同意');
+														}else{
+															$.myUtil().alert_msg(data);
+														}
+													});
+												}else{
+													$.myUtil().toast(res.msg);
+												}
+											})
+										})
+									})
+									
+									//同意完成诚意金按钮点击事件
+									$("#promise_dialog_aagree").click(function(){
+										id = $("#promist_show").attr('data-id');
+										if(promise_user_type == 'jia'){
+											mtypes =  56;
+										}else if(promise_user_type == 'yi'){
+											mtypes = 55;
+										}
+										$.myUtil().ajax({
+											data:{
+												'api_name':'deposit_agreeok',
+												'token':token,
+												'depositid':id
+											}
+										}).done(function(res){
+											layer.closeAll();
+											$.myUtil().alert_msg(res.msg,function(){
+												if(res.state == 'ok'){													
+													pdata.status = mtypes;
+													content = JSON.stringify(pdata);	
+													sendStatus(mtypes,content,function(status,data){
+//														console.log('发起完成诚信金动作');
+//														$(item).find('.promise-tip').html('[同意对方完成]');
+													});
+													$("#sp_3").hide();
+													$(".promise-dialog-foot").hide();
+													$(".backdrop").hide();
+													$(".cyj").hide();													
+													$("#promist_show").hide();
+//													$(item).find('.msg-content-promise-foot').hide();
+													promise_guoqi_agree = '';
+												}
+											})
+										})
+									})
+									// 拒绝完成诚意金按钮点击事件
+									$("#promise_dialog_afailed").click(function(){
+										id = $("#promist_show").attr('data-id');
+										if(promise_user_type == 'jia'){
+											mtypes =  44;
+										}else if(promise_user_type == 'yi'){
+											mtypes = 43;
+										}
+										$.myUtil().ajax({
+											data:{
+												'api_name':'deposit_notagree',
+												'token':token,
+												'depositid':id
+											}
+										}).done(function(res){
+											layer.closeAll();
+											$.myUtil().alert_msg(res.msg,function(){
+												if(res.state == 'ok'){
+													pdata.status = mtypes;
+													content = JSON.stringify(pdata);	
+													sendStatus(mtypes,content,function(status,data){
+//														console.log('拒绝完方发起的申请完成动作');
+//														$(item).find('.promise-tip').html('[拒绝对方完成]');
+														$('#sp_4').hide();
+														$('#sp_3').attr('style','display:table;');
+														$("#"+id).find('#p_4').hide();
+														$("#"+id).find('#p_3').attr('style','display:table;');
+													});
+												}else{
+													console.log('拒绝完成对方发起的超时完成诚信金申请动作失败:'+res.msg);
+												}
+												promise_guoqi_agree = '';
+											})
+										})
+									})
+									
+									//撤销按钮点击事件
+									$("#promise_dialog_cancel").click(function(){
+										id = $("#promist_show").attr('data-id');
+										if(promise_status == 1){
+											$.myUtil().ajax({
+												data:{
+													'api_name':'deposit_drop',
+													'token':token,
+													'depositid':id
+												},beforeFn:function(){}
+											}).done(function(res){
+												if(res.state == 'ok'){
+													$.myUtil().toast(res.msg);
+													$("#promist_show").hide();
+													$(".backdrop").hide();
+													$(".cyj").hide();
+													pdata.status = 63;
+													content = JSON.stringify(pdata);
+													sendStatus(63,content,function(status,data){
+//														console.log('撤销诚信金');										
+													});
+//													$("#"+id).find('.promise-tip').html('已撤销');
+													$("#"+id).find('.promise-dialog-foot').hide();
+													$(".backdrop").hide();
+													$(".cyj").hide();
+													$("#promist_show").hide();
+												}
+											})
+										}
+									})
+									
+//									//撤销按钮点击事件
+//									$("#promise_dialog_cancel").click(function(){
+//										id = $("#promist_show").attr('data-id');
+//										if(promise_status == 1){
+//											$.myUtil().ajax({
+//												data:{
+//													'api_name':'deposit_drop',
+//													'token':token,
+//													'depositid':id
+//												},beforeFn:function(){}
+//											}).done(function(res){
+//												if(res.state == 'ok'){
+//													$.myUtil().toast(res.msg);
+//													$("#promist_show").hide();
+//													$(".backdrop").hide();
+//													$(".cyj").hide();
+//													pdata.status = 63;
+//													content = id + "##" + JSON.stringify(self) + '##' + JSON.stringify(pdata);
+//													sendStatus(63,content,function(status,data){
+//														console.log('撤销诚信金');										
+//													});
+//													$("#"+id).find('.promise-tip').html('已撤销');
+//													$("#"+id).find('.msg-content-promise-foot').hide();
+//												}
+//											})
+//										}else{
+//											$.myUtil().confirm('确定要投诉吗？','确认','取消',function(){
+//												$.myUtil().ajax({
+//													data:{
+//														'api_name':'deposit_tousu',
+//														'token':token,
+//														'depositid':id
+//													}
+//												}).done(function(res){
+//													layer.closeAll();
+//													$.myUtil().alert_msg(res.msg,function(){
+//														if(res.state == 'ok'){													
+//															$(".promise-dialog-foot").hide();													
+//															if(promise_user_type == 'jia'){
+//																mtypes =  52;
+//															}else if(promise_user_type == 'yi'){
+//																mtypes = 51;
+//															}
+//															pdata.status = mtypes;
+//															content = id + "##" + JSON.stringify(self) + '##' + JSON.stringify(pdata);
+//															sendStatus(mtypes,content,function(status,data){
+//																console.log('投诉诚信金');
+//															});
+//														}
+//													})
+//												})
+//											});
+//										}								
+//									});
+//									
+//									
+//									$("#promise_dialog_agree").click(function(){
+//										if(promise_status == 1){
+//											pdata.status = 42;
+//											content = id + "##" + JSON.stringify(self) + '##' + JSON.stringify(pdata);
+//											promise_other(id,content);
+//										}else{
+//											if(launch_ok == 0){				//双方均没提交完成动作
+//												if(promise_user_type == 'jia'){
+//													mtypes = 46;
+//												}else if(promise_user_type == 'yi'){
+//													mtypes = 45;
+//												}
+//												pdata.status = mtypes;
+//												content = id + "##" + JSON.stringify(self) + '##' + JSON.stringify(pdata);
+//												sendStatus(mtypes,content,function(status,data){
+//													console.log('发出完成请求');
+//												});
+//											}else if(launch_ok == self.id){	//自己提交完成请求
+//												$.myUtil().alert_msg('请等待对方操作');return;
+//											}else{							//对方提交完成请求
+//												$.myUtil().ajax({
+//													data:{
+//														'api_name':'deposit_agreeok',
+//														'token':token,
+//														'depositid':id
+//													}
+//												}).done(function(res){
+//													layer.closeAll();
+//													$.myUtil().alert_msg(res.msg,function(){
+//														if(res.state == 'ok'){
+//															if(promise_user_type == 'jia'){
+//																mtypes = 62;
+//															}else if(promise_user_type == 'yi'){
+//																mtypes = 61;
+//															}
+//															pdata.status = mtypes;
+//															content = id + "##" + JSON.stringify(self) + '##' + JSON.stringify(pdata);
+//															sendStatus(mtypes,content,function(status,data){
+//																console.log('同意对方完成');
+//																$(".promise-dialog-foot").hide();
+//															});
+//															$(item).find('.msg-content-promise-foot').hide();
+//															promise_guoqi_agree = '';
+//														}
+//													})
+//												})
+//												
+//												
+//												
+//											}
+//										}
+//									});
+//									$("#promise_dialog_failed").click(function(){										
+//										$.myUtil().ajax({
+//											data:{
+//												'api_name':'deposit_peifu',
+//												'token':token,
+//												'depositid':id
+//											}
+//										}).done(function(res){
+//											layer.closeAll();
+//											promise_guoqi = res.data.guoqi;
+//											if(promise_user_type == 'jia'){
+//												mtypes = 54;
+//											}else if(promise_user_type = 'yi'){
+//												mtypes = 53;
+//											}
+//											pdata.status = mtypes;
+//											content = id + "##" + JSON.stringify(self) + '##' + JSON.stringify(pdata);
+//											$.myUtil().alert_msg(res.msg,function(){												
+//												if(res.state == 'ok'){
+//													sendStatus(mtypes,content,function(status,data){
+//														console.log('发起赔付动作');														
+//													});													
+//													$(".promise-dialog-foot").hide();
+//												}else{
+//													console.log('赔付动作失败:'+res.msg);
+//												}
+//											})
+//										})									
+//										
+//									});
+								//};
+							});
+						}
+					}
+				})
+			}
+			
+			$.myUtil().ajax({data:{'api_name':'userinfo_find','token':token},beforeFn:function(){}}).done(function(res){
+				self = res.data;
+			});
+			$.myUtil().ajax({data:{'api_name':'userinfo_findother','token':token,'user_id':from_id},beforeFn:function(){}}).done(function(res){
+//				console.log(JSON.stringify(res.data));
+				fromer = res.data;
+				if(fromer.remarks != '' && fromer.remarks != '未设置'){
+					$(".title").html(fromer.remarks);
+				}else{
+					$(".title").html(fromer.nickname);	
+				}
+				
+				initCyj();
+				promise_data.room_id = room_id;
+				getHistoryMsg();
+				$("#chat-detail").click(function(){
+					localStorage.setItem('single-fromer',JSON.stringify(fromer));
+					localStorage.setItem('single-roomid',$.myUtil().makeRoomId(self.intval_id,fromer.user_id));
+					clicked('chat-detail.html?id='+room_id);
+				})
+			});
+			
+			setTimeout("initBmap()",3000);
+			
+			$("#position_send").click(function(){				
+				if(is_promist_page == 1){					
+					$.router.load("#zd-chat-promise");
+					cxj_is_open = true;
+				}else{
+//					console.log(position_lat+","+position_lng);
+					local = position_lng+","+position_lat;
+					send({
+                    	sender: 'self',
+						type: 'position',
+						mtypes:6,
+						content: local,
+						show_path:'http://api.map.baidu.com/staticimage/v2?ak=C8Pn598qtNvbvOFXuLhN8z2j&center='+local+'&width=512&height=360&zoom=14&markers='+local+'&dpiType=ph',
+						logo_src: self.head_pic
+                    });
+					$.router.load("#zd-chat");
+				}
+				
+			})
+			
+			$("#promise_pay_btn").click(function(){
+				money = $("#promise_money").val();
+				if(money == ''){
+					$.myUtil().alert_msg('请填写约定的诚信金额');return;
+				}
+				if(money <= 0){
+					$.myUtil().alert_msg('请填写正确的诚信金额');return;
+				}
+				start = $("#start_time").val();
+				end = $("#end_time").val();
+				float_time = $("#float_time").val();
+				last_time = $("#last_time").val();
+				note = $("#note").val();
+				
+//				promise_data.token = token;
+//				promise_data.price = money;
+//				promise_data.room_id = $.myUtil().makeRoomId(self.intval_id,fromer.user_id);
+//				promise_data.local = promise_lng+","+promise_lat;
+//				promise_data.start = start;
+//				promise_data.end = end;
+//				promise_data.last = last_time;
+//				promise_data.foruserid = fromer.user_id;
+//				promise_data.note = note;
+//				promise_data.addr = promise_local;
+				promise_data = {
+					'api_name':'deposit_add',
+					'token':token,
+					'price':money,
+					'res':0,
+					'local':promise_lng+","+promise_lat,
+					'addr':promise_local,
+					'start':start,
+					'end':end,
+					'last':last_time,
+					'foruserid':fromer.user_id,
+					'note':note,
+					'room_id':$.myUtil().makeRoomId(self.intval_id,fromer.user_id),
+				};
+				
+//				console.error(typeof promise_data);
+				
+				$.myUtil().ajax({
+					data:promise_data,
+					beforeFn:function(){}
+				}).done(function(res){
+//					console.log(JSON.stringify(res));
+					if(res.state == 'ok'){
+						orderid = res.data.deposit_id;
+						promise_data.id = res.data.deposit_id;
+						paytype = 'promise'
+						//$(".backdrop").show();
+						$("#promise_pay_form").show();
+					}else{
+						$.myUtil().alert_msg(res.msg,function(){$.router.back();cxj_is_open = false;});return;
+					}
+				})
+			})
+			
+			$("#hongbao_money").on('keyup',function(){
+				if(this.value > 0){
+					$("#hongbao_total").html(this.value);
+				}else{
+					$("#hongbao_total").html('0.00');
+				}
+			})
+			
+			$("#hongbao_pay_btn").click(function(){
+				money = $("#hongbao_money").val();
+				if(money == ''){
+					$.myUtil().alert_msg('请填写红包金额');return;
+				}
+				if(money <= 0){
+					$.myUtil().alert_msg('请填写正确的红包金额');return;
+				}				
+				
+				$.myUtil().ajax({
+					data:{
+						'api_name':'luckymoney_add',
+						'token' : token,
+						'price':money,
+						'pnum':1,
+						'roomid':room_id,
+						'title':'',
+						'res':0,
+						'aid':0
+					},					
+				}).done(function(res){
+					layer.closeAll();
+//					console.log(JSON.stringify(res));
+					if(res.state == 'ok'){
+						orderid = res.data.luckyid;
+						paytype = 'hongbao'
+						$(".backdrop").show();
+						$("#promise_pay_form").show();
+					}
+				})
+			})
+			
+			
+			
+			$("#msg-content").on('input',function(){
+				//MobileFrame.saveMsg(1,1,'aaaaaa');
+				if(this.value != ''){
+					$("#msg-more").attr('src','images/icon/icon-chat-send.png');
+					send_text = true;
+				}else{
+					$("#msg-more").attr('src','images/icon/icon-chat-more.png');
+					send_text = false;
+				}
+			});			
+			
+			
+//			getHistoryMsg();
+//			MobileFrame.saveMsg({
+//			    "_id" : "000000000000000000000051",
+//			    "user_id" : "100003",
+//			    "room_id" : "000000100003000000100005",
+//			    "chat_content" : "1",
+//			    "chat_type" : "3",
+//			    "addtime" : 1494052930
+//			});		
+//			
+//			MobileFrame.getMsg('000000100003000000100005',function(result){
+//				console.log(result.length);
+//				for(i in result){
+//					if(result[i] == '') continue;
+//					console.log(result[i]);
+//				}
+//			});
+			
+			plus.io.requestFileSystem( plus.io.PRIVATE_DOC, function( fs ) {
+				entry = fs.root;
+				entry.getDirectory( 'msg', {create:true,exclusive:false}, function(dir){
+//					console.log('文件夹打开');
+				},function(err){
+//					console.log('文件夹打开失败');
+				});
+			})
+			
+			radio_nw = plus.webview.getWebviewById('radio');						
+			var stopTimer = null;
+			$("#chat-type").on('click',function(){
+				if(chat_type == 'text'){
+					$("#msg-content").hide();
+					$("#msg-sound").show();
+					$(this).attr('src','images/icon/icon-chat-keybord.png');
+					chat_type = 'sound';
+				}else if(chat_type == 'sound'){
+					$("#msg-content").show();
+					$("#msg-sound").hide();
+					$(this).attr('src','images/icon/icon-chat-sound.png');
+					chat_type = 'text';
+				}
+			})
+		    
+		    
+		    $("#msg-more").on('click',function(){
+		    	if(send_text){
+		    		send({
+						sender: 'self',
+						type: 'text',
+						content: $("#msg-content").val(),
+						logo_src: self.head_pic
+					});
+					$("#msg-content").val('');
+					$("#msg-more").attr('src','images/icon/icon-chat-more.png');
+					send_text = false;
+		    	}else{
+		    		if(!$("footer").hasClass('chat-slideUp') && $("footer").classList == undefined){
+			    		$("footer").attr('class','chat-slideUp');
+			    	}else if($("footer").hasClass('chat-slideUp')){
+			    		$("footer").attr('class','chat-slideDown');
+			    	}
+		    	}
+		    	
+		    	
+		    	
+		    })
+			
+			
+			
+			
+			var setSoundAlertVisable=function(show){
+				if(show){
+					ui.boxSoundAlert.style.display = 'block';
+					ui.boxSoundAlert.style.opacity = 1;
+				}else{
+					ui.boxSoundAlert.style.opacity = 0;
+					//fadeOut 完成再真正隐藏
+					setTimeout(function(){
+						ui.boxSoundAlert.style.display = 'none';
+					},200);
+				}
+			};
+			var recordCancel = false;
+			var recorder = null;
+			var audio_tips = document.getElementById("audio_tips");
+			var startTimestamp = null;
+			var stopTimestamp = null; 
+			var stopTimer = null;	
+			
+			
+			
+			
+			
+			
+			var promiseGuoqiChange = function(item){
+				$(item).find('.promise-cancel').html('赔付');
+			}
+			
+			
+			
+			ui.boxMsgSound.addEventListener("touchstart", function(e) {
+//				console.log("start....");
+				e.preventDefault();
+			});
+			
+			
+			ui.boxMsgSound.addEventListener('longTap', function(event) {				
+				//console.log('hold');return;
+				recordCancel = false;
+				if(stopTimer)clearTimeout(stopTimer);
+				audio_tips.innerHTML = "手指上划，取消发送";
+				ui.boxSoundAlert.classList.remove('rprogress-sigh');
+				setSoundAlertVisable(true);
+				recorder = plus.audio.getRecorder();
+				if (recorder == null) {
+					plus.nativeUI.toast("不能获取录音对象");
+					return;
+				}
+				startTimestamp = (new Date()).getTime();
+				recorder.record({
+					filename: "_doc/audio/"
+				}, function(path) {					
+					if (recordCancel) return;
+					
+					sound_file = path;
+                	uploadFile({'api_name':'upload_add','token':token},path,function(res){
+                		res = typeof res == 'string' ? JSON.parse(res):res;
+                		if(res.state == 'ok'){
+                			resid = res.data.resid;
+                			s_sound_list = [];
+	                    	s_sound_list = JSON.parse(localStorage.getItem('s_sound_list')) || [];
+	                    	s_sound_list.push({resid:res.data.resid,'info':path});
+	                    	send({
+	                        	sender: 'self',
+								type: 'sound',
+								mtypes : 4,
+								content: resid,
+								show_path:path,
+								logo_src: self.head_pic
+	                        });
+	                        plus.io.resolveLocalFileSystemURL( '_doc', function( fs ) {
+								//entry = fs.root;				
+//								console.log(fs.fullPath);
+								fs.getDirectory( 'sound', {create:true,exclusive:false}, function(newDir){
+									plus.io.resolveLocalFileSystemURL( path, function(fileEntry){
+		                        	fileEntry.copyTo( newDir, resid+'.amr', function( entry ){
+//										plus.console.log("New Path: " + entry.fullPath);
+//										console.log('复制成功');
+									}, function( e ){
+										console.log(e.message);
+									});								
+								})
+								})
+							})
+//	                        plus.io.resolveLocalFileSystemURL( '_doc/sound', function(newDir){	                        	
+//	                        	plus.io.resolveLocalFileSystemURL( path, function(fileEntry){
+//		                        	fileEntry.copyTo( newDir, resid+'.amr', function( entry ){
+////										plus.console.log("New Path: " + entry.fullPath);
+//										console.log('复制成功');
+//									}, function( e ){
+//										console.log(e.message);
+//									});								
+//								})
+//	                        }, function(err){
+//	                        	console.log(err.message);
+//	                        });
+	                        
+	                        
+                		}
+                	},true);
+					
+					/*
+					$.myUtil().ajax({
+                    	data:{
+                    		'api_name':'upload_add',
+                    		'token':token,
+                    		'rsfl':path
+                    	},
+                    	beforeFn:function(){}
+                    }).done(function(res){
+                    	s_sound_list = [];			                        	
+                    	s_sound_list = JSON.parse(localStorage.getItem('s_sound_list')) || [];
+                    	s_sound_list.push({resid:res.data.resid,'info':path});
+                    	
+                    	send({
+                        	sender: 'self',
+							type: 'sound',
+							content: res.data.resid,
+							show_path:path,
+							logo_src: self.head_pic
+                        });
+                       
+                       
+                    });
+                    */
+					
+//					send({
+//						sender: 'self',
+//						type: 'sound',
+//						content: path,
+//						logo_src: self.head_pic
+//					});
+				}, function(e) {
+					plus.nativeUI.toast("录音时出现异常: " + e.message);
+				});
+			}, false);
+			ui.boxMsgSound.addEventListener('drag', function(event) {				
+//				console.log('drag');return;
+				if (Math.abs(event.detail.deltaY) > 50) {
+					if (!recordCancel) {
+						recordCancel = true;
+						if (!audio_tips.classList.contains("cancel")) {
+							audio_tips.classList.add("cancel");
+						}
+						audio_tips.innerHTML = "松开手指，取消发送";
+					}
+				} else {
+					if (recordCancel) {
+						recordCancel = false;
+						if (audio_tips.classList.contains("cancel")) {
+							audio_tips.classList.remove("cancel");
+						}
+						audio_tips.innerHTML = "手指上划，取消发送";
+					}
+				}
+			}, false);
+			ui.boxMsgSound.addEventListener('touchend', function(event) {
+//				console.log('release');
+				if (audio_tips.classList.contains("cancel")) {
+					audio_tips.classList.remove("cancel");
+					audio_tips.innerHTML = "手指上划，取消发送";
+				}
+				//
+				stopTimestamp = (new Date()).getTime();
+				if (stopTimestamp - startTimestamp < MIN_SOUND_TIME) {
+					audio_tips.innerHTML = "录音时间太短";
+					ui.boxSoundAlert.classList.add('rprogress-sigh');
+					recordCancel = true;
+					stopTimer=setTimeout(function(){
+						setSoundAlertVisable(false);
+					},800);
+				}else{
+					setSoundAlertVisable(false);
+				}
+				recorder.stop();
+			}, false);
+			ui.boxMsgSound.addEventListener("touchstart", function(e) {
+				//console.log("start....");
+				e.preventDefault();
+			});
+			
+			$("#choose-pic").on('click',function(){
+				if(!$("footer").hasClass('chat-slideUp') && $("footer").classList == undefined){
+		    		$("footer").attr('class','chat-slideUp');
+		    	}else if($("footer").hasClass('chat-slideUp')){
+		    		$("footer").attr('class','chat-slideDown');
+		    	}
+				galleryImg();
+			});
+			
+			
+			function galleryImg() {			
+		        //每次拍摄或选择图片前清空数组对象
+		        f1.splice(0, f1.length);        
+		        // 从相册中选择图片
+		        //mui.toast("从相册中选择一张图片");
+		        plus.gallery.pick(function(path) {
+		            showImg(path);
+		        }, function(e) {
+		            //mui.toast("取消选择图片");
+		            $.myUtil().toast('取消选择');
+		        }, {
+		            filter: "image",
+		            multiple: false
+		        });
+		    }
+			
+			function showImg(url) {
+			    // 兼容以“file:”开头的情况
+			    if (0 != url.toString().indexOf("file://")) {
+			        url = "file://" + url;
+			    }
+			    var _div_ = document.getElementsByClassName("showimg")[0];
+			    var _img_ = new Image();
+			    _img_.src = url; // 传过来的图片路径在这里用。
+			    _img_.onclick = function() {
+			        plus.runtime.openFile(url);
+			    };
+			    _img_.onload = function() {
+			        var tmph = _img_.height;
+			        var tmpw = _img_.width;
+			        var isHengTu = tmpw > tmph;
+			        var max = Math.max(tmpw, tmph);
+			        var min = Math.min(tmpw, tmph);
+			        var bili = min / max;
+			        if (max > 1200) {
+			            max = 1200;
+			            min = Math.floor(bili * max);
+			        }
+			        tmph = isHengTu ? min : max;
+			        tmpw = isHengTu ? max : min;
+	//		        _img_.style.border = "1px solid rgb(200,199,204)";
+	//		        _img_.style.margin = "10px";
+	//		        _img_.style.width = "150px";
+	//		        _img_.style.height = "150px";
+			        _img_.onload = null;
+			        plus.io.resolveLocalFileSystemURL(url, function(entry) {
+			        	plus.nativeUI.showWaiting('图片压缩中');
+			            entry.file(function(file) {		                
+			                canvasResize(file, {
+			                    width: tmpw,
+			                    height: tmph,
+			                    crop: false,
+			                    quality: 50, //压缩质量
+			                    rotate: 0,
+			                    callback: function(data, width, height) {
+			                        f1.push(data);
+			                        _img_.src = data;
+			                        $.myUtil().ajax({
+			                        	data:{
+			                        		'api_name':'upload_add',
+			                        		'token':token,
+			                        		'pich5':data
+			                        	},
+			                        	beforeFn:function(){}
+			                        }).done(function(res){
+			                        	s_img_list = [];			                        	
+			                        	s_img_list = JSON.parse(localStorage.getItem('s_img_list')) || [];
+			                        	s_img_list.push({resid:res.data.resid,'info':data});
+			                        	localStorage.setItem('s_img_list', JSON.stringify(s_img_list));
+			                        	send({
+				                        	sender: 'self',
+											type: 'image',
+											mtypes:3,
+											content: res.data.resid,
+											show_path:data,
+											logo_src: self.head_pic
+				                        }) 
+			                        	
+			                        	
+//			                        	plus.io.resolveLocalFileSystemURL(url,function(newFile){
+//			                        		dir = newFile.fullPath.substr(0,newFile.fullPath.lastIndexOf('/')+1);
+//			                        		file_name = newFile.fullPath.substr(newFile.fullPath.lastIndexOf('/')+1);
+//			                        		console.log(dir);
+//			                        		console.log(file_name);
+			                        		plus.io.resolveLocalFileSystemURL( '_doc/image', function(newDir){
+					                        	plus.io.resolveLocalFileSystemURL( url, function(fileEntry){
+						                        	fileEntry.copyTo( newDir, res.data.resid+'m.jpg', function( entry ){						                        		
+//														plus.console.log("New Path: " + entry.fullPath);
+													}, function( e ){
+														console.log(JSON.stringify(e));
+													});								
+												},function(err){
+													console.log("打开目录失败");
+												})
+					                        }, function(err){
+					                        	console.log(JSON.stringify(e));
+					                        });
+			                        		
+//			                        	})
+			                        	
+			                        	
+//			                        	s_img_list = [];			                        	
+//			                        	s_img_list = JSON.parse(localStorage.getItem('s_img_list')) || [];
+//			                        	s_img_list.push({resid:res.data.resid,'info':data});
+//			                        	localStorage.setItem('s_img_list', JSON.stringify(s_img_list));			                        	
+//			                        	plus.io.requestFileSystem(plus.io.PRIVATE_DOC,function(fs){
+//			                        		entry = fs.root;
+//											entry.getDirectory('image', {create:true,exclusive:false},function(dir){
+//												plus.io.resolveLocalFileSystemURL( url, function(fileEntry){
+//						                        	fileEntry.copyTo( dir, res.data.resid+'m.jpg', function( entry ){
+//														send({
+//								                        	sender: 'self',
+//															type: 'image',
+//															content: res.data.resid,
+//															show_path:entry.fullPath,
+//															logo_src: self.head_pic
+//								                        }) 
+//													}, function( e ){
+//														console.log(JSON.stringify(e));
+//													});								
+//												},function(err){
+//													console.log("打开目录失败");
+//												})
+//											});
+//										});
+			                        	
+//			                        	plus.io.resolveLocalFileSystemURL(url,function(newFile){
+//			                        		dir = newFile.fullPath.substr(0,newFile.fullPath.lastIndexOf('/')+1);
+//			                        		file_name = newFile.fullPath.substr(newFile.fullPath.lastIndexOf('/')+1);
+//			                        		console.log(dir);
+//			                        		console.log(file_name);
+//			                        		plus.io.resolveLocalFileSystemURL( '_doc/image', function(newDir){
+//					                        	
+//					                        }, function(err){
+//					                        	console.log(JSON.stringify(e));
+//					                        });
+			                        		
+//			                        	})
+			                        	
+			                        	
+			                        	
+			                        });
+			                        
+			                        //$("#thumb_a").html(_img_);
+			                        //$("#img_thumbs").attr('src',url);
+			                        plus.nativeUI.closeWaiting();
+			                        //imgupgrade();
+			                    }
+			                });
+			            });
+			        },
+			        function(e) {
+			            plus.nativeUI.closeWaiting();
+			            
+			        });
+			    };
+			};
+	
+	        function imgupgrade() {
+	            //mui.toast('后台联调时启用上传功能');
+	            //return;
+	            var wt = plus.nativeUI.showWaiting();
+	            var url = '后台地址';
+	            var dataType = 'json';
+	            //发送数据  
+	            var data = {
+	                files1: f1[0] //base64数据        
+	            };
+	            $.myUtil().ajax({data:{'api_name':'upload_add','pich5':f1[0],'token':token},beforeFn:function(){}}).done(function(res){
+	            	plus.nativeUI.closeWaiting();
+//	            	console.log(res);
+	            	if(typeof res == 'string'){
+	            		res = JSON.parse(res);
+	            	}                	
+	            	$.myUtil().toast(res.msg);
+	            	imgPath = res.data.path;
+//	            	console.log(JSON.stringify({'api_name':'userinfo_set','token':token,'head_portrait':res.data.resid}));
+	            	$.myUtil().ajax({data:{'api_name':'userinfo_set','token':token,'head_portrait':res.data.resid},beforeFn:function(){}}).done(function(resource){
+	            		layer.closeAll();	            		
+	            		userinfo.head_pic = imgPath;
+	            		localStorage.removeItem('userinfo');
+	            		localStorage.setItem('userinfo',JSON.stringify(userinfo));
+	            	});
+	            });
+	            //mui.post(url, data, success, dataType);
+	        }
+	        //成功响应的回调函数
+	        var success = function(response) {
+	            plus.nativeUI.closeWaiting();
+	            if (response != null) {
+	                alert("上传成功");
+	            }
+	        }
+	        
+	        function getImage(){				
+				var cmr = plus.camera.getCamera();
+				cmr.captureImage(function(p){				
+					plus.io.resolveLocalFileSystemURL(p, function(entry){
+						//createItem(entry);
+						showImg(entry.toLocalURL());
+					}, function(e){
+						console.log('读取拍照文件错误：'+e.message);
+					});
+				}, function(e){
+					console.log('失败：'+e.message);
+				}, {filename:'_doc/camera/',index:1});
+			}
+	       	
+	       	$("#choose-photo").on('click',function(){
+	       		if(!$("footer").hasClass('chat-slideUp') && $("footer").classList == undefined){
+		    		$("footer").attr('class','chat-slideUp');
+		    	}else if($("footer").hasClass('chat-slideUp')){
+		    		$("footer").attr('class','chat-slideDown');
+		    	}
+	       		getImage();
+	       	});
+	       	
+	       	function getVideo(){
+//				console.log('开始录像：');
+				var cmr = plus.camera.getCamera();
+				cmr.startVideoCapture(function(p){
+//					console.log('成功：'+p);
+					plus.io.resolveLocalFileSystemURL(p, function(entry){
+						//createItem(entry);
+//						console.log(entry.toLocalURL());
+						uploadFile({'api_name':'upload_add','token':token},entry.toLocalURL(),function(res){							
+	                		res = typeof res == 'string' ? JSON.parse(res):res;
+	                		if(res.state == 'ok'){
+	                			resid = res.data.resid;
+	                			s_video_list = [];			                        	
+	                        	s_video_list = JSON.parse(localStorage.getItem('s_video_list')) || [];
+	                        	s_video_list.push({resid:res.data.resid,'info':entry.toLocalURL()});
+	                        	localStorage.setItem('s_video_list', JSON.stringify(s_video_list));
+		                    	send({
+		                        	sender: 'self',
+									type: 'video',
+									mtypes:5,
+									content: res.data.resid,
+									show_path:entry.toLocalURL(),
+									logo_src: self.head_pic
+		                        })
+		                    	plus.io.resolveLocalFileSystemURL( '_doc/video', function(newDir){				                        		
+		                        	plus.io.resolveLocalFileSystemURL( entry.toLocalURL(), function(fileEntry){
+//		                        		console.log(fileEntry.fullPath);
+			                        	fileEntry.copyTo( newDir, res.data.resid+'.mp4', function( entry ){						                        		
+//											plus.console.log("New Path: " + entry.fullPath);
+										}, function( e ){
+											console.log(JSON.stringify(e));
+										});								
+									},function(err){
+										console.log("打开目录失败");
+									})
+		                        }, function(err){
+		                        	console.log(JSON.stringify(e));
+		                        });
+	                		}
+	                	},true);
+					
+					}, function(e){
+						console.log('读取录像文件错误：'+e.message);
+					} );
+				}, function(e){
+					console.log('失败：'+e.message);
+				}, {filename:'_doc/camera/',index:i});
+			}
+			$("#choose-video").on('click',function(){
+				if(!$("footer").hasClass('chat-slideUp') && $("footer").classList == undefined){
+		    		$("footer").attr('class','chat-slideUp');
+		    	}else if($("footer").hasClass('chat-slideUp')){
+		    		$("footer").attr('class','chat-slideDown');
+		    	}
+	       		getVideo();
+	       	});
+	       	
+	       	$("#choose-card").click(function(){
+	       		if(!$("footer").hasClass('chat-slideUp') && $("footer").classList == undefined){
+		    		$("footer").attr('class','chat-slideUp');
+		    	}else if($("footer").hasClass('chat-slideUp')){
+		    		$("footer").attr('class','chat-slideDown');
+		    	}
+	       		send({
+                	sender: 'self',
+					type: 'share_card',
+					mtypes : 12,
+					content: JSON.stringify({"thumb":self.head_pic,"title":self.nickname,"desc":"【分享名片】点击查看名片","id":self.intval_id,"type":0,"share_type":"share_card","share_url":"index-card.html?id="+self.intval_id}),
+					show_path:path,
+					logo_src: self.head_pic
+               });
+	       	})
+	       	
+			function uploadFile(params,files,successCall,wait) {
+				timestamp=new Date().getTime();
+//				console.log('开始上传----'+timestamp);
+				var netStatus = plus.networkinfo.getCurrentType();
+				if (netStatus == plus.networkinfo.CONNECTION_NONE){
+					plus.nativeUI.closeWaiting();
+					mui.toast('无网络链接，请检查网络设置！');
+					return;
+				}				
+				var url = $.apiPath;
+				if (wait === undefined) {
+					wait = true;
+				}
+				if (wait) {
+					var waitTitle = '上传中...';
+					plus.nativeUI.showWaiting(waitTitle, {
+						padlock: true
+					});
+				}
+				var upload = plus.uploader.createUpload(url, {
+					method: 'post',
+					timeout:300000,
+					retryInterval:60000
+				},
+				function(t, status) {
+					timestamp=new Date().getTime();
+//					console.log('上传完毕----'+timestamp);
+					if (wait) {
+						plus.nativeUI.closeWaiting();
+					}
+					if (status == 200) {						
+//						console.log("上传成功："+status);
+//						console.log(t.responseText);
+		//				plus.storage.setItem("uploader", t.responseText); //添加数据存储到应用中
+						if (typeof successCall == 'function') {
+							successCall(JSON.parse(t.responseText));
+						}
+					} else {
+//						console.log(status);
+						if (wait) {
+							plus.nativeUI.closeWaiting();
+						}
+						mui.toast('亲，问题上传失败');
+		//				outLine("上传失败：" + status);
+					}
+				});
+				//upload.addData("token", token);
+				for(i in params){
+					upload.addData(i,params[i]);
+				}
+				upload.setRequestHeader("Content-Type",'multipart/form-data');
+				upload.addFile(files, {'key':'rsfl'});
+//				for (var i = 0; i < files.length; i++) {
+//					upload.addFile(files[i].path, {
+//						key: files[i].name
+//					});
+//				}
+				upload.start();
+			}
+			setInterval(function(){				
+				MobileFrame.getCache(userinfo.intval_id,room_id,function(result){					
+					var msgStr = [];
+					promiseids = '';
+					console.error(result);
+					for(i in result){
+						if(result[i] == '')continue;
+//						console.error(result[i]);
+						msg = JSON.parse(result[i]);
+						if(typeof msg == 'string'){
+							msg = JSON.parse(msg);
+						}
+						memberinfo = fromer;
+//						console.log(JSON.stringify(memberinfo));
+						type = $.getMsgType(msg.mtypes);
+						msg.logo_src = memberinfo.head_pic;
+						msg.nickname = memberinfo.nickname;
+						msg.content = msg.msg;
+						msg.type = type;
+						msg.sender = 'other';
+						msg.user_id = msg.user;
+						msg.userid = msg.user;
+						if(type != 'text'){
+							if(type == 'sound'){
+//								msg.content = msg.show_path;
+//								msg.show_path = msg.content
+								msg.show_path = plus.io.convertLocalFileSystemURL(rootPath + msg.type + '/'+msg.content+'.amr');
+								msg.content = "http://www.quweilai.cn/new_api/res/"+msg.user+"/"+msg.msg+".amr";
+							}else if(type == 'video'){
+								msg.content = "http://www.quweilai.cn/new_api/res/"+msg.user+"/"+msg.msg+".mp4";
+//								msg.show_path = msg.content;
+								msg.show_path = plus.io.convertLocalFileSystemURL(rootPath + msg.type + '/'+msg.user+'.mp4');
+							}else if(type == 'image'){
+//								console.log("http://www.quweilai.cn/new_api/res/"+msg.user+"/"+msg.msg+"m.jpg");
+								msg.content = "http://www.quweilai.cn/new_api/res/"+msg.user+"/"+msg.msg+"m.jpg";
+//								msg.show_path = msg.content;
+								msg.show_path = plus.io.convertLocalFileSystemURL(rootPath + msg.type + '/'+ msg.user +'m.jpg');
+							}else if(type == 'face'){
+								msg.content = "images/emoji/"+msg.msg+".gif";
+								msg.show_path = msg.content;
+							}else if(type == 'position'){
+								msg.show_path = msg.content;
+								msg.content = 'http://api.map.baidu.com/staticimage/v2?ak=C8Pn598qtNvbvOFXuLhN8z2j&center='+msg.msg+'&width=512&height=360&zoom=14&markers='+msg.msg+'&dpiType=ph';								
+							}else if(type == 'hongbao'){
+								arr = msg.content.split('@@');
+								id = arr[0];
+								title = arr[1];
+								msg.objid = id;
+								msg.title = title;
+								msg.show_path = msg.content;
+							}else if(type == 'promise'){
+								msg.msg = decodeURI(msg.msg);
+								msg.content = decodeURI(msg.msg);
+//								console.error(msg.content);
+//								console.log("诚信金接收方推送信息:"+msg.content);
+								obj = JSON.parse(msg.content);
+								id = obj.id;
+								promise_data = obj;
+								promise_data.guoqi = '';
+								msg.objid = id;
+								msg.show_path = msg.content
+								msg.promise_data = promise_data;
+								promiseids = id;
+							}else if(msg.type == 'share_shop' || msg.type == 'share_user' || msg.type == 'share_info' || msg.type == 'share_hongbao' || msg.type == 'share_card'){
+								share_url = '';
+								msg.share_data = JSON.parse(msg.content);
+								if(msg.type == 'share_shop'){
+									share_url = 'index-shop-index.html?id='+msg.share_data.id;
+								}else if(msg.type == 'share_user'){
+									share_url = 'index-user-index.html?id='+msg.share_data.id;
+								}else if(msg.type == 'share_info'){
+									if(msg.share_data.type == 1 || msg.share_data.type == 2 || msg.share_data.type == 4){
+										share_url = 'index-articel-detail.html?id='+msg.share_data.id;	
+									}else if(msg.share_data.type == 3){
+										share_url = 'index-product-detail.html?id='+msg.share_data.id;
+									}								
+								}else if(msg.type == 'share_card'){
+									share_url = 'index-card.html?id='+msg.share_data.id;
+								}
+								msg.share_data.share_url = share_url;
+								msg.share_data.share_type = msg.type;
+								msg.type = 'share';
+							}
+						}
+						msgStr.push(JSON.stringify(msg));						
+						record.push(msg);
+						bindMsgList();
+						
+					}
+					
+					if(promiseids != ''){
+						$.myUtil().ajax({
+							data:{
+								'api_name':'deposit_findeone',
+								'token':token,
+								'id':promiseids
+							},beforeFn:function(){}
+						}).done(function(res){
+							if(res.state == 'ok'){
+								for(i in res.data.list){								
+									if(res.data.list[i].status == 1){									
+										if(res.data.list[i].user_a_id == self.intval_id){
+											$("#"+res.data.list[i].id).find('#p_1').show();										
+											$("#"+res.data.list[i].id).find('#p_1 .promise-chexiao').css('width','100%');
+	//										$("#"+res.data.list[i].id).find('.promise-tousu').hide();
+	//										$("#"+res.data.list[i].id).find('.promise-complate').hide();
+	//										$("#"+res.data.list[i].id).find('.promise-cancel').hide();
+										}else{
+											$("#"+res.data.list[i].id).find('#p_2').show();
+											$("#"+res.data.list[i].id).find('#p_2 .promise-ok').css('width','50%');
+											$("#"+res.data.list[i].id).find('#p_2 .promise-err').css('width','50%');
+	//										$("#"+res.data.list[i].id).find('.promise-chexiao').hide();										
+	//										$("#"+res.data.list[i].id).find('.promise-tousu').hide();
+	//										$("#"+res.data.list[i].id).find('.promise-complate').html('同意');
+	//										$("#"+res.data.list[i].id).find('.promise-complate').attr('style','width:50%');
+	//										$("#"+res.data.list[i].id).find('.promise-cancel').html('拒绝');
+	//										$("#"+res.data.list[i].id).find('.promise-cancel').attr('style','width:50%');
+										}
+	//									$(".msg-content-promise-foot").show();
+									}else if(res.data.list[i].status == 2){									
+										if(res.data.list[i].launch_ok == 0){
+	//										$("#"+res.data.list[i].id).find('.promise-chexiao').hide();
+											$("#"+res.data.list[i].id).find('#p_3').show();
+											$("#"+res.data.list[i].id).find('#p_3 .promise-tip').html('对方已同意');
+											$("#"+res.data.list[i].id).find('#p_3 .promise-tousu').html('投诉');
+											$("#"+res.data.list[i].id).find('#p_3 .promise-tousu').attr('style','width:33.33333333%;');
+	//										$("#"+res.data.list[i].id).find('.promise-tousu').attr('style','width:33.33333333%;');
+	//										$("#"+res.data.list[i].id).find('.promise-complate').html('完成');
+	//										$("#"+res.data.list[i].id).find('.promise-complate').show();
+											$("#"+res.data.list[i].id).find('#p_3 .promise-complate').attr('style','width:33.33333333%;');										
+	//										$("#"+res.data.list[i].id).find('.promise-cancel').html('赔付');
+	//										$("#"+res.data.list[i].id).find('.promise-cancel').show();
+											$("#"+res.data.list[i].id).find('#p_3 .promise-peifu').attr('style','width:33.33333333%;');
+										}else if(res.data.list[i].launch_ok == self.intval_id){
+	//										$("#"+res.data.list[i].id).find('.promise-chexiao').hide();
+											$("#"+res.data.list[i].id).find('.promise-tip').html('等待对方确认');
+	//										$("#"+res.data.list[i].id).find('#p_3').show();										
+	//										$("#"+res.data.list[i].id).find('#p_3 .promise-tousu').html('投诉');
+	//										$("#"+res.data.list[i].id).find('#p_3 .promise-tousu').attr('style','width:33.33333333%;');
+	//										$("#"+res.data.list[i].id).find('.promise-tousu').html('投诉');
+	//										$("#"+res.data.list[i].id).find('.promise-tousu').show();
+	//										$("#"+res.data.list[i].id).find('#p_3 .promise-tousu').attr('style','width:33.33333333%;');
+	//										$("#"+res.data.list[i].id).find('.promise-complate').html('完成');
+	//										$("#"+res.data.list[i].id).find('.promise-complate').show();
+	//										$("#"+res.data.list[i].id).find('#p_3 .promise-complate').attr('style','width:33.33333333%;');										
+	//										$("#"+res.data.list[i].id).find('.promise-cancel').html('赔付');
+	//										$("#"+res.data.list[i].id).find('.promise-cancel').show();
+	//										$("#"+res.data.list[i].id).find('#p_3 .promise-peifu').attr('style','width:33.33333333%;');
+										}else{
+	//										$("#"+res.data.list[i].id).find('.promise-chexiao').hide();
+											$("#"+res.data.list[i].id).find('#p_4').show();
+											$("#"+res.data.list[i].id).find('.promise-tip').html('对方申请完成');										
+	//										$("#"+res.data.list[i].id).find('.promise-tousu').html('投诉');
+	//										$("#"+res.data.list[i].id).find('.promise-tousu').show();
+											$("#"+res.data.list[i].id).find('#p_4 .promise-tousu').attr('style','width:33.33333333%;');
+	//										$("#"+res.data.list[i].id).find('.promise-complate').html('同意完成');
+	//										$("#"+res.data.list[i].id).find('.promise-complate').show();
+											$("#"+res.data.list[i].id).find('#p_4 .promise-acomplate').attr('style','width:33.33333333%;');										
+	//										$("#"+res.data.list[i].id).find('.promise-cancel').html('拒绝完成');
+	//										$("#"+res.data.list[i].id).find('.promise-cancel').show();
+											$("#"+res.data.list[i].id).find('#p_4 .promise-acancel').attr('style','width:33.33333333%;');
+	//										promise_guoqi_agree = 1;
+										}
+	//									$(".msg-content-promise-foot").show();
+									}else if(res.data.list[i].status == 4){									
+										$("#"+res.data.list[i].id).find('.promise-tip').html('已撤销');
+	//									$("#"+res.data.list[i].id).find('.msg-content-promise-foot').remove();
+	//									$("#"+res.data.list[i].id).find('.msg-content-promise-foot').hide();
+									}else if(res.data.list[i].status == 5){
+										$("#"+res.data.list[i].id).find('.promise-tip').html('已完成');
+	//									$("#"+res.data.list[i].id).find('.msg-content-promise-foot').hide();
+									}else if(res.data.list[i].status == 3){									
+										$("#"+res.data.list[i].id).find('.promise-tip').html('投诉中');
+	//									$("#"+res.data.list[i].id).find('.msg-content-promise-foot').hide();
+									}
+								}
+								
+							}
+						})
+						
+					}
+					
+					file_name = (new Date()).format('y-m-d')+".cx";
+					MobileFrame.writeTxt('_doc/'+userinfo.intval_id+'/msg/'+msg.room_id+'/',file_name,msgStr.join("|"));					
+				});
+			},1000);	
+			
+			
+			$(".nub_ggg li a").click(function(){
+				pwd_index++;
+				num = $(this).html();				
+				if(pwd_index<6){
+					$(".mm_box li").eq(pwd_index-1).addClass("mmdd");
+					pass = pass+num;
+				}else{
+					if(is_check){
+						return;
+					}
+					is_check = true;
+					pass = pass+num;
+					$(".mm_box li").eq(pwd_index-1).addClass("mmdd"); 
+					
+						//location.href="cg.html";						
+						pay_data = {
+							'token':token
+						};
+						api_name = '';
+						if(paytype == 'promise'){
+							pay_data.api_name = 'deposit_pay';
+							pay_data.depositid = orderid;
+						}else if(paytype == 'hongbao'){
+							pay_data.api_name = 'luckymoney_apppay';
+							pay_data.luckyid = orderid;
+						}
+						pay_data.paypass = pass;
+						if(paytype == 'promise_other'){
+							promise_other(promise_id,promise_json,pass);
+						}else{
+							$.myUtil().ajax({
+								data:pay_data
+							}).done(function(res){
+								layer.closeAll();
+								pwd_index = 0;
+								pass = '';
+								is_check = false;
+								$.myUtil().alert_msg(res.msg,function(){
+//									console.log(JSON.stringify(res));
+									if(res.state == 'ok'){
+										$(".backdrop").hide();
+										$("#promise_pay_form").hide();
+//										console.log(paytype);
+										promise_data.status = 40;										
+										if(paytype == 'promise'){
+											promise_data.user_id = user_data.user_id;
+											promise_data.nickname = user_data.nickname;
+											promise_data.logo_src = user_data.logo_src;										
+											content = JSON.stringify(promise_data);
+//											console.error("发起诚意金："+content);
+//											console.error('发送消息：$(".nub_ggg li a").click');
+											send({
+												sender: 'self',
+												type: 'promise',
+												content: content,
+												logo_src: self.head_pic,
+											});
+											sendStatus(40,content,function(status,data){
+												if(status != 6){$.myUtil().alert_msg(data)};
+												promise_user_type = 'jia';
+//												console.log(data);
+											})
+										}else if(paytype == 'hongbao'){										
+											send({
+												sender: 'self',
+												type: 'hongbao',
+												content: orderid+'@@恭喜发财，大吉大利',
+												logo_src: self.head_pic
+											});											
+											
+											hongbao_is_open = false;
+										}
+										
+										$(".backdrop").hide();
+										$("#promise_pay_form").hide();										
+										pwd_index = 0;
+										pass = '';
+										is_check = false;
+										$(".mm_box li").removeClass("mmdd");										
+										orderid = '';
+										paytype = '';
+										$.router.back();
+									}else{
+										$(".mm_box li").removeClass('mmdd');
+										pwd_index = 0;
+										is_check = false;
+										$.myUtil().alert_msg(res.msg,function(){
+											$(".backdrop").hide();
+											$("#promise_pay_form").hide();
+											pwd_index = 0;
+											pass = '';
+											is_check = false;
+											$(".mm_box li").removeClass("mmdd");											
+											orderid = '';
+											paytype = '';
+											$.router.back();cxj_is_open = false;hongbao_is_open = false
+										});
+										
+									}
+								})
+							})							
+						}
+				} 
+			});
+			$("#pay_close").click(function(){
+				pwd_index = 0;
+				pass = '';
+				is_check = false;
+				$(".backdrop").hide();
+				$("#promise_pay_form").hide();
+//				if(paytype == 'promise_other'){
+//					$(".backdrop").show();
+//					$("#promist_show").show();
+//				}
+			})
+			$(".nub_ggg li .del").click(function(){
+				if(pwd_index>0){
+					pwd_index--;
+					$(".mm_box li").eq(pwd_index).removeClass("mmdd");
+					pass = pass.substr(0,pwd_index);
+					pwd_index==0;
+				}
+			});
+			
+			
+		},false);
+		
+		
+		//童增加好友关系查询，判断返回的聊天列表位置
+		
+		function haoyouguanxi(){
+			$.myUtil().ajax({
+				data:{
+					'api_name':'friend_guanxi',
+					'token':token,
+					'user_id':id
+				},
+				beforeFn:function(){}
+			}).done(function(res){
+				if(res.state == 'ok'){
+					fromer = res.data;	
+				}
+				
+			});
+		
+		}
+		
+		function goliebiao(){
+			$.myUtil().ajax({data:{'api_name':'friend_guanxi','token':token,'user_id':from_id},beforeFn:function(){}}).done(function(res){
+				self = res.data;
+				localStorage.setItem("group_id",self.group-1);
+				socket.disconnect();
+				clicked('chat-index.html');
+			});
+			//localStorage.setItem("group_id",0); 
+		//	clicked('chat-index.html');
+		}
+		
+		
+		function historyBack(){
+			console.error('执行historyBack');			
+			if(!has_history && !history_back){
+				now_date = time2;
+				getHistoryMsg(room_id);
+				history_back = true;
+			}
+		}
+		
+		function getHistoryMsg(){
+			roomid = $.myUtil().makeRoomId(self.intval_id,from_id);
+//			console.log(roomid);
+			MobileFrame.getMsg(self.intval_id,roomid,now_date,function(result){
+				if(typeof result != 'object'){
+					no_history = true;
+					return;
+				}				
+				promiseids = [];
+				
+//				if(result.length == 0){
+//					has_history = false;
+//					historyBack();
+//					return;
+//				}
+				
+				for(i in result){
+//					console.error(result[i]);
+					if(result[i] == '')continue;
+//					console.error(result[i]);
+					msg = JSON.parse(result[i]);
+//					console.log(JSON.stringify(fromer));
+					if(msg.sender == 'other' && msg.user != self.intval_id && msg.user != fromer.user_id){
+						msg.logo_src = 'images/icon/icon-kefu.jpg';
+					}
+					if(msg.type != 'text'){
+						if(msg.type == 'image'){
+							//filename = msg.content+'m.jpg';
+							//msg.content = "http://www.quweilai.cn/new_api/res/"+self.intval_id+"/"+msg.content+"m.jpg";
+						}else if(msg.type == 'sound'){
+							//filename = msg.content+'.amr';
+						}else if(msg.type == 'video'){
+							//filename = msg.content+'.mp4';
+						}else if(msg.type == 'face'){
+							//msg.content = "images/emoji/"+msg.content+".gif";
+						}else if(msg.type == 'position'){
+							//msg.content = 'http://api.map.baidu.com/staticimage/v2?ak=C8Pn598qtNvbvOFXuLhN8z2j&center='+msg.msg+'&width=512&height=360&zoom=14&markers='+msg.msg+'&dpiType=ph';
+						}else if(msg.type == 'hongbao'){						
+							arr = msg.content.split('@@');
+							id = arr[0];
+							title = arr[1];
+							msg.objid = id;
+							msg.title = title;
+							msg.show_path = msg.content
+						}else if(msg.type == 'promise'){
+							//msg.content = 'http://api.map.baidu.com/staticimage/v2?ak=C8Pn598qtNvbvOFXuLhN8z2j&center='+msg.msg+'&width=512&height=360&zoom=14&markers='+msg.msg+'&dpiType=ph';
+							obj = JSON.parse(msg.content);
+							promiseid = obj.id;
+							promise_data = obj;
+							msg.objid = promise_data.id;
+							msg.show_path = msg.content;
+							if(promiseid != '' && promiseid != null){
+								promiseids.push(promiseid);	
+							}
+							msg.promise_data = promise_data;
+//							console.error(msg.promise_data);
+							msg.mid = promise_data.id;
+						}else if(msg.type == 'share_shop' || msg.type == 'share_user' || msg.type == 'share_info' || msg.type == 'share_hongbao' || msg.type == 'share_card'){
+							share_url = '';
+							msg.share_data = JSON.parse(msg.content);
+							if(msg.type == 'share_shop'){
+								share_url = 'index-shop-index.html?id='+msg.share_data.id;
+							}else if(msg.type == 'share_user'){
+								share_url = 'index-user-index.html?id='+msg.share_data.id;
+							}else if(msg.type == 'share_info'){
+								if(msg.share_data.type == 1 || msg.share_data.type == 2 || msg.share_data.type == 4){
+									share_url = 'index-articel-detail.html?id='+msg.share_data.id;	
+								}else if(msg.share_data.type == 3){
+									share_url = 'index-product-detail.html?id='+msg.share_data.id;
+								}								
+							}else if(msg.type == 'share_card'){
+								share_url = 'index-card.html?id='+msg.share_data.id;
+							}
+							msg.share_data.share_url = share_url;
+							msg.share_data.share_type = msg.type;
+							msg.type = 'share';
+						}else if(msg.type == 'notice'){
+							//msg.content = 
+						}
+						
+						
+//							if(msg.type == 'sound'){
+////								msg.content = plus.io.convertLocalFileSystemURL(rootPath + msg.type + '/'+msg.content+'.amr');
+//								msg.show_path = plus.io.convertLocalFileSystemURL(rootPath + msg.type + '/'+msg.content+'.amr');
+//							}else if(msg.type == 'video'){
+////								msg.content = plus.io.convertLocalFileSystemURL(rootPath + msg.type + '/'+msg.content+'.mp4');
+//								msg.show_path = plus.io.convertLocalFileSystemURL(rootPath + msg.type + '/'+msg.content+'.mp4');
+//							}else if(msg.type == 'image'){
+////								msg.content = plus.io.convertLocalFileSystemURL(rootPath + msg.type + '/'+ msg.content +'m.jpg');
+//								msg.show_path = plus.io.convertLocalFileSystemURL(rootPath + msg.type + '/'+ msg.content +'m.jpg');
+//							}							
+					}
+					record.push(msg);					
+					bindMsgList();
+					
+					if(msg.type == 'promise'){
+						$(".msg-content-promise-foot").hide();
+					}
+				}
+				if(is_load_history) is_load_history = false;
+				
+				
+				
+				
+				
+				if(promiseids.length > 0){
+					$.myUtil().ajax({
+						data:{
+							'api_name':'deposit_findeone',
+							'token':token,
+							'id':promiseids.join('|')
+						},beforeFn:function(){}
+					}).done(function(res){
+						if(res.state == 'ok'){
+							for(i in res.data.list){
+//								console.error(res.data.list[i].status);
+								if(res.data.list[i].status == 1){									
+									if(res.data.list[i].user_a_id == self.intval_id){
+										$("#"+res.data.list[i].id).find('#p_1').show();										
+										$("#"+res.data.list[i].id).find('#p_1 .promise-chexiao').css('width','100%');
+//										$("#"+res.data.list[i].id).find('.promise-tousu').hide();
+//										$("#"+res.data.list[i].id).find('.promise-complate').hide();
+//										$("#"+res.data.list[i].id).find('.promise-cancel').hide();
+									}else{
+										$("#"+res.data.list[i].id).find('#p_2').show();
+										$("#"+res.data.list[i].id).find('#p_2 .promise-ok').css('width','50%');
+										$("#"+res.data.list[i].id).find('#p_2 .promise-err').css('width','50%');
+//										$("#"+res.data.list[i].id).find('.promise-chexiao').hide();										
+//										$("#"+res.data.list[i].id).find('.promise-tousu').hide();
+//										$("#"+res.data.list[i].id).find('.promise-complate').html('同意');
+//										$("#"+res.data.list[i].id).find('.promise-complate').attr('style','width:50%');
+//										$("#"+res.data.list[i].id).find('.promise-cancel').html('拒绝');
+//										$("#"+res.data.list[i].id).find('.promise-cancel').attr('style','width:50%');
+									}
+//									$(".msg-content-promise-foot").show();
+								}else if(res.data.list[i].status == 2){									
+									if(res.data.list[i].launch_ok == 0){
+//										$("#"+res.data.list[i].id).find('.promise-chexiao').hide();
+										$("#"+res.data.list[i].id).find('#p_3').show();
+										$("#"+res.data.list[i].id).find('#p_3 .promise-tip').html('对方已同意');
+										$("#"+res.data.list[i].id).find('#p_3 .promise-tousu').html('投诉');
+										$("#"+res.data.list[i].id).find('#p_3 .promise-tousu').attr('style','width:33.33333333%;');
+//										$("#"+res.data.list[i].id).find('.promise-tousu').attr('style','width:33.33333333%;');
+//										$("#"+res.data.list[i].id).find('.promise-complate').html('完成');
+//										$("#"+res.data.list[i].id).find('.promise-complate').show();
+										$("#"+res.data.list[i].id).find('#p_3 .promise-complate').attr('style','width:33.33333333%;');										
+//										$("#"+res.data.list[i].id).find('.promise-cancel').html('赔付');
+//										$("#"+res.data.list[i].id).find('.promise-cancel').show();
+										$("#"+res.data.list[i].id).find('#p_3 .promise-peifu').attr('style','width:33.33333333%;');
+									}else if(res.data.list[i].launch_ok == self.intval_id){
+//										$("#"+res.data.list[i].id).find('.promise-chexiao').hide();
+										$("#"+res.data.list[i].id).find('.promise-tip').html('等待对方确认');
+//										$("#"+res.data.list[i].id).find('#p_3').show();										
+//										$("#"+res.data.list[i].id).find('#p_3 .promise-tousu').html('投诉');
+//										$("#"+res.data.list[i].id).find('#p_3 .promise-tousu').attr('style','width:33.33333333%;');
+//										$("#"+res.data.list[i].id).find('.promise-tousu').html('投诉');
+//										$("#"+res.data.list[i].id).find('.promise-tousu').show();
+//										$("#"+res.data.list[i].id).find('#p_3 .promise-tousu').attr('style','width:33.33333333%;');
+//										$("#"+res.data.list[i].id).find('.promise-complate').html('完成');
+//										$("#"+res.data.list[i].id).find('.promise-complate').show();
+//										$("#"+res.data.list[i].id).find('#p_3 .promise-complate').attr('style','width:33.33333333%;');										
+//										$("#"+res.data.list[i].id).find('.promise-cancel').html('赔付');
+//										$("#"+res.data.list[i].id).find('.promise-cancel').show();
+//										$("#"+res.data.list[i].id).find('#p_3 .promise-peifu').attr('style','width:33.33333333%;');
+									}else{
+//										$("#"+res.data.list[i].id).find('.promise-chexiao').hide();
+										$("#"+res.data.list[i].id).find('#p_4').show();
+										$("#"+res.data.list[i].id).find('.promise-tip').html('对方申请完成');										
+//										$("#"+res.data.list[i].id).find('.promise-tousu').html('投诉');
+//										$("#"+res.data.list[i].id).find('.promise-tousu').show();
+										$("#"+res.data.list[i].id).find('#p_4 .promise-tousu').attr('style','width:33.33333333%;');
+//										$("#"+res.data.list[i].id).find('.promise-complate').html('同意完成');
+//										$("#"+res.data.list[i].id).find('.promise-complate').show();
+										$("#"+res.data.list[i].id).find('#p_4 .promise-acomplate').attr('style','width:33.33333333%;');										
+//										$("#"+res.data.list[i].id).find('.promise-cancel').html('拒绝完成');
+//										$("#"+res.data.list[i].id).find('.promise-cancel').show();
+										$("#"+res.data.list[i].id).find('#p_4 .promise-acancel').attr('style','width:33.33333333%;');
+//										promise_guoqi_agree = 1;
+									}
+//									$(".msg-content-promise-foot").show();
+								}else if(res.data.list[i].status == 4){									
+									$("#"+res.data.list[i].id).find('.promise-tip').html('已撤销');
+//									$("#"+res.data.list[i].id).find('.msg-content-promise-foot').remove();
+//									$("#"+res.data.list[i].id).find('.msg-content-promise-foot').hide();
+								}else if(res.data.list[i].status == 5){
+									$("#"+res.data.list[i].id).find('.promise-tip').html('已完成');
+//									$("#"+res.data.list[i].id).find('.msg-content-promise-foot').hide();
+								}else if(res.data.list[i].status == 3){									
+									$("#"+res.data.list[i].id).find('.promise-tip').html('投诉中');
+//									$("#"+res.data.list[i].id).find('.msg-content-promise-foot').hide();
+								}else if(res.data.list[i].status == 6){									
+									$("#"+res.data.list[i].id).find('.promise-tip').html('已赔付');
+//									$("#"+res.data.list[i].id).find('.msg-content-promise-foot').hide();
+								}
+							}
+							
+						}
+					})
+					
+				}
+				
+			})
+		}
+		
+		var ui = {
+			body:document.querySelector('body'),
+			boxMsgText: document.querySelector('#msg-text'),
+			boxMsgSound: document.querySelector('#msg-sound'),
+			btnMsgImage: document.querySelector('#msg-image'),
+			areaMsgList: document.querySelector('#msg-list'),
+			boxSoundAlert: document.querySelector('#sound-alert'),
+		}
+		
+		var bindMsgList = function() {
+			if(record.length == 0){return;}
+			var html = template('msg-template', {'record':[record[record.length-1]]});
+			if(is_load_history){
+				$("#msg-list").before(html);
+			}else{
+				$("#msg-list").append(html);
+			}
+    		if(myScroll == ''){
+    			myScroll = new iScroll('msg-scroll',{
+    				hideScrollbar:true,
+					fadeScrollbar:true,
+					onScrollMove: function () {						
+			            if (this.y > 0 && Math.abs(this.y) < 50 ) {  
+			            	is_load = true;
+			            }
+			        },
+			        onScrollEnd: function () {
+			            if(is_load){			            	
+			            	//获取前一天的聊天记录
+			            	if(!no_history){			            		
+			            		now_date = new Date(Date.parse(new Date(now_date))-(24*60*60*1000)).format("y-m-d");			            		
+			            		//day_index++;
+			            		is_load_history = true;
+			            	}
+			            	getHistoryMsg();
+			            	is_load = false;
+			            }
+			        }
+    			});
+    		}else{
+    			setTimeout(function(){
+    				myScroll.refresh();    				
+    				if($("#msg-list").height() > $("#msg-scroll").height()){
+    					myScroll.scrollTo(0,myScroll.maxScrollY);
+    				}    				
+    			},400);
+    		}
+    		
+			var msgItems = ui.areaMsgList.querySelectorAll('.msg-item');
+			[].forEach.call(msgItems, function(item, index) {
+				type = item.getAttribute('msg-type');
+				if(type == 'promise'){
+					var type = item.getAttribute('msg-type');
+					var content = item.getAttribute('msg-content');
+					var showPath = item.getAttribute('msg-show_path');
+					obj = JSON.parse(content);
+					obj.msg = content.msg;
+					content = JSON.stringify(content);
+					var face = $(item).find('.msg-user').attr('src');					
+					$(item).find('.promise-chexiao').unbind('click').click(function(){
+						//alert("点击了撤销按钮");
+						id = $(this).attr('data-id');						
+						$.myUtil().ajax({
+							data:{
+								'api_name':'deposit_drop',
+								'token':token,
+								'depositid':id
+							},beforeFn:function(){}
+						}).done(function(res){
+							$.myUtil().alert_msg(res.msg,function(){
+								if(res.state == 'ok'){
+//									console.log("撤销诚信金："+JSON.stringify(msg));
+									obj = JSON.parse(content);
+									obj.status = 63;
+									content = JSON.stringify(obj);
+									sendStatus(63,content,function(status,data){
+//										console.log('撤销诚信金');										
+									});
+									$("#"+id).find('.promise-tip').html('已撤销');
+									$("#"+id).find('.msg-content-promise-foot').hide();
+									
+								}
+							})							
+						})
+					});
+					$(item).find('.promise-tousu').unbind('click').click(function(){
+						id = $(this).attr('data-id');
+						$.myUtil().confirm('确定要投诉吗？','确认','取消',function(){
+							$.myUtil().ajax({
+								data:{
+									'api_name':'deposit_tousu',
+									'token':token,
+									'depositid':id
+								}
+							}).done(function(res){
+								layer.closeAll();
+								$.myUtil().alert_msg(res.msg,function(){
+									if(res.state == 'ok'){
+										$("#"+id).find('.promise-tip').html('已投诉');
+										$("#"+id).find('.msg-content-promise-foot').hide();
+										if(promise_user_type == 'jia'){
+											mtypes =  52;
+										}else if(promise_user_type == 'yi'){
+											mtypes = 51;
+										}
+										obj = JSON.parse(content);
+										obj.status = mtypes;
+										content = JSON.stringify(obj);
+										sendStatus(mtypes,content,function(status,data){
+//											console.log('撤销诚信金');
+										});
+									}
+								})
+							})
+						});
+						
+					});
+					
+					//拒绝按钮点击事件
+					$(item).find('.promise-err').unbind('click').click(function(){
+						id = $(this).attr('data-id');
+						$.myUtil().ajax({
+							data:{
+								'api_name':'deposit_refuse',
+								'token':token,
+								'depositid':id
+							}
+						}).done(function(res){
+							layer.closeAll();
+							$.myUtil().alert_msg(res.msg,function(){
+								if(res.state == 'ok'){
+//									console.error(content);
+									obj = JSON.parse(content);
+									if(typeof obj == 'string'){
+										obj = JSON.parse(obj);	
+									}									
+									obj.status = 41;
+									content = JSON.stringify(obj);
+//									console.error('聊天拒绝：'+content);
+									sendStatus(41,content,function(status,data){
+										if(status == 6){
+											$(".backdrop").hide();
+											$("#promist_show").hide();
+										}else{
+											alert(status,JSON.stringify(data));
+											//$.myUtil().alert_msg(JSON.stringify(data));
+										}
+									});
+									$(".cyj").hide();
+									$("#"+id).find("#p_2").hide();
+									$("#"+id).find(".promise-tip").html('已拒绝');
+								}else{
+									$.myUtil().toast(res.msg);
+								}
+							})
+						})
+					})
+					//同意按钮点击事件
+					$(item).find('.promise-ok').unbind('click').click(function(){						
+//						console.group('点击同意按钮事件Start：');
+						id = $(this).attr('data-id');
+//						console.error('1) PromiseId:'+id);
+						$.myUtil().ajax({
+							data:{
+								'api_name':'deposit_agree',
+								'depositid':id,
+								'token':token,
+								//'paypass':password
+							}
+						}).done(function(res){
+//							console.error('2) deposit_agree接口请求完毕，返回值：'+JSON.stringify(res));
+							layer.closeAll();
+							$.myUtil().alert_msg(res.msg,function(){
+								if(res.state == 'ok'){
+									obj = user_data;
+		//							send_data = promise_json;
+									promise_user_type = 'yi';
+									obj = JSON.parse(content);
+									if(typeof obj == 'string'){
+										obj = JSON.parse(obj);	
+									}
+									obj.status = 42;
+									content = JSON.stringify(obj);
+//									console.error("3) 携带信息内容：" + content);
+									sendStatus(42,content,function(status,data){
+										if(status == 6){
+//											console.error('4) 发送消息：'+ content);
+//											send({
+//												sender: 'self',
+//												type: 'promise',
+//												content: content,
+//												logo_src: self.head_pic
+//											});
+//											console.error('5) 处理UI：'+ $("#"+id).html());
+											$("#"+id).find("#p_1").hide();
+											$("#"+id).find("#p_2").hide();
+											$("#"+id).find("#p_3").attr('style','display:table;');
+											
+											$("#sp_2").hide();
+											$("#sp_3").show();
+											
+											
+											$("#"+id).find(".promise-tip").html('已同意');
+//											console.error('6) UI处理完毕');
+											
+										}else{
+											console.error('7) 信息错误');
+											$.myUtil().alert_msg(data);
+										}
+									});
+								}else{
+									console.error('7) 接口返回错误');
+									$.myUtil().toast(res.msg);
+								}
+							})
+						})
+						console.groupEnd();
+					});
+					
+					//完成按钮点击事件
+					$(item).find('.promise-complate').unbind('click').click(function(){
+						id = $(this).attr('data-id');
+						$.myUtil().ajax({
+							data:{
+								'api_name':'deposit_done',
+								'token':token,
+								'depositid':id
+							}
+						}).done(function(res){
+							layer.closeAll();
+							promise_guoqi = res.data.guoqi;
+							if(promise_user_type == 'jia'){
+								mtypes =  46;
+							}else if(promise_user_type == 'yi'){
+								mtypes = 45;
+							}
+							
+							$.myUtil().alert_msg(res.msg,function(){
+								if(res.state == 'ok'){
+									obj = JSON.parse(content);
+									if(typeof obj == 'string'){
+										obj = JSON.parse(obj);	
+									}
+									obj.status = mtypes;
+									obj.guoqi = res.data.guoqi;
+									send_data = JSON.stringify(content);
+									sendStatus(mtypes,send_data,function(status,data){
+//										console.log('发起完成诚信金动作：'+send_data);
+										$(item).find('.promise-tip').html('[等待对方同意完成]');
+									});
+								}else{
+									
+								}
+							})
+						})
+					})
+					//赔付按钮点击事件
+					$(item).find('.promise-peifu').unbind('click').click(function(){
+						id = $(this).attr('data-id');
+						$.myUtil().ajax({
+							data:{
+								'api_name':'deposit_peifu',
+								'token':token,
+								'depositid':id
+							}
+						}).done(function(res){
+							layer.closeAll();
+							promise_guoqi = res.data.guoqi;
+							if(promise_user_type == 'jia'){
+								mtypes = 54;
+							}else if(promise_user_type = 'yi'){
+								mtypes = 53;
+							}
+							$.myUtil().alert_msg(res.msg,function(){
+								promise_data.guoqi = promise_guoqi;
+								if(res.state == 'ok'){
+									obj = JSON.parse(content);
+									if(typeof obj == 'string'){
+										obj = JSON.parse(obj);	
+									}
+									obj.status = mtypes;
+									content = JSON.stringify(obj);									
+									sendStatus(mtypes,content,function(status,data){
+//										console.log('发起赔付动作');
+										$(item).find('.promise-tip').html('[已赔付对方]');										
+									});
+									$(".cyj").hide();
+									$(item).find('.msg-content-promise-foot').hide();
+								}else{
+									console.log('赔付动作失败:'+res.msg);
+								}
+							})
+						})
+					})
+					//同意完成按钮点击事件
+					$(item).find('.promise-acomplate').unbind('click').click(function(){
+						id = $(this).attr('data-id');
+						if(promise_user_type == 'jia'){
+							mtypes =  56;
+						}else if(promise_user_type == 'yi'){
+							mtypes = 55;
+						}
+						$.myUtil().ajax({
+							data:{
+								'api_name':'deposit_agreeok',
+								'token':token,
+								'depositid':id
+							}
+						}).done(function(res){
+							layer.closeAll();
+							$.myUtil().alert_msg(res.msg,function(){
+								if(res.state == 'ok'){
+									obj = JSON.parse(content);
+									if(typeof obj == 'string'){
+										obj = JSON.parse(obj);	
+									}
+									obj.status = mtypes;
+									content = JSON.stringify(obj);	
+									sendStatus(mtypes,content,function(status,data){
+//										console.log('发起完成诚信金动作');
+										$(item).find('.promise-tip').html('[同意对方完成]');
+									});
+									$(".cyj").hide();
+									$(item).find('.msg-content-promise-foot').hide();
+									promise_guoqi_agree = '';
+								}
+							})
+						})
+					})
+					//拒绝完成按钮点击事件
+					$(item).find('.promise-acancel').unbind('click').click(function(){
+						id = $(this).attr('data-id');
+						if(promise_user_type == 'jia'){
+							mtypes =  44;
+						}else if(promise_user_type == 'yi'){
+							mtypes = 43;
+						}
+						$.myUtil().ajax({
+							data:{
+								'api_name':'deposit_notagree',
+								'token':token,
+								'depositid':id
+							}
+						}).done(function(res){
+							layer.closeAll();
+							$.myUtil().alert_msg(res.msg,function(){
+								if(res.state == 'ok'){												
+									obj = JSON.parse(content);
+									if(typeof obj == 'string'){
+										obj = JSON.parse(obj);	
+									}
+									obj.status = mtypes;
+									content = JSON.stringify(obj);	
+									sendStatus(mtypes,content,function(status,data){
+//										console.log('拒绝完方发起的申请完成动作');
+										$(item).find('.promise-tip').html('[拒绝对方完成]');										
+										
+										$("#sp_4").hide();
+										$('#sp_3').attr('style','display:table;');
+										$(item).find('#p_4').hide();
+										$(item).find('#p_3').attr('style','display:table;');
+									});
+								}else{
+									console.log('拒绝完成对方发起的超时完成诚信金申请动作失败:'+res.msg);
+								}
+								promise_guoqi_agree = '';
+							})
+						})
+					})
+					
+//					$(item).find('.promise-cancel').unbind('click').click(function(){							
+//						id = $(this).attr('data-id');
+//						console.log('点击拒绝按钮111111111111');
+//						if(promise_guoqi == 0){
+//							if(promise_user_type == 'jia'){
+//								mtypes =  44;
+//							}else if(promise_user_type == 'yi'){
+//								mtypes = 43;
+//							}
+//						}else if(promise_guoqi == 1){
+//							if(promise_user_type == 'jia'){
+//								mtypes =  48;
+//							}else if(promise_user_type == 'yi'){
+//								mtypes = 47;
+//							}
+//						}
+//						
+//						if(promise_guoqi == 1){				//诚信金超期后点击取消按钮
+//							if(promise_guoqi_agree == 1){	//对方点击超期完成按钮后，点击决绝取消按钮
+//								if(promise_user_type == 'jia'){
+//									mtypes =  58;
+//								}else if(promise_user_type == 'yi'){
+//									mtypes = 57;
+//								}
+//								console.log("拒绝完成对方发起的超时完成诚信金申请");
+//								$.myUtil().ajax({
+//									data:{
+//										'api_name':'deposit_notagree',
+//										'token':token,
+//										'depositid':id
+//									}
+//								}).done(function(res){
+//									layer.closeAll();
+//									$.myUtil().alert_msg(res.msg,function(){
+//										if(res.state == 'ok'){												
+//											send_data = content;
+//											sendStatus(mtypes,send_data,function(status,data){
+//												console.log('拒绝完成对方发起的超时完成诚信金申请动作');
+//												$(item).find('.promise-tip').html('[拒绝对方完成]');
+//												$(item).find('.promise-complate').html('完成');
+//												$(item).find('.promise-cancel').html('赔付');
+//											});
+//										}else{
+//											console.log('拒绝完成对方发起的超时完成诚信金申请动作失败:'+res.msg);
+//										}											
+//										promise_guoqi_agree = '';
+//									})
+//								})
+//							}else{
+//								console.log("发起诚信金赔付");
+//								$.myUtil().ajax({
+//									data:{
+//										'api_name':'deposit_peifu',
+//										'token':token,
+//										'depositid':id
+//									}
+//								}).done(function(res){
+//									layer.closeAll();
+//									promise_guoqi = res.data.guoqi;
+//									if(promise_user_type == 'jia'){
+//										mtypes = 54;
+//									}else if(promise_user_type = 'yi'){
+//										mtypes = 53;
+//									}
+//									$.myUtil().alert_msg(res.msg,function(){
+//										promise_data.guoqi = promise_guoqi;
+//										if(res.state == 'ok'){												
+//											send_data = id+'##'+JSON.stringify(user_data)+'##'+JSON.stringify(promise_data);
+//											sendStatus(mtypes,send_data,function(status,data){
+//												console.log('发起赔付动作');
+//												$(item).find('.promise-tip').html('[已赔付对方]');
+//											});
+//											$(item).find('.msg-content-promise-foot').hide();
+//										}else{
+//											console.log('赔付动作失败:'+res.msg);
+//										}
+//									})
+//								})
+//							}
+//						}else{								//未过期点击取消按钮
+//							console.log("发起诚信金未过期取消");
+//							
+//							if(promise_guoqi_agree == 1){	//对方点击完成按钮后，点击拒绝取消按钮
+//								if(promise_user_type == 'jia'){
+//									mtypes =  60;
+//								}else if(promise_user_type == 'yi'){
+//									mtypes = 59;
+//								}
+//								$.myUtil().ajax({
+//									data:{
+//										'api_name':'deposit_notagree',
+//										'token':token,
+//										'depositid':id
+//									}									
+//								}).done(function(res){
+//									layer.closeAll();									
+//									promise_guoqi = res.data.guoqi;
+//									$.myUtil().alert_msg(res.msg,function(){
+//										if(res.state == 'ok'){
+//											promise_data.guoqi = promise_guoqi;
+//											send_data = id+'##'+JSON.stringify(user_data)+'##'+JSON.stringify(promise_data);
+//											sendStatus(mtypes,send_data,function(status,data){
+//												console.log('拒绝对方发起未过期完成动作');
+//												$(item).find('.promise-tip').html('[已拒绝完成]');
+//												promise_guoqi_agree = '';
+//												$(item).find('.promise-cancel').html('取消');
+//												$(item).find('.promise-complate').html('完成');
+//											});												
+//										}else{
+//											console.log('拒绝对方发起未过期完成动作失败:'+res.msg);
+//											if(promise_guoqi == 1){
+//												$(item).find('.promise-cancel').html('赔付');
+//											}else{
+//												$(item).find('.promise-cancel').html('赔付');
+//												$(item).find('.promise-complate').html('完成');
+//											}
+//										}
+//									})
+//								})	
+//							}else{
+//								console.log("发起诚信金赔付");
+//									$.myUtil().ajax({
+//										data:{
+//											'api_name':'deposit_peifu',
+//											'token':token,
+//											'depositid':id
+//										}
+//									}).done(function(res){
+//										layer.closeAll();
+//										promise_guoqi = res.data.guoqi;
+//										if(promise_user_type == 'jia'){
+//											mtypes = 54;
+//										}else if(promise_user_type = 'yi'){
+//											mtypes = 53;
+//										}
+//										$.myUtil().alert_msg(res.msg,function(){
+//											promise_data.guoqi = promise_guoqi;
+//											if(res.state == 'ok'){												
+//												send_data = id+'##'+JSON.stringify(user_data)+'##'+JSON.stringify(promise_data);
+//												sendStatus(mtypes,send_data,function(status,data){
+//													console.log('发起赔付动作');
+//													$(item).find('.promise-tip').html('[已赔付对方]');
+//												});
+//												$(item).find('.msg-content-promise-foot').hide();
+//											}else{
+//												console.log('赔付动作失败:'+res.msg);
+//											}
+//										})
+//									})
+//								
+////								$.myUtil().ajax({
+////									data:{
+////										'api_name':'deposit_cancel',
+////										'token':token,
+////										'depositid':id
+////									}									
+////								}).done(function(res){
+////									layer.closeAll();									
+////									promise_guoqi = res.data.guoqi;
+////									$.myUtil().alert_msg(res.msg,function(){
+////										if(res.state == 'ok'){
+////											promise_data.guoqi = promise_guoqi;
+////											send_data = JSON.stringify(user_data)+'##'+id+'##'+JSON.stringify(promise_data);
+////											sendStatus(mtypes,send_data,function(status,data){
+////												console.log('发起未过期取消诚信金动作');
+////												$(item).find('.promise-tip').html('[已取消]');
+////											});
+////											$(item).find('.msg-content-promise-foot').hide();
+////										}else{
+////											console.log('发起未过期取消诚信金动作失败:'+res.msg);
+////											if(promise_guoqi == 1){
+////												$(item).find('.promise-cancel').html('赔付');
+////											}
+////										}
+////									})
+////								})	
+//							}
+//							
+//							
+//						}
+//						
+//						
+//					})
+//					$(item).find('.promise-complate').unbind('click').click(function(){
+//						id = $(this).attr('data-id');
+//						console.log('点击按成按钮,是否超期：'+promise_guoqi+"|对方是否点击完成："+promise_guoqi_agree);						
+//						if(promise_guoqi == 1){
+//							if(promise_guoqi_agree == 1){
+//								if(promise_user_type == 'jia'){
+//									mtypes =  56;
+//								}else if(promise_user_type == 'yi'){
+//									mtypes = 55;
+//								}
+//								console.log("同意完成对方发起的超时完成诚信金申请");
+//								$.myUtil().ajax({
+//									data:{
+//										'api_name':'deposit_agreeok',
+//										'token':token,
+//										'depositid':id
+//									}
+//								}).done(function(res){
+//									layer.closeAll();
+//									$.myUtil().alert_msg(res.msg,function(){
+//										if(res.state == 'ok'){
+//											arr = content.split('##');
+//											obj_p = JSON.parse(arr[2]);
+//											obj_p.guoqi = res.data.guoqi;
+//											arr[2] = JSON.stringify(obj_p);
+//											send_data = arr.join("##");
+//											sendStatus(mtypes,send_data,function(status,data){
+//												console.log('发起完成诚信金动作');
+//												$(item).find('.promise-tip').html('[同意对方完成]');
+//											});
+//											$(item).find('.msg-content-promise-foot').hide();
+//											promise_guoqi_agree = '';
+//										}
+//									})
+//								})
+//							}else{
+//								$.myUtil().ajax({
+//									data:{
+//										'api_name':'deposit_done',
+//										'token':token,
+//										'depositid':id
+//									}
+//								}).done(function(res){
+//									layer.closeAll();
+//									promise_guoqi = res.data.guoqi;
+//									if(promise_guoqi == 0){
+//										if(promise_user_type == 'jia'){
+//											mtypes =  46;
+//										}else if(promise_user_type == 'yi'){
+//											mtypes = 45;
+//										}
+//									}else if(promise_guoqi == 1){
+//										if(promise_user_type == 'jia'){
+//											mtypes =  50;
+//										}else if(promise_user_type == 'yi'){
+//											mtypes = 49;
+//										}
+//									}
+//									
+//									$.myUtil().alert_msg(res.msg,function(){
+//										if(res.state == 'ok'){
+//											arr = content.split('##');
+//											obj_p = JSON.parse(arr[2]);
+//											obj_p.guoqi = res.data.guoqi;
+//											arr[2] = JSON.stringify(obj_p);
+//											send_data = arr.join("##");
+//											sendStatus(mtypes,send_data,function(status,data){
+//												console.log('发起完成诚信金动作');
+//												$(item).find('.promise-tip').html('[等待对方同意完成]');
+//											});
+//										}else{
+//											
+//										}	
+//									})
+//									
+//									if(promise_guoqi == 1){
+//										$(item).find('.promise-cancel').html('赔付');										
+//									}
+//								})
+//							}
+//						}else{
+//							if(promise_guoqi_agree == 1){
+//								if(promise_user_type == 'jia'){
+//									mtypes =  62;
+//								}else if(promise_user_type == 'yi'){
+//									mtypes = 61;
+//								}
+//								console.log("同意完成对方发起的未超时完成诚信金申请");
+//								$.myUtil().ajax({
+//									data:{
+//										'api_name':'deposit_agreeok',
+//										'token':token,
+//										'depositid':id
+//									}
+//								}).done(function(res){
+//									layer.closeAll();
+//									$.myUtil().alert_msg(res.msg,function(){
+//										if(res.state == 'ok'){
+//											arr = content.split('##');
+//											obj_p = JSON.parse(arr[2]);
+//											obj_p.guoqi = res.data.guoqi;
+//											arr[2] = JSON.stringify(obj_p);
+//											send_data = arr.join("##");
+//											sendStatus(mtypes,send_data,function(status,data){
+//												console.log('发起完成诚信金动作');
+//												$(item).find('.promise-tip').html('[同意对方完成]');
+//											});
+//											$(item).find('.msg-content-promise-foot').hide();
+//											promise_guoqi_agree = '';
+//										}
+//									})
+//								})
+//							}else{
+//								$.myUtil().ajax({
+//									data:{
+//										'api_name':'deposit_done',
+//										'token':token,
+//										'depositid':id
+//									}
+//								}).done(function(res){
+//									layer.closeAll();
+//									promise_guoqi = res.data.guoqi;
+//									if(promise_guoqi == 0){
+//										if(promise_user_type == 'jia'){
+//											mtypes =  46;
+//										}else if(promise_user_type == 'yi'){
+//											mtypes = 45;
+//										}
+//									}else if(promise_guoqi == 1){
+//										if(promise_user_type == 'jia'){
+//											mtypes =  50;
+//										}else if(promise_user_type == 'yi'){
+//											mtypes = 49;
+//										}
+//									}
+//									
+//									$.myUtil().alert_msg(res.msg,function(){
+//										if(res.state == 'ok'){
+//											arr = content.split('##');
+//											obj_p = JSON.parse(arr[2]);
+//											obj_p.guoqi = res.data.guoqi;
+//											arr[2] = JSON.stringify(obj_p);
+//											send_data = arr.join("##");
+//											sendStatus(mtypes,send_data,function(status,data){
+//												console.log('发起完成诚信金动作：'+send_data);
+//												$(item).find('.promise-tip').html('[等待对方同意完成]');
+//											});
+//										}else{
+//											
+//										}	
+//									})
+//									
+//									if(promise_guoqi == 1){
+//										$(item).find('.promise-cancel').html('赔付');										
+//									}
+//								})
+//							}
+//						}						
+//						
+//						
+//					})
+				}else{
+					$(item).unbind('click').click(function(){
+						msgItemTap(item, event);
+					});
+//					item.addEventListener('click', function(event) {
+//						msgItemTap(item, event);
+//					}, false);	
+				}
+			});
+			//imageViewer.findAllImage();
+			ui.areaMsgList.scrollTop = ui.areaMsgList.scrollHeight + ui.areaMsgList.offsetHeight;				
+		};
+		
+		var send = function(msg) {
+//			console.error("[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[发送消息");
+			msg.userid = self.intval_id;
+			msg.room_id = $.myUtil().makeRoomId(self.intval_id,fromer.user_id);
+			msg.mid = self.intval_id+Date.parse(new Date());
+			filename = '';
+			
+			if(msg.type == 'text'){
+				$("#msg-content").val('');
+			}
+			
+			mtype = 1;
+			if(msg.type == 'face'){
+				mtype = 2;
+			}else if(msg.type == 'image'){
+				mtype = 3;
+			}else if(msg.type == 'sound'){
+				mtype = 4;
+			}else if(msg.type == 'video'){
+				mtype = 5;
+			}else if(msg.type == 'position'){
+				mtype = 6;
+			}else if(msg.type == 'hongbao'){
+				mtype = 7;
+			}else if(msg.type == 'share_card'){
+				mtype = 12;
+			}else if(msg.type == 'promise'){
+				//msg.promise_data = promise_data;
+				msg.content = encodeURI(msg.content); 
+				mtype = 22;
+			}else if(msg.type == 'notice'){
+				mtype = 30;
+			}				
+			
+//			console.error('sendmsg("'+token+'","'+fromer['user_id']+'","'+mtype+'","0",\''+msg.content+'\');');
+			radio_nw.evalJS('sendmsg("'+token+'","'+fromer['user_id']+'","'+mtype+'","0",\''+msg.content+'\');');
+			//radio_nw.evalJS('sendmsg("'+token+'","'+fromer.user_id+'","'+mtype+'","0","'+msg.content+'");');
+			//chat_type = 'text';
+			
+			if(msg.type == 'image'){
+				filename = msg.content+'m.jpg';
+				msg.content = "http://www.quweilai.cn/new_api/res/"+self.intval_id+"/"+msg.content+"m.jpg";
+			}else if(msg.type == 'sound'){
+				filename = msg.content+'.amr';
+				msg.show_path = plus.io.convertLocalFileSystemURL(rootPath + msg.type + '/'+msg.content+'.amr');
+			}else if(msg.type == 'video'){
+				filename = msg.content+'.mp4';
+			}else if(msg.type == 'face'){
+				msg.content = "images/emoji/"+msg.content+".gif";
+			}else if(msg.type == 'position'){
+				msg.content = 'http://api.map.baidu.com/staticimage/v2?ak=C8Pn598qtNvbvOFXuLhN8z2j&center='+msg.content+'&width=512&height=360&zoom=14&markers='+msg.content+'&dpiType=ph';
+			}else if(msg.type == 'hongbao'){						
+				arr = msg.content.split('@@');
+				id = arr[0];
+				title = arr[1];
+				msg.objid = id;
+				msg.title = title;
+				msg.show_path = msg.content
+			}else if(msg.type == 'promise'){
+				//msg.content = 'http://api.map.baidu.com/staticimage/v2?ak=C8Pn598qtNvbvOFXuLhN8z2j&center='+msg.msg+'&width=512&height=360&zoom=14&markers='+msg.msg+'&dpiType=ph';					
+				//msg.objid = promise_data.id;
+				msg.content = decodeURI(msg.content);
+				msg.show_path = msg.content;					
+				msg.promise_data = JSON.parse(msg.content);
+				msg.objid = msg.promise_data.id;
+				msg.mid = msg.promise_data.id;
+			}else if(msg.type == 'share_card'){
+				share_url = '';
+				msg.share_data = JSON.parse(msg.content);
+				share_url = 'index-card.html?id='+msg.share_data.id;
+				msg.share_data.share_url = share_url;
+				msg.share_data.share_type = msg.type;
+				msg.type = 'share';
+			}
+//			console.log(JSON.stringify(msg));
+//			console.error('[[[[[[[[[[[[[[[[[send]]]]]]]]]]]]');
+			MobileFrame.saveMsg(msg);
+			record.push(msg);
+			bindMsgList();
+			if(msg.type == 'promise'){
+				$("#"+msg.objid).find("#p_1").show();
+				$("#"+msg.objid).find('#p_1 .promise-chexiao').show();
+				$("#"+msg.objid).find('#p_1 .promise-chexiao').css('width','100%');					
+			}
+		};
+		
+		
+		function sendStatus(type,msg,callBack){
+			room_id = $.myUtil().makeRoomId(self.intval_id,fromer.user_id);
+			socket.emit('changechengxin',token,0,type,room_id,msg,function(status,data){
+//				console.log('发送保证金状态改变信息');
+				if(type == 40 && status == 6){
+					msg.userid = self.intval_id;
+					//msg.room_id = $.myUtil().makeRoomId(self.intval_id,fromer.user_id);
+					msg.room_id = room_id;
+					msg.mid = self.intval_id+Date.parse(new Date());
+					obj = JSON.parse(msg);					
+					
+					
+					if(msg.type == 'text'){
+						$("#msg-content").val('');
+					}
+					mtype = type;
+					msg_obj = {
+						'sender':'self',
+						'type': $.getMsgType(type),
+						'content':msg,
+						'logo_src':userinfo.logo_src,
+						'userid':self.intval_id,
+						'room_id':room_id,
+						'mid' : msg.id,
+						'mtypes':type
+					}
+//					console.error('[[[[[[[[[[[[[[[[[sendStatus]]]]]]]]]]]]');
+					MobileFrame.saveMsg(msg_obj);
+				}
+				callBack(status,data);
+			})
+		}
+		
+		var msgItemTap = function(msgItem, event) {
+			var msgType = msgItem.getAttribute('msg-type');
+			var msgContent = msgItem.getAttribute('msg-content');
+			var msgShowPath = msgItem.getAttribute('msg-show_path');
+			var face = $(msgItem).find('.msg-user').attr('src');
+//			console.log(msgShowPath);
+			if (msgType == 'sound') {					
+				player = plus.audio.createPlayer(msgShowPath);
+				var playState = msgItem.querySelector('.play-state');
+				playState.innerText = '正在播放...';
+				player.play(function() {
+//					console.log("111");
+					playState.innerText = '点击播放';
+				}, function(e) {
+					console.log(e.message);
+					playState.innerText = '点击播放';
+				});
+			}else if(msgType == 'video'){
+				
+				var name = msgContent;
+				var suffix = name.substr(name.lastIndexOf('.'));
+				var url = '';
+				if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){						
+					url = 'camera_video.html';
+				}
+				
+				plus.runtime.openFile(msgShowPath);
+				
+//					w=plus.webview.create(url,url,{hardwareAccelerated:true,scrollIndicator:'none',scalable:true,bounce:'all'});
+//					w.addEventListener('loaded', function(){
+//						w.evalJS('loadMedia("'+msgShowPath+'")');
+//						//w.evalJS('loadMedia("'+'http://localhost:13131/_doc/camera/'+name+'")');
+//					}, false );
+//					w.addEventListener('close', function(){
+//						w = null;
+//					}, false);
+//					w.show('pop-in');
+			}else if(msgType == 'hongbao'){
+				var arr = msgContent.split('@@');
+				objid = arr[0];
+//				console.log(objid);
+				$.myUtil().ajax({
+					data:{
+						'api_name':'luckymoney_openit',
+						'token':token,
+						'luckyid':objid
+					}
+				}).done(function(res){
+					if(res.state == 'ok'){
+						$.myUtil().ajax({
+							data:{
+								'api_name':'luckymoney_receive',
+								'token':token,
+								'luckypass':''
+							},beforeFn:function(){}
+						}).done(function(res){
+							layer.closeAll();
+//							console.log(JSON.stringify(res));
+							
+							$("#hb_user_pic").attr('src',res.data.userpic);
+							$("#hb_nickname").html(res.data.nickname);
+							$("#hb_money").html(res.data.money);								
+							$("#hongbao_log").html(template('hongbao_logT',res.data));
+							$("#hongbao_log").show();
+							//$("#get_hongbao").show();
+							$.router.load("#zd-chat-chai");
+							chai_is_open = true;
+							if(res.state != 'ok'){
+//								for(i in res.data.receivelist){
+//									if(userinfo.intval_id == res.data.receivelist[i].user_id){
+//										$("#hb_money").html(res.data.receivelist[i].receive_money);
+//									}
+//								}
+								$.myUtil().toast(res.msg);return;	
+							}								
+						})
+					}else{
+						layer.closeAll();
+						$.myUtil().alert_msg(res.msg);
+						return;
+					}
+				})
+			}else if(msg.type == 'share'){				
+//				console.log(msgContent);
+				sd = JSON.parse(msgContent);
+				if(sd.share_type == 'share_card'){
+					clicked(sd.share_url);	
+				}else{
+					clicked(sd.url);
+				}
+			}
+		};
+		
+	</script>
+	
+</body>
+</html>

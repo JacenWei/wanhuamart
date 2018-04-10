@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css" />
+		<!--公用css-->
+		<link rel="stylesheet" href="../css/shop-setup.css" />
+
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+		<script src="../js/util.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script src="../js/layer2.0/layer.js"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=C8Pn598qtNvbvOFXuLhN8z2j"></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined') {
+				clicked('login.html');
+			}
+		</script>
+		<style>
+			#bmap {
+				width: 100%;
+				height: 15rem;
+				z-index: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="header">
+			<a class="back" href="javascript:;" onclick="clicked('agent_shop_list.html');"></a>
+			<h1 class="tit">商家入驻</h1>
+		</header>
+		<div class="content" style="margin:0;">
+			<input type="hidden" id="lng" name="lng" value="" />
+			<input type="hidden" id="lat" name="lat" value="" />
+			<input type="hidden" id="shop_id" name="shop_id" value="" />
+			<ul class="shop-list">
+				<li>
+					<p class="shop-name">业务员账户</p>
+					<p class="shop-nr"><input type="tel" id="yw_mobile" readonly="" value=""></p>
+				</li>
+				<li>
+					<p class="shop-name">商家账户</p>
+					<p class="shop-nr"><input type="tel" id="user_mobile" readonly="" value="" placeholder="请输入商家注册会员手机号"></p>
+				</li>
+				<li>
+					<p class="shop-name">店铺名称</p>
+					<p class="shop-nr"><input type="text" id="shop_name" readonly="" value="" placeholder="请输入店铺名称"></p>
+				</li>
+				<li>
+					<p class="shop-name">店铺分类</p>
+					<p class="shop-nr">
+						<span id="fenlei"></span>
+					</p>
+				</li>
+				<li>
+					<p class="shop-name">所在区域</p>
+
+					<p class="shop-nr">
+						<select name="n_province" id="n_province" data-next="n_city" onchange="areaChange(this,this.value)" style="width:25%;">
+							<option value="">请选择省份</option>
+						</select>
+
+						<select name="n_city" id="n_city" data-next="n_area" onchange="areaChange(this,this.value)" style="width:25%;">
+							<option value="">请选择城市</option>
+						</select>
+
+						<select name="n_area" id="n_area" data-next="" onchange="areaChange(this,this.value)" style="width:25%;">
+							<option value="">选择县区</option>
+						</select>
+
+					</p>
+				</li>
+				<li>
+					<p class="shop-name">商家地址（自动获取）</p>
+					<p class="shop-nr"><input type="text" id="shop_addr" value="" placeholder="请输入详细地址"></p>
+				</li>
+				<li>
+					<div id="bmap"></div>
+				</li>
+			</ul>
+			<div id="pos_info"></div>
+			<p class="shop-Submit"><button type="button" id="doSubmit">提交信息</button></p>
+		</div>
+	</body>
+	<script>
+		$(function() {
+			getAreaChild('n_province', 1);
+		})
+
+		function areaChange(obj, value) {
+			var type = $(obj).attr('data-next');
+			if(type != '') {
+				getAreaChild(type, value);
+			}
+		}
+
+		function getAreaChild(objid, pid) {
+			$.ajax({
+				url: 'http://www.tanglikeji.com/api/index.php?n=area&f=list4',
+				type: 'POST',
+				dataType: 'JSON',
+				data: {
+					'areasid': pid
+				},
+				success: function(res) {
+					if(res.state == 'ok') {
+						var str = '请选择城市';
+						if(objid == 'n_area') {
+							str = '请选择县区';
+						} else if(objid == 'n_province') {
+							str = '请选择省份';
+						}
+						$("#" + objid).html('');
+						html = '<option value="0">' + str + '</option>'
+						for(var i in res.data) {
+							html += '<option value="' + res.data[i].areaid + '">' + res.data[i].diqu + '</option>';
+						}
+						$("#" + objid).html(html);
+					}
+				}
+			});
+		}
+	</script>
+	<script>
+		var shop_lng = '';
+		var shop_lat = '';
+		var n_lng = '';
+		var n_lat = '';
+		var n_province = '';
+		var n_city = '';
+		var n_area = '';
+		var ws = null,
+			wo = null;
+		var em = null,
+			map = null,
+			pcenter = null;
+		document.addEventListener('plusready', function() {
+
+			//			ws=plus.webview.currentWebview();
+			//			wo=ws.opener();
+			//			//高德地图坐标为(116.3974357341,39.9085574220), 百度地图坐标为(116.3975,39.9074)
+			//			pcenter = new plus.maps.Point(shop_lng,shop_lat);
+			//			setTimeout(function(){
+			//				map=new plus.maps.Map("bmap");
+			//				map.centerAndZoom(pcenter,15);
+			//				map.getUserLocation(function(state,pos){
+			//					if(0==state){
+			//						map.setCenter(pos);
+			//					}
+			//				});
+			//				map.onclick = function( point ){
+			//					map.clearOverlays();
+			//					createMarker(point.getLng(),point.getLat());
+			//					n_lng = point.getLng();
+			//					n_lat = point.getLat();
+			//					plus.maps.Map.reverseGeocode(point,{},function(event){
+			//						var address = event.address;  // 转换后的地理位置
+			//						var point = event.coord;  // 转换后的坐标信息
+			//						var coordType = event.coordType;	// 转换后的坐标系类型						
+			//						$("#shop_addr").val(event.address);
+			//					},function(e){
+			//						
+			//					});
+			//				}
+			////				createMarker();
+			////				// 创建子窗口
+			////				createSubview();
+			//			},100);
+			//			// 显示页面并关闭等待框
+			//		    ws.show("pop-in");
+
+			mui('body').on('tap', '.mui-tab-item', function(e) {
+				var href = this.getAttribute('id');
+				clicked(href);
+
+			});
+			plus.geolocation.getCurrentPosition(function(position) {
+				var codns = position.coords; //获取地理坐标信息； 
+				localStorage.setItem('longitude', codns.longitude);
+				localStorage.setItem('latitude', codns.latitude);
+				n_lng = codns.longitude;
+				n_lat = codns.latitude;
+				n_province = position.address.province;
+				n_city = position.address.city;
+				n_area = position.address.district;
+				$("#shop_addr").val(position.address.street);
+				localStorage.setItem('address', position.address.district);
+				$("#chooseCity").html(position.address.district);
+				createMarker(codns.longitude, codns.latitude);
+			}, function(e) {
+				//if (error) error(e);
+			}, {
+				provider: 'baidu'
+			});
+
+			//			var watchId = plus.geolocation.watchPosition( function ( position ) {
+			//				var codns = position.coords; //获取地理坐标信息； 
+			//		        localStorage.setItem('longitude',codns.longitude);
+			//		        localStorage.setItem('latitude',codns.latitude);
+			//		        n_lng = codns.longitude;
+			//		        n_lat = codns.latitude;
+			//		        n_province = position.address.province;
+			//		        n_city = position.address.city;
+			//		        n_area = position.address.district;
+			//		        $("#shop_addr").val(position.address.street);
+			//		        localStorage.setItem('address',position.address.district); 
+			//		        $("#chooseCity").html(position.address.district);
+			//		        //$("#pos_info").html(n_lng+'|'+n_lat+'|'+n_province+'|'+n_city+'|'+n_area);
+			//		    }, function ( e ) {
+			//		        console.log( "监听位置变化信息失败："+e.message );
+			//		    }, {
+			//		        provider: 'baidu'
+			//		    } );	
+
+			function createMarker(lng, lat) {
+
+				map = new BMap.Map("bmap");
+				map.centerAndZoom(new BMap.Point(lng, lat), 14);
+				map.clearOverlays();
+				map.addOverlay(new BMap.Marker(new BMap.Point(lng, lat)));
+				//				//高德地图坐标为(116.3406445236,39.9630878208), 百度地图坐标为(116.347292,39.968716
+				//				var marker=new plus.maps.Marker(new plus.maps.Point(lng,lat));
+				//				marker.setIcon("/images/icon/marker.png");
+				//				//marker.setLabel("HBuilder");
+				//				//var bubble = new plus.maps.Bubble("打造最好的HTML5移动开发工具");
+				//				//marker.setBubble(bubble);
+				//				map.addOverlay(marker);				
+
+			}
+
+		}, false);
+
+		$(function() {
+			token = localStorage.getItem('token');
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined') {
+				clicked('login.html');
+			}
+			userInfo = JSON.parse(localStorage.getItem('userInfo'));
+			if(userInfo == null || userInfo.userId == undefined) {
+				$.fn.Util().alert_msg('请先登录', function() {
+					clicked('login.html');
+				});
+			}
+			$("#yw_mobile").val(userInfo.uname + '|' + userInfo.lzhengName);
+			//getCate();
+			function getCate() {
+				$.fn.Util().ajax({
+					url: 　 'http://www.tanglikeji.com/api.php/Index/shopfenleilist',
+				}).done(function(res) {
+					if(res.state == 'ok') {
+						for(i in res.data) {
+							$("#cateid").append('<option value="' + res.data[i].id + '">' + res.data[i].name + '</option>');
+						}
+					}
+				});
+			}
+			getShop();
+
+			function getShop() {
+				param = $.fn.Util().toQueryParams();
+				id = param['id'];
+				$.fn.Util().ajax({
+					url: 'http://www.tanglikeji.com/api.php/Index/shopinfo',
+					data: {
+						'token': token,
+						'id': id
+					},
+				}).done(function(res) {
+					if(res.state == 'ok') {
+						var html1 = '';
+						var html2 = '';
+						shop_lng = res.data.lng;
+						shop_lat = res.data.lat;
+						$("#n_city").html('');
+						for(i in res.data.citys) {
+
+							html1 += '<option value="' + res.data.citys[i].id + '">' + res.data.citys[i].name + '</option>';
+
+						}
+						$("#n_city").html(html1);
+						$("#n_area").html('');
+						for(i in res.data.areas) {
+
+							html2 += '<option value="' + res.data.areas[i].id + '">' + res.data.areas[i].name + '</option>';
+
+						}
+						$("#n_area").html(html2);
+						$("#shop_id").val(res.data.id);
+						$("#yw_mobile").val(res.data.yewu_mobile + "|" + res.data.yewu_name);
+						$("#user_mobile").val(res.data.uname);
+						$("#shop_name").val(res.data.shop_name);
+						$("#fenlei").html(res.data.fenlei);
+						$("#n_province").val(res.data.province);
+						$("#city").val(res.data.city);
+						$("#area").val(res.data.area1);
+						//$("#shop_addr").val(res.data.address);
+						initMap(res.data.lng, res.data.lat);
+
+					}
+				});
+			}
+
+			$(".edit").on('click', function() {
+				clicked('agent_shop_list.html');
+			})
+
+			$("#doSubmit").on('click', function() {
+				shop_id = $("#shop_id").val();
+				shop_addr = $("#shop_addr").val();
+				n_province = $("#n_province").val();
+				n_city = $("#n_city").val();
+				n_area = $("#n_area").val();
+				if(shop_id == '') {
+					$.fn.Util().alert_msg('商家信息异常，请重新选择');
+					return;
+				}
+				if(shop_addr == '') {
+					$.fn.Util().alert_msg('详细地址不能为空');
+					return;
+				}
+				if(n_lat == '' || n_lat == '') {
+					$.fn.Util().alert_msg('定位失败');
+					return;
+				}
+				console.log(JSON.stringify({
+					'cookie': token,
+					'shop_id': shop_id,
+					'shop_addr': shop_addr,
+					'lng': n_lng,
+					'lat': n_lat,
+					'province': n_province,
+					'city': n_city,
+					'area': n_area,
+				}));
+				$.fn.Util().ajax({
+					url: 　 'http://www.tanglikeji.com/api.php/Ucenter/edit_shop',
+					data: {
+						'cookie': token,
+						'shop_id': shop_id,
+						'shop_addr': shop_addr,
+						'lng': n_lng,
+						'lat': n_lat,
+						'province': n_province,
+						'city': n_city,
+						'area': n_area,
+					}
+				}).done(function(res) {
+					if(res.state == 'ok') {
+						plus.nativeUI.alert('修改成功');
+						//						$.fn.Util().alert_msg('修改成功！',function(){
+						//							//location.reload();
+						//						});
+					} else {
+						$.fn.Util().alert_msg(res.msg);
+					}
+				});
+			});
+
+			function initMap(lng, lat) {
+				map = new BMap.Map("bmap"); // 创建地图实例  
+				var point = new BMap.Point(lng, lat); // 创建点坐标  
+				map.centerAndZoom(point, 15);
+				createMarker(lng, lat);
+				var geoc = new BMap.Geocoder();
+				map.addEventListener("click", function(e) {
+					createMarker(e.point.lng, e.point.lat);
+					var pt = e.point;
+					geoc.getLocation(pt, function(rs) {
+						var addComp = rs.addressComponents;
+						n_lng = pt.lng;
+						n_lat = pt.lat;
+						n_province = addComp.province;
+						n_city = addComp.city;
+						n_area = addComp.district;
+						$("#shop_addr").val(addComp.street + ' ' + addComp.streetNumber);
+					});
+				});
+			}
+
+			function createMarker(lng, lat) {
+				map.clearOverlays();
+				var myIcon = new BMap.Icon("/images/icon/marker.png", new BMap.Size(24, 24));
+				var marker = new BMap.Marker(new BMap.Point(lng, lat));
+				map.addOverlay(marker);
+			}
+
+		});
+	</script>
+
+</html>

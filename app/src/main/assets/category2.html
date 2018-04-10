@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta charset="utf-8">
+		<title>手机端商品分类滑动切换</title>
+
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.4.6.0.css">
+		<link rel="stylesheet" href="../css/swiper-3.2.5.min.css" />
+		<link rel="stylesheet" href="../css/ectouch.css" />
+		<link rel="stylesheet" href="../css/search.css" />
+
+	</head>
+
+	<body style="max-width:640px;font-size: 14px;">
+		<div id="loading"><img src="../images/loading.gif" /></div>
+		<div class="con">
+			<div class="category-top" style="position: fixed;top: 0px;text-align: center;width: 100%;background-color: #FFFFFF;z-index: 9999;">
+				<header>
+					<section class="">
+						<div class="text-all dis-box j-text-all">
+							<a class="" style="font-size: 18px;margin-left: 20px;" href="javascript:back()"><</a>
+							<div class="box-flex" style="text-align: center;folat:left;">								
+								
+								分类列表 </div>
+						</div>
+					</section>
+				</header>
+			</div>
+			<aside id="fatherList">
+				<div class="menu-left scrollbar-none" id="sidebar">
+					<ul id="fatherList2">
+						
+					</ul>
+				</div>
+			</aside>
+			<aside id="sublist">
+				
+			</aside>
+		</div>
+		
+
+		<script type="text/javascript">
+			//设置cookie
+			function setCookie(cname, cvalue, exdays) {
+				var d = new Date();
+				d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+				var expires = "expires=" + d.toUTCString();
+				document.cookie = cname + "=" + cvalue + "; " + expires;
+			}
+
+			function clearHistroy() {
+				setCookie('ECS[keywords]', '', -1);
+				document.getElementById("search_histroy").style.visibility = "hidden";
+			}
+		</script>
+		<script src="../js/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="../js/swiper-3.2.5.min.js"></script>
+		<script type="text/javascript" src="../js/ectouch.js"></script>
+		<script type="text/javascript" src="../js/jquery.json.js"></script>
+		<script type="text/javascript" src="../js/catecommon.js"></script>
+		
+		
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+	    <script src="../js/util.js"></script>
+	    <script src="../js/common.js"></script>
+	    <script src="../js/layer2.0/layer.js"></script>
+		<script type="text/javascript" src="http://www.tanglikeji.com/Public/js/mobile/categroy2.php" ></script>
+		<script type="text/javascript">
+			$(function($) {
+				$('#sidebar ul').on('click','li',function() {
+					$(this).addClass('active').siblings('li').removeClass('active');
+					var index = $(this).index();
+					$('.j-content').eq(index).show().siblings('.j-content').hide();
+				})
+			})
+
+		</script>
+
+	</body>
+
+</html>

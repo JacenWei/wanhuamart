@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
+		<title></title>
+		<link rel="stylesheet" href="../css/profit.css" />
+		<link rel="stylesheet" href="../css/public.css" />
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+		<script src="../js/util.js"></script>
+		<script src="../js/user_qb.js?2=s22"></script>
+	    <script src="../js/common.js"></script>
+		<script src="../js/layer2.0/layer.js"></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				clicked( 'login.html');
+			}
+		</script>
+		<style>
+			.header .back:before {
+			    content: '\e471';
+			    line-height: 44px;
+			    color: #0168B7;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="header" style="background-color:#fff;">
+			<a class="back" id="frame4.html" onclick="clicked(this.id)" style=""></a>
+			<h1 class="tit" style="color:#000">个人钱包</h1>
+		</header>
+		<div class="content">
+			<div class="profit-top">
+				<div class="profit-pic">
+					<span>
+						<img src="../images/user_qb_white.png" style="    width: 60px;padding: 10px;"  id="user_all_order.html" onclick="clicked(this.id)" >
+					</span>
+				</div>
+				<div class="profit-cont">
+					
+					<a href="javascript:void(0);" class="pro-ifi" style="    margin-left: 10px; color: #fff;">
+								待用积分
+						</a>
+ <button style="float: right;border: 1px #ffffff solid;margin-top: 25px;margin-right: 20px; color: #ffffff;padding: 5px;border-radius: 5px;" onclick="clicked('user_all_jifen.html')";>明细</button>					
+					<p class="pro-current"><span class="now_point">0</span></p>
+					<div class="pro-td">
+						         
+						<a href="javascript:void(0);" class="pro-cum" style="font-size: 16px; margin-left: 15px;">
+							万华宝:
+							<span id="whb">0</span>
+						</a>
+                                    <!-- -->
+					</div>
+				</div>
+			</div>
+			<!--
+            	时间：2016-06-16
+            	描述：收益top
+            -->
+              <div class="profit-details">
+              	<ul>
+              		<li>
+              			<a   href="javascript:void(0);" onclick="clicked('user_normal_point.html');">
+              				<p class="user_normal_point">0.00</p>
+              				<span>通用积分</span>
+              			</a>
+              		</li>
+              		<li>
+              			<a  href="javascript:void(0);" onclick="clicked('user_mall_point.html');">
+              				<p class='user_mall_point'>0.00</p>
+              				<span>万华积分</span>
+              			</a>
+              		</li>              		
+              		<li>
+              			<a  href="javascript:void(0);" onclick="clicked('happyness.html');">
+              				<p class="user_happyness">0.00</p>
+              				<span>爱心基金</span>
+              			</a>
+              		</li>
+              		<li>
+              			<a    href="javascript:void(0);" onclick="clicked('profit.html');">
+              				<p class="user_p_point">0</p>
+              				<span>奖励积分</span>
+              			</a>
+              		</li>
+              		<!--<li>
+              			<a    href="javascript:void(0);" onclick="clicked('profit_use_record.html');">
+              				<span>积分来源</span>
+              			</a>
+              		</li>-->
+              	</ul>
+              </div>                  
+		</div>
+	</body>
+</html>

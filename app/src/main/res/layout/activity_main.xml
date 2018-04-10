@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.wanhua.wanhuamarket.com.wanhua.wanhuamarket.Activity.MainActivity">
+
+    <FrameLayout
+        android:id="@+id/fl_body"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="40dp"
+        android:clipToPadding="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#33000000" />
+
+    <RadioGroup
+        android:id="@+id/btn_group"
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/btn_home"
+            style="@style/main_bottom_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:drawableTop="@drawable/home_selector"
+            android:text="首页" />
+
+        <RadioButton
+            android:id="@+id/btn_scan_code"
+            style="@style/main_bottom_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:drawableTop="@drawable/saoma_selector"
+            android:text="扫码" />
+
+        <RadioButton
+            android:id="@+id/btn_near"
+            style="@style/main_bottom_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:drawableTop="@drawable/near_selector"
+            android:text="附近" />
+
+        <RadioButton
+            android:id="@+id/btn_shop"
+            style="@style/main_bottom_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:drawableTop="@drawable/shopping_selector"
+            android:text="购物车" />
+
+        <RadioButton
+            android:id="@+id/btn_my"
+            style="@style/main_bottom_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:drawableTop="@drawable/my_seletor"
+            android:text="我的" />
+    </RadioGroup>
+
+</RelativeLayout>

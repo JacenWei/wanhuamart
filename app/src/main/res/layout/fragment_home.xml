@@ -1,0 +1,141 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.wanhua.wanhuamarket.com.wanhua.wanhuamarket.Fragment.HomeFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorRed">
+
+        <Button
+            android:id="@+id/btn_location"
+            style="@style/Title_Textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableLeft="@drawable/ic_place_black_24dp"
+            android:drawableStart="@drawable/ic_place_black_24dp"
+            android:text="@string/location" />
+
+        <TextView
+            android:id="@+id/tx_title"
+            style="@style/Title_Textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/btn_location"
+            android:layout_alignBottom="@+id/btn_location"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:text="@string/mark" />
+
+        <Button
+            android:id="@+id/btn_logout"
+            style="@style/Title_Textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tx_title"
+            android:layout_alignBottom="@+id/tx_title"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:text="@string/logout" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="48dp"
+                android:orientation="horizontal">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/banner1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <com.youth.banner.Banner
+                        android:id="@+id/banner2"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp" />
+
+                    <com.youth.banner.Banner
+                        android:id="@+id/banner3"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/newmet" />
+
+            <com.wanhua.wanhuamarket.view.MyGridView
+                android:id="@+id/home_gridview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorRed"
+                android:cacheColorHint="#00000000"
+                android:columnWidth="50dp"
+                android:drawSelectorOnTop="false"
+                android:fadeScrollbars="true"
+                android:fadingEdge="none"
+                android:fadingEdgeLength="10dp"
+                android:gravity="center"
+                android:horizontalSpacing="5dp"
+                android:listSelector="#00000000"
+                android:numColumns="5"
+                android:paddingBottom="5dp"
+                android:scrollbars="none"
+                android:verticalSpacing="10dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorRed"
+                android:src="@mipmap/quanguo_show" />
+            <com.wanhua.wanhuamarket.view.MyGridView
+                android:id="@+id/gridview_quanguo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:numColumns="2"
+                android:verticalSpacing="5dp"
+                android:horizontalSpacing="5dp"
+                android:gravity="center"
+                android:background="@color/colorRed"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorRed"
+                android:src="@mipmap/bendi_show" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorRed"
+                android:src="@mipmap/bendishop_show" />
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

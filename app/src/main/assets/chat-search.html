@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>发布</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="css/sm.css">
+	<link rel="stylesheet" href="css/sm-extend.css">
+	<link rel="stylesheet" href="css/login.css">
+	<script type='text/javascript' src='js/zepto.js' charset='utf-8'></script>
+    <script type="text/javascript" src="js/update.js" ></script>
+    <script type="text/javascript" src="js/common.js" ></script>
+	
+</head>
+<body>
+    <div class="page-group" style="background-color:#f5f5f5;" id="chat-search">
+        <div class="page page-current chat-page" style="background-color:#f5f5f5;">
+        	<header class="bar bar-nav" style="padding:0;">
+        		<button class="button pull-left btn-back" style="top:0;height:4rem;width:4rem;margin:0;padding:0;text-align: center;;"><img src="images/icon/icon-arrow-left.png" class="icon-close" style="width:2rem;"/></button>				
+        		<h1 class="title" style="padding-left:4rem;text-align:left;">
+        			<form id="searchform" style="border-bottom:1px solid #fff;display: block;;">        				
+        				<input type="search" id="search" style="background-color:transparent;border:0;vertical-align: middle;line-height:2rem;height:2rem;font-size:1rem;padding-left:3rem;background:url('images/icon/icon-chat-search-big.png') left center no-repeat;background-size:contain;border-bottom:1px solid rgba(97,218,123,0.6);width:90%;" placeholder="搜索"/>
+        			</form>
+        		</h1>
+			</header>
+        	<div class="content chat-content" style="bottom:0;">			  	
+			  	
+			  	<div class="list-block content-div contacts-block" style="display:block;" id="friendList3">
+	        		<div class="chat-contact list-group" id="searchList"></div>
+	        	</div>
+		        	
+	        	<div style="padding:2rem 1rem;" id="search_info">
+			  		<p style="margin:0;padding-bottom:1rem;color:#BABABA;font-size:1.33333333rem;text-align:center;">搜索更多</p>
+			  		<p>
+			  			<span style="text-align:center;color:#53CF5F;font-size:1.16666666rem;width:50%;float:left;border-right:1px solid #E0E0E0;margin-right:-1px;">最新</span>
+			  			<span style="text-align:center;color:#53CF5F;font-size:1.16666666rem;width:50%;float:left;">新朋友</span>
+			  			<div class="clearfix"></div>
+			  			<br />
+			  			<span style="text-align:center;color:#53CF5F;font-size:1.16666666rem;width:50%;float:left;border-right:1px solid #E0E0E0;margin-right:-1px;">顾客/陌生人</span>
+			  			<span style="text-align:center;color:#53CF5F;font-size:1.16666666rem;width:50%;float:left;">联系人</span>
+			  			<div class="clearfix"></div>
+			  		</p>
+			  	</div>
+			  	
+		       	
+			</div>
+        </div>        
+    </div>
+    
+    
+    <script type="text/html" id="searchListT">
+    	<ul>
+    		{{each list as item i}}
+    		{{if item.tag == 'a1'}}
+	    	<a id="chat-chat.html?from={{item.toid}}"  href="javascript:;" onclick="clicked(this.id)">	    		
+	    	{{else}}
+	    		{{if item.tag == 'e1'}}
+	    		<a id="{{item.url}}" class="zd-item" data-roomid="{{item.room_id}}"  href="javascript:;" onclick="clicked(this.id)">
+	    		{{else}}
+	    			{{if item.tag == 'd1'}}
+	    			<a id="index-xunjia-chat.html?from={{item.room_id}}" class="xj-item" data-roomid="{{item.room_id}}"  href="javascript:;">
+	    			{{else}}
+	    			<a href="javascript:;" class="group-chat" data-companyid="{{item.company_id}}" data-cateid="{{item.cates_id}}">
+	    			{{/if}}
+	    		{{/if}}
+	    	{{/if}}
+	    		<li class="item-content" style="height: inherit;padding:1.33333333rem;">
+		          	<div class="item-media" style="margin:0;"><i class="icon icon-wallet face" style="width:3.333333rem;height:3.333333rem;"><img src="{{item.pic}}" /></i></div>
+		          	<div class="item-inner uc-list-inner my-inner-list" style="margin-left:1.333333rem;">
+		            	<div class="item-title">
+		            		<p style="">{{if item.remarks != ''}}{{item.remarks}}{{else}}{{item.nickname}}{{/if}}</p>
+		            		<p>{{item.signature}}</p>
+		            	</div>
+		            	<div class="item-after">
+		            		<!--<span class="time">5分钟前</span>
+		            		<span class="badge">5</span>-->
+		            	</div>
+		          	</div>
+		        </li>	    	
+		    </a>
+		    {{/each}}
+	    </ul>
+    </script>   
+    
+    
+    
+	<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+	<script type='text/javascript' src='js/template.js' charset='utf-8'></script>
+	<script type="text/javascript" src="js/layer/layer.js" ></script>
+	<script>
+		$(function(){	
+			var token = localStorage.getItem('token');
+			if(token == '' || token == null || token == undefined){
+				//$.myUtil().alert_msg('身份已过期，请重新登录',function(){location.href='login.html';});
+			}
+			var newinput = null;
+			
+			$("#search").on('keyup',function(){
+				str = $(this).val();
+				if(str == ''){
+					$("#searchList").html('');
+					$("#search_info").show();
+				}else{
+					clearTimeout(newinput);
+					newinput = newtime();
+				}
+			})
+			
+			function newtime(){
+				return setTimeout(function(){					
+					str = $("#search").val();
+					if(str != ''){
+						getSearchData(str);	
+					}					
+				},500);
+			}
+			
+			$("#searchform").on('submit',function(){
+				search = $('#search').val();
+				if(search != ''){
+					getSearchData(search);
+				}
+				return false;
+			});	    
+		    
+		    
+		    function  getSearchData(search){
+		    	$.myUtil().ajax({
+					data:{
+						'api_name':'guke_chathistory',
+						'token':token,
+						'keywords':search
+					},
+					beforeFn:function(){}
+				}).done(function(res){
+					if(res.state == 'ok'){
+						for(i in res.data.list){
+							tag = res.data.list[i].room_id.substr(0,2);
+							if(tag == 'a1'){
+								url = 'chat-chat.html?from='+res.data.list[i].toid;
+							}else if(tag == 'e1'){
+								url = 'zd-chat.html?from='+res.data.list[i].room_id;
+							}else{
+								url = 'chat-group-chat.html?='+res.data.list[i].toid;
+							}
+							res.data.list[i].tag = tag;
+							res.data.list[i].remarks = res.data.list[i].room_name;
+							res.data.list[i].signature = res.data.list[i].room_name;
+							res.data.list[i].url = url;
+						}
+						if(res.data.list.length > 0){
+							$("#search_info").hide();
+						}
+						$('#searchList').html(template('searchListT',{'list':res.data.list}));
+						$(".group-chat").click(function(){
+							companyid = $(this).attr('data-companyid');
+							cates_id = $(this).attr('data-catesid');
+							type = 1;
+							if(cates_id > 0){
+								type = 2;
+							}
+							groupChat(companyid,cates_id,type);
+						});
+						$(".zd-item").click(function(){
+							url = this.id;
+							room_id = $(this).attr('data-roomid');
+							$.myUtil().ajax({
+								data:{
+									'api_name':'zhida_findroombyid',
+									'token':token,
+									'room_id':room_id
+								}
+							}).done(function(res){
+								if(res.state == 'ok'){
+									cid = res.data.cid2;
+									$.myUtil().ajax({
+										data:{
+											'api_name':'zhida_companylist',
+											'token':token,
+											'cate_id':cid
+										},
+										beforeFn:function(){}
+									}).done(function(ress){
+										if(ress.state == 'ok'){
+											layer.closeAll();
+											ids = [];
+											for(i in ress.data.list){
+												ids.push(ress.data.list[i].info.intval_id);
+											}
+											localStorage.setItem('zhidao_now','{"id":"'+cid+'","name":"'+ress.data.cate_name+'","company_id":"'+ids.join('|')+'"}');
+											clicked(url);
+										}											
+									})
+								}
+							})
+						})
+						
+						$(".xj-item").click(function(){
+							roomid = $(this).attr('data-roomid');								
+							$.myUtil().ajax({
+								data:{
+									'api_name':'guke_xunjialist',
+									'token':token,
+									'room_id':roomid
+								},
+								beforeFn:function(){}
+							}).done(function(res){									
+								if(res.state == 'ok'){
+//										console.log(JSON.stringify(res.data.room_members));
+//										return;
+									localStorage.setItem('memberinfo',JSON.stringify(res.data.room_members));										
+									clicked('index-xunjia-chat.html?from='+roomid);
+								}
+							})
+						})
+					}
+				})
+		    }
+		    			
+		})
+
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css" /><!--公用css-->
+		<link rel="stylesheet" href="../css/shop-setup.css" />
+		
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+	    <script src="../js/config.js"></script>
+	    <script src="../js/util.js"></script>
+	    <script src="../js/jifenduihuan.js"></script>
+	    <script src="../js/layer2.0/layer.js"></script>
+	    <script type="text/javascript" src="../js/common.js" ></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				clicked('login.html');
+			}
+		</script>
+	</head>
+	<body>
+		<header class="header" >
+			<a class="back" href="javascript:back();"></a>
+			<h1 class="tit">积分兑换</h1>
+			 
+		</header>
+		<div class="content">
+			<ul class="shop-list">
+				<li>
+					<p class="shop-name">会员账号</p>
+					<p class="shop-nr"><input type="tel" id="uname" value="" placeholder="请输入11位电话号码"></p>
+				</li>
+				<li>
+					<p class="shop-name">姓名电话</p>
+					<p class="shop-nr" id="real_name"></p>
+				</li>
+				
+				
+				<li id="kyff" style="display: none;">
+					<p class="shop-name">可用积分</p>
+					<p class="shop-nr" id="real_jifen"></p>
+				</li>
+				
+				<li>
+					<p class="shop-name">店铺名称</p>
+					<p class="shop-nr" id="shop_name"></p>
+				</li>
+				<li>
+					<p class="shop-name">商品名称</p>
+					<p class="shop-nr"><input type="text" id="goods_name" placeholder="请填写商品名称"></p>
+				</li>
+				<li>
+					<p class="shop-name">兑换金额</p>
+					<p class="shop-nr"><input type="number" id="money" value="" placeholder="填写兑换金额"></p>
+				</li>
+				
+				
+				<!--
+				<li>
+					<p class="shop-name">让利金额</p>
+					<p class="shop-nr"><input type="tel" id="point" placeholder="请填写让利金额"></p>
+				</li>
+				<li>
+					<p class="shop-name">下单时间</p>
+					<p class="shop-nr"><input type="date" id="userday" value=""></p>
+				</li>
+				-->
+				<li>
+					<p class="shop-name">会员交易密码</p>
+					<p class="shop-nr"><input type="password" id="password" placeholder="请填写会员的交易密码"></p>
+				</li>
+				<li>
+					<p class="shop-name">短信验证码</p>
+					<p class="shop-nr">
+						<input type="tel" style="width:50%;    display: inline;" id="code" placeholder="请填写短信验证码">
+						<button type="button" id="sendsms" style="display:inline;background-color: #00A4A6;padding:5px;color: #FFFFFF;font-size: 16px;border-radius: 3px;">发送验证码</button>
+					</p>
+				</li>
+			</ul>
+			<p class="shop-Submit"><button onclick="doSubmit()">提交</button></p>
+		</div>		
+	</body>
+	<script>
+
+	</script>
+</html>

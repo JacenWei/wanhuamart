@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
+		<title></title>
+		<link rel="stylesheet" href="../css/public.css" /><!--公用css-->
+		<link rel="stylesheet" href="../css/shop-setup.css" />
+		
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+		<script src="../js/util.js"></script>
+		<script src="../js/daigou.js"></script>
+		<script src="../js/layer2.0/layer.js"></script>
+	    <script type="text/javascript" src="../js/common.js" ></script>
+		<script type="text/javascript">
+			if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+				clicked('login.html');
+			}
+		</script>
+	</head>
+	<body>
+		<header class="header" >
+			<a class="back" href="javascript:back();"></a>
+			<h1 class="tit">代购</h1>
+		</header>
+		<div class="content">
+			<ul class="shop-list">
+				<!--
+				<li>
+					<p class="shop-name">会员账号</p>
+					<p class="shop-nr"><input type="tel" id="user_name" disabled value="1364679875" placeholder="请输入11位电话号码"></p>
+				</li>
+				-->
+				<li>
+					<p class="shop-name">收货人</p>
+					<p class="shop-nr"><input type="text" id="buyer_name" value="" placeholder="收货人姓名"></p>
+				</li>
+				<li>
+					<p class="shop-name">电话</p>
+					<p class="shop-nr"><input type="tel" id="buyer_mobile" value="" placeholder="请输入收货人11位电话号码"></p>
+				</li>
+				<li>
+					<p class="shop-name">地址</p>
+					<p class="shop-nr"><input type="text" id="buyer_add" value="" placeholder="填写收货地址"></p>
+				</li>
+				<li>
+					<p class="shop-name">代购网站</p>
+					<p class="shop-right" style="text-align:left;">
+						<select id="website">
+							<option value="淘宝">淘宝</option>
+							<option value="京东">京东</option>
+							<option value="唯品会">唯品会</option>
+							<option value="一号店">一号店</option>
+							<option value="苏宁易购">苏宁易购</option>
+						</select>
+						<!--<a class="point-cion"></a>-->
+					</p>
+				</li>
+				<li>
+					<p class="shop-name">产品链接</p>
+					<p class="shop-nr"><input type="text" value="" id="product_url" placeholder="填写代购产品url地址"></p>
+				</li>
+				<li>
+					<p class="shop-name">产品名称</p>
+					<p class="shop-nr"><input type="text" id="product_name" placeholder="填写代购产品名称"></p>
+				</li>
+				<li>
+					<p class="shop-name">数量</p>
+					<p class="shop-nr"><input type="number" min="1" step="1" value="1" id="product_num" placeholder="填写代购产品的数量"></p>
+				</li>
+				<li>
+					<p class="shop-name">属性</p>
+					<p class="shop-nr"><input type="text" value="" id="product_param" placeholder="填写代购产品的规格属性"></p>
+				</li>
+				<li>
+					<p class="shop-name">总金额</p>
+					<p class="shop-nr"><input type="number" min="1" step="1" id="product_price" value="" placeholder="填写代购产品的总金额,现金价x10"></p>
+				</li>
+
+				<li>
+					<p class="shop-name">交易密码</p>
+					<p class="shop-nr"><input type="password" value="" id="psw"></p>
+				</li>
+			</ul>
+			<p class="shop-Submit"><button id="submit">生成订单</button></p>
+		</div>
+		
+	</body>
+</html>

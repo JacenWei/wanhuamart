@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-touch-fullscreen" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>商城</title>
+		<meta name="description" content="商城">
+		<meta name="keywords" content="商城">
+		<link href="../css/global.css" type="text/css" rel="stylesheet">
+		<link href="../css/main.css" type="text/css" rel="stylesheet">
+		<link href="../css/public.css" type="text/css" rel="stylesheet">
+		<link rel="stylesheet" href="../css/business.css">
+		<link rel="stylesheet" href="../css/myindex.css">
+		<link rel="stylesheet" href="../css/swiper-3.4.1.min.css">
+		<link href="../css/mui.poppicker.css" type="text/css" rel="stylesheet">
+		<link href="../css/mui.picker.css" type="text/css" rel="stylesheet">
+		<link href="../css/newyear.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+		<script src="../js/util.js"></script>
+		<script src="../js/frame0.js?dne222w=2ssss50a"></script>
+		<script src="../js/layer2.0/layer.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/mui.picker.js"></script>
+		<script src="../js/mui.poppicker.js"></script>
+		<script src="../js/city.data-3.js"></script>
+		<script type="text/javascript" src="../js/swiper-3.4.1.jquery.min.js" charset="utf-8"></script>
+		<script>
+			$(function() {
+				if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined') {
+					console.error("未登录");
+					$("#lld").show();
+				} else {
+					console.error("已登录");
+					$("#lld").html("退出登录").show().on("click", function() {
+						localStorage.clear("token");
+						localStorage.clear("zhongqiu");
+
+					});
+				}
+
+			});
+			$.getScript("http://www.tanglikeji.com/api/ad.js");
+
+			function adpro(id) {
+				var st = id.substring(0, 1);
+				var et = id.substring(1);
+				if(st == 'N' || st == 'n') {
+					clicked("article_detail2.html?id=" + et);
+				}
+				if(st == 'P' || st == 'p') {
+					clicked("product_detail.html?id=" + et);
+				}
+				if(st == 'M' || st == 'm') {
+					clicked(et + ".html");
+				}
+
+			}
+
+			var _clickTime;
+
+			function openhuhu() {
+				token = localStorage.getItem('token');
+				if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined') {
+					location.href = 'login.html';
+				} else {
+					//alert(1);
+					location.href = "schemedemomm://?token=" + token;
+					checkOpen();
+				}
+
+			}
+
+			function checkOpen() {
+				_clickTime = +(new Date());
+				var _count = 0,
+					intHandle;
+				intHandle = setInterval(function() {
+					_count++;
+					var elsTime = +(new Date()) - _clickTime;
+					if(_count >= 100 || elsTime > 3000) {
+						clearInterval(intHandle);
+						check(elsTime);
+					}
+				}, 20);
+
+			}
+
+			function createDownload(hreff) {
+				//alert(hreff);
+				var dtask = plus.downloader.createDownload(hreff, {}, function(d, status) {
+					// 下载完成  
+					if(status == 200) {
+						
+						//alert("Download success: " + d.filename);
+						plus.runtime.openFile(d.filename, {}, function(e) {
+							plus.nativeUI.alert("无法打开此文件：" + e.emssage);
+						});
+					} else {
+						alert("下载失败: " + status);
+					}
+				});
+				//dtask.addEventListener( "statechanged", onStateChanged, false );  
+				dtask.start();
+			}
+
+			function check(elsTime) {
+				if(elsTime > 3000 || document.hidden || document.webkitHidden) {
+					//alert(1);
+				} else {
+					alert("请先安装唿唿");
+					var hreff = "http://www.tanglikeji.com/huhu.apk";
+					createDownload(hreff);
+				}
+			}
+		</script>
+	<style>
+			.header .back:before {
+				content: '\e471';
+				line-height: 44px;
+				color: #0168B7;
+			}
+			
+			.product header h1 {
+				font-size: 0.75rem;
+			}
+			
+			.shopList li h2,
+			p {
+				padding: 0;
+			}
+		</style>
+		<style>
+			.mui-bar {
+				position: fixed;
+				z-index: 10;
+				right: 0;
+				left: 0;
+				height: 44px;
+				padding-right: 10px;
+				padding-left: 10px;
+				border-bottom: 0;
+				background-color: #f7f7f7;
+				-webkit-box-shadow: 0 0 1px rgba(0, 0, 0, .85);
+				box-shadow: 0 0 1px rgba(0, 0, 0, .85);
+				-webkit-backface-visibility: hidden;
+				backface-visibility: hidden;
+			}
+			
+			.mui-bar-tab {
+				bottom: 0;
+				display: table;
+				width: 100%;
+				height: 50px;
+				padding: 0;
+				table-layout: fixed;
+				border-top: 0;
+				border-bottom: 0;
+				-webkit-touch-callout: none;
+			}
+			
+			.mui-bar-tab .mui-tab-item {
+				display: table-cell;
+				overflow: hidden;
+				width: 1%;
+				height: 50px;
+				text-align: center;
+				vertical-align: middle;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				color: #929292;
+			}
+			
+			.mui-bar-tab .mui-tab-item.mui-active {
+				color: #007aff;
+			}
+			
+			.mui-bar-tab .mui-tab-item .mui-icon {
+				top: 3px;
+				width: 24px;
+				height: 24px;
+				padding-top: 0;
+				padding-bottom: 0;
+			}
+			
+			.mui-bar .mui-icon {
+				font-size: 24px;
+				position: relative;
+				z-index: 20;
+				padding-top: 10px;
+				padding-bottom: 10px;
+			}
+			
+			.mui-icon {
+				font-family: Muiicons;
+				font-size: 24px;
+				font-weight: 400;
+				font-style: normal;
+				line-height: 1;
+				display: inline-block;
+				text-decoration: none;
+				-webkit-font-smoothing: antialiased;
+			}
+			
+			.mui-icon-home:before {
+				content: '\e500';
+			}
+			
+			.mui-icon-email:before {
+				content: '\e201';
+			}
+			
+			.mui-icon-contact:before {
+				content: '\e100';
+			}
+			
+			.mui-icon-person:before {
+				content: '\e101';
+			}
+			
+			.mui-icon-map:before {
+				content: '\e364';
+			}
+			
+			.mui-icon-upload:before {
+				content: '\e402';
+			}
+			
+			.mui-icon-list:before {
+				content: '\e301';
+			}
+			
+			.mui-bar-tab .mui-tab-item .mui-icon~.mui-tab-label {
+				font-size: 11px;
+				display: block;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			
+			.mui-icon .mui-badge {
+				font-size: 10px;
+				line-height: 1.4;
+				position: absolute;
+				top: -2px;
+				left: 100%;
+				margin-left: -10px;
+				padding: 1px 5px;
+				color: #fff;
+				background: red;
+			}
+			
+			.mui-badge {
+				font-size: 12px;
+				line-height: 1;
+				display: inline-block;
+				padding: 3px 6px;
+				color: #333;
+				border-radius: 100px;
+				background-color: rgba(0, 0, 0, .15);
+			}
+			
+			.wh-search {
+				top: 55px;
+				width: 100%;
+				background-color: #0062CC;
+				z-index: 88;
+				padding: 5px;
+				
+			position: fixed;
+			}
+			
+			.wh-search-input {
+				
+				height:30px;
+				left: 80px;
+				width: 70%;	
+				background-color: #ffffff;
+				text-align: center;
+				font-size: 16px;
+				cursor: pointer;
+				color: #000000;
+				border-radius:10px ;
+			}
+			
+			.wh-cate {
+				
+				height: 30px;
+				width: 80px;
+				background-color: #0062CC;
+				float: left;
+				color: white;
+			}
+		</style>
+	</head>
+
+	<body style="padding-bottom: 50px;background-color:#960000;">
+
+		<script type="text/javascript" src="http://www.tanglikeji.com/Public/js/mobile/adva.php"></script>
+		
+
+		<header class="index-header" style="background:none; background-color:#960000;position:inherit; position: fixed; top:0px; width:95%;">
+			<h1>万华商城</h1>
+			<button class="pull-left icon_position" id="showCityPicker3"><span id="chooseCity">卧龙区</span></button>
+			<button class="pull-right" id="lld" style="display: none;" type="button" onclick="clicked('login.html');">登录/注册</button>
+		</header>
+			<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item mui-active page_index" id="frame0.html" href="javascript:;" onclick="clicked(this.id)">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item page_index" href="javascript:void(0);" id="frame1.html" onclick="clicked(this.id)">
+				<span class="mui-icon mui-icon-list"></span>
+				<span class="mui-tab-label">扫码</span>
+			</a>
+			<a class="mui-tab-item page_index" id="frame2.html?dengji=1" href="javascript:;" onclick="clicked(this.id)">
+				<span class="mui-icon mui-icon-map"></span>
+				<span class="mui-tab-label">附近</span>
+			</a>
+			<a class="mui-tab-item page_index" id="frame3.html" href="javascript:;" onclick="clicked(this.id)">
+				<span class="mui-icon mui-icon-upload"><!--<span class="mui-badge"></span>--></span>
+				<span class="mui-tab-label">购物车</span>
+			</a>
+			<a class="mui-tab-item page_index" id="frame4.html" href="javascript:;" onclick="clicked(this.id)">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+
+		<div class="swiper-container" id="banner_box" style=" height:250px;width: 65%; float:left ;margin-top: 40px;">
+			<div class="swiper-wrapper" id="bannerList" style=" height:250px;  ">
+			</div>
+			<div class="swiper-pagination"></div>
+		</div>
+
+		<div style=" height:250px;width: 35%; float:left;margin-top: 40px; ">
+			<div class="swiper-container" id="banner_box1">
+				<div class="swiper-wrapper" id="bannerList1" style="width: 100%;  float: left; height: 125px; background: #FFFFFF;">
+				</div>
+				<div class="swiper-pagination"></div>
+			</div>
+
+			<div class="swiper-container" id="banner_box2">
+				<div class="swiper-wrapper" id="bannerList2" style="width: 100%;  float: left; height: 125px; background: #FFFFFF;">
+				</div>
+				<div class="swiper-pagination"></div>
+			</div>
+
+		</div>
+		<div class="newy-lit"><img src="../image/newmet.png"></div>
+		<section id="guide" style="background: #960000;margin-bottom:5px;">
+			<div id="apps">
+				<dl>
+					<dt><a id="new_whzy.html" onclick="clicked($(this).attr('id'))"><img src="../images/icon/01.png"><span>万华专营</span></a></dt>
+				</dl>
+				<dl style="display: none;">
+					<dt><a href="javascript:;" onclick="alert('栏目建设中');"><img src="../images/icon/03.png"><span>一分购</span></a></dt>
+				</dl>
+				<dl>
+					<dt><a  id="frame2.html?dengji=2" onclick="clicked($(this).attr('id'))"  > <img src="../images/icon/04.png"><span>钻石商家</span></a></dt>
+				</dl>
+				<dl>
+					<dt><a id="frame4.html"  onclick="clicked($(this).attr('id'))"><img src="../images/team/user.png"><span>会员中心</span></a></dt>
+				</dl>
+				<dl>
+					<dt><a  id="article_index.html" onclick="clicked($(this).attr('id'))"><img src="../images/team/info.png" ><span>信息中心</span></a></dt>
+				</dl>
+				<dl>
+					<dt><a href="javascript:;" onclick="alert('栏目建设中');"><img src="http://www.tanglikeji.com/Public/images/joypad.png"><span>游戏</span></a></dt>
+				</dl>
+
+				<dl>
+					<dt><a href="javascript:;" onclick="alert('栏目建设中');"><img src="../images/team/pintuan.png?1"> <span>拼团</span></a></dt>
+				</dl>
+
+				<dl>
+					<dt><a href="javascript:;" onclick="openhuhu()"><img src="../images/icon/huhu.png"><span>唿唿</span></a></dt>
+				</dl>
+
+				<dl>
+					<dt><a  id="frame1.html" onclick="clicked($(this).attr('id'))"><img src="../images/team/saoma.png"><span>扫码</span></a></dt>
+				</dl>
+
+				<dl>
+					<dt><a  href="javascript:;" onclick="alert('栏目建设中');" ><img src="../images/team/bianmin.png"><span>便民服务</span></a></dt>
+				</dl>
+
+				<dl>
+					<dt><a href="javascript:;" onclick="alert('栏目建设中');"><img src="../images/icon/ddb.png"><span>东东帮</span></a></dt>
+				</dl>
+
+			</div>
+
+		</section>
+		<div class="jd2015_floor">
+			<div class="title" style="background:url('../images/quanguo_show.png') center center no-repeat;width:100%;height: 50px;background-size: cover;"></div>
+			<ul class="shopList newy-ul" id="topList">
+				<div class="clearfix"></div>
+			</ul>
+			<div style="clear:both;"></div>
+		</div>
+
+		<div class="jd2015_floor" style="background-color:#960000;" id="rexiao1">
+			<div class="title" style="background:url('../images/bendi_show.png') center center no-repeat;width:100%;height: 50px;background-size: cover;"></div>
+			<ul class="row4" id="localList"></ul>
+			<div class="clear"></div>
+		</div>
+
+		<div class="jd2015_floor" style="background-color:#960000;" id="xinpin1">
+			<div class="title" style="background:url('../images/bendishop_show.png') center center no-repeat;width:100%;height: 50px;background-size: cover;"></div>
+			<div class="swiper-container" id="shop_box" style=" height:auto;">
+				<div class="swiper-wrapper" id="shopList" style=" height:auto; "></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<!--
+<div class="jd2015_floor" style="background-color:#F1F2F6;" id="xihuan1">
+    <div class="title" style="background:url('../images/66.png') center center no-repeat;width:100%;height: 50px;background-size: cover;"></div>
+    <ul class="row4" id="xihuan"></ul>
+    <div class="clear"></div>
+</div>
+
+<div class="jd2015_floor" style="background-color:#F1F2F6;" id="guess1">
+    <div class="title" style="background:url('../images/4.png') center center;width:100%;height: 50px;background-size: cover;"></div>
+    <ul class="row4" id="guess"></ul>
+    <div class="clear"></div>
+</div>
+-->
+		<script>
+		</script>
+	</body>
+
+</html>

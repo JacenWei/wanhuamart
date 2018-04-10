@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="../css/Personal-Center.css" />
+    <link rel="stylesheet" href="../css/public.css" />
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/config.js"></script>
+	<script src="../js/util.js"></script>
+	    <script type="text/javascript" src="../js/common.js" ></script>
+	<script type="text/javascript">
+		if(!localStorage.getItem('token') || localStorage.getItem('token') == 'undefined'){
+			clicked('login.html');
+		}
+	</script>
+</head>
+<body>
+	<div class="content">
+		<!--
+        	时间：2016-06-15
+        	描述：个人中心top板块
+        -->
+		<div class="top">
+			<a class="setup" href="account-management.html"></a>
+			<div class="userpic">
+				<a href="#"><img src="images/Personal/User-profile.png"></a>
+			</div>
+			<div class="userinf">
+				<h4>商家测试</h4>
+				<div class="user-identity">
+					<div class="user-id">
+						<img src="images/Personal/gm-sale.png">
+						<!--
+						<span class="icon-sale"></span>
+                        	时间：2016-06-16
+                        	描述：背景图标样式
+                        -->
+						<a href="#">商户</a>
+						<em class="icon-jx"></em>
+					</div>
+                    <!--
+					<div class="user-id">
+						<img src="images/Personal/love.png">
+						<a href="#">2648</a>
+						<em class="icon-jx"></em>
+					</div>
+                    -->
+				</div>
+			</div>
+			<!--
+			<div class="useradmin">
+				<a href="#">
+					<sapn>帐户管理</span>
+				</a>
+			</div>
+            	时间：2016-06-15
+            	描述：屏幕宽度不同时无法保证正确显示
+            -->
+            <div class="clear"></div>
+		</div>
+		<div class="capital">
+			<div class="cap-one">
+				<div class="cap-box">
+                    <a href="promise.html">
+					<h4>2014</h4>
+					<p class="cap-tit"><span class="icon-int"></span>保证金</p>
+					<p class="cap-tay">今日<span>2154</span></p>
+					<p class="cap-tay">累计<span>22567</span></p>
+                    </a>
+				</div>
+			</div>
+			<div class="cap-one">
+				<div class="cap-box">
+                    <a href="xiaofeirangli.html">
+					<h4>1532</h4>
+					<p class="cap-tit"><span class="icon-money"></span>消费让利</p>
+					<p class="cap-tay">积分权<span>235</span></p>
+					<p class="cap-tay">总获利<span>22567</span></p>
+                    </a>
+				</div>
+			</div>
+			<div class="cap-one">
+				<div class="cap-box">
+                    <a href="shop_send.html">
+					<h4>2986</h4>
+					<p class="cap-tit"><span class="icon-pro"></span>商家让利</p>
+					<p class="cap-tay">积分权<span>128</span></p>
+					<p class="cap-tay">总让利<span>13545</span></p>
+                    </a>
+				</div>
+			</div>
+		</div>
+		<!--
+        	时间：2016-06-15
+        	描述：管理
+        -->
+        <div class="recommend">
+        	<div class="rec-one w50 fl">
+        		<a href="huokuan.html">
+        			<img src="images/Personal/icon-1.png">        			
+        			<p>商家货款</p>
+        		</a>
+        	</div>
+        	<div class="rec-one w50 fl">
+        		<a href="promise.html">
+        			<img src="images/Personal/icon-2.png">
+        			<p>保证金额</p>
+        		</a>
+        	</div>
+        </div>
+        
+        <div class="recommend">
+        	<div class="rec-one w25 fl">
+        		<a href="jifenduihuan.html">
+        			<img src="images/Personal/icon-c1.png">
+        			<p>积分兑换</p>
+        		</a>
+        	</div>
+        	<div class="rec-one w25 fl">
+        		<a href="zuodan.html">
+        			<img src="images/Personal/icon-c2.png">
+        			<p>做单</p>
+        		</a>
+        	</div>
+        	<div class="rec-one w25 fl">
+        		<a href="jiesuan.html">
+        			<img src="images/Personal/icon-c3.png">
+        			<p>结算</p>
+        		</a>
+        	</div>
+        	<div class="rec-one w25 fl">
+        		<a href="chongzhi.html">
+        			<img src="images/Personal/icon-c4.png">
+        			<p>充值</p>
+        		</a>
+        	</div>
+        	<div class="rec-one w25 fl">
+        		<a href="shop-setup.html">
+        			<img src="images/Personal/icon-c5.png">
+        			<p>店铺设置</p>
+        		</a>
+        	</div>
+        	<div class="rec-one w25 fl">
+        		<a href="user_order.html">
+        			<img src="images/Personal/icon-c6.png">
+        			<p>会员订单</p>
+        		</a>
+        	</div>
+        	<div class="rec-one w25 fl">
+        		<a href="shop_user.html">
+        			<img src="images/Personal/icon-c7.png">
+        			<p>商家会员</p>
+        		</a>
+        	</div>
+            <div class="rec-one w25 fl">
+                <a href="#">
+                    <img src="images/Personal/icon-c8.png">
+                    <p>购物订单</p>
+                </a>
+            </div>
+        </div>
+	</div>
+</body>
+</html>

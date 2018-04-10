@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <title>向商户付款</title> 
+    <link rel="stylesheet" href="../css/default.css">
+    <link rel="stylesheet" href="../css/spay_scan.css">
+        <script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
+		<script src="../js/util.js"></script>
+	    <script type="text/javascript" src="../js/common.js" ></script>
+		<script src="../js/layer2.0/layer.js"></script> 
+		<link rel="stylesheet" href="../css/public.css" /><!--公用css-->
+		
+	 	
+</head>
+<body>
+   
+		 
+		
+    <div class="layout-flex" >
+        <!-- content start -->
+        <div class="content" style="min-height: 290px;">
+            <p class="sico_pay_p"><span class="sico_pay" style="background: url('../images/ico_success.png')  ; background-size: 100%;"></span></p>
+          	<div style="font-size: 24px; color: #0168B7; letter-spacing: 5px; margin-top: 20px;">付款成功</div>
+          	<div style="font-size: 24px; color: #000; letter-spacing: 5px; margin-top: 60px;">
+          		<span style="font-size: 24px;">¥</span>
+          		<span style="font-size: 36px; color: #f00;" id="amount">0.00</span>
+          	</div>
+          	<div onclick="location.href='frame0.html';" style="  background-color: #fff; border: double #0168B7 1px; width: 40%; font-size: 21px; height: 30px; line-height: 30px; border-radius: 5px; margin: 70px auto; color: #0168B7; ">完&nbsp;成</div>
+       </div>
+    </div>
+    
+    <script>
+    	
+    	
+				var amount=localStorage.getItem("amount");
+    			$("#amount").html(amount);
+    </script>
+ </body>
+</html>
